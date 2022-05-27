@@ -1,0 +1,91 @@
+---
+title: 'Genekitr: Gene Analysis Toolkit based on R'
+author: Yunze Liu
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+site: bookdown::bookdown_site
+output:
+  bookdown::bs4_book:
+  bookdown::pdf_book:
+    dev: "cairo_pdf"
+    latex_engine: xelatex
+biblio-style: apalike
+always_allow_html: yes
+toc_appendix: yes
+fontsize: "12pt"
+mainfont: Times New Roman
+sansfont: Arial
+monofontoptions: "Scale=0.7"
+linestretch: 1.5
+toc-depth: 2
+link-citations: yes
+github-repo: GangLiLab/book_genekitr
+twiter-handle: ReedLiu1314
+description: "Genekitr: Gene Analysis Toolkit based on R"
+documentclass: book
+papersize: A4
+classoption: twoside
+highlight_bw: yes
+geometry: "left=35mm,right=35mm,top=25mm,bottom=25mm"
+---
+
+
+```{r initial, include=FALSE}
+library(emojifont)
+library(cowplot)
+library(aplot)
+library(patchwork)
+
+CRANpkg <- function (pkg) {
+    cran <- "https://CRAN.R-project.org/package"
+    fmt <- "[%s](%s=%s)"
+    sprintf(fmt, pkg, cran, pkg)
+}
+
+Biocpkg <- function (pkg) {
+    sprintf("[%s](http://bioconductor.org/packages/%s)", pkg, pkg)
+}
+
+Githubpkg <- function (user, pkg) {
+    gh <- "https://github.com"
+    fmt <- "[%s](%s/%s/%s)"
+    sprintf(fmt, pkg, gh, user, pkg)
+}
+
+Entrez <- function(gene){
+  sprintf("[%s](https://www.ncbi.nlm.nih.gov/gene/%s)", gene, gene)
+}
+
+
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, 
+    echo=TRUE, cache=TRUE, out.width="98%")
+```
+
+
+# `r emoji("book")` Introduction {-}
+
+
+Welcome to use genekitr!
+
+The book is a tutorial for gene information query, ID conversion, enrichment analysis, and publication-level plotting. If you are new to R, do not worry, I will set enough example codes to guide you through the book. After reading this book, you could plot your figures based on your analysis result.
+
+
+```{r workflow, echo=FALSE}
+# knitr::include_graphics("figures/workflow.png")
+```
+
+
+
+## `r emoji("books")` Content {-}
+
++ Part 1 (Search information) introduces how to search gene metadata and PubMed papers.
++ Part 2 (ID conversion) describes ID conversion among symbol & alias, NCBI Entrez, Ensembl, and Uniprot. 
++ Part 3 (Enrichment analysis) describes accessible functions to enrichment results, including GO, KEGG, and GSEA.
++ Part 4 (Plotting) includes 14 GO plots, 7 KEGG plots, 5 GSEA plots, 2 Venn plots, and 1 Volcano plot. 
+
+## `r emoji("heart")` Welcome to contribute {-}
+
+Book source code at <https://github.com/GangLiLab/book_genekitr>. 
+
+If you get some ideas or issues, please feel free to [post feedback](https://github.com/YuLab-SMU/biomedical-knowledge-mining-book/issues/new).

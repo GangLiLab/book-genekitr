@@ -1,0 +1,67 @@
+# (PART\*) Part I: Search Information {-}
+
+
+# Search gene metadata {#search-gene-metadata}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+library(genekitr)
+library(dplyr)
+```
+
+If users have groups of genes to check their names, location, GC content etc., they can use `genInfo()` function to quickly check.
+
+## Supported organisms {#geninfo-supported-species}
+
+Support 196 vertebrate species, 120 plant species and 2 bacteria species
+
+```{r geninfo-orgname, warning=FALSE}
+# install.packages('DT')
+library(genekitr)
+DT::datatable(ensOrg_name, options = list(pageLength = 10))
+```
+
+
+A user could select an organism name from the `latin_short_name` column. The common name is acceptable for popular research species (e.g., human, mouse, rat, fly, zebrafish, worm, chicken). Take human as an example; its official Latin short name is "happens," but hg," "hsa," "hs," or "human" are also acceptable.
+
+## Basic usage
+
+There are only three arguments in `genInfo()`:
+
+- `id`: gene id (symbol, Entrez or Ensembl) or protein id
+
+- `org`: organism name
+
+- `unique`: `TRUE` or `FALSE`. Commonly, one gene could have many other types of matched records. For example, the human `HBD` gene has three matched Entrez IDs: `r Entrez("3045")`, `r Entrez("85349")`, and `r Entrez("100187828")`. If `TRUE,` only return a one-to-one match result with minimal NAs.
+
+```{r geninfo-basic-research, warning=FALSE}
+id <- "HBD"
+uniq_res <- genInfo(id, org = 'hs', unique = TRUE)
+all_res <- genInfo(id, org = 'hs', unique = FALSE)
+uniq_res[1:4]
+all_res[1:4]
+
+colnames(all_res)
+```
+
+## 
+
+
+
+
+## Useful tricks
+
+User can count organism gene types:
+
+```{r geninfo-biotypes, warning=FALSE}
+# you can try other organisms
+genInfo(org = 'hs') %>% {table(.$gene_biotype)}
+```
+
+
+
+
+
+
+
