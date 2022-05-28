@@ -56,6 +56,10 @@ Entrez <- function(gene){
   sprintf("[%s](https://www.ncbi.nlm.nih.gov/gene/%s)", gene, gene)
 }
 
+Ensembl <- function(gene){
+  sprintf("[%s](https://www.ensembl.org/id/%s)", gene, gene)
+}
+
 
 library(knitr)
 opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, 

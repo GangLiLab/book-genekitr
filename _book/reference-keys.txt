@@ -1,3 +1,8 @@
 search-gene-metadata
 geninfo-supported-species
-basic-search
+geninfo-basic-usage
+geninfo-features
+geninfo-feature-1
+geninfo-feature-2
+geninfo-feature-3
+geninfo-feature-4

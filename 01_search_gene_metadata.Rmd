@@ -25,43 +25,106 @@ DT::datatable(ensOrg_name, options = list(pageLength = 10))
 
 A user could select an organism name from the `latin_short_name` column. The common name is acceptable for popular research species (e.g., human, mouse, rat, fly, zebrafish, worm, chicken). Take human as an example; its official Latin short name is "happens," but hg," "hsa," "hs," or "human" are also acceptable.
 
-## Basic usage
+## Basic usage {#geninfo-basic-usage}
 
 There are only three arguments in `genInfo()`:
 
 - `id`: gene id (symbol, Entrez or Ensembl) or protein id
 
-- `org`: organism name
+- `org`: organism name, default is human
 
 - `unique`: `TRUE` or `FALSE`. Commonly, one gene could have many other types of matched records. For example, the human `HBD` gene has three matched Entrez IDs: `r Entrez("3045")`, `r Entrez("85349")`, and `r Entrez("100187828")`. If `TRUE,` only return a one-to-one match result with minimal NAs.
 
 ```{r geninfo-basic-research, warning=FALSE}
 id <- "HBD"
-uniq_res <- genInfo(id, org = 'hs', unique = TRUE)
-all_res <- genInfo(id, org = 'hs', unique = FALSE)
-uniq_res[1:4]
-all_res[1:4]
+uniq_info <- genInfo(id, org = 'hs', unique = TRUE)
+uniq_info[1:4]
 
-colnames(all_res)
+all_info <- genInfo(id, org = 'hs', unique = FALSE)
+all_info[1:4]
+
+colnames(all_info)
 ```
 
-## 
+## Features {#geninfo-features}
+
+### Feature1: keep input id order {#geninfo-feature-1}
+
+`genInfo` result will strictly keep input order even if there are any unrecognized ids.
+
+If the user gives a misspelled gene id or the id does not belong to this organism, the result will provide all other columns as NA.
 
 
+```{r}
+id <- c("MCM10", "CDC20", "S100A9", 
+        "FAKEID", "TP53", "HBD", "NUDT10")
+# for human id, no need to input the org argument
+info <- genInfo(id)
+identical(id, unique(info$input_id))
+DT::datatable(info, options = list(pageLength = 10))
+```
 
+### Feature2: recognize both gene symbol and alias {#geninfo-feature-2}
 
-## Useful tricks
+Many common gene names are gene alias, but many programs only accept gene symbols which cause gene information to be lost. For example, "BCC7" is alias of "TP53", "PD1" has three aliases: "PDCD1", "SNCA" and "SPATA2".
 
-User can count organism gene types:
+```{r}
+id <- c("BCC7","PD1")
+genInfo(id)[1:4]
+```
 
-```{r geninfo-biotypes, warning=FALSE}
-# you can try other organisms
-genInfo(org = 'hs') %>% {table(.$gene_biotype)}
+### Feature3: count organism gene types {#geninfo-feature-3}
+
+Here, we only need to calculate once for those symbols with one-to-many matched types. Of course, there are many genes with NA biotypes that are uncategorized.
+
+```{r}
+uniq_symbol <- genInfo(org = 'hs') %>% 
+  dplyr::filter(!is.na(gene_biotype)) %>% 
+  dplyr::distinct(symbol,.keep_all = T) 
+
+uniq_symbol %>%  {table(.$gene_biotype)}
 ```
 
 
+### Feature4: extract specific biotype genes {#geninfo-feature-4}
+
+If we want to get all human protein-coding genes:
+
+```{r}
+hg_pro_gene <- uniq_symbol %>% 
+  dplyr::filter(gene_biotype == 'protein_coding') %>% 
+  dplyr::pull(symbol) 
+  
+length(hg_pro_gene)
+```
+
+Compare with HGNC data:
+
+```{r}
+hgnc_data <- rio::import('http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt') 
+hgnc_symbol <- hgnc_data$symbol
+plotVenn(list(genekitr_symbol = hg_pro_gene,
+              hgnc_symbol = hgnc_symbol))
+```
+
+Check some missing gene names in our result:
+```{r}
+check_genes <- head(hgnc_symbol[!hgnc_symbol%in%hg_pro_gene],3)
+hgnc_data %>% dplyr::filter(symbol %in% check_genes) %>% 
+  dplyr::select(symbol,date_approved_reserved,date_symbol_changed,
+                entrez_id)
+```
 
 
+It seems that the gene "ABTB3" is recently modified, [GeneCards](https://www.genecards.org/Search/Keyword?queryString=ABTB3) also shows no result.
+
+When we look at its EntrezID `r Entrez("121551")`, it is also known as "BTBD11" which matched with our Ensembl data: `r Ensembl("ENSG00000151136")`
+
+```{r}
+genInfo('121551')[1:3]
+```
+
+So the reason for the mismatch is out-of-sync of the extensive database Ensembl and NCBI.
 
 
 
