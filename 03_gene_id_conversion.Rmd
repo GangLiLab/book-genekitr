@@ -1,0 +1,23 @@
+# (PART\*) Part II: ID Conversion {-}
+
+
+# Gene ID conversion {#gene-id-conversion}
+
+The popular gene ID types include Symbol, NCBI Entrez and Ensembl. ID conversion among different types is very common. 
+
+
+## Current tools {#convertion-current-tools}
+
+Now there are many tools could handle id conversion including `r Biocpkg("biomaRt")`, `r Biocpkg("clusterProfiler.")` .
+
+biomaRt is frequently used to access Ensembl database while clusterProfiler depends on NCBI database via organism annotation database packages of Bioconductor.
+
+genekitr combines both Ensembl and NCBI database to provide more comprehensive gene id mapping.
+
+
+
+
+
+
+
+

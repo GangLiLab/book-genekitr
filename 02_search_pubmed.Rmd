@@ -1,5 +1,26 @@
 # Search PubMed records {#search-pubmed}
 
+`getPubmed` function could use `r CRANpkg("europepmc")` to easily get PubMed records by searching paper abstract.
 
+A user needs to input the `term` argument; if there is any supplement information, the `keys` parameter is available.
+
+For example, if we want to check papers for genes "Tp53", "Brca1," and "Tet2" in mouse stem cells, we could write codes like this:
+
+```{r}
+term <- c("Tp53","Brca1","Tet2")
+keys <- c('stem cell','mouse')
+l <- getPubmed(term,keys)
+names(l)
+DT::datatable(l$Tp53, options = list(pageLength = 10))
+```
+
+NOTICE:
+A minor update has been made in version 0.8.6 or above. Argument `keys` is replaced with `add_term` for easy understanding, and the `num` parameter is added to specify the number of returned records.
+
+```{r eval=FALSE}
+term <- c("Tp53","Brca1","Tet2")
+add_term <- c('stem cell','mouse')
+l <- getPubmed(term,add_term,num=30)
+```
 
 
