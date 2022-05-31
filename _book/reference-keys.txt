@@ -6,3 +6,17 @@ geninfo-feature-1
 geninfo-feature-2
 geninfo-feature-3
 geninfo-feature-4
+search-pubmed
+gene-id-conversion
+convertion-current-tools
+transid-basic-usage
+transid-features
+transid-feature-1
+transid-feature-2
+transid-feature-3
+transid-real-exp
+transid-real-exp-data
+transid-real-exp-bitr
+transid-real-exp-transid
+transid-real-exp-compare
+protein-id-conversion

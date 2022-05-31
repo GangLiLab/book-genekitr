@@ -14,14 +14,13 @@ If users have groups of genes to check their names, location, GC content etc., t
 
 ## Supported organisms {#geninfo-supported-species}
 
-Support 196 vertebrate species, 120 plant species and 2 bacteria species
+Support 196 vertebrate species, 120 plant species and 2 bacteria species. All data is up-to-date.
 
 ```{r geninfo-orgname, warning=FALSE}
 # install.packages('DT')
 library(genekitr)
 DT::datatable(ensOrg_name, options = list(pageLength = 10))
 ```
-
 
 A user could select an organism name from the `latin_short_name` column. The common name is acceptable for popular research species (e.g., human, mouse, rat, fly, zebrafish, worm, chicken). Take human as an example; its official Latin short name is "happens," but hg," "hsa," "hs," or "human" are also acceptable.
 
@@ -34,6 +33,8 @@ There are only three arguments in `genInfo()`:
 - `org`: organism name, default is human
 
 - `unique`: `TRUE` or `FALSE`. Commonly, one gene could have many other types of matched records. For example, the human `HBD` gene has three matched Entrez IDs: `r Entrez("3045")`, `r Entrez("85349")`, and `r Entrez("100187828")`. If `TRUE,` only return a one-to-one match result with minimal NAs.
+
+> If one-to-many mapping happens and user wants to get unique match, the ID with maximum information will return (that is with minimum NAs).
 
 ```{r geninfo-basic-research, warning=FALSE}
 id <- "HBD"
