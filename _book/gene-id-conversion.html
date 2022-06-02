@@ -54,6 +54,10 @@
 <li><a class="active" href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></li>
 <li><a class="" href="protein-id-conversion.html"><span class="header-section-number">4</span> Protein ID conversion</a></li>
 <li><a class="" href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></li>
+<li class="book-part">Part III: Enrichment Analysis</li>
+<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
+<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
+<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
 </ul>
 
         <div class="book-extra">
@@ -89,7 +93,7 @@
 <p>The argument below “ens” represents “ensembl”, if you do not want to type too many characters like me, just spell first characters.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'AKT3'</span>,<span class="st">'SSX6P'</span>,<span class="st">'FAKE_ID'</span>,<span class="st">'BCC7'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,<span class="st">'ens'</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'ens'</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id         ensembl
 ## 1     AKT3 ENSG00000275199
 ## 2     AKT3 ENSG00000117020
@@ -97,7 +101,7 @@
 ## 4     BCC7 ENSG00000141510</code></pre>
 <p>Due to NA was removed, the result order is slightly different from input id. If you want to get the same order, you can save NA:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,<span class="st">'ens'</span>,keepNA <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'ens'</span>,keepNA <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id         ensembl
 ## 1     AKT3 ENSG00000275199
 ## 2     AKT3 ENSG00000117020
@@ -106,7 +110,7 @@
 ## 5     BCC7 ENSG00000141510</code></pre>
 <p>If you want to get one-to-one mapping and keep input id order:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,<span class="st">'ens'</span>,keepNA <span class="op">=</span> <span class="cn">TRUE</span>,unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'ens'</span>,keepNA <span class="op">=</span> <span class="cn">TRUE</span>,unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id         ensembl
 ## 1     AKT3 ENSG00000275199
 ## 2    SSX6P ENSG00000171483
@@ -194,7 +198,7 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <span class="header-section-number">3.4.3</span> transId from genekitr<a class="anchor" aria-label="anchor" href="#transid-real-exp-transid"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transid_res</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,<span class="st">'sym'</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">transid_res</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'sym'</span><span class="op">)</span>
 <span class="va">transid_sym</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">transid_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">transid_sym</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 18600</code></pre>
@@ -205,7 +209,7 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 </h3>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>bitr_sym<span class="op">=</span><span class="va">bitr_sym</span>,transid_sym<span class="op">=</span><span class="va">transid_sym</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="98%"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="98%"></div>
 <p>There are 114 genes only in <code>bitr</code> result:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bitr_sym</span><span class="op">[</span><span class="op">!</span><span class="va">bitr_sym</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">transid_sym</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -239,7 +243,7 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <p>When we search on NCBI web, we found the reason, they are replaced with new one. For example, the first one <a href="https://www.ncbi.nlm.nih.gov/gene/23285">23285</a> is discontinued on 9-Nov-2019 and replaced with <a href="https://www.ncbi.nlm.nih.gov/gene/284697">284697</a>.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># As we get the latest id, we could convert it immediately!</span>
-<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="st">'284697'</span>,<span class="st">'sym'</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="st">'284697'</span>,transTo <span class="op">=</span> <span class="st">'sym'</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id symbol
 ## 1   284697  BTBD8</code></pre>
 

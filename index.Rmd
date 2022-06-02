@@ -86,9 +86,9 @@ The book is a tutorial for gene information query, ID conversion, enrichment ana
 
 ## `r emoji("books")` Content {-}
 
-+ Part 1 (Search information) introduces how to search gene metadata and PubMed papers.
-+ Part 2 (ID conversion) describes ID conversion among symbol & alias, NCBI Entrez, Ensembl, and Uniprot. 
-+ Part 3 (Enrichment analysis) describes accessible functions to enrichment results, including GO, KEGG, and GSEA.
++ Part 1 (Search Information) introduces how to search gene metadata and PubMed papers.
++ Part 2 (ID Conversion) describes ID conversion among symbol & alias, NCBI Entrez, Ensembl, Uniprot and microarray probe. 
++ Part 3 (Enrichment Analysis) describes the two widely used functional enrichment methods over-representation analysis (ORA) and functional class scoring (FCS).
 + Part 4 (Plotting) includes 14 GO plots, 7 KEGG plots, 5 GSEA plots, 2 Venn plots, and 1 Volcano plot. 
 
 ## `r emoji("heart")` Welcome to contribute {-}

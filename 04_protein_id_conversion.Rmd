@@ -1,5 +1,12 @@
 # Protein ID conversion {#protein-id-conversion}
 
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+library(genekitr)
+library(dplyr)
+```
+
 If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.
 
 ## Example data {#protein-example-data}
@@ -21,13 +28,14 @@ head(rat_prodata,5)
 
 The second column is rat protein id, and the third one is gene name.
 
-## Protein id conversion {#transid-convert-protein}
+## Protein id conversion {#protein-id-conversion}
 
 ```{r}
 protein_id = rat_prodata[,"Acc"]
 gname = transId(protein_id,'symbol','rat',unique = T)
 
-new_res = merge(rat_prodata,gname,by.x = 'Acc',by.y = 'input_id',all.x = T) %>% 
+new_res = merge(rat_prodata, gname,
+                by.x = 'Acc',by.y = 'input_id',all.x = T) %>% 
   dplyr::relocate(symbol,.after = Gene)
 
 head(new_res,5)

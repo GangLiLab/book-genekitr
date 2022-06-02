@@ -99,7 +99,7 @@ hg_pro_gene <- uniq_symbol %>%
 length(hg_pro_gene)
 ```
 
-Compare with HGNC data:
+Compare with [HGNC data](http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt):
 
 ```{r}
 hgnc_data <- rio::import('http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt') 

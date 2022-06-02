@@ -1,5 +1,12 @@
 # (PART\*) Part II: ID Conversion {-}
 
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+library(genekitr)
+library(clusterProfiler)
+library(dplyr)
+```
 
 # Gene ID conversion {#gene-id-conversion}
 
@@ -31,17 +38,17 @@ Genekitr combines both Ensembl and NCBI database to provide more comprehensive g
 The argument below "ens" represents "ensembl", if you do not want to type too many characters like me, just spell first characters.
 ```{r transid_basic_usage, warning=FALSE}
 id <- c('AKT3','SSX6P','FAKE_ID','BCC7')
-transId(id,'ens')
+transId(id,transTo = 'ens')
 ```
 
 Due to NA was removed, the result order is slightly different from input id. If you want to get the same order, you can save NA:
 ```{r}
-transId(id,'ens',keepNA = TRUE)
+transId(id,transTo = 'ens',keepNA = TRUE)
 ```
 
 If you want to get one-to-one mapping and keep input id order:
 ```{r}
-transId(id,'ens',keepNA = TRUE,unique = TRUE)
+transId(id,transTo = 'ens',keepNA = TRUE,unique = TRUE)
 ```
 
 
@@ -100,7 +107,7 @@ length(bitr_sym)
 
 ### transId from genekitr {#transid-real-exp-transid}
 ```{r}
-transid_res = transId(id,'sym')
+transid_res = transId(id,transTo = 'sym')
 transid_sym = unique(transid_res$symbol)
 length(transid_sym)
 ```
@@ -145,7 +152,7 @@ When we search on NCBI web, we found the reason, they are replaced with new one.
 
 ```{r}
 # As we get the latest id, we could convert it immediately!
-transId('284697','sym')
+transId('284697',transTo = 'sym')
 ```
 
 

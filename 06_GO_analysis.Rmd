@@ -1,0 +1,144 @@
+# (PART\*) Part III: Enrichment Analysis {-}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+library(genekitr)
+library(dplyr)
+```
+
+# ORA GO analysis {#ora-go-analysis}
+
+As the paper ["Urgent need for consistent standards in functional enrichment analysis"](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009935) mentioned, popular functional enrichment tools can be classified into two main categories: (1) over-representation analysis (ORA) and (2) functional class scoring (FCS) . 
+
+According to paper ["Over-representation of correlation analysis (ORCA): a method for identifying associations between variable sets"](https://academic.oup.com/bioinformatics/article/31/1/102/2365686?login=true):
+
+> Over-representation analysis (ORA) is a simple method for objectively deciding whether a set of variables of known or suspected biological relevance, such as a gene set or pathway, is more prevalent in a set of variables of interest than we expect by chance.
+
+ORA usually has these precedures:
+
+1. Identify biomolecules, such as mRNA, proteins or microarray probes, considered "differentially expressed" in two or more conditions
+2. Determine the number of differentially expressed biomolecules in each pathway
+3. For each pathway, using a hypergeometric distribution to calculate a probability value ( P -value) of obtaining the number of differentially expressed biomolecules against the background list of all biomolecules
+
+In this chapter, we will introduce two popular gene annotation databases: GO and KEGG. 
+
+## GO intruduction {#go-introduction}
+
+According to Wikipedia, "Ontologies consist of detectable or directly observable representations of things and the relationships between those things." 
+GO is short for [Gene Ontology](http://geneontology.org). GO analysis is to find the associations between gene products and GO terms， which has three domains:
+
++ Biological Processes (BP)
+  - A biological process represents a specific objective that the organism is genetically programmed to achieve.
++ Molecular Functions (MF)
+  - A molecular process that can be carried out by the action of a single macromolecular machine, usually via direct physical interactions with other molecular entities.
++ Cellular Components (CC)
+  - A location, relative to cellular compartments and structures, occupied by a macromolecular machine when it carries out a molecular function.
+
+GO terms are built in a directed acyclic graph with a parent-child relationship.
+
+> For more comprehensive introduction of GO, you may visit: https://advaitabio.com/faq-items/understanding-gene-ontology/ OR http://geneontology.org/docs/ontology-documentation/
+
+## Basic usage {#go-basic-usage}
+
+> `genGO` is built on `clusterProfiler::enrichGO`
+
+The simplest arguments are: 
+
+- `id`: gene id of entrez, ensembl or symbol (alias is also accepted)
+- `org`: organism (from `genekitr::biocOrg_name`)
+- `ont`: ontology of "bp", "mf", "cc" or "all"
+- `pvalueCutoff`
+- `qvalueCutoff`
+
+```{r}
+data(geneList, package = "genekitr")
+id <- names(geneList)[abs(geneList) > 2]
+ego <- genGO(id,
+             org = "human", 
+             ont = "bp", 
+             pvalueCutoff = 0.01,
+             qvalueCutoff = 0.01)
+head(ego)
+```
+
+If input id is not a symbol, `genGO` will automatically convert to a symbol for easy understanding.
+
+Besides, `genGO` set four measurement aspects: "Count", "GeneRatio", "FoldEnrichment" and "RichFactor".
+
+- Bg Ratio: Total number of specific pathway gene/ Universal gene numbers (e.g., all human protein-coding genes)
+- Gene Ratio: Genes of interest in specific pathway/gene of interest (e.g., differentially expressed genes)
+- Fold Enrichment:  GeneRatio / BgRatio
+- Rich Factor: Genes of interest in specific pathway/ Total number of specific pathway gene
+
+## Group enrichment {#go-group-enrichment}
+
+A user needs to specify gene groups and set them as the `group_list` argument:
+
+Group list with one group:
+
+```{r}
+id2 <- c(head(names(geneList),50),tail(names(geneList),50))
+one_group <- list(group1  = c(rep('up',50),rep('down',50)))
+
+gego1 <- genGO(id2, 
+               group_list = one_group,
+               org = "human", 
+               ont = "bp", 
+               pvalueCutoff = 0.05,
+               qvalueCutoff = 0.05)
+head(gego1,5)
+```
+
+Group list with over one group:
+
+```{r}
+two_group <- list(group1  = c(rep('up',50),rep('down',50)),
+                  group2 = c(rep('A',40),rep('B',60)))
+gego2 <- genGO(id2, 
+               group_list = two_group,
+               org = "human", 
+               ont = "bp", 
+               pvalueCutoff = 0.05,
+               qvalueCutoff = 0.05)
+head(gego2,5)
+```
+
+## Additional arguments {#go-additional-arguments}
+
++ `pAdjustMethod`: choose from "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
++ `minGSSize`: Minimal size of each gene set for analysis. Default is 10. Pathway with less than ten genes will be omitted (e.g. [GO:0062196](http://www.informatics.jax.org/vocab/gene_ontology/GO:0062196) is a child term with 8-gene in the bottom of the directed acyclic graph).
++ `maxGSSize`: Maximal size. Default is 500. The pathway will more than 500 genes will be omitted (e.g. [GO:0007049](http://www.informatics.jax.org/vocab/gene_ontology/GO:0007049) has 1796 genes as parent nodes at the top of the directed acyclic graph). 
++ `universe`: If uses have their background genes, set them as `universe`. Otherwise, the program will take all genes in the `orgDb` annotation package (e.g. `org.Hs.eg.db`).
+
+## Advanced usage {#go-advanced-usage}
+
+In the below example, we will input some symbols with alias and set universal genes as Entrez ID.
+Even if they are not the same type, we still could utilize `transId` to automatically convert them to the same type.
+
+```{r}
+symbol_id <- transId(id2,transTo = 'symbol',unique = T) %>% dplyr::pull(symbol)
+symbol_id <- c(symbol_id,'BCC7','PD1',"PDL1")
+head(symbol_id)
+head(names(geneList))
+
+diy_ego <- genGO(symbol_id,
+             org = "human", 
+             ont = "bp", 
+             pvalueCutoff = 0.01,
+             qvalueCutoff = 0.01,
+             pAdjustMethod = "fdr",
+             minGSSize = 5,
+             maxGSSize = 2000,
+             universe =  names(geneList))
+
+head(diy_ego,5)
+```
+
+In this result, the input gene alias is also recognized and converted to the official symbol (e.g. `BCC7`):
+```{r}
+diy_ego$geneID[1]
+diy_ego$geneID_symbol[1]
+```
+
+
