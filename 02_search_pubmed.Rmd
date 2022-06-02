@@ -11,10 +11,10 @@ term <- c("Tp53","Brca1","Tet2")
 keys <- c('stem cell','mouse')
 l <- getPubmed(term,keys)
 names(l)
-DT::datatable(l$Tp53, options = list(pageLength = 10))
+head(l$Tp53,5)
 ```
 
-NOTICE:
+> **NOTICE**:
 A minor update has been made in version 0.8.6 or above. Argument `keys` is replaced with `add_term` for easy understanding, and the `num` parameter is added to specify the number of returned records.
 
 ```{r eval=FALSE}

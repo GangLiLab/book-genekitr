@@ -60,6 +60,9 @@ Ensembl <- function(gene){
   sprintf("[%s](https://www.ensembl.org/id/%s)", gene, gene)
 }
 
+Uniprot <- function(pro){
+  sprintf("[%s](https://www.uniprot.org/uniprot/%s)", pro, pro)
+}
 
 library(knitr)
 opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, 

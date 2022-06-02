@@ -20,3 +20,6 @@ transid-real-exp-bitr
 transid-real-exp-transid
 transid-real-exp-compare
 protein-id-conversion
+protein-example-data
+transid-convert-protein
+probe-id-conversion

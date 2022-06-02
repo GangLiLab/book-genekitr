@@ -62,7 +62,7 @@ id <- c("MCM10", "CDC20", "S100A9",
 # for human id, no need to input the org argument
 info <- genInfo(id)
 identical(id, unique(info$input_id))
-DT::datatable(info, options = list(pageLength = 10))
+head(info,3)
 ```
 
 ### Feature2: recognize both gene symbol and alias {#geninfo-feature-2}

@@ -1,0 +1,31 @@
+# Probe ID conversion {#probe-id-conversion}
+
+Microarray probes are used to measure the expression level of large number of genes. After we get microarray data, the first important thing before downstream analysis is probe id conversion.
+
+`genekitr::transProbe` is built on [Ensembl up-to-date annotation datasets](https://www.ensembl.org/info/genome/microarray_probe_set_mapping.html) and could join together with other genekitr functions elegantly.
+
+Supported platforms can be listed by:
+
+```{r}
+DT::datatable(hsapiens_probe_platform, options = list(pageLength = 10))
+```
+
+## Probe id conversion {#transid-convert-probe}
+
+User only needs to input probe id, organism and wanted conversion type, left things just give genekitr!
+
+```{r}
+data(deg, package = "genekitr")
+probes = deg$probe_id
+
+transProbe(probes,"symbol",org = "human")
+```
+
+
+
+
+
+
+
+
+

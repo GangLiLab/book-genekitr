@@ -1,5 +1,57 @@
 # Protein ID conversion {#protein-id-conversion}
 
+If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.
+
+## Example data {#protein-example-data}
+
+For example, in this data article [Dataset from proteomic analysis of rat, mouse, and human liver microsomes and S9 fractions](https://www.sciencedirect.com/science/article/pii/S2352340915000189#ec0005) , we could get proteomic analysis result for [rat](https://ars.els-cdn.com/content/image/1-s2.0-S2352340915000189-mmc1.zip)
+
+
+Firstly, take a look at the data:
+
+```{r include=FALSE}
+load('cache/rat_pro.rda')
+```
+
+
+```{r}
+colnames(rat_prodata)
+head(rat_prodata,5)
+```
+
+The second column is rat protein id, and the third one is gene name.
+
+## Protein id conversion {#transid-convert-protein}
+
+```{r}
+protein_id = rat_prodata[,"Acc"]
+gname = transId(protein_id,'symbol','rat',unique = T)
+
+new_res = merge(rat_prodata,gname,by.x = 'Acc',by.y = 'input_id',all.x = T) %>% 
+  dplyr::relocate(symbol,.after = Gene)
+
+head(new_res,5)
+```
+
+Maybe you have noticed that some gene names are different from the original data. For example, the second one: `r Uniprot("A0JPQ8")` is called `Alkmo` before, but the latest name is `Agmo`.
+
+Looking through the whole data, you may find many gene names updated. 
+
+```{r}
+old_name = unique(new_res$Gene) %>% 
+  stringr::str_remove_all('_RAT')
+new_name = unique(toupper(new_res$symbol))
+new_res[which(is.na(new_res$symbol)),] %>% 
+  dplyr::select(Acc,Gene,symbol)
+```
+
+For example, the protein id `r Uniprot("P01835")` has replaced the gene name with `NA`.
+
+The Venn plot shows that primary protein ids have changed their gene names. If users continue to use the old gene names, they may lose the latest information.
+
+```{r}
+plotVenn(list(old_name=old_name, new_name = na.omit(new_name)))
+```
 
 
 
