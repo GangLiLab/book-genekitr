@@ -1,0 +1,282 @@
+# (PART\*) Part IV: Plotting {-}
+
+# Plot GO and KEGG {#plot-go-kegg}
+
+```{r include=FALSE}
+library(knitr)
+library(ggplot2)
+library(igraph)
+library(ggraph)
+library(patchwork)
+library(genekitr)
+```
+
+After selecting interested pathways or terms from `genGO` or `genKEGG` result, user could pass the data frame to `plotEnrich`, which sets many plot types for GO and KEGG result, including barplot, dotplot, heatmap, wego-like plot, chord plot, network, wordcloud etc.
+
+It is worth mentioning that almost plots are based on ggplot2 and `plot_theme` function could easily change their border, legend, label etc., which could help user make their own plot.
+
+
+## Bar Plot
+
+Bar plot is the simplest way to show enriched terms. The x-axis is enrichment metric (e.g. Gene ratio, Fold enrichment); the y-axis is selected terms. The bar color represents statistical value.
+
+> **What's the difference between pvalue and p.adjust?**
+`p.adjust` has seven adjustment methods: <https://www.rdocumentation.org/packages/stats/versions/3.5.0/topics/p.adjust>.
+The adjusted p-value is always the p-value, multiplied with some factor: adj.p = f * p The actual size of this factor f depends on the strategy used to correct for multiple testing.
+By the way, the "q-value" stands for "false discovery rate (FDR)" method.
+
+```{r}
+data(geneList, package = "genekitr")
+id <- names(geneList)[abs(geneList) > 1.5]
+logfc <- geneList[id]
+
+ego <- genGO(id,
+  org = "human", ont = "bp", pvalueCutoff = 0.01,
+  qvalueCutoff = 0.01)
+# Here just show head ten terms, you can choose your own interested terms!
+ego <- ego[1:10,]
+```
+
+The basic arguments are: 
+
+- `term_metric`: The x-axis could be "Count", "GeneRatio", "FoldEnrich" or "RichFactor"
+- `stats_metric`: Statistic value of "p.adjust", "pvalue" or "qvalue"
+- `up_color`: Color for stronger statistic value (e.g. pvalue 0.01)
+- `down_color`: Color for weaker statistic value (e.g. pvalue 1)
+- `wrap_length`: Wrap term text if longer than this number
+
+(ref:barplotScap) Bar plot of enrichment analysis.
+
+(ref:barplotCap) **Bar plot of enrichment analysis.** default (A), modify metrics (B),  modify color (C) and modify term length (D).
+
+```{r barplot, fig.width=12, fig.height=10, fig.cap="(ref:barplotCap)", fig.scap="(ref:barplotScap)"}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot")
+p2 <- plotEnrich(ego,plot_type = "dot", term_metric = "GeneRatio", stats_metric = "pvalue")
+p3 <- plotEnrich(ego,plot_type = "dot", up_color = "#E69056", down_color = "#325CAC")
+p4 <- plotEnrich(ego,plot_type = "dot", wrap_length = 20)
+pp <- p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
+pp
+```
+
+## Bubble Plot
+
+Enriched term are shown as bubbles with different sizes that represents various gene number.
+The x-axis is statistic value and the y-axis is "Fold Enrichment".
+
+The basic arguments are: 
+- `stats_metric`: Statistic value of "p.adjust", "pvalue" or "qvalue"
+- `scale_ratio`: Change bubble size. Default is 1.
+
+(ref:bubbleplotScap) Bubble plot of enrichment analysis.
+
+(ref:bubbleplotCap) **Bubble plot of enrichment analysis.** default (A), modify bubble size (B).
+
+```{r bubbleplot, fig.height=5, fig.width=5, fig.cap="(ref:bubbleplotCap)", fig.scap="(ref:bubbleplotScap)"}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "bubble")
+p2 <- plotEnrich(ego,plot_type = "bubble", scale_ratio = 0.5, stats_metric = "qvalue")
+p1 + p2 + plot_annotation(tag_levels = 'A')
+```
+
+## Dot Plot
+
+Similar with bar plot, dot plot is also widely used in enrichment analysis plotting. Like bubble plot, dot size represents gene number in this term.
+
+(ref:dotplotScap) Dot plot of enrichment analysis.
+
+(ref:dotplotCap) **Dot plot of enrichment analysis.** default (A), modify bubble size (B).
+
+```{r dotplot, fig.height=5, fig.width=5, fig.cap="(ref:dotplotCap)", fig.scap="(ref:dotplotScap)"}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot")
+p2 <- plotEnrich(ego,plot_type = "dot", scale_ratio = 1, stats_metric = "pvalue")
+p1 + p2 + plot_annotation(tag_levels = 'A')
+```
+
+## WEGO Plot
+
+If user analyzed more than one ontology, he may want to show them in one figure.
+Inspired by [WEGO](https://wego.genomics.cn/), `genekitr` utilized `r CRANpkg("ggplot2")` to reproduce this plot.
+
+Here we generate all three ontologies (BP,MF and CC) result. 
+```{r}
+all_ego <- genGO(id,
+                 org = "human", 
+                 ont = "all", 
+                 pvalueCutoff = 0.01,
+                 qvalueCutoff = 0.01)
+head(all_ego)
+```
+
+> If you just want to show two ontologies, you can rbind both dataframes and give the new dataframe a new column "ONTOLOGY" to distinguish different ontologies.
+
+(ref:wegoplotScap) WEGO plot of enrichment analysis.
+
+(ref:wegoplotCap) **WEGO plot of enrichment analysis.** 
+
+```{r wegoplot, fig.height=5, fig.width=5, fig.cap="(ref:wegoplotCap)", fig.scap="(ref:wegoplotScap)"}
+plotEnrich(all_ego,plot_type = "wego")
+```
+
+## Lollipop Plot
+
+Lollipop is like combination of barplot and dotplot
+
+(ref:lolliplotScap) Lollipop plot of enrichment analysis.
+
+(ref:lolliplotCap) **Lollipop plot of enrichment analysis.** 
+
+```{r lolliplot, fig.height=5, fig.width=5, fig.cap="(ref:lolliplotCap)", fig.scap="(ref:lolliplotScap)"}
+plotEnrich(ego,plot_type = "lollipop")
+```
+
+## Heatmap Plot
+
+Heatmap plot showed interactions between enriched terms and their genes.
+If fold change is given, heatmap will add color for up and down-regulated genes.
+
+(ref:heatmapScap) Heatmap plot of enrichment analysis.
+
+(ref:heatmapCap) **Heatmap plot of enrichment analysis.** all genes (A, default), selected genes (B), selected genes with logFC value (C).
+
+```{r heatmap, fig.height=3, fig.width=5, fig.cap="(ref:heatmapCap)", fig.scap="(ref:heatmapScap)"}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "geneheat")
+show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
+p2 <- plotEnrich(ego,plot_type = "geneheat",show_gene = show_gene)
+p3 <- plotEnrich(ego,plot_type = "geneheat",show_gene = show_gene, fold_change = logfc)
+p1/p2/p3 +plot_annotation(tag_levels = 'A')
+```
+
+## Chord Plot
+
+Inspired by [GOplot](https://wencke.github.io/), chord plot is reproduced using `r CRANpkg("ggplot2")` and it is similar with heatmap plot.
+
+(ref:chordScap) Chord plot of enrichment analysis.
+
+(ref:chordCap) **Heatmap plot of enrichment analysis.** selected genes (A), selected genes with logFC value (B).
+
+```{r chord, fig.height=5, fig.width=8, fig.cap="(ref:chordCap)", fig.scap="(ref:chordScap)"}
+library(patchwork)
+show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
+p1 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene)
+p2 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene, fold_change = logfc)
+p1+p2 +plot_annotation(tag_levels = 'A')
+```
+
+## Network Plot
+
+Inspired by `enrichplot::emapplot`, `genekitr` reproduced this plot to enhance modification.
+Enriched terms are the nodes in the network, the overlapping gene sets are edges. Terms with more overlapped genes are tend to cluster together and the edge will be thicker.
+
+- GO analysis result could use six methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang" , "Wang" and "JC" (Jaccard similarity coefficient) methods.
+- KEGG only supports JC method.
+
+User could define `layout` argument derived from `r CRANpkg("ggraph")`, including "nicely" (default), "circle", "dh", "drl", "fr", "graphopt", "grid","lgl", "kk", "mds", "randomly", "star" etc.
+
+> For more information about the `layout`, you could refer to: [Introduction to ggraph: Layouts](https://www.data-imaginist.com/2017/ggraph-introduction-layouts/)
+
+(ref:networkScap) Network plot of enrichment analysis.
+
+(ref:networkCap) **Network plot of enrichment analysis.** JC method and nicely layout(A, default), circle layout (B), grid layout and Want method (C).
+
+```{r network, fig.height=5, fig.width=5, fig.cap="(ref:networkCap)", fig.scap="(ref:networkScap)"}
+library(patchwork)
+library(igraph)
+library(ggraph)
+p1 <- plotEnrich(ego,plot_type = "network",scale_ratio = 0.5)
+p2 <- plotEnrich(ego,plot_type = "network", layout = "circle",scale_ratio = 0.5)
+p3 <- plotEnrich(ego,plot_type = "network", layout = "grid",sim_method = "Wang" )
+(p1+p2)/p3 +plot_annotation(tag_levels = 'A')
+```
+
+## Map Plot
+
+GO terms are built in a directed acyclic graph with a parent-child relationship.
+Here the map plot utilized `r Biocpkg("GOSemSim")` to extract parent and child terms, also utilized `r CRANpkg("ggraph")` and `r CRANpkg("igraph")` to draw with default layout "sugiyama".
+
+To avoid too much unrelated terms messed up, `genekitr` only shows the closest parent and child with selected terms. Besides, the top parent term will be also plotted.
+
+(ref:mapScap) Map plot of enrichment analysis.
+
+(ref:mapCap) **Map plot of enrichment analysis.** 
+
+```{r map, fig.height=5, fig.width=5, fig.cap="(ref:mapCap)", fig.scap="(ref:mapScap)"}
+library(igraph)
+library(ggraph)
+plotEnrich(ego,plot_type = "gomap", wrap_length = 25)
+```
+
+## GO Heatmap Plot
+
+Inspired by `r Biocpkg("rrvgo")`, `genekitr` scratches some main codes to cluster GO terms. Also it could use six methods to calculate the similarity between terms.
+
+(ref:goheatScap) GO heatmap plot of enrichment analysis.
+
+(ref:goheatCap) **GO heatmap plot of enrichment analysis.** 
+
+```{r goheat, fig.height=5, fig.width=5, fig.cap="(ref:goheatCap)", fig.scap="(ref:goheatScap)"}
+plotEnrich(ego,plot_type = "goheat",sim_method = 'Rel')
+```
+
+## GO Tangram Plot
+
+According to [rrvgo vignettes](http://bioconductor.org/packages/release/bioc/vignettes/rrvgo/inst/doc/rrvgo.html), tangram plot is space-filling visualization of hierarchical structures. The terms are grouped (colored) based on their parent, and the space used by the term is proportional to the score.  
+
+(ref:gotangramScap) GO tangram plot of enrichment analysis.
+
+(ref:gotangramCap) **GO tangram plot of enrichment analysis.** 
+
+```{r gotangram, fig.height=5, fig.width=5, fig.cap="(ref:gotangramCap)", fig.scap="(ref:gotangramScap)"}
+plotEnrich(ego,plot_type = "gotangram",sim_method = 'Rel')
+```
+
+## Wordcloud Plot
+
+Wordcloud plot utilized text frequency to show term emphasis.
+
+(ref:wordcloudScap) Wordcloud plot of enrichment analysis.
+
+(ref:wordcloudCap) **Wordcloud plot of enrichment analysis.** 
+
+```{r wordcloud, fig.height=5, fig.width=5, fig.cap="(ref:wordcloudCap)", fig.scap="(ref:wordcloudScap)"}
+plotEnrich(ego,plot_type = "wordcloud",sim_method = 'Rel')
+```
+
+## Upset Plot
+
+Inspired by `r CRANpkg("UpSetR")`, the upset plot shows the association between genes and enriched terms. Unlike common Venn diagram, it could emphasize complex relationship among many gene sets.
+
+(ref:upsetScap) Upset plot of enrichment analysis.
+
+(ref:upsetCap) **Upset plot of enrichment analysis.** 
+
+```{r upset, fig.height=5, fig.width=5, fig.cap="(ref:upsetCap)", fig.scap="(ref:upsetScap)"}
+plotEnrich(ego,plot_type = "upset")
+```
+
+
+## Plot Theme
+(ref:themeScap) Plot theme.
+
+(ref:themeCap) **Plot theme.** default theme (A), modify text size (B),  modify grid and border size (C) and modify all text (D).
+
+```{r theme, fig.height=5, fig.width=5, fig.cap="(ref:themeCap)", fig.scap="(ref:themeScap)"}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot")
+p2 <- plotEnrich(ego,plot_type = "dot", main_text_size = 10, legend_text_size  = 10)
+p3 <- plotEnrich(ego,plot_type = "dot", border_thick = 3, remove_grid = F)
+p4 <- plotEnrich(ego,plot_type = "dot", 
+                 remove_main_text = T, 
+                 remove_legend_text = T,
+                 remove_legend = T)
+p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
+```
+
+
+
+
+
+
+

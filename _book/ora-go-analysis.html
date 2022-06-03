@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="As the paper “Urgent need for consistent standards in functional enrichment analysis” mentioned, popular functional enrichment tools can be classified into two main categories: (1)...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="As the paper “Urgent need for consistent standards in functional enrichment analysis” mentioned, popular functional enrichment tools can be classified into two main categories: (1)...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="As the paper “Urgent need for consistent standards in functional enrichment analysis” mentioned, popular functional enrichment tools can be classified into two main categories: (1)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -58,6 +58,8 @@
 <li><a class="active" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
 <li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li class="book-part">Part IV: Plotting</li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
 </ul>
 
         <div class="book-extra">
@@ -65,7 +67,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ora-go-analysis" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ora-go-analysis" class="section level1">
 <h1>
 <span class="header-section-number">6</span> ORA GO analysis<a class="anchor" aria-label="anchor" href="#ora-go-analysis"><i class="fas fa-link"></i></a>
 </h1>
@@ -81,7 +83,7 @@
 <li>For each pathway, using a hypergeometric distribution to calculate a probability value ( P -value) of obtaining the number of differentially expressed biomolecules against the background list of all biomolecules</li>
 </ol>
 <p>In this chapter, we will introduce two popular gene annotation databases: GO and KEGG.</p>
-<div id="go-introduction" class="section level2" number="6.1">
+<div id="go-introduction" class="section level2">
 <h2>
 <span class="header-section-number">6.1</span> GO intruduction<a class="anchor" aria-label="anchor" href="#go-introduction"><i class="fas fa-link"></i></a>
 </h2>
@@ -109,7 +111,7 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 <p>For more comprehensive introduction of GO, you may visit: <a href="https://advaitabio.com/faq-items/understanding-gene-ontology/" class="uri">https://advaitabio.com/faq-items/understanding-gene-ontology/</a> OR <a href="http://geneontology.org/docs/ontology-documentation/" class="uri">http://geneontology.org/docs/ontology-documentation/</a></p>
 </blockquote>
 </div>
-<div id="go-basic-usage" class="section level2" number="6.2">
+<div id="go-basic-usage" class="section level2">
 <h2>
 <span class="header-section-number">6.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#go-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
@@ -136,20 +138,27 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
              pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
              qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ego</span><span class="op">)</span></code></pre></div>
-<pre><code>##              Hs_BP_ID                                                Description  GeneRatio   BgRatio
-## GO:0050673 GO:0050673                              epithelial cell proliferation 0.13821138 453/18866
-## GO:0006260 GO:0006260                                            DNA replication 0.10569106 273/18866
-## GO:0050678 GO:0050678                regulation of epithelial cell proliferation 0.11382114 395/18866
-## GO:0010165 GO:0010165                                          response to X-ray 0.04065041  32/18866
-## GO:1901992 GO:1901992 positive regulation of mitotic cell cycle phase transition 0.05691057  94/18866
-## GO:1901989 GO:1901989         positive regulation of cell cycle phase transition 0.05691057 110/18866
-##                  pvalue     p.adjust       qvalue
-## GO:0050673 6.263837e-09 1.770787e-05 1.356945e-05
-## GO:0006260 2.730876e-08 3.860093e-05 2.957970e-05
-## GO:0050678 3.012571e-07 2.838847e-04 2.175394e-04
-## GO:0010165 1.898488e-06 1.341756e-03 1.028181e-03
-## GO:1901992 2.698729e-06 1.525861e-03 1.169260e-03
-## GO:1901989 7.698650e-06 3.461411e-03 2.652461e-03
+<pre><code>##              Hs_BP_ID
+## GO:0050673 GO:0050673
+## GO:0006260 GO:0006260
+## GO:0050678 GO:0050678
+## GO:0010165 GO:0010165
+## GO:1901992 GO:1901992
+## GO:1901989 GO:1901989
+##                                                           Description
+## GO:0050673                              epithelial cell proliferation
+## GO:0006260                                            DNA replication
+## GO:0050678                regulation of epithelial cell proliferation
+## GO:0010165                                          response to X-ray
+## GO:1901992 positive regulation of mitotic cell cycle phase transition
+## GO:1901989         positive regulation of cell cycle phase transition
+##             GeneRatio   BgRatio       pvalue     p.adjust       qvalue
+## GO:0050673 0.13821138 453/18866 6.263837e-09 1.770787e-05 1.356945e-05
+## GO:0006260 0.10569106 273/18866 2.730876e-08 3.860093e-05 2.957970e-05
+## GO:0050678 0.11382114 395/18866 3.012571e-07 2.838847e-04 2.175394e-04
+## GO:0010165 0.04065041  32/18866 1.898488e-06 1.341756e-03 1.028181e-03
+## GO:1901992 0.05691057  94/18866 2.698729e-06 1.525861e-03 1.169260e-03
+## GO:1901989 0.05691057 110/18866 7.698650e-06 3.461411e-03 2.652461e-03
 ##                                                                                             geneID
 ## GO:0050673 5176/26471/3488/6591/8549/3725/6657/4208/407007/6422/29128/595/7039/7099/374/3690/10468
 ## GO:0006260                  3725/5427/157570/641/5888/6241/8318/9156/9134/55388/63967/51514/374393
@@ -180,7 +189,7 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 <li>Rich Factor: Genes of interest in specific pathway/ Total number of specific pathway gene</li>
 </ul>
 </div>
-<div id="go-group-enrichment" class="section level2" number="6.3">
+<div id="go-group-enrichment" class="section level2">
 <h2>
 <span class="header-section-number">6.3</span> Group enrichment<a class="anchor" aria-label="anchor" href="#go-group-enrichment"><i class="fas fa-link"></i></a>
 </h2>
@@ -197,24 +206,24 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
                pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
                qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego1</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Cluster group1   Hs_BP_ID                       Description  GeneRatio   BgRatio       pvalue
-## 1    down   down GO:0000217   DNA secondary structure binding 0.06250000  34/18352 9.491897e-05
-## 2    down   down GO:0008094     DNA-dependent ATPase activity 0.08333333 108/18352 1.808164e-04
-## 3    down   down GO:0140097 catalytic activity, acting on DNA 0.10416667 209/18352 2.099890e-04
-## 4    down   down GO:0003697       single-stranded DNA binding 0.08333333 114/18352 2.225745e-04
-## 5    down   down GO:0000400     four-way junction DNA binding 0.04166667  17/18352 8.884883e-04
-##     p.adjust      qvalue                   geneID               geneID_symbol Count FoldEnrich
-## 1 0.01079486 0.007262958           641/7516/63967             BLM/XRCC2/CLSPN     3   33.73529
-## 2 0.01079486 0.007262958      54821/641/5888/7516      ERCC6L/BLM/RAD51/XRCC2     4   14.16049
-## 3 0.01079486 0.007262958 54821/5427/641/5888/9156 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673
-## 4 0.01079486 0.007262958      641/5888/8318/55388       BLM/RAD51/CDC45/MCM10     4   13.41520
-## 5 0.03447335 0.023194220                 641/7516                   BLM/XRCC2     2   44.98039
-##   RichFactor
-## 1 0.08823529
-## 2 0.03703704
-## 3 0.02392344
-## 4 0.03508772
-## 5 0.11764706</code></pre>
+<pre><code>##   Cluster group1   Hs_BP_ID                       Description  GeneRatio
+## 1    down   down GO:0000217   DNA secondary structure binding 0.06250000
+## 2    down   down GO:0008094     DNA-dependent ATPase activity 0.08333333
+## 3    down   down GO:0140097 catalytic activity, acting on DNA 0.10416667
+## 4    down   down GO:0003697       single-stranded DNA binding 0.08333333
+## 5    down   down GO:0000400     four-way junction DNA binding 0.04166667
+##     BgRatio       pvalue   p.adjust      qvalue                   geneID
+## 1  34/18352 9.491897e-05 0.01079486 0.007262958           641/7516/63967
+## 2 108/18352 1.808164e-04 0.01079486 0.007262958      54821/641/5888/7516
+## 3 209/18352 2.099890e-04 0.01079486 0.007262958 54821/5427/641/5888/9156
+## 4 114/18352 2.225745e-04 0.01079486 0.007262958      641/5888/8318/55388
+## 5  17/18352 8.884883e-04 0.03447335 0.023194220                 641/7516
+##                 geneID_symbol Count FoldEnrich RichFactor
+## 1             BLM/XRCC2/CLSPN     3   33.73529 0.08823529
+## 2      ERCC6L/BLM/RAD51/XRCC2     4   14.16049 0.03703704
+## 3 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673 0.02392344
+## 4       BLM/RAD51/CDC45/MCM10     4   13.41520 0.03508772
+## 5                   BLM/XRCC2     2   44.98039 0.11764706</code></pre>
 <p>Group list with over one group:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">two_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group1  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'up'</span>,<span class="fl">50</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'down'</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span>,
@@ -226,26 +235,26 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
                pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
                qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego2</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Cluster group1 group2   Hs_BP_ID                       Description  GeneRatio   BgRatio
-## 1  down.B   down      B GO:0000217   DNA secondary structure binding 0.06250000  34/18352
-## 2  down.B   down      B GO:0008094     DNA-dependent ATPase activity 0.08333333 108/18352
-## 3  down.B   down      B GO:0140097 catalytic activity, acting on DNA 0.10416667 209/18352
-## 4  down.B   down      B GO:0003697       single-stranded DNA binding 0.08333333 114/18352
-## 5  down.B   down      B GO:0000400     four-way junction DNA binding 0.04166667  17/18352
-##         pvalue   p.adjust      qvalue                   geneID               geneID_symbol Count
-## 1 9.491897e-05 0.01079486 0.007262958           641/7516/63967             BLM/XRCC2/CLSPN     3
-## 2 1.808164e-04 0.01079486 0.007262958      54821/641/5888/7516      ERCC6L/BLM/RAD51/XRCC2     4
-## 3 2.099890e-04 0.01079486 0.007262958 54821/5427/641/5888/9156 ERCC6L/POLE2/BLM/RAD51/EXO1     5
-## 4 2.225745e-04 0.01079486 0.007262958      641/5888/8318/55388       BLM/RAD51/CDC45/MCM10     4
-## 5 8.884883e-04 0.03447335 0.023194220                 641/7516                   BLM/XRCC2     2
-##   FoldEnrich RichFactor
-## 1   33.73529 0.08823529
-## 2   14.16049 0.03703704
-## 3    9.14673 0.02392344
-## 4   13.41520 0.03508772
-## 5   44.98039 0.11764706</code></pre>
+<pre><code>##   Cluster group1 group2   Hs_BP_ID                       Description  GeneRatio
+## 1  down.B   down      B GO:0000217   DNA secondary structure binding 0.06250000
+## 2  down.B   down      B GO:0008094     DNA-dependent ATPase activity 0.08333333
+## 3  down.B   down      B GO:0140097 catalytic activity, acting on DNA 0.10416667
+## 4  down.B   down      B GO:0003697       single-stranded DNA binding 0.08333333
+## 5  down.B   down      B GO:0000400     four-way junction DNA binding 0.04166667
+##     BgRatio       pvalue   p.adjust      qvalue                   geneID
+## 1  34/18352 9.491897e-05 0.01079486 0.007262958           641/7516/63967
+## 2 108/18352 1.808164e-04 0.01079486 0.007262958      54821/641/5888/7516
+## 3 209/18352 2.099890e-04 0.01079486 0.007262958 54821/5427/641/5888/9156
+## 4 114/18352 2.225745e-04 0.01079486 0.007262958      641/5888/8318/55388
+## 5  17/18352 8.884883e-04 0.03447335 0.023194220                 641/7516
+##                 geneID_symbol Count FoldEnrich RichFactor
+## 1             BLM/XRCC2/CLSPN     3   33.73529 0.08823529
+## 2      ERCC6L/BLM/RAD51/XRCC2     4   14.16049 0.03703704
+## 3 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673 0.02392344
+## 4       BLM/RAD51/CDC45/MCM10     4   13.41520 0.03508772
+## 5                   BLM/XRCC2     2   44.98039 0.11764706</code></pre>
 </div>
-<div id="go-additional-arguments" class="section level2" number="6.4">
+<div id="go-additional-arguments" class="section level2">
 <h2>
 <span class="header-section-number">6.4</span> Additional arguments<a class="anchor" aria-label="anchor" href="#go-additional-arguments"><i class="fas fa-link"></i></a>
 </h2>
@@ -260,7 +269,7 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 <code>universe</code>: If uses have their background genes, set them as <code>universe</code>. Otherwise, the program will take all genes in the <code>orgDb</code> annotation package (e.g. <code>org.Hs.eg.db</code>).</li>
 </ul>
 </div>
-<div id="go-advanced-usage" class="section level2" number="6.5">
+<div id="go-advanced-usage" class="section level2">
 <h2>
 <span class="header-section-number">6.5</span> Advanced usage<a class="anchor" aria-label="anchor" href="#go-advanced-usage"><i class="fas fa-link"></i></a>
 </h2>
@@ -270,7 +279,8 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
 <code class="sourceCode R"><span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id2</span>,transTo <span class="op">=</span> <span class="st">'symbol'</span>,unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
 <span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">symbol_id</span>,<span class="st">'BCC7'</span>,<span class="st">'PD1'</span>,<span class="st">"PDL1"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">symbol_id</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "CD36"       "DCT"        "PRUNE2"     "ST6GALNAC2" "TCN1"       "CD24"</code></pre>
+<pre><code>## [1] "CD36"       "DCT"        "PRUNE2"     "ST6GALNAC2" "TCN1"      
+## [6] "CD24"</code></pre>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "948"       "1638"      "158471"    "10610"     "6947"      "100133941"</code></pre>
@@ -286,18 +296,18 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
              universe <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">diy_ego</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##              Hs_BP_ID                              Description  GeneRatio    BgRatio       pvalue
-## GO:0010165 GO:0010165                        response to X-ray 0.05882353   29/16019 2.423427e-08
-## GO:0006260 GO:0006260                          DNA replication 0.11764706  261/16019 1.001346e-07
-## GO:0050673 GO:0050673            epithelial cell proliferation 0.13725490  413/16019 3.474181e-07
-## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 0.18627451  801/16019 6.106590e-07
-## GO:0033554 GO:0033554              cellular response to stress 0.30392157 1946/16019 7.529315e-07
-##                p.adjust       qvalue Count
-## GO:0010165 0.0000786402 5.619799e-05     6
-## GO:0006260 0.0001624684 1.161035e-04    12
-## GO:0050673 0.0003757906 2.685481e-04    14
-## GO:0006974 0.0004886526 3.492017e-04    19
-## GO:0033554 0.0004886526 3.492017e-04    31
+<pre><code>##              Hs_BP_ID                              Description  GeneRatio
+## GO:0010165 GO:0010165                        response to X-ray 0.05882353
+## GO:0006260 GO:0006260                          DNA replication 0.11764706
+## GO:0050673 GO:0050673            epithelial cell proliferation 0.13725490
+## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 0.18627451
+## GO:0033554 GO:0033554              cellular response to stress 0.30392157
+##               BgRatio       pvalue     p.adjust       qvalue Count
+## GO:0010165   29/16019 2.423427e-08 0.0000786402 5.619799e-05     6
+## GO:0006260  261/16019 1.001346e-07 0.0001624684 1.161035e-04    12
+## GO:0050673  413/16019 3.474181e-07 0.0003757906 2.685481e-04    14
+## GO:0006974  801/16019 6.106590e-07 0.0004886526 3.492017e-04    19
+## GO:0033554 1946/16019 7.529315e-07 0.0004886526 3.492017e-04    31
 ##                                                                                                                                                                                                 geneID
 ## GO:0010165                                                                                                                                                            SFRP1/BLM/RAD51/CCND1/XRCC2/BCC7
 ## GO:0006260                                                                                                                        POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/FAM111B/BCC7
@@ -323,6 +333,48 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span><span class="op">$</span><span class="va">geneID_symbol</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] "SFRP1/BLM/RAD51/CCND1/XRCC2/TP53"</code></pre>
+</div>
+<div id="go-import" class="section level2">
+<h2>
+<span class="header-section-number">6.6</span> Import external data<a class="anchor" aria-label="anchor" href="#go-import"><i class="fas fa-link"></i></a>
+</h2>
+<p>For now, <code>genekitr</code> support <a href="http://pantherdb.org/webservices/go/overrep.jsp">panther</a> data from <a href="http://geneontology.org/">GeneOntology</a>.</p>
+
+
+<div class="figure">
+<span style="display:block;" id="fig:goPanther"></span>
+<img src="figures/panther_exp.png" alt="Panther result." width="100%"><p class="caption">
+Figure 6.1: <strong>Panther result.</strong>
+</p>
+</div>
+<p><code>importPanther</code> will tidy the panther data and calculate both fold enrichment and rich factor.</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">panther_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/importPanther.html">importPanther</a></span><span class="op">(</span><span class="st">'analysis.txt'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">panther_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>##           ID
+## 1 GO:1901295
+## 2 GO:0036520
+## 3 GO:0036304
+## 4 GO:1905066
+## 5 GO:0060844
+##                                                                                      Description
+## 1 regulation of canonical Wnt signaling pathway involved in cardiac muscle cell fate commitment 
+## 2                                                       astrocyte-dopaminergic neuron signaling 
+## 3                                                                  umbilical cord morphogenesis 
+## 4                   regulation of canonical Wnt signaling pathway involved in heart development 
+## 5                                                     arterial endothelial cell fate commitment 
+##    GeneRatio      BgRatio upload_1 (42) upload_1 (expected)
+## 1 0.04761905 9.713925e-05             2                0.00
+## 2 0.07142857 1.457089e-04             3                0.01
+## 3 0.04761905 9.713925e-05             2                0.00
+## 4 0.04761905 9.713925e-05             2                0.00
+## 5 0.04761905 9.713925e-05             2                0.00
+##   upload_1 (over/under) FoldEnrich   pvalue   qvalue Count   RichFactor
+## 1                     +   490.2143 2.42e-05 9.30e-04     2 9.713925e-05
+## 2                     +   490.2143 1.56e-07 1.06e-05     3 1.457089e-04
+## 3                     +   490.2143 2.42e-05 9.28e-04     2 9.713925e-05
+## 4                     +   490.2143 2.42e-05 9.26e-04     2 9.713925e-05
+## 5                     +   490.2143 2.42e-05 9.23e-04     2 9.713925e-05</code></pre>
 
 </div>
 </div>
@@ -338,6 +390,7 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
 <li><a class="nav-link" href="#go-group-enrichment"><span class="header-section-number">6.3</span> Group enrichment</a></li>
 <li><a class="nav-link" href="#go-additional-arguments"><span class="header-section-number">6.4</span> Additional arguments</a></li>
 <li><a class="nav-link" href="#go-advanced-usage"><span class="header-section-number">6.5</span> Advanced usage</a></li>
+<li><a class="nav-link" href="#go-import"><span class="header-section-number">6.6</span> Import external data</a></li>
 </ul>
 
       <div class="book-extra">
@@ -354,7 +407,7 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-02.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

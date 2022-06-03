@@ -1,5 +1,11 @@
 # Functional Class Scoring {#functional-class-scoring}
 
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+library(genekitr)
+```
+
 [ORA method](#over-representation-analysis) is easy to conduct, but it will lose information when genes' differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by fold change cutoff.
 
 Unlike [ORA method](#over-representation-analysis), FCS tools do not set a threshold for differentially expressed genes. Instead, it gives each detected gene a differential expression score and then evaluates whether the scores are more positive or negative than expected by chance for each gene set.
@@ -20,11 +26,11 @@ There are main three steps to doing GSEA:
 
 3. Adjust for multiple hypothesis testing for when a large number of gene sets are being analyzed at one time: the enrichment scores for each set are normalized, and a false discovery rate is calculated.
 
-(ref:gsea_overviewscap) GSEA overview
+(ref:gseaoverviewScap) GSEA overview
 
-(ref:gsea_overviewcap) **GSEA overview**
+(ref:gseaoverviewCap) **GSEA overview**
 
-```{r gsea_overview, out.width="100%", echo=FALSE, fig.cap="(ref:gsea_overviewcap)", fig.scap="(ref:gsea_overviewscap)"}
+```{r gseaoverview, out.width="100%", echo=FALSE, fig.cap="(ref:gseaoverviewCap)", fig.scap="(ref:gseaoverviewScap)"}
 knitr::include_graphics("figures/gsea_overview.png")
 ```
 
@@ -54,7 +60,7 @@ The simplest arguments are:
 + C7: immunologic signature gene sets
 + C8: cell type signature gene sets
 
-```{r}
+```{r gsea-basic-usage}
 data(geneList, package = "genekitr")
 gse <- genGSEA(genelist = geneList, 
                org = "human",
@@ -66,7 +72,7 @@ names(gse)
 
 The GSEA result is a list mainly including input genelist, target gene set and result.
 
-```{r}
+```{r gsea-check-result}
 head(gse$genelist) 
 head(gse$geneset) 
 head(gse$gsea_df,5)

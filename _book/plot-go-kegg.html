@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Plot GO and KEGG | Genekitr: Gene Analysis Toolkit based on R</title>
+<meta name="author" content="Yunze Liu">
+<meta name="description" content="After selecting interested pathways or terms from genGO or genKEGG result, user could pass the data frame to plotEnrich, which sets many plot types for GO and KEGG result, including barplot,...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Plot GO and KEGG | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="After selecting interested pathways or terms from genGO or genKEGG result, user could pass the data frame to plotEnrich, which sets many plot types for GO and KEGG result, including barplot,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Plot GO and KEGG | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:description" content="After selecting interested pathways or terms from genGO or genKEGG result, user could pass the data frame to plotEnrich, which sets many plot types for GO and KEGG result, including barplot,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genekitr: Gene Analysis Toolkit based on R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">📖 Introduction</a></li>
+<li><a class="active" href="plot-go-kegg.html"><span class="header-section-number">1</span> Plot GO and KEGG</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="plot-go-kegg" class="section level1">
+<h1>
+<span class="header-section-number">1</span> Plot GO and KEGG<a class="anchor" aria-label="anchor" href="#plot-go-kegg"><i class="fas fa-link"></i></a>
+</h1>
+<p>After selecting interested pathways or terms from <code>genGO</code> or <code>genKEGG</code> result, user could pass the data frame to <code>plotEnrich</code>, which sets many plot types for GO and KEGG result, including barplot, dotplot, heatmap, wego-like plot, chord plot, network, wordcloud etc.</p>
+<p>It is worth mentioning that almost plots are based on ggplot2 and <code>plot_theme</code> function could easily change their border, legend, label etc., which could help user make their own plot.</p>
+<div id="bar-plot" class="section level2">
+<h2>
+<span class="header-section-number">1.1</span> Bar Plot<a class="anchor" aria-label="anchor" href="#bar-plot"><i class="fas fa-link"></i></a>
+</h2>
+<p>Bar plot is the simplest way to show enriched terms. The x-axis is enrichment metric (e.g. Gene ratio, Fold enrichment); the y-axis is selected terms. The bar color represents statistical value.</p>
+<blockquote>
+<p><strong>What’s the difference between pvalue and p.adjust?</strong>
+<code>p.adjust</code> has seven adjustment methods: <a href="https://www.rdocumentation.org/packages/stats/versions/3.5.0/topics/p.adjust" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.5.0/topics/p.adjust</a>.
+The adjusted p-value is always the p-value, multiplied with some factor: adj.p = f * p The actual size of this factor f depends on the strategy used to correct for multiple testing.
+By the way, the “q-value” stands for “false discovery rate (FDR)” method.</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
+<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1.5</span><span class="op">]</span>
+<span class="va">logfc</span> <span class="op">&lt;-</span> <span class="va">geneList</span><span class="op">[</span><span class="va">id</span><span class="op">]</span>
+
+<span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu">genGO</span><span class="op">(</span><span class="va">id</span>,
+  org <span class="op">=</span> <span class="st">"human"</span>, ont <span class="op">=</span> <span class="st">"bp"</span>, pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
+  qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
+<span class="co"># Here just show head ten terms, you can choose your own interested terms!</span>
+<span class="va">ego</span> <span class="op">&lt;-</span> <span class="va">ego</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span></code></pre></div>
+<p>The basic arguments are:</p>
+<ul>
+<li>
+<code>term_metric</code>: The x-axis could be “Count”, “GeneRatio”, “FoldEnrich” or “RichFactor”</li>
+<li>
+<code>stats_metric</code>: Statistic value of “p.adjust”, “pvalue” or “qvalue”</li>
+<li>
+<code>up_color</code>: Color for stronger statistic value (e.g. pvalue 0.01)</li>
+<li>
+<code>down_color</code>: Color for weaker statistic value (e.g. pvalue 1)</li>
+<li>
+<code>wrap_length</code>: Wrap term text if longer than this number</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>,plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:barplot-1"></span>
+<img src="genekitr_files/figure-html/barplot-1.png" alt="Bar plot of enrichment analysis. default (A), modify metrics (B), modify color (C) and modify term length (D)." width="98%"><p class="caption">
+Figure 1.1: <strong>Bar plot of enrichment analysis.</strong> default (A), modify metrics (B), modify color (C) and modify term length (D).
+</p>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>,plot_type <span class="op">=</span> <span class="st">"dot"</span>, term_metric <span class="op">=</span> <span class="st">"GeneRatio"</span>, stats_metric <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:barplot-2"></span>
+<img src="genekitr_files/figure-html/barplot-2.png" alt="Bar plot of enrichment analysis. default (A), modify metrics (B), modify color (C) and modify term length (D)." width="98%"><p class="caption">
+Figure 1.2: <strong>Bar plot of enrichment analysis.</strong> default (A), modify metrics (B), modify color (C) and modify term length (D).
+</p>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>,plot_type <span class="op">=</span> <span class="st">"dot"</span>, up_color <span class="op">=</span> <span class="st">"#E69056"</span>, down_color <span class="op">=</span> <span class="st">"#325CAC"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:barplot-3"></span>
+<img src="genekitr_files/figure-html/barplot-3.png" alt="Bar plot of enrichment analysis. default (A), modify metrics (B), modify color (C) and modify term length (D)." width="98%"><p class="caption">
+Figure 1.3: <strong>Bar plot of enrichment analysis.</strong> default (A), modify metrics (B), modify color (C) and modify term length (D).
+</p>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>,plot_type <span class="op">=</span> <span class="st">"dot"</span>, wrap_length <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:barplot-4"></span>
+<img src="genekitr_files/figure-html/barplot-4.png" alt="Bar plot of enrichment analysis. default (A), modify metrics (B), modify color (C) and modify term length (D)." width="98%"><p class="caption">
+Figure 1.4: <strong>Bar plot of enrichment analysis.</strong> default (A), modify metrics (B), modify color (C) and modify term length (D).
+</p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">'A'</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:barplot-5"></span>
+<img src="genekitr_files/figure-html/barplot-5.png" alt="Bar plot of enrichment analysis. default (A), modify metrics (B), modify color (C) and modify term length (D)." width="98%"><p class="caption">
+Figure 1.5: <strong>Bar plot of enrichment analysis.</strong> default (A), modify metrics (B), modify color (C) and modify term length (D).
+</p>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">📖 Introduction</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#plot-go-kegg"><span class="header-section-number">1</span> Plot GO and KEGG</a></li>
+<li><a class="nav-link" href="#bar-plot"><span class="header-section-number">1.1</span> Bar Plot</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,5 @@
+book_filename: "genekitr"
+chapter_name: "Chapter "
+delete_merged_file: true
+rmd_files: ["index.Rmd",
+  "000-test.Rmd"]

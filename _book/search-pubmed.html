@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="getPubmed function could use europepmc to easily get PubMed records by searching paper abstract. A user needs to input the term argument; if there is any supplement information, the keys parameter...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="getPubmed function could use europepmc to easily get PubMed records by searching paper abstract. A user needs to input the term argument; if there is any supplement information, the keys parameter...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="getPubmed function could use europepmc to easily get PubMed records by searching paper abstract. A user needs to input the term argument; if there is any supplement information, the keys parameter...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -58,6 +58,8 @@
 <li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
 <li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li class="book-part">Part IV: Plotting</li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
 </ul>
 
         <div class="book-extra">
@@ -65,7 +67,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="search-pubmed" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="search-pubmed" class="section level1">
 <h1>
 <span class="header-section-number">2</span> Search PubMed records<a class="anchor" aria-label="anchor" href="#search-pubmed"><i class="fas fa-link"></i></a>
 </h1>
@@ -81,17 +83,20 @@
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">Tp53</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 28
-##   id        source pmid     pmcid    doi   title authorString journalTitle issue journalVolume pubYear
-##   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;  
-## 1 35409174  MED    35409174 PMC8998… 10.3… "Enh… Gringmuth M… Int J Mol S… 7     23            2022   
-## 2 PPR467733 PPR    &lt;NA&gt;     &lt;NA&gt;     10.1… "Bia… Ohno T, Aka… &lt;NA&gt;         &lt;NA&gt;  &lt;NA&gt;          2022   
-## 3 35435331  MED    35435331 &lt;NA&gt;     10.1… "Ide… Thirouard L… Adv Sci (We… &lt;NA&gt;  &lt;NA&gt;          2022   
-## 4 35536873  MED    35536873 &lt;NA&gt;     10.1… "Com… Liu T, Zhao… Cancer Res   &lt;NA&gt;  &lt;NA&gt;          2022   
-## 5 PPR483807 PPR    &lt;NA&gt;     &lt;NA&gt;     10.2… "Nic… Yu Z, Tong … &lt;NA&gt;         &lt;NA&gt;  &lt;NA&gt;          2022   
-## # … with 17 more variables: journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;,
-## #   inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;, citedByCount &lt;int&gt;,
-## #   hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;, hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
-## #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;, firstPublicationDate &lt;chr&gt;</code></pre>
+##   id        source pmid     pmcid    doi   title authorString journalTitle issue
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;
+## 1 35409174  MED    35409174 PMC8998… 10.3… "Enh… Gringmuth M… Int J Mol S… 7    
+## 2 PPR467733 PPR    &lt;NA&gt;     &lt;NA&gt;     10.1… "Bia… Ohno T, Aka… &lt;NA&gt;         &lt;NA&gt; 
+## 3 35435331  MED    35435331 &lt;NA&gt;     10.1… "Ide… Thirouard L… Adv Sci (We… &lt;NA&gt; 
+## 4 35536873  MED    35536873 &lt;NA&gt;     10.1… "Com… Liu T, Zhao… Cancer Res   &lt;NA&gt; 
+## 5 PPR483807 PPR    &lt;NA&gt;     &lt;NA&gt;     10.2… "Nic… Yu Z, Tong … &lt;NA&gt;         &lt;NA&gt; 
+## # … with 19 more variables: journalVolume &lt;chr&gt;, pubYear &lt;chr&gt;,
+## #   journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;,
+## #   inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;,
+## #   citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,
+## #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
+## #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;,
+## #   firstPublicationDate &lt;chr&gt;</code></pre>
 <blockquote>
 <p><strong>NOTICE</strong>:
 A minor update has been made in version 0.8.6 or above. Argument <code>keys</code> is replaced with <code>add_term</code> for easy understanding, and the <code>num</code> parameter is added to specify the number of returned records.</p>
@@ -126,7 +131,7 @@ A minor update has been made in version 0.8.6 or above. Argument <code>keys</cod
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-02.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.  4.1 Example data For example, in this data article Dataset from proteomic...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.  4.1 Example data For example, in this data article Dataset from proteomic...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.  4.1 Example data For example, in this data article Dataset from proteomic...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -58,6 +58,8 @@
 <li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
 <li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li class="book-part">Part IV: Plotting</li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
 </ul>
 
         <div class="book-extra">
@@ -65,12 +67,12 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="protein-id-conversion" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="protein-id-conversion" class="section level1">
 <h1>
 <span class="header-section-number">4</span> Protein ID conversion<a class="anchor" aria-label="anchor" href="#protein-id-conversion"><i class="fas fa-link"></i></a>
 </h1>
 <p>If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.</p>
-<div id="protein-example-data" class="section level2" number="4.1">
+<div id="protein-example-data" class="section level2">
 <h2>
 <span class="header-section-number">4.1</span> Example data<a class="anchor" aria-label="anchor" href="#protein-example-data"><i class="fas fa-link"></i></a>
 </h2>
@@ -81,12 +83,18 @@
 <pre><code>## [1] "GI"       "Acc"      "Gene"     "Name"     "GRAVY"    "Length"   "Sequence"</code></pre>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">rat_prodata</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##       GI    Acc      Gene                                                      Name      GRAVY Length
-## 1 112774 P27364 3BHS5_RAT                3 beta-hydroxysteroid dehydrogenase type 5 -0.2168901    373
-## 2 112889 P17475  A1AT_RAT                                    Alpha-1-antiproteinase -0.1576642    411
-## 3 112893 P14046  A1I3_RAT                                       Alpha-1-inhibitor 3 -0.2164523   1477
-## 4 112987 P00507  AATM_RAT                 Aspartate aminotransferase, mitochondrial -0.2295349    430
-## 5 113016 P15650 ACADL_RAT Long-chain specific acyl-CoA dehydrogenase, mitochondrial -0.2227907    430
+<pre><code>##       GI    Acc      Gene
+## 1 112774 P27364 3BHS5_RAT
+## 2 112889 P17475  A1AT_RAT
+## 3 112893 P14046  A1I3_RAT
+## 4 112987 P00507  AATM_RAT
+## 5 113016 P15650 ACADL_RAT
+##                                                        Name      GRAVY Length
+## 1                3 beta-hydroxysteroid dehydrogenase type 5 -0.2168901    373
+## 2                                    Alpha-1-antiproteinase -0.1576642    411
+## 3                                       Alpha-1-inhibitor 3 -0.2164523   1477
+## 4                 Aspartate aminotransferase, mitochondrial -0.2295349    430
+## 5 Long-chain specific acyl-CoA dehydrogenase, mitochondrial -0.2227907    430
 ##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Sequence
 ## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 MPGWSCLVTGAGGFLGQRIVQMLVQEKELQEVRVLYRTFSPKHKEELSKLQTKAKVTVLRGDIVDAQFLRRACQGMSVIIHTAAALDIAGFLPRQTILDVNVKGTQLLLDACVEASVPAFIYSSSTGVAGPNSYKETILNDREEEHRESTWSNPYPYSKRMAEKAVLAANGSILKNGGTFHTCALRLPFIYGEESQIISTMVNRALKNNSIIKRHATFSIANPVYVGNAAWAHILAARGLRDPEKSQSIQGQFYYISDDTPHQSYDDLNYTLSKEWGFCLDSSWSLPLPLLYWLAFLLETVSFLLRPFYNYRPPFNRFMVTILNSVFTISYKKAQRDLGYEPLVSWEEAKQKTSEWIGTLVEQHRETLDTKSQ
 ## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           MAPSISRGLLLLAALCCLAPSFLAEDAQETDTSQQDQSPTYRKISSNLADFAFSLYRELVHQSNTSNIFFSPMSITTAFAMLSLGSKGDTRKQILEGLEFNLTQIPEADIHKAFHHLLQTLNRPDSELQLNTGNGLFVNKNLKLVEKFLEEVKNNYHSEAFSVNFADSEEAKKVINDYVEKGTQGKIVDLMKQLDEDTVFALVNYIFFKGKWKRPFNPEHTRDADFHVDKSTTVKVPMMNRLGMFDMHYCSTLSSWVLMMDYLGNATAIFLLPDDGKMQHLEQTLTKDLISRFLLNRQTRSAILYFPKLSISGTYNLKTLLSSLGITRVFNNDADLSGITEDAPLKLSQAVHKAVLTLDERGTEAAGATVVEAVPMSLPPQVKFDHPFIFMIVESETQSPLFVGKVIDPTR
@@ -95,7 +103,7 @@
 ## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        MAARLLLRSLRVLSARSATLPPPSARCSHSGAEARLETPSAKKLTDIGIRRIFSSEHDIFRESVRKFFQEEVIPYHEEWEKAGEVSRELWEKAGKQGLLGINIAEKHGGIGGDLLSTAVTWEEQAYSNCTGPGFSLHSDIVMPYIANYGTKEQIEQFIPQMTAGKCIGAIAMTEPGAGSDLQGVRTNAKRSGSDWILNGSKVFITNGWLSDLVIVVAVTNREARSPAHGISLFLVENGMKGFIKGKKLHKMGMKAQDTAELFFEDVRLPASALLGEENKGFYYLMQELPQERLLIADLAISACEFMFEETRNYVRQRKAFGKTVAHIQTVQHKLAELKTNICVTRAFVDSCLQLHETKRLDSASASMAKYWASELQNTVAYQCVQLHGGWGYMWEYPIAKAYVDARVQPIYGGTNEIMKELIARQIVSDS</code></pre>
 <p>The second column is rat protein id, and the third one is gene name.</p>
 </div>
-<div id="protein-id-conversion" class="section level2" number="4.2">
+<div id="protein-id-conversion" class="section level2">
 <h2>
 <span class="header-section-number">4.2</span> Protein id conversion<a class="anchor" aria-label="anchor" href="#protein-id-conversion"><i class="fas fa-link"></i></a>
 </h2>
@@ -108,12 +116,18 @@
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">symbol</span>,.after <span class="op">=</span> <span class="va">Gene</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">new_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##      Acc        GI      Gene symbol                                         Name       GRAVY Length
-## 1 A0FKI7 123797828 ACBD5_RAT  Acbd5 Acyl-CoA-binding domain-containing protein 5 -0.81245059    506
-## 2 A0JPQ8 158512263 ALKMO_RAT   Agmo                  Alkylglycerol monooxygenase  0.23579418    447
-## 3 A0JPQ9 134035401 CHID1_RAT  Chid1        Chitinase domain-containing protein 1 -0.20229008    393
-## 4 A1L134 221222583  AUP1_RAT   Aup1                 Ancient ubiquitous protein 1 -0.09902439    410
-## 5 A1L1J9 171704593  LMF2_RAT   Lmf2                   Lipase maturation factor 2  0.04757835    702
+<pre><code>##      Acc        GI      Gene symbol
+## 1 A0FKI7 123797828 ACBD5_RAT  Acbd5
+## 2 A0JPQ8 158512263 ALKMO_RAT   Agmo
+## 3 A0JPQ9 134035401 CHID1_RAT  Chid1
+## 4 A1L134 221222583  AUP1_RAT   Aup1
+## 5 A1L1J9 171704593  LMF2_RAT   Lmf2
+##                                           Name       GRAVY Length
+## 1 Acyl-CoA-binding domain-containing protein 5 -0.81245059    506
+## 2                  Alkylglycerol monooxygenase  0.23579418    447
+## 3        Chitinase domain-containing protein 1 -0.20229008    393
+## 4                 Ancient ubiquitous protein 1 -0.09902439    410
+## 5                   Lipase maturation factor 2  0.04757835    702
 ##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Sequence
 ## 1                                                                                                                                                                                                     MLFLSFYAGSWESWICCCCVIPVDRPWDRGRRWQLEMADTRSVYETRFEAAVKVIQSLPKNGSFQPTNEMMLRFYSFYKQATEGPCKLSRPGFWDPIGRYKWDAWSSLGDMTKEEAMIAYVEEMKKIIETMPMTEKVEELLHVIGPFYEIVEDKKNSKSSDLTSDLGNVLTSSNAKAVNGKAESSDSGAESEEEEAQEELKGAEQSGSDDKKMMTKSTDKNLEIIVTNGYKDSFAQDSDIHTDSSRSARRSEDKKPTDQSSQQTGNTVLCVHQDTNEDPGEDASGVHHLTSDSDSEVYCDSMEQFGQEEYYLGGDPAQHLEGSGFCEDAQLSPGNGSIGKMQMRAVKGKGEVKHGGEDGRSSSGTPHREKRGGESEDISGVRRGRGHRMPHLSEGTKGRQVGSGGDGERWGSDRGSRGSLNEQIALVLIRLQEDMQNVLQRLHKLETLTASQAKLSWQTSNQPSSQRPSWWPFEMSPGALAFAIIWPFIAQWLVHLYYQRRRRKLN
 ## 2                                                                                                                                                                                                                                                                MRNPGAQDNVSVSQGMRAMFYMMKPSETAFQTVEEVPDYVKKATPFFIFLILLELVVSWILKGKPSGRLDDILTSMSAGVVSRLPNLFFRSLEVTSYIYIWENYRVCELPWDSPWTWYLTFLGVDFGYYWFHRMAHEINIIWAAHQAHHSSEDYNLSTALRQSVLQQYSSWVFYCPLALFVPPSVFAVHIQFNLLYQFWIHTEVIRTLGPLELVLNTPSHHRVHHGRNRYCIDKNYAGTLIIWDRIFGTFEAENEQVIYGLTHPIGTFEPFKVQFHHLLYIWTTFWATPGFCHKFSVLFKGPGWGPGKPRLGLSEEIPEVTGQEVPFTSSASQFLKIYAVLQFAVMLVFYEETFANTAVLSQVTILLRICFIILTLTSIGFLLDQRPKAAIVETLRCLLFLTLYRFGHLKPLIESLSFAFEIFFSVCIAFWGVRSITHLASGSWKKP
@@ -143,7 +157,7 @@
 <p>The Venn plot shows that primary protein ids have changed their gene names. If users continue to use the old gene names, they may lose the latest information.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>old_name<span class="op">=</span><span class="va">old_name</span>, new_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">new_name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="98%"></div>
+<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-31-1.png" width="98%"></div>
 
 </div>
 </div>
@@ -172,7 +186,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-02.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

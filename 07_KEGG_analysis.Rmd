@@ -1,5 +1,11 @@
 # ORA KEGG analysis {#ora-kegg-analysis}
 
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+library(genekitr)
+```
+
 ## KEGG intruduction {#kegg-introduction}
 
 KEGG is short for "Kyoto Encyclopedia of Genes and Genomes," a collection of databases dealing with genomes, biological pathways, diseases, drugs, and chemical substances.
@@ -14,11 +20,11 @@ The pathway maps are classified into the following sections:
 6. Human diseases
 7. Drug development
 
-(ref:kegg_overviewscap) KEGG overview
+(ref:keggoverviewScap) KEGG overview.
 
-(ref:kegg_overviewcap) **KEGG overview**
+(ref:keggoverviewCap) **KEGG overview.** Figure taken from <https://paintomics.readthedocs.io/en/stable/1_kegg/>.
 
-```{r kegg_overview, out.width="100%", echo=FALSE, fig.cap="(ref:kegg_overviewcap)", fig.scap="(ref:kegg_overviewscap)"}
+```{r keggoverview, out.width="100%", echo=FALSE, fig.cap="(ref:keggoverviewCap)", fig.scap="(ref:keggoverviewScap)"}
 knitr::include_graphics("figures/kegg_overview.png")
 ```
 

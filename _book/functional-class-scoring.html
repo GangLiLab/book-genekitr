@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>8 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 8 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="8 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 8 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="8 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 8 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -58,6 +58,8 @@
 <li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
 <li><a class="active" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li class="book-part">Part IV: Plotting</li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
 </ul>
 
         <div class="book-extra">
@@ -65,7 +67,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-class-scoring" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-class-scoring" class="section level1">
 <h1>
 <span class="header-section-number">8</span> Functional Class Scoring<a class="anchor" aria-label="anchor" href="#functional-class-scoring"><i class="fas fa-link"></i></a>
 </h1>
@@ -73,7 +75,7 @@
 <p>Unlike <a href="#over-representation-analysis">ORA method</a>, FCS tools do not set a threshold for differentially expressed genes. Instead, it gives each detected gene a differential expression score and then evaluates whether the scores are more positive or negative than expected by chance for each gene set.</p>
 <p>FCS approaches include GSEA, Catmap, GlobalTest, sigPathway, SAFE, GSA, Category, PADOG, PCOT2, FunCluster, SAM-GS, etc.</p>
 <p>Next, we will go through the popular Gene Set Enrichment Analysis (GSEA) tool, which uses FCS permutation approaches to determine whether a gene set is significantly associated with higher or lower scores.</p>
-<div id="gsea-introduction" class="section level2" number="8.1">
+<div id="gsea-introduction" class="section level2">
 <h2>
 <span class="header-section-number">8.1</span> GSEA intruduction<a class="anchor" aria-label="anchor" href="#gsea-introduction"><i class="fas fa-link"></i></a>
 </h2>
@@ -86,18 +88,17 @@
 <li><p>Estimate the statistical significance of the ES: this calculation is done by a phenotypic-based permutation test in order to produce a null distribution for the ES.</p></li>
 <li><p>Adjust for multiple hypothesis testing for when a large number of gene sets are being analyzed at one time: the enrichment scores for each set are normalized, and a false discovery rate is calculated.</p></li>
 </ol>
-<p>(ref:gsea_overviewscap) GSEA overview</p>
-<p>(ref:gsea_overviewcap) <strong>GSEA overview</strong></p>
 <div class="figure">
-<img src="figures/gsea_overview.png" alt="(ref:gsea_overviewcap)" width="100%"><p class="caption">
-(#fig:gsea_overview)(ref:gsea_overviewcap)
+<span style="display:block;" id="fig:gseaoverview"></span>
+<img src="figures/gsea_overview.png" alt="GSEA overview" width="100%"><p class="caption">
+Figure 8.1: <strong>GSEA overview</strong>
 </p>
 </div>
 <blockquote>
 <p>If you are interested in GSEA detailed procedure, please visit: <a href="https://www.pathwaycommons.org/guide/primers/data_analysis/gsea" class="uri">https://www.pathwaycommons.org/guide/primers/data_analysis/gsea</a></p>
 </blockquote>
 </div>
-<div id="gsea-basic-usage" class="section level2" number="8.2">
+<div id="gsea-basic-usage" class="section level2">
 <h2>
 <span class="header-section-number">8.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#gsea-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
@@ -127,7 +128,7 @@
 + C6: oncogenic signature gene sets
 + C7: immunologic signature gene sets
 + C8: cell type signature gene sets</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>genelist <span class="op">=</span> <span class="va">geneList</span>, 
                org <span class="op">=</span> <span class="st">"human"</span>,
@@ -135,15 +136,15 @@
                use_symbol <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "genelist" "geneset"  "gsea_df"  "exponent" "org"</code></pre>
 <p>The GSEA result is a list mainly including input genelist, target gene set and result.</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">genelist</span><span class="op">)</span> </code></pre></div>
 <pre><code>##       948      1638    158471     10610      6947 100133941 
 ##  5.780170  5.633027  4.683610  3.875120  3.357670  3.322533</code></pre>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">geneset</span><span class="op">)</span> </code></pre></div>
 <pre><code>##                 gs_name entrez_gene
 ## 1 HALLMARK_ADIPOGENESIS          19
@@ -152,20 +153,26 @@
 ## 4 HALLMARK_ADIPOGENESIS          33
 ## 5 HALLMARK_ADIPOGENESIS          34
 ## 6 HALLMARK_ADIPOGENESIS          35</code></pre>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##                                                ID              Description setSize enrichmentScore
-## HALLMARK_E2F_TARGETS         HALLMARK_E2F_TARGETS     HALLMARK_E2F_TARGETS     194      -0.8361902
-## HALLMARK_G2M_CHECKPOINT   HALLMARK_G2M_CHECKPOINT  HALLMARK_G2M_CHECKPOINT     195      -0.8028510
-## HALLMARK_MYC_TARGETS_V1   HALLMARK_MYC_TARGETS_V1  HALLMARK_MYC_TARGETS_V1     187      -0.7348931
-## HALLMARK_MYC_TARGETS_V2   HALLMARK_MYC_TARGETS_V2  HALLMARK_MYC_TARGETS_V2      54      -0.8644875
-## HALLMARK_MITOTIC_SPINDLE HALLMARK_MITOTIC_SPINDLE HALLMARK_MITOTIC_SPINDLE     197      -0.5161722
-##                                NES       pvalue     p.adjust       qvalue rank
-## HALLMARK_E2F_TARGETS     -3.397462 1.000000e-10 1.225229e-09 5.674744e-10 2116
-## HALLMARK_G2M_CHECKPOINT  -3.260154 1.000000e-10 1.225229e-09 5.674744e-10 2114
-## HALLMARK_MYC_TARGETS_V1  -2.953045 1.000000e-10 1.225229e-09 5.674744e-10 3480
-## HALLMARK_MYC_TARGETS_V2  -2.870120 1.000000e-10 1.225229e-09 5.674744e-10 2138
-## HALLMARK_MITOTIC_SPINDLE -2.089870 1.225229e-10 1.225229e-09 5.674744e-10 2192
+<pre><code>##                                                ID              Description
+## HALLMARK_E2F_TARGETS         HALLMARK_E2F_TARGETS     HALLMARK_E2F_TARGETS
+## HALLMARK_G2M_CHECKPOINT   HALLMARK_G2M_CHECKPOINT  HALLMARK_G2M_CHECKPOINT
+## HALLMARK_MYC_TARGETS_V1   HALLMARK_MYC_TARGETS_V1  HALLMARK_MYC_TARGETS_V1
+## HALLMARK_MYC_TARGETS_V2   HALLMARK_MYC_TARGETS_V2  HALLMARK_MYC_TARGETS_V2
+## HALLMARK_MITOTIC_SPINDLE HALLMARK_MITOTIC_SPINDLE HALLMARK_MITOTIC_SPINDLE
+##                          setSize enrichmentScore       NES       pvalue
+## HALLMARK_E2F_TARGETS         194      -0.8361902 -3.430823 1.000000e-10
+## HALLMARK_G2M_CHECKPOINT      195      -0.8028510 -3.295795 1.000000e-10
+## HALLMARK_MYC_TARGETS_V1      187      -0.7348931 -3.001507 1.000000e-10
+## HALLMARK_MYC_TARGETS_V2       54      -0.8644875 -2.906550 1.000000e-10
+## HALLMARK_MITOTIC_SPINDLE     197      -0.5161722 -2.120880 3.427877e-10
+##                              p.adjust       qvalue rank
+## HALLMARK_E2F_TARGETS     1.250000e-09 5.789474e-10 2116
+## HALLMARK_G2M_CHECKPOINT  1.250000e-09 5.789474e-10 2114
+## HALLMARK_MYC_TARGETS_V1  1.250000e-09 5.789474e-10 3480
+## HALLMARK_MYC_TARGETS_V2  1.250000e-09 5.789474e-10 2138
+## HALLMARK_MITOTIC_SPINDLE 3.427877e-09 1.587648e-09 2192
 ##                                            leading_edge
 ## HALLMARK_E2F_TARGETS     tags=79%, list=11%, signal=71%
 ## HALLMARK_G2M_CHECKPOINT  tags=72%, list=11%, signal=64%
@@ -193,9 +200,12 @@
 
 </div>
 </div>
+
+
+
   <div class="chapter-nav">
 <div class="prev"><a href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></div>
-<div class="empty"></div>
+<div class="next"><a href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -218,7 +228,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-02.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
