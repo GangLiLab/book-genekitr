@@ -18,7 +18,7 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.23/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.22/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -128,7 +128,7 @@ Figure 8.1: <strong>GSEA overview</strong>
 + C6: oncogenic signature gene sets
 + C7: immunologic signature gene sets
 + C8: cell type signature gene sets</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>genelist <span class="op">=</span> <span class="va">geneList</span>, 
                org <span class="op">=</span> <span class="st">"human"</span>,
@@ -136,15 +136,15 @@ Figure 8.1: <strong>GSEA overview</strong>
                use_symbol <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "genelist" "geneset"  "gsea_df"  "exponent" "org"</code></pre>
 <p>The GSEA result is a list mainly including input genelist, target gene set and result.</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">genelist</span><span class="op">)</span> </code></pre></div>
 <pre><code>##       948      1638    158471     10610      6947 100133941 
 ##  5.780170  5.633027  4.683610  3.875120  3.357670  3.322533</code></pre>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">geneset</span><span class="op">)</span> </code></pre></div>
 <pre><code>##                 gs_name entrez_gene
 ## 1 HALLMARK_ADIPOGENESIS          19
@@ -153,7 +153,7 @@ Figure 8.1: <strong>GSEA overview</strong>
 ## 4 HALLMARK_ADIPOGENESIS          33
 ## 5 HALLMARK_ADIPOGENESIS          34
 ## 6 HALLMARK_ADIPOGENESIS          35</code></pre>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##                                                ID              Description
 ## HALLMARK_E2F_TARGETS         HALLMARK_E2F_TARGETS     HALLMARK_E2F_TARGETS
@@ -162,17 +162,17 @@ Figure 8.1: <strong>GSEA overview</strong>
 ## HALLMARK_MYC_TARGETS_V2   HALLMARK_MYC_TARGETS_V2  HALLMARK_MYC_TARGETS_V2
 ## HALLMARK_MITOTIC_SPINDLE HALLMARK_MITOTIC_SPINDLE HALLMARK_MITOTIC_SPINDLE
 ##                          setSize enrichmentScore       NES       pvalue
-## HALLMARK_E2F_TARGETS         194      -0.8361902 -3.430823 1.000000e-10
-## HALLMARK_G2M_CHECKPOINT      195      -0.8028510 -3.295795 1.000000e-10
-## HALLMARK_MYC_TARGETS_V1      187      -0.7348931 -3.001507 1.000000e-10
-## HALLMARK_MYC_TARGETS_V2       54      -0.8644875 -2.906550 1.000000e-10
-## HALLMARK_MITOTIC_SPINDLE     197      -0.5161722 -2.120880 3.427877e-10
+## HALLMARK_E2F_TARGETS         194      -0.8361902 -3.445727 1.000000e-10
+## HALLMARK_G2M_CHECKPOINT      195      -0.8028510 -3.306617 1.000000e-10
+## HALLMARK_MYC_TARGETS_V1      187      -0.7348931 -3.009652 1.000000e-10
+## HALLMARK_MYC_TARGETS_V2       54      -0.8644875 -2.904591 1.000000e-10
+## HALLMARK_MITOTIC_SPINDLE     197      -0.5161722 -2.138998 1.342429e-10
 ##                              p.adjust       qvalue rank
-## HALLMARK_E2F_TARGETS     1.250000e-09 5.789474e-10 2116
-## HALLMARK_G2M_CHECKPOINT  1.250000e-09 5.789474e-10 2114
-## HALLMARK_MYC_TARGETS_V1  1.250000e-09 5.789474e-10 3480
-## HALLMARK_MYC_TARGETS_V2  1.250000e-09 5.789474e-10 2138
-## HALLMARK_MITOTIC_SPINDLE 3.427877e-09 1.587648e-09 2192
+## HALLMARK_E2F_TARGETS     1.192016e-09 5.520914e-10 2116
+## HALLMARK_G2M_CHECKPOINT  1.192016e-09 5.520914e-10 2114
+## HALLMARK_MYC_TARGETS_V1  1.192016e-09 5.520914e-10 3480
+## HALLMARK_MYC_TARGETS_V2  1.192016e-09 5.520914e-10 2138
+## HALLMARK_MITOTIC_SPINDLE 1.192016e-09 5.520914e-10 2192
 ##                                            leading_edge
 ## HALLMARK_E2F_TARGETS     tags=79%, list=11%, signal=71%
 ## HALLMARK_G2M_CHECKPOINT  tags=72%, list=11%, signal=64%
@@ -228,7 +228,7 @@ Figure 8.1: <strong>GSEA overview</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-03.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

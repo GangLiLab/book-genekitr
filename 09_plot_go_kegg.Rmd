@@ -45,18 +45,36 @@ The basic arguments are:
 - `down_color`: Color for weaker statistic value (e.g. pvalue 1)
 - `wrap_length`: Wrap term text if longer than this number
 
-(ref:barplotScap) Bar plot of enrichment analysis.
+```{r include= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot",main_text_size = 15, legend_text_size = 13)
+p2 <- plotEnrich(ego,plot_type = "dot", term_metric = "GeneRatio", stats_metric = "pvalue",
+                 main_text_size = 15, legend_text_size = 13)
+p3 <- plotEnrich(ego,plot_type = "dot", up_color = "#E69056", down_color = "#325CAC",
+                 main_text_size = 15, legend_text_size = 13)
+p4 <- plotEnrich(ego,plot_type = "dot", wrap_length = 25,
+                 main_text_size = 15, legend_text_size = 13)
+pp <- p1 + p2 + p3 + p4 
+```
 
-(ref:barplotCap) **Bar plot of enrichment analysis.** default (A), modify metrics (B),  modify color (C) and modify term length (D).
 
-```{r barplot, fig.width=12, fig.height=10, fig.cap="(ref:barplotCap)", fig.scap="(ref:barplotScap)"}
+```{r eval = F}
 library(patchwork)
 p1 <- plotEnrich(ego,plot_type = "dot")
 p2 <- plotEnrich(ego,plot_type = "dot", term_metric = "GeneRatio", stats_metric = "pvalue")
 p3 <- plotEnrich(ego,plot_type = "dot", up_color = "#E69056", down_color = "#325CAC")
-p4 <- plotEnrich(ego,plot_type = "dot", wrap_length = 20)
-pp <- p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
-pp
+p4 <- plotEnrich(ego,plot_type = "dot", wrap_length = 25)
+p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
+```
+
+
+(ref:barplotScap) Bar plot of enrichment analysis.
+
+(ref:barplotCap) **Bar plot of enrichment analysis.** default (A), modify metrics (B),  modify color (C) and modify term length (D).
+
+```{r barplot, fig.width=20, fig.height=10, fig.cap="(ref:barplotCap)", fig.scap="(ref:barplotScap)", echo = F, dpi=300}
+pp + plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 30))
 ```
 
 ## Bubble Plot
@@ -72,27 +90,63 @@ The basic arguments are:
 
 (ref:bubbleplotCap) **Bubble plot of enrichment analysis.** default (A), modify bubble size (B).
 
-```{r bubbleplot, fig.height=5, fig.width=5, fig.cap="(ref:bubbleplotCap)", fig.scap="(ref:bubbleplotScap)"}
+
+```{r include= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "bubble",main_text_size = 15,legend_text_size = 10)
+p2 <- plotEnrich(ego,plot_type = "bubble", scale_ratio = 0.5, stats_metric = "qvalue",
+                 main_text_size = 15,legend_text_size = 10)
+pp <- p1/p2 
+```
+
+```{r eval= F}
 library(patchwork)
 p1 <- plotEnrich(ego,plot_type = "bubble")
 p2 <- plotEnrich(ego,plot_type = "bubble", scale_ratio = 0.5, stats_metric = "qvalue")
-p1 + p2 + plot_annotation(tag_levels = 'A')
+p1/p2 + plot_annotation(tag_levels = 'A')
+```
+
+(ref:bubbleplotScap) Bubble plot of enrichment analysis.
+
+(ref:bubbleplotCap) **Bubble plot of enrichment analysis.** default (A), modify bubble size (B).
+
+```{r bubbleplot, fig.height=12, fig.width=10, fig.cap="(ref:bubbleplotCap)", fig.scap="(ref:bubbleplotScap)",echo = F, dpi=300}
+pp + plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 30))
 ```
 
 ## Dot Plot
 
 Similar with bar plot, dot plot is also widely used in enrichment analysis plotting. Like bubble plot, dot size represents gene number in this term.
 
-(ref:dotplotScap) Dot plot of enrichment analysis.
+```{r include= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot",main_text_size = 15,legend_text_size = 10)
+p2 <- plotEnrich(ego,plot_type = "dot", scale_ratio = 1.5, stats_metric = "pvalue",
+                 main_text_size = 15,legend_text_size = 10,
+                 term_metric = "RichFactor")
+pp = p1+p2
+```
+
+```{r eval= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot")
+p2 <- plotEnrich(ego,plot_type = "dot", 
+                 scale_ratio = 1.5, 
+                 stats_metric = "pvalue",
+                 term_metric = "RichFactor")
+p1+p2 + plot_annotation(tag_levels = 'A')
+```
+
+(ref:dptplotScap) Dot plot of enrichment analysis.
 
 (ref:dotplotCap) **Dot plot of enrichment analysis.** default (A), modify bubble size (B).
 
-```{r dotplot, fig.height=5, fig.width=5, fig.cap="(ref:dotplotCap)", fig.scap="(ref:dotplotScap)"}
-library(patchwork)
-p1 <- plotEnrich(ego,plot_type = "dot")
-p2 <- plotEnrich(ego,plot_type = "dot", scale_ratio = 1, stats_metric = "pvalue")
-p1 + p2 + plot_annotation(tag_levels = 'A')
+```{r dotplot, fig.height=10, fig.width=20, fig.cap="(ref:dotplotCap)", fig.scap="(ref:dotplotScap)",echo = F, dpi=300}
+pp + plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 30))
 ```
+
 
 ## WEGO Plot
 
@@ -115,7 +169,7 @@ head(all_ego)
 
 (ref:wegoplotCap) **WEGO plot of enrichment analysis.** 
 
-```{r wegoplot, fig.height=5, fig.width=5, fig.cap="(ref:wegoplotCap)", fig.scap="(ref:wegoplotScap)"}
+```{r wegoplot, fig.height=3, fig.width=8, fig.cap="(ref:wegoplotCap)", fig.scap="(ref:wegoplotScap)"}
 plotEnrich(all_ego,plot_type = "wego")
 ```
 
@@ -123,12 +177,32 @@ plotEnrich(all_ego,plot_type = "wego")
 
 Lollipop is like combination of barplot and dotplot
 
+```{r include= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "lollipop",main_text_size = 15,legend_text_size = 10)
+p2 <- plotEnrich(ego,plot_type = "lollipop", scale_ratio = 1.5, stats_metric = "pvalue",
+                 main_text_size = 15,legend_text_size = 10,
+                 term_metric = "RichFactor")
+pp = p1+p2
+```
+
+```{r eval= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "lollipop")
+p2 <- plotEnrich(ego,plot_type = "lollipop", 
+                 scale_ratio = 1.2, 
+                 stats_metric = "pvalue",
+                 term_metric = "RichFactor")
+p1+p2 + plot_annotation(tag_levels = 'A')
+```
+
 (ref:lolliplotScap) Lollipop plot of enrichment analysis.
 
 (ref:lolliplotCap) **Lollipop plot of enrichment analysis.** 
 
-```{r lolliplot, fig.height=5, fig.width=5, fig.cap="(ref:lolliplotCap)", fig.scap="(ref:lolliplotScap)"}
-plotEnrich(ego,plot_type = "lollipop")
+```{r lolliplot, fig.height=10, fig.width=20, fig.cap="(ref:lolliplotCap)", fig.scap="(ref:lolliplotScap)",echo = F, dpi=300}
+pp + plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 30))
 ```
 
 ## Heatmap Plot
@@ -136,11 +210,18 @@ plotEnrich(ego,plot_type = "lollipop")
 Heatmap plot showed interactions between enriched terms and their genes.
 If fold change is given, heatmap will add color for up and down-regulated genes.
 
-(ref:heatmapScap) Heatmap plot of enrichment analysis.
 
-(ref:heatmapCap) **Heatmap plot of enrichment analysis.** all genes (A, default), selected genes (B), selected genes with logFC value (C).
+```{r include= F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "geneheat")
+show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
+p2 <- plotEnrich(ego,plot_type = "geneheat",show_gene = show_gene)
+p3 <- plotEnrich(ego,plot_type = "geneheat",show_gene = show_gene, fold_change = logfc)
+pp = p1/p2/p3 
 
-```{r heatmap, fig.height=3, fig.width=5, fig.cap="(ref:heatmapCap)", fig.scap="(ref:heatmapScap)"}
+```
+
+```{r eval= F}
 library(patchwork)
 p1 <- plotEnrich(ego,plot_type = "geneheat")
 show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
@@ -149,20 +230,46 @@ p3 <- plotEnrich(ego,plot_type = "geneheat",show_gene = show_gene, fold_change =
 p1/p2/p3 +plot_annotation(tag_levels = 'A')
 ```
 
+(ref:heatmapScap) Heatmap plot of enrichment analysis.
+
+(ref:heatmapCap) **Heatmap plot of enrichment analysis.** all genes (A, default), selected genes (B), selected genes with logFC value (C).
+
+```{r heatmap, fig.height=8, fig.width=12, fig.cap="(ref:heatmapCap)", fig.scap="(ref:heatmapScap)",echo = F, dpi=300}
+pp+ plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 20))
+```
+
 ## Chord Plot
 
 Inspired by [GOplot](https://wencke.github.io/), chord plot is reproduced using `r CRANpkg("ggplot2")` and it is similar with heatmap plot.
+
+```{r include= F}
+library(patchwork)
+show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
+p1 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene)+
+  ggplot2::theme(legend.position="none")
+p2 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene, fold_change = logfc,
+                 remove_legend_text=T)
+pp = p1+p2 
+
+```
+
+```{r eval= F}
+library(patchwork)
+show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
+p1 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene)+
+  ggplot2::theme(legend.position="none")
+p2 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene, fold_change = logfc)
+p1+p2 +plot_annotation(tag_levels = 'A')
+```
 
 (ref:chordScap) Chord plot of enrichment analysis.
 
 (ref:chordCap) **Heatmap plot of enrichment analysis.** selected genes (A), selected genes with logFC value (B).
 
-```{r chord, fig.height=5, fig.width=8, fig.cap="(ref:chordCap)", fig.scap="(ref:chordScap)"}
-library(patchwork)
-show_gene = c('BRCA2','CDK1','JUN','MCM8','TIPIN')
-p1 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene)
-p2 <- plotEnrich(ego,plot_type = "genechord",show_gene = show_gene, fold_change = logfc)
-p1+p2 +plot_annotation(tag_levels = 'A')
+```{r chord, fig.height=8, fig.width=15, fig.cap="(ref:chordCap)", fig.scap="(ref:chordScap)",echo = F, dpi=300}
+pp+ plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 20))
 ```
 
 ## Network Plot
@@ -177,11 +284,18 @@ User could define `layout` argument derived from `r CRANpkg("ggraph")`, includin
 
 > For more information about the `layout`, you could refer to: [Introduction to ggraph: Layouts](https://www.data-imaginist.com/2017/ggraph-introduction-layouts/)
 
-(ref:networkScap) Network plot of enrichment analysis.
+```{r include= F}
+library(patchwork)
+library(igraph)
+library(ggraph)
+p1 <- plotEnrich(ego,plot_type = "network",scale_ratio = 0.5)
+p2 <- plotEnrich(ego,plot_type = "network", layout = "circle",scale_ratio = 0.5)
+p3 <- plotEnrich(ego,plot_type = "network", layout = "grid",sim_method = "Wang" )
+pp = (p1+p2)/p3 
 
-(ref:networkCap) **Network plot of enrichment analysis.** JC method and nicely layout(A, default), circle layout (B), grid layout and Want method (C).
+```
 
-```{r network, fig.height=5, fig.width=5, fig.cap="(ref:networkCap)", fig.scap="(ref:networkScap)"}
+```{r eval= F}
 library(patchwork)
 library(igraph)
 library(ggraph)
@@ -191,6 +305,15 @@ p3 <- plotEnrich(ego,plot_type = "network", layout = "grid",sim_method = "Wang" 
 (p1+p2)/p3 +plot_annotation(tag_levels = 'A')
 ```
 
+(ref:networkScap) Network plot of enrichment analysis.
+
+(ref:networkCap) **Network plot of enrichment analysis.** JC method and nicely layout(A, default), circle layout (B), grid layout and Want method (C).
+
+```{r network, fig.height=10, fig.width=15, fig.cap="(ref:networkCap)", fig.scap="(ref:networkScap)",echo = F, dpi=300}
+pp+ plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 20))
+```
+
 ## Map Plot
 
 GO terms are built in a directed acyclic graph with a parent-child relationship.
@@ -198,27 +321,44 @@ Here the map plot utilized `r Biocpkg("GOSemSim")` to extract parent and child t
 
 To avoid too much unrelated terms messed up, `genekitr` only shows the closest parent and child with selected terms. Besides, the top parent term will be also plotted.
 
+```{r include= F}
+library(igraph)
+library(ggraph)
+pp = plotEnrich(ego,plot_type = "gomap", wrap_length = 25)
+
+```
+
+```{r eval= F}
+library(igraph)
+library(ggraph)
+plotEnrich(ego,plot_type = "gomap", wrap_length = 25)
+```
+
 (ref:mapScap) Map plot of enrichment analysis.
 
 (ref:mapCap) **Map plot of enrichment analysis.** 
 
-```{r map, fig.height=5, fig.width=5, fig.cap="(ref:mapCap)", fig.scap="(ref:mapScap)"}
-library(igraph)
-library(ggraph)
-plotEnrich(ego,plot_type = "gomap", wrap_length = 25)
+```{r map, fig.height=5, fig.width=5, fig.cap="(ref:mapCap)", fig.scap="(ref:mapScap)",echo = F, dpi=300}
+pp
 ```
 
 ## GO Heatmap Plot
 
 Inspired by `r Biocpkg("rrvgo")`, `genekitr` scratches some main codes to cluster GO terms. Also it could use six methods to calculate the similarity between terms.
 
+```{r eval= F}
+plotEnrich(ego,plot_type = "goheat",sim_method = 'Rel')
+```
+
 (ref:goheatScap) GO heatmap plot of enrichment analysis.
 
 (ref:goheatCap) **GO heatmap plot of enrichment analysis.** 
 
-```{r goheat, fig.height=5, fig.width=5, fig.cap="(ref:goheatCap)", fig.scap="(ref:goheatScap)"}
-plotEnrich(ego,plot_type = "goheat",sim_method = 'Rel')
+```{r goheat, fig.height=5, fig.width=10, fig.cap="(ref:goheatCap)", fig.scap="(ref:goheatScap)",echo = F, dpi=300}
+plotEnrich(ego,plot_type = "goheat",sim_method = 'Rel',
+                main_text_size=10)
 ```
+
 
 ## GO Tangram Plot
 
@@ -228,7 +368,7 @@ According to [rrvgo vignettes](http://bioconductor.org/packages/release/bioc/vig
 
 (ref:gotangramCap) **GO tangram plot of enrichment analysis.** 
 
-```{r gotangram, fig.height=5, fig.width=5, fig.cap="(ref:gotangramCap)", fig.scap="(ref:gotangramScap)"}
+```{r gotangram, fig.height=5, fig.width=8, fig.cap="(ref:gotangramCap)", fig.scap="(ref:gotangramScap)",results='hide'}
 plotEnrich(ego,plot_type = "gotangram",sim_method = 'Rel')
 ```
 
@@ -240,7 +380,7 @@ Wordcloud plot utilized text frequency to show term emphasis.
 
 (ref:wordcloudCap) **Wordcloud plot of enrichment analysis.** 
 
-```{r wordcloud, fig.height=5, fig.width=5, fig.cap="(ref:wordcloudCap)", fig.scap="(ref:wordcloudScap)"}
+```{r wordcloud, fig.height=5, fig.width=8, fig.cap="(ref:wordcloudCap)", fig.scap="(ref:wordcloudScap)",results='hide'}
 plotEnrich(ego,plot_type = "wordcloud",sim_method = 'Rel')
 ```
 
@@ -252,26 +392,53 @@ Inspired by `r CRANpkg("UpSetR")`, the upset plot shows the association between 
 
 (ref:upsetCap) **Upset plot of enrichment analysis.** 
 
-```{r upset, fig.height=5, fig.width=5, fig.cap="(ref:upsetCap)", fig.scap="(ref:upsetScap)"}
+```{r upset, fig.height=5, fig.width=10, fig.cap="(ref:upsetCap)", fig.scap="(ref:upsetScap)"}
 plotEnrich(ego,plot_type = "upset")
 ```
 
 
 ## Plot Theme
-(ref:themeScap) Plot theme.
 
-(ref:themeCap) **Plot theme.** default theme (A), modify text size (B),  modify grid and border size (C) and modify all text (D).
-
-```{r theme, fig.height=5, fig.width=5, fig.cap="(ref:themeCap)", fig.scap="(ref:themeScap)"}
+```{r include= F}
+library(patchwork)
 library(patchwork)
 p1 <- plotEnrich(ego,plot_type = "dot")
-p2 <- plotEnrich(ego,plot_type = "dot", main_text_size = 10, legend_text_size  = 10)
+p2 <- plotEnrich(ego,plot_type = "dot", main_text_size = 13, legend_text_size  = 13)
 p3 <- plotEnrich(ego,plot_type = "dot", border_thick = 3, remove_grid = F)
 p4 <- plotEnrich(ego,plot_type = "dot", 
                  remove_main_text = T, 
                  remove_legend_text = T,
                  remove_legend = T)
+pp = p1 + p2 + p3 + p4 
+```
+
+
+```{r eval = F}
+library(patchwork)
+p1 <- plotEnrich(ego,plot_type = "dot")
+p2 <- plotEnrich(ego,plot_type = "dot", 
+                 main_text_size = 10, 
+                 legend_text_size  = 10)
+
+p3 <- plotEnrich(ego,plot_type = "dot", 
+                 border_thick = 3, 
+                 remove_grid = F)
+
+p4 <- plotEnrich(ego,plot_type = "dot", 
+                 remove_main_text = T, 
+                 remove_legend_text = T,
+                 remove_legend = T)
 p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
+```
+
+(ref:themeScap) Plot theme.
+
+(ref:themeCap) **Plot theme.** default theme (A), modify text size (B),  modify grid line and border size (C) and remove all text and legend (D).
+
+
+```{r theme, fig.width=15, fig.height=10, fig.cap="(ref:themeCap)", fig.scap="(ref:themeScap)", echo = F, dpi=300}
+pp + plot_annotation(tag_levels = 'A')& 
+  theme(plot.tag = element_text(size = 30))
 ```
 
 

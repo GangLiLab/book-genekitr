@@ -160,6 +160,53 @@ panther_res <- importPanther('analysis.txt')
 head(panther_res,5)
 ```
 
+## Comparison with other tools
+
+### `genekitr::genGO`  vs `clusterProfiler::enrichGO`
+
+`genGO` could utilize `transId` of `r CRANpkg("genekitr")` to automatically convert gene alias to symbol for better explanation of gene product.
+
+For example, if we have several genes: 
+
+```{r}
+check_gene = c("BCC7","TP53","PDL1","CD274","PD1")
+x = genekitr::genGO(check_gene, ont='bp',org = 'hs',pvalueCutoff = 1,qvalueCutoff = 1)
+x2  =clusterProfiler::enrichGO(check_gene,
+                               OrgDb = 'org.Hs.eg.db',
+                               keyType = 'SYMBOL',
+                               pvalueCutoff = 1,
+                               qvalueCutoff = 1,
+                               ont = 'BP') %>% as.data.frame()
+
+table(x2$ID%in%x$Hs_BP_ID)
+table(x$Hs_BP_ID%in%x2$ID)
+x$Hs_BP_ID[!x$Hs_BP_ID%in%x2$ID]
+```
+
+Seems that gene pathways belong to "PD1". If we only look into this gene, we will find there is no result from `enrichGO`:
+
+```{r}
+x11 = genekitr::genGO( "PD1",ont='bp',org = 'hs',pvalueCutoff = 1,qvalueCutoff = 1)
+x21  =clusterProfiler::enrichGO("PD1",
+                                OrgDb = 'org.Hs.eg.db',
+                                keyType = 'SYMBOL',
+                                pvalueCutoff = 1,
+                                qvalueCutoff = 1,
+                                ont = 'BP')  %>% as.data.frame()
+
+dim(x11);dim(x21)
+```
+
+
+Gene "PD1" do not have any pathways in clusterProfiler result, it is not right obviously for this essential gene. The reason is that "PD1" is actually called "PDCD1" while `enrichGO` only accepts official symbols if user specify `keyType = 'SYMBOL'`. Only specifying `keyType = 'ALIAS'`, the program could check gene alias which may cause confused result.
+
+### `genekitr::genGO`  vs `Panther web`
+
+Just check two genes: "PD1" and "PDL1" which are all gene alias.
+
+Panther could recognize "PDL1" but not "PD1", while `genGO` could recognize both.
+
+
 
 
 
