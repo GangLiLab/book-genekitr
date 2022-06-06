@@ -198,7 +198,15 @@ dim(x11);dim(x21)
 ```
 
 
-Gene "PD1" do not have any pathways in clusterProfiler result, it is not right obviously for this essential gene. The reason is that "PD1" is actually called "PDCD1" while `enrichGO` only accepts official symbols if user specify `keyType = 'SYMBOL'`. Only specifying `keyType = 'ALIAS'`, the program could check gene alias which may cause confused result.
+Gene "PD1" do not have any pathways in clusterProfiler result, it is not right obviously for this essential gene. The reason is that "PD1" is actually called "PDCD1" while `enrichGO` only accepts official symbols if user specify `keyType = 'SYMBOL'`. This function is based on organism annotation package (e.g. `org.Hs.eg.db`) and it has different types of data:
+
+```{r}
+library(org.Hs.eg.db)
+AnnotationDbi::columns(org.Hs.eg.db)
+```
+
+
+Only by specifying `keyType = 'ALIAS'`, this program could recognize gene alias like "PD1". Even though, it could not distinguish the mix names of symbol and alias.
 
 ### `genekitr::genGO`  vs `Panther web`
 

@@ -1,0 +1,74 @@
+# Plot GSEA {#plot-gsea}
+
+```{r include=FALSE}
+library(knitr)
+library(ggplot2)
+library(igraph)
+library(ggraph)
+library(patchwork)
+library(genekitr)
+```
+
+`genGSEA` returns a list format result, user could pass the list object to `plotGSEA`, which gets classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar plot.
+
+```{r}
+data(geneList, package = "genekitr")
+gse <- genGSEA(genelist = geneList, org = "human",
+               category = "H",use_symbol = TRUE, pvalueCutoff = 0.05)
+```
+
+## Classic Pathway Plot
+
+Running enrichment score for a gene set is set as classic pathway plot lines. The function will walks down the ranked gene list. The vertical lines in the middle show the location of gene set members.
+
+If user wants to show specific genes or pathways, just pass to according parameters: `show_pathway` and `show_gene`.
+
+(ref:classicGSEAScap) Classic pathway plot of GSEA.
+
+(ref:classicGSEACap) **Classic pathway plot of GSEA.** 
+
+```{r classicGSEA, fig.height=8, fig.width=10, fig.cap="(ref:classicGSEACap)", fig.scap="(ref:classicGSEAScap)", dpi=300}
+pathways <- c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
+genes <- c("MET", "TP53", "PMM2")
+plotGSEA(gse, plot_type = 'classic', show_pathway = pathways, show_gene = genes)
+```
+
+## Volcano Pathway Plot
+
+Slightly different with DEG volcano plot, the x-axis is represented as NES, standing for normalized enrichment score, which corrects for differences in ES between gene-sets due to differences in gene-set sizes.
+
+A significant positive NES value indicates that members of the gene set tend to appear at the top of the ranked data (e.g. fold change of DEG) and a significant negative NES indicates the opposite.
+
+Default shows the topN pathways. If user wants to show specific pathway, also pass the argument to `show_pathway`.
+
+```{r include= F}
+p1 <- plotGSEA(gse, plot_type = 'volcano', show_pathway = 3)
+
+pathways = c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
+p2 <- plotGSEA(gse, plot_type = 'volcano',show_pathway = pathways)
+pp <- p1+p2
+```
+
+```{r eval= F}
+library(patchwork)
+p1 <- plotGSEA(gse, plot_type = 'volcano', show_pathway = 3)
+
+pathways = c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
+p2 <- plotGSEA(gse, plot_type = 'volcano',show_pathway = pathways)
+p1+p2 + plot_annotation(tag_levels = 'A')
+```
+
+(ref:volcanoGSEAScap) Volcano pathway plot of GSEA.
+
+(ref:volcanoGSEACap) **Volcano pathway plot of GSEA.** default (A), select pathways (B).
+
+```{r volcanoGSEA, fig.height=5, fig.width=10, fig.cap="(ref:volcanoGSEACap)", fig.scap="(ref:volcanoGSEAScap)",echo = F, dpi=300}
+pp
+```
+
+
+
+
+
+
+
