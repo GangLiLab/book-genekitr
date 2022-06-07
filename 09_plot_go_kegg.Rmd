@@ -47,12 +47,12 @@ The basic arguments are:
 
 ```{r include= F}
 library(patchwork)
-p1 <- plotEnrich(ego,plot_type = "dot",main_text_size = 15, legend_text_size = 13)
-p2 <- plotEnrich(ego,plot_type = "dot", term_metric = "GeneRatio", stats_metric = "pvalue",
+p1 <- plotEnrich(ego,plot_type = "bar",main_text_size = 15, legend_text_size = 13)
+p2 <- plotEnrich(ego,plot_type = "bar", term_metric = "GeneRatio", stats_metric = "pvalue",
                  main_text_size = 15, legend_text_size = 13)
-p3 <- plotEnrich(ego,plot_type = "dot", up_color = "#E69056", down_color = "#325CAC",
+p3 <- plotEnrich(ego,plot_type = "bar", up_color = "#E69056", down_color = "#325CAC",
                  main_text_size = 15, legend_text_size = 13)
-p4 <- plotEnrich(ego,plot_type = "dot", wrap_length = 25,
+p4 <- plotEnrich(ego,plot_type = "bar", wrap_length = 25,
                  main_text_size = 15, legend_text_size = 13)
 pp <- p1 + p2 + p3 + p4 
 ```
@@ -60,10 +60,10 @@ pp <- p1 + p2 + p3 + p4
 
 ```{r eval = F}
 library(patchwork)
-p1 <- plotEnrich(ego,plot_type = "dot")
-p2 <- plotEnrich(ego,plot_type = "dot", term_metric = "GeneRatio", stats_metric = "pvalue")
-p3 <- plotEnrich(ego,plot_type = "dot", up_color = "#E69056", down_color = "#325CAC")
-p4 <- plotEnrich(ego,plot_type = "dot", wrap_length = 25)
+p1 <- plotEnrich(ego,plot_type = "bar")
+p2 <- plotEnrich(ego,plot_type = "bar", term_metric = "GeneRatio", stats_metric = "pvalue")
+p3 <- plotEnrich(ego,plot_type = "bar", up_color = "#E69056", down_color = "#325CAC")
+p4 <- plotEnrich(ego,plot_type = "bar", wrap_length = 25)
 p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
 ```
 
@@ -440,6 +440,94 @@ p1 + p2 + p3 + p4 + plot_annotation(tag_levels = 'A')
 pp + plot_annotation(tag_levels = 'A')& 
   theme(plot.tag = element_text(size = 30))
 ```
+
+## Advanced Usage
+
+### Two-group barplot for up/down regulated pathways
+
+If user does `genGO` or `genKEGG` for up and down regulated genes separately and wants to visualize them together. Here we take GO result as an example:
+
+```{r}
+# Since the geneList is logFC decreasing ordered, we could take first 100 as up-regulated genes and vice versa.
+data(geneList, package = "genekitr")
+up_genes <- head(names(geneList),100)
+down_genes <- tail(names(geneList),100)
+
+up_go <- genGO(up_genes,
+  org = "human", ont = "bp", pvalueCutoff = 0.05,
+  qvalueCutoff = 0.05)
+
+down_go <- genGO(down_genes,
+  org = "human", ont = "bp", pvalueCutoff = 0.01,
+  qvalueCutoff = 0.01)
+
+dim(up_go)
+dim(down_go)
+# seems that up/down-regulated pathways are too many, here we only take 10 of them
+up_go <- head(up_go,10)
+down_go <- head(down_go,10)
+```
+
+There are two visulization types: 
+
+- `plot_type = "one"`: both up and down-regulated pathways are plotted together
+- `plot_type = "two"`: up and down-regulated pathways are plotted separately. **Recommended if the number of both groups is similar.**
+
+(ref:twogroup1Scap) Visualize two groups together when `plot_type = "one"`
+
+(ref:twogroup1Cap) **Visualize two groups together when `plot_type = "one"`.** 
+
+```{r twogroup1, fig.width=7, fig.height=5, fig.cap="(ref:twogroup1Cap)", fig.scap="(ref:twogroup1Scap)", dpi=300}
+plotEnrichAdv(up_go,down_go,
+              plot_type = 'one',
+              stats_metric = 'p.adjust')+
+  theme(legend.position = c(0.2, 0.9))+ ylim(NA,5)
+```
+
+
+```{r include= F}
+library(patchwork)
+color = c("#a32a31","#f7dcca","#3665a6","#d5e4ef")
+left = suppressMessages(plotEnrich(up_go,plot_type = "bar",
+                                   term_metric = 'FoldEnrich',
+                                   stats_metric = 'qvalue',
+                                   up_color = color[1], down_color = color[2])+
+                          scale_y_discrete(limits=rev)+
+                          scale_x_reverse()+
+                          theme(axis.title.y = element_blank(),
+                                legend.position = c(0.2, 0.8)))
+
+right = suppressMessages(plotEnrich(down_go,plot_type = "bar",
+                                    term_metric = 'FoldEnrich',
+                                    stats_metric = 'qvalue',
+                                    up_color = color[3],down_color = color[4])+
+                           scale_y_discrete(position = "right")+
+                           theme(axis.title.y = element_blank(),
+                                 legend.position = c(0.8, 0.2)))
+
+pp = left+right
+```
+
+```{r eval = F}
+plotEnrichAdv(up_go,down_go,plot_type = 'two',
+              term_metric = 'FoldEnrich',
+              stats_metric = 'qvalue')
+```
+
+(ref:twogroup2Scap) Visualize two groups seperately.
+
+(ref:twogroup2Cap) **Visualize two groups seperately.** 
+
+```{r twogroup2, fig.width=12, fig.height=5, fig.cap="(ref:twogroup2Cap)", fig.scap="(ref:twogroup2Scap)", dpi=300, echo = F}
+pp
+```
+
+
+
+
+
+
+
 
 
 

@@ -27,7 +27,7 @@ If user wants to show specific genes or pathways, just pass to according paramet
 
 (ref:classicGSEACap) **Classic pathway plot of GSEA.** 
 
-```{r classicGSEA, fig.height=8, fig.width=10, fig.cap="(ref:classicGSEACap)", fig.scap="(ref:classicGSEAScap)", dpi=300}
+```{r classicGSEA, fig.height=5, fig.width=8, fig.cap="(ref:classicGSEACap)", fig.scap="(ref:classicGSEAScap)", dpi=300}
 pathways <- c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
 genes <- c("MET", "TP53", "PMM2")
 plotGSEA(gse, plot_type = 'classic', show_pathway = pathways, show_gene = genes)
@@ -42,35 +42,82 @@ A significant positive NES value indicates that members of the gene set tend to 
 Default shows the topN pathways. If user wants to show specific pathway, also pass the argument to `show_pathway`.
 
 ```{r include= F}
-p1 <- plotGSEA(gse, plot_type = 'volcano', show_pathway = 3)
+p1 <- plotGSEA(gse, plot_type = 'volcano', show_pathway = 3, remove_legend = T)
 
-pathways = c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
+pathways <- c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
 p2 <- plotGSEA(gse, plot_type = 'volcano',show_pathway = pathways)
 pp <- p1+p2
 ```
 
 ```{r eval= F}
 library(patchwork)
+pathways <- c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
 p1 <- plotGSEA(gse, plot_type = 'volcano', show_pathway = 3)
-
-pathways = c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
 p2 <- plotGSEA(gse, plot_type = 'volcano',show_pathway = pathways)
-p1+p2 + plot_annotation(tag_levels = 'A')
+p1 + p2 + plot_annotation(tag_levels = 'A')
 ```
 
 (ref:volcanoGSEAScap) Volcano pathway plot of GSEA.
 
 (ref:volcanoGSEACap) **Volcano pathway plot of GSEA.** default (A), select pathways (B).
 
-```{r volcanoGSEA, fig.height=5, fig.width=10, fig.cap="(ref:volcanoGSEACap)", fig.scap="(ref:volcanoGSEAScap)",echo = F, dpi=300}
+```{r volcanoGSEA, fig.height=6, fig.width=12, fig.cap="(ref:volcanoGSEACap)", fig.scap="(ref:volcanoGSEAScap)",echo = F, dpi=300}
 pp
 ```
 
 ## Multi-pathway Plot
 
-If user wants to show a bunch of selected pathways, `fgsea` plot is built in.
+If user wants to show a bunch of selected pathways, `plotGSEA` has scratched some codes from `r  Biocpkg("fgsea")`.
 
+Default shows the topN pathways. If user wants to show specific pathway, also pass the argument to `show_pathway`.
 
+```{r include= F}
+p1 <- plotGSEA(gse, plot_type = 'fgsea', show_pathway = 5)
+
+pathways <- c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
+p2 <- plotGSEA(gse, plot_type = 'fgsea',show_pathway = pathways)
+pp <- p1+p2
+```
+
+```{r eval= F}
+library(patchwork)
+pathways <- c("HALLMARK_P53_PATHWAY","HALLMARK_GLYCOLYSIS","HALLMARK_DNA_REPAIR")
+p1 <- plotGSEA(gse, plot_type = 'fgsea', show_pathway = 5)
+p2 <- plotGSEA(gse, plot_type = 'fgsea',show_pathway = pathways)
+p1 + p2 + plot_annotation(tag_levels = 'A')
+```
+
+(ref:fgseaGSEAScap) Multi-pathway plot of GSEA.
+
+(ref:fgseaGSEACap) **Multi-pathway plot of GSEA.** default (A), select pathways (B).
+
+```{r fgseaGSEA, fig.height=6, fig.width=14, fig.cap="(ref:fgseaGSEACap)", fig.scap="(ref:fgseaGSEAScap)",echo = F, dpi=300}
+pp
+```
+
+## Ridge Plot
+
+Ridge plot will visualize enriched pathways of up/down regulated genes. The x-axis is fold change and y-axis is pathways. Different color represents statistical value (e.g. pvalue/p.adjust/qvalue)
+
+(ref:ridgeScap) Ridge plot of GSEA.
+
+(ref:ridgeCap) **Ridge plot of GSEA.** 
+
+```{r ridge, fig.height=5, fig.width=8, fig.cap="(ref:ridgeCap)", fig.scap="(ref:ridgeScap)",echo = F, dpi=300}
+plotGSEA(gse, plot_type = 'ridge', show_pathway = 10, stats_metric = 'p.adjust')
+```
+
+## Two-side Barplot
+
+The barplot will seperate positive and negative NES (normalized enrichment score) into two sides. Users could specify `colors` for the two sides. Meanwhile, non-significant pathways (e.g. pvalue > 0.05) will be colored as "grey".
+
+(ref:twosideBarScap) Two-side bar plot of GSEA.
+
+(ref:twosideBarCap) **Two-side bar plot of GSEA.** 
+
+```{r twosideBar, fig.height=5, fig.width=6, fig.cap="(ref:twosideBarCap)", fig.scap="(ref:twosideBarScap)",echo = F, dpi=300}
+plotGSEA(gse, plot_type = 'bar',colors = c('navyblue','orange'))
+```
 
 
 
