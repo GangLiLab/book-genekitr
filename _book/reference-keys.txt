@@ -1,5 +1,5 @@
 fig:twogroup1
 fig:twogroup2
-plot-go-kegg
+plot-test
 advanced-usage
 two-group-barplot-for-updown-regulated-pathways
