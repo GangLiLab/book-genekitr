@@ -103,20 +103,21 @@ Ridge plot will visualize enriched pathways of up/down regulated genes. The x-ax
 
 (ref:ridgeCap) **Ridge plot of GSEA.** 
 
-```{r ridge, fig.height=5, fig.width=8, fig.cap="(ref:ridgeCap)", fig.scap="(ref:ridgeScap)",echo = F, dpi=300}
-plotGSEA(gse, plot_type = 'ridge', show_pathway = 10, stats_metric = 'p.adjust')
+```{r ridge, fig.height=5, fig.width=8, fig.cap="(ref:ridgeCap)", fig.scap="(ref:ridgeScap)", dpi=300}
+plotGSEA(gse, plot_type = 'ridge', 
+         show_pathway = 10, stats_metric = 'p.adjust')
 ```
 
 ## Two-side Barplot
 
-The barplot will seperate positive and negative NES (normalized enrichment score) into two sides. Users could specify `colors` for the two sides. Meanwhile, non-significant pathways (e.g. pvalue > 0.05) will be colored as "grey".
+The barplot will seperate positive and negative NES (normalized enrichment score) into two sides. Users could specify `color` for the two sides. Meanwhile, non-significant pathways (e.g. pvalue > 0.05) will be colored as "grey".
 
 (ref:twosideBarScap) Two-side bar plot of GSEA.
 
 (ref:twosideBarCap) **Two-side bar plot of GSEA.** 
 
-```{r twosideBar, fig.height=5, fig.width=6, fig.cap="(ref:twosideBarCap)", fig.scap="(ref:twosideBarScap)",echo = F, dpi=300}
-plotGSEA(gse, plot_type = 'bar',colors = c('navyblue','orange'))
+```{r twosideBar, fig.height=5, fig.width=6, fig.cap="(ref:twosideBarCap)", fig.scap="(ref:twosideBarScap)", dpi=300}
+plotGSEA(gse, plot_type = 'bar',color = c('navyblue','orange'))
 ```
 
 

@@ -60,6 +60,7 @@
 <li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
 <li class="book-part">Part IV: Plotting</li>
 <li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea.html"><span class="header-section-number">10</span> Plot GSEA</a></li>
 </ul>
 
         <div class="book-extra">
@@ -421,7 +422,17 @@ Figure 6.1: <strong>Panther result.</strong>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x11</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x21</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 28 12</code></pre>
 <pre><code>## [1] 0 0</code></pre>
-<p>Gene “PD1” do not have any pathways in clusterProfiler result, it is not right obviously for this essential gene. The reason is that “PD1” is actually called “PDCD1” while <code>enrichGO</code> only accepts official symbols if user specify <code>keyType = 'SYMBOL'</code>. Only specifying <code>keyType = 'ALIAS'</code>, the program could check gene alias which may cause confused result.</p>
+<p>Gene “PD1” do not have any pathways in clusterProfiler result, it is not right obviously for this essential gene. The reason is that “PD1” is actually called “PDCD1” while <code>enrichGO</code> only accepts official symbols if user specify <code>keyType = 'SYMBOL'</code>. This function is based on organism annotation package (e.g. <code>org.Hs.eg.db</code>) and it has different types of data:</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
+<span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></code></pre></div>
+<pre><code>##  [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
+##  [6] "ENTREZID"     "ENZYME"       "EVIDENCE"     "EVIDENCEALL"  "GENENAME"    
+## [11] "GO"           "GOALL"        "IPI"          "MAP"          "OMIM"        
+## [16] "ONTOLOGY"     "ONTOLOGYALL"  "PATH"         "PFAM"         "PMID"        
+## [21] "PROSITE"      "REFSEQ"       "SYMBOL"       "UCSCKG"       "UNIGENE"     
+## [26] "UNIPROT"</code></pre>
+<p>Only by specifying <code>keyType = 'ALIAS'</code>, this program could recognize gene alias like “PD1”. Even though, it could not distinguish the mix names of symbol and alias.</p>
 </div>
 <div id="genekitrgengo-vs-panther-web" class="section level3">
 <h3>
@@ -468,7 +479,7 @@ Figure 6.1: <strong>Panther result.</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-06.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
