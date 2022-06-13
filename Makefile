@@ -1,5 +1,5 @@
 bs4:
-	Rscript -e 'library(bookdown); render_book("index.Rmd", "bs4_book")'
+	Rscript -e 'library(bookdown); render_book("index.Rmd", bookdown::bs4_book(theme = bs4_book_theme(primary = "#00A064")))'
 pdfbook:
 	Rscript -e 'library(bookdown); render_book("index.Rmd", "pdf_book")'
 gitbook:

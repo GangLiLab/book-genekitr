@@ -1,0 +1,60 @@
+# Probe ID conversion {#probe-id-conversion-1}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(genekitr)
+library(dplyr)
+```
+
+Probes are used to measure the expression level of many genes. After getting micro array data, the first important thing before downstream analysis maybe probe id conversion.
+
+Ensembl database regularly maps probes sets against the latest set of transcript models using their own [pipeline]((https://www.ensembl.org/info/genome/microarray_probe_set_mapping.html)).
+
+Here, `transProbe` utilizes Ensembl up-to-date annotation datasets and could join together with other genekitr functions fluently.
+
+> Notice: now we only support human data
+
+## Supported platforms {#transProbe-supported-platforms}
+
+36 probe platforms include Affymetrix, Agilent, Illumina, Codelink and Phalanx.
+
+```{r}
+DT::datatable(hsapiens_probe_platform, options = list(pageLength = 10))
+```
+
+## Basic usage {#probe-basic-usage}
+
+`transProbe` has four arguments:
+
+- `id`: probe id
+- `transTo`: the conversion target type. User could select **more than one** from "symbol", "entrez", "ensembl" or "uniprot".
+- `org`: human (default)
+- `platform`: Probe platform. If not given, program will detect automatically.
+
+
+```{r}
+data(deg, package = "genekitr")
+probes <- deg$probe_id
+
+res <- transProbe(probes, transTo = "ensembl", org = "human")
+head(probes)
+head(res)
+```
+
+
+## Convert to more than one type {#convert-probe-types}
+
+User could define `transTo` as many types:
+
+```{r}
+res2 <- transProbe(probes, transTo = c("ensembl","symbol"), org = "human")
+head(res2)
+```
+
+Let's take the first record as example:`r Ensembl("ENSG00000228794")` has 38 transcripts. 
+
+When we look at its second transcript [ENST00000445118.7](http://asia.ensembl.org/Homo_sapiens/Transcript/Oligos?db=core;g=ENSG00000228794;r=1:825138-859446;t=ENST00000445118), probe `7896759` is listed in `AFFY HuGene-1_0-st-v1` database.
+
+
+

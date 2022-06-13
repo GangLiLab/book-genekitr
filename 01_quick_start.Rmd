@@ -1,0 +1,156 @@
+# Quick start {#quick-start}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(genekitr)
+library(dplyr)
+library(DT)
+```
+
+## [Search gene metadata](#search-gene-metadata-1)
+
+```{r eval=FALSE}
+id <- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD", "NUDT10")
+info <- genInfo(id, org = "hs")
+# keep unique records
+info2 <- genInfo(id, org = "hs", unique = TRUE)
+```
+
+
+## [Search PubMed records](#search-pubmed-1)
+
+```{r eval=FALSE}
+## check package version
+packageVersion("genekitr")
+
+## for version < 0.8.6
+term <- c("Tp53", "Brca1", "Tet2")
+keys <- c("stem cell", "mouse")
+l <- getPubmed(term, keys)
+
+## for version > 0.8.6
+term <- c("Tp53", "Brca1", "Tet2")
+add_term <- c("stem cell", "mouse")
+l <- getPubmed(term, add_term, num = 30)
+
+# set "num" larger to get all records
+all <- getPubmed(term, add_term, num = 666666)
+```
+
+## [Gene ID conversion](#gene-id-conversion-1)
+
+```{r eval=FALSE}
+id <-  c("Cyp2c23", "Fhit", "Gal3st2b", "Trp53", "Tp53")
+sym2ens <- transId(id ,transTo = "ensembl", org = "mouse")
+# keep unique records
+sym2ensent <- transId(id ,transTo = c("ensembl","entrez"), org = "mouse", unique = TRUE)
+```
+
+## [Protein ID conversion](#protein-id-conversion-1)
+
+```{r eval=FALSE}
+id <-  c("P27364", "P14046", "P15650", "P16638", "P24483")
+protein2sym <- transId(id ,transTo = "sym", org = "rat")
+```
+
+## [Probe ID conversion](#probe-id-conversion-1)
+
+
+```{r eval=FALSE}
+id <-  c('205647_at','204857_at','201394_s_at','210377_at')
+probe2sym <- transProbe(id, transTo = 'sym',org = 'hs')
+```
+
+## [ORA GO analysis](#ora-go-analysis-1)
+
+> ORA stands for "over-representation analysis".
+
+```{r eval=FALSE}
+id <- c("TP53","BRCA1", "PD1", "PDL1")
+ego <- genGO(id,
+  org = "human",
+  ont = "bp",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.01
+)
+```
+
+## [ORA KEGG analysis](#ora-kegg-analysis-1)
+
+```{r eval=FALSE}
+id <- c("TP53","BRCA1", "PD1", "PDL1","BRCA2","TET2")
+keg <- genKEGG(id,
+  org = "human",
+  pvalueCutoff = 0.05,
+  qvalueCutoff = 0.05
+)
+```
+
+## [FCS GSEA analysis](#functional-class-scoring-1)
+
+> FCS stands for "functional-class-scoring".
+
+`geneList` is an order ranked gene list in decreasing order. Gene inside can be Entrez, Ensembl or symbol.
+
+```{r eval=FALSE}
+data(geneList, package = "genekitr")
+gse <- genGSEA(
+  genelist = geneList,
+  org = "human",
+  category = "H",
+  use_symbol = TRUE
+)
+```
+
+## [Plot GO and KEGG](#plot-go-kegg-1)
+
+Supported types include: `bar`, `wego`, `bubble`, `dot`, `lollipop`, `geneheat`, `genechord`,
+`network`, `gomap`, `goheat`, `gotangram`, `wordcloud`, `upset` and `two-group barplot`
+
+```{r eval=FALSE}
+plotEnrich(ego, plot_type = "dot")
+plotEnrich(keg, plot_type = "bar")
+plotEnrich(ego, plot_type = "geneheat")
+plotEnrich(ego, plot_type = "network", scale_ratio = 0.5)
+```
+
+
+## [Plot GSEA](#plot-gsea-1)
+
+Supported types include: `volcano`, `classic`, `fgsea`, `ridge` and `bar`
+
+```{r eval=FALSE}
+plotGSEA(gse, plot_type = "volcano", show_pathway = 3)
+
+genes <- c("MET", "TP53", "PMM2")
+plotGSEA(gse, plot_type = "classic", show_pathway = pathways, show_gene = genes)
+
+plotGSEA(gse, plot_type = "fgsea", show_pathway = 3)
+```
+
+## [Plot Venn](#plot-others-1)
+
+```{r eval=FALSE}
+set1 <- paste0(rep("gene", 100), sample(1:1000, 100))
+set2 <- paste0(rep("gene", 100), sample(1:1000, 100))
+set3 <- paste0(rep("gene", 100), sample(1:1000, 100))
+
+# classic venn plot
+plotVenn(list(gset1 = set1, gset2 = set2, gset3 = set3), use_venn = TRUE)
+# UpSet plot
+plotVenn(list(gset1 = set1, gset2 = set2, gset3 = set3), use_venn = FALSE)
+```
+
+## [Plot DEG Volcano](#plot-others-1)
+
+```{r eval=FALSE}
+data(deg, package = "genekitr")
+plotVolcano(deg, "p.adjust",
+  remove_legend = T,
+  show_gene = c("CD36", "DUSP6", "IER3", "CDH7")
+)
+```
+
+
+

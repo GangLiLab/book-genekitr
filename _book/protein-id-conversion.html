@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 5 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content="If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.  4.1 Example data For example, in this data article Dataset from proteomic...">
+<meta name="description" content="If you have handled proteomics or metabolomics data (e.g. mass spectrometry), you may need to convert protein to gene id before downstream analysis.  5.1 Example data For example, in this data...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 5 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.  4.1 Example data For example, in this data article Dataset from proteomic...">
+<meta property="og:description" content="If you have handled proteomics or metabolomics data (e.g. mass spectrometry), you may need to convert protein to gene id before downstream analysis.  5.1 Example data For example, in this data...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
-<meta name="twitter:description" content="If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.  4.1 Example data For example, in this data article Dataset from proteomic...">
+<meta name="twitter:title" content="Chapter 5 Protein ID conversion | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:description" content="If you have handled proteomics or metabolomics data (e.g. mass spectrometry), you may need to convert protein to gene id before downstream analysis.  5.1 Example data For example, in this data...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -46,21 +46,23 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">📖 Introduction</a></li>
+<li><a class="" href="index.html">🧬 Welcome to genekitr!</a></li>
+<li><a class="" href="quick-start.html"><span class="header-section-number">1</span> Quick start</a></li>
 <li class="book-part">Part I: Search Information</li>
-<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">1</span> Search gene metadata</a></li>
-<li><a class="" href="search-pubmed.html"><span class="header-section-number">2</span> Search PubMed records</a></li>
+<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">2</span> Search gene metadata</a></li>
+<li><a class="" href="search-pubmed.html"><span class="header-section-number">3</span> Search PubMed records</a></li>
 <li class="book-part">Part II: ID Conversion</li>
-<li><a class="" href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></li>
-<li><a class="active" href="protein-id-conversion.html"><span class="header-section-number">4</span> Protein ID conversion</a></li>
-<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></li>
+<li><a class="" href="gene-id-conversion.html"><span class="header-section-number">4</span> Gene ID conversion</a></li>
+<li><a class="active" href="protein-id-conversion.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
+<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
-<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
+<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
+<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea.html"><span class="header-section-number">10</span> Plot GSEA</a></li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea.html"><span class="header-section-number">11</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others.html"><span class="header-section-number">12</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -70,20 +72,20 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="protein-id-conversion" class="section level1">
 <h1>
-<span class="header-section-number">4</span> Protein ID conversion<a class="anchor" aria-label="anchor" href="#protein-id-conversion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Protein ID conversion<a class="anchor" aria-label="anchor" href="#protein-id-conversion"><i class="fas fa-link"></i></a>
 </h1>
-<p>If users have proteomics or metabolomics like mass spectrometry data, they may need to convert protein to gene id.</p>
+<p>If you have handled proteomics or metabolomics data (e.g. mass spectrometry), you may need to convert protein to gene id before downstream analysis.</p>
 <div id="protein-example-data" class="section level2">
 <h2>
-<span class="header-section-number">4.1</span> Example data<a class="anchor" aria-label="anchor" href="#protein-example-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Example data<a class="anchor" aria-label="anchor" href="#protein-example-data"><i class="fas fa-link"></i></a>
 </h2>
-<p>For example, in this data article <a href="https://www.sciencedirect.com/science/article/pii/S2352340915000189#ec0005">Dataset from proteomic analysis of rat, mouse, and human liver microsomes and S9 fractions</a> , we could get proteomic analysis result for <a href="https://ars.els-cdn.com/content/image/1-s2.0-S2352340915000189-mmc1.zip">rat</a></p>
+<p>For example, in this data article <a href="https://www.sciencedirect.com/science/article/pii/S2352340915000189#ec0005">Dataset from proteomic analysis of rat, mouse, and human liver microsomes and S9 fractions</a> , we could get <a href="https://ars.els-cdn.com/content/image/1-s2.0-S2352340915000189-mmc1.zip">rat proteomic analysis data</a></p>
 <p>Firstly, take a look at the data:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-toTable.html">colnames</a></span><span class="op">(</span><span class="va">rat_prodata</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "GI"       "Acc"      "Gene"     "Name"     "GRAVY"    "Length"   "Sequence"</code></pre>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">rat_prodata</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">rat_prodata</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##       GI    Acc      Gene
 ## 1 112774 P27364 3BHS5_RAT
 ## 2 112889 P17475  A1AT_RAT
@@ -106,23 +108,25 @@
 </div>
 <div id="protein-id-conversion" class="section level2">
 <h2>
-<span class="header-section-number">4.2</span> Protein id conversion<a class="anchor" aria-label="anchor" href="#protein-id-conversion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Protein id conversion<a class="anchor" aria-label="anchor" href="#protein-id-conversion"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">protein_id</span> <span class="op">=</span> <span class="va">rat_prodata</span><span class="op">[</span>,<span class="st">"Acc"</span><span class="op">]</span>
-<span class="va">gname</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">protein_id</span>,<span class="st">'symbol'</span>,<span class="st">'rat'</span>,unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<p>Here we will convert protein id to gene symbol and compare with the original one.</p>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">protein_id</span> <span class="op">&lt;-</span> <span class="va">rat_prodata</span><span class="op">[</span>, <span class="st">"Acc"</span><span class="op">]</span>
+<span class="va">gname</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">protein_id</span>, <span class="st">"symbol"</span>, <span class="st">"rat"</span>, unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
-<span class="va">new_res</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">rat_prodata</span>, <span class="va">gname</span>,
-                by.x <span class="op">=</span> <span class="st">'Acc'</span>,by.y <span class="op">=</span> <span class="st">'input_id'</span>,all.x <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">symbol</span>,.after <span class="op">=</span> <span class="va">Gene</span><span class="op">)</span>
+<span class="va">new_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">rat_prodata</span>, <span class="va">gname</span>,
+  by.x <span class="op">=</span> <span class="st">"Acc"</span>, by.y <span class="op">=</span> <span class="st">"input_id"</span>, all.x <span class="op">=</span> <span class="cn">T</span>
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">symbol</span>, .after <span class="op">=</span> <span class="va">Gene</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">new_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##      Acc        GI      Gene symbol
-## 1 A0FKI7 123797828 ACBD5_RAT  Acbd5
-## 2 A0JPQ8 158512263 ALKMO_RAT   Agmo
-## 3 A0JPQ9 134035401 CHID1_RAT  Chid1
-## 4 A1L134 221222583  AUP1_RAT   Aup1
-## 5 A1L1J9 171704593  LMF2_RAT   Lmf2
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">new_res</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>##      Acc        GI      Gene       symbol
+## 1 A0FKI7 123797828 ACBD5_RAT        Acbd5
+## 2 A0JPQ8 158512263 ALKMO_RAT         Agmo
+## 3 A0JPQ9 134035401 CHID1_RAT LOC100911881
+## 4 A1L134 221222583  AUP1_RAT         Aup1
+## 5 A1L1J9 171704593  LMF2_RAT         Lmf2
 ##                                           Name       GRAVY Length
 ## 1 Acyl-CoA-binding domain-containing protein 5 -0.81245059    506
 ## 2                  Alkylglycerol monooxygenase  0.23579418    447
@@ -136,13 +140,13 @@
 ## 4                                                                                                                                                                                                                                                                                                     MEPPPAPGPERLFDSHRLPSDGFLLLALLLYAPVGLCLLVLRLFLGLHVFLVSCALPDSVLRRFVVRTMCAVLGLVARQEDSGLRDHRVRVLISNHVTPFDHNIVNLLTTCSTPLLNSPPSFVCWSRGFMEMDRRVELVESLKKFCASTRLPPTPLLLFPEEEATNGREGLLRFSSWPFSIQDVVQPLTLQVQRPLVSVTVSDASWVSELLWSLFVPFTVYQVRWLHPIRRQLGEENEEFALRVQQLVAKELGQIGTRLTPADKAEHMKRQRHPRLRPQSVQSSFPSPPSPSSDVQLTILAQRVKEVLPHVPLNVIQRDLARTGCVDLTITNLLEGAVAFMPEDVTEGSQSLPTASAPKFPSSGLVTPQPTALTFAKSSWARQESLQERKQALYEYARRRFRERQAQEAE
 ## 5 MASARVPQQLFLQGVAAVYLFAFASLYTQIPGLYGPEGILPARRTLRPQGKGRWQQLWETPTILWEAPRLGLDTAQGLDLLTLLGTVLALGALLLNSLRHPFIYLLLWAAYLSACQVGQVFLYFQWDSLLLETGFLAILVAPLRRPSKHKIPQGGLAGALPHEDLPFWLVRWLLFRLMFASGVVKLTSRCPAWWGLTALTYHYETQCLPTPAAWFAHHLPVWLHRLSVVATFLIEIAVPPLFFAPIRRLRLSAFYAQALLQILIIITGNYNFFNLLTLVLTTALLDDRHLSAEPELRCHKKMPTSWPKTLLTSLSLMLELTVYGLLAYGTIYYFGLEVDWQQQIVLSKTTFTFHQFSQWLKMVTLPTVWLGTASLAWELLIALWRWIQVQGWSRKFFAGIQLSVLGTATVFLFLISLVPYSYVEPGTHGRLWTGAHRLFSSVEHLQLANSYGLFRRMTGLGGRPEVVLEGSHDGHHWTEIEFMYKPGNVSRPPPFLIPHQPRLDWQMWFAALGPHTHSPWFTSLVLRLLQGKEPVIRLIQNQVANYPFREQPPTYLRAQRYKYWFSKPGDQSRWWHRQWVEEFFPSVSLGDPTLETLLQQFGLKDKSPPRARSSKNALAQTLNWVRAQLSPLEPSILLWGLLGAVVAIRVVRTLLTPRPLQSSKQTREEKRKQAPKKDSRAVSEQTAPNSNSNGSWAPRRKK</code></pre>
 <p>Maybe you have noticed that some gene names are different from the original data. For example, the second one: <a href="https://www.uniprot.org/uniprot/A0JPQ8">A0JPQ8</a> is called <code>Alkmo</code> before, but the latest name is <code>Agmo</code>.</p>
-<p>Looking through the whole data, you may find many gene names updated.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">old_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">new_res</span><span class="op">$</span><span class="va">Gene</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove_all</a></span><span class="op">(</span><span class="st">'_RAT'</span><span class="op">)</span>
-<span class="va">new_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">new_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span><span class="op">)</span>
-<span class="va">new_res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">new_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span><span class="op">)</span>,<span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Acc</span>,<span class="va">Gene</span>,<span class="va">symbol</span><span class="op">)</span></code></pre></div>
+<p>Some proteins have new gene names like above, while some may have no names for now.</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">old_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">new_res</span><span class="op">$</span><span class="va">Gene</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringr/man/str_remove.html">str_remove_all</a></span><span class="op">(</span><span class="st">"_RAT"</span><span class="op">)</span>
+<span class="va">new_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">toupper</a></span><span class="op">(</span><span class="va">new_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span><span class="op">)</span>
+<span class="va">new_res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">new_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span><span class="op">)</span>, <span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Acc</span>, <span class="va">Gene</span>, <span class="va">symbol</span><span class="op">)</span></code></pre></div>
 <pre><code>##        Acc      Gene symbol
 ## 103 P01835  KACB_RAT   &lt;NA&gt;
 ## 215 P0C169 H2A1C_RAT   &lt;NA&gt;
@@ -151,26 +155,24 @@
 ## 544 P62161  CALM_RAT   &lt;NA&gt;
 ## 620 P81828   UP2_RAT   &lt;NA&gt;
 ## 623 P83121   UP3_RAT   &lt;NA&gt;
-## 785 Q5U2Q3 CK054_RAT   &lt;NA&gt;
-## 831 Q63010  EST5_RAT   &lt;NA&gt;
 ## 950 Q6P6G2 CF089_RAT   &lt;NA&gt;</code></pre>
-<p>For example, the protein id <a href="https://www.uniprot.org/uniprot/P01835">P01835</a> has replaced the gene name with <code>NA</code>.</p>
-<p>The Venn plot shows that primary protein ids have changed their gene names. If users continue to use the old gene names, they may lose the latest information.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>old_name<span class="op">=</span><span class="va">old_name</span>, new_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">new_name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-31-1.png" width="98%"></div>
+<p>We could see the result above: the protein id <a href="https://www.uniprot.org/uniprot/P01835">P01835</a> has replaced the gene name with <code>NA</code>.</p>
+<p>The Venn plot shows that primary protein ids have changed their gene names. If users continue to use the old gene names, they may lose the latest gene information even enriched pathways.</p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>old_name <span class="op">=</span> <span class="va">old_name</span>, new_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">new_name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-55-1.png" width="98%"></div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></div>
-<div class="next"><a href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></div>
+<div class="prev"><a href="gene-id-conversion.html"><span class="header-section-number">4</span> Gene ID conversion</a></div>
+<div class="next"><a href="probe-id-conversion.html"><span class="header-section-number">6</span> Probe ID conversion</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#protein-id-conversion"><span class="header-section-number">4</span> Protein ID conversion</a></li>
-<li><a class="nav-link" href="#protein-example-data"><span class="header-section-number">4.1</span> Example data</a></li>
-<li><a class="nav-link" href="#protein-id-conversion"><span class="header-section-number">4.2</span> Protein id conversion</a></li>
+<li><a class="nav-link" href="#protein-id-conversion"><span class="header-section-number">5</span> Protein ID conversion</a></li>
+<li><a class="nav-link" href="#protein-example-data"><span class="header-section-number">5.1</span> Example data</a></li>
+<li><a class="nav-link" href="#protein-id-conversion"><span class="header-section-number">5.2</span> Protein id conversion</a></li>
 </ul>
 
       <div class="book-extra">
@@ -187,7 +189,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-07.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

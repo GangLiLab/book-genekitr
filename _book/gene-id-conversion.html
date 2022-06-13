@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Gene ID conversion | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 4 Gene ID conversion | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content="The popular gene ID types include Symbol, NCBI Entrez and Ensembl. ID conversion among different types is very common.  3.1 Current tools Now there are many tools could handle id conversion...">
+<meta name="description" content="If you have handled genomics analysis, then you may spend much time converting gene identifiers to other types. For example, gene set enrichment analysis is very common in omics downstream process...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Gene ID conversion | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 4 Gene ID conversion | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="The popular gene ID types include Symbol, NCBI Entrez and Ensembl. ID conversion among different types is very common.  3.1 Current tools Now there are many tools could handle id conversion...">
+<meta property="og:description" content="If you have handled genomics analysis, then you may spend much time converting gene identifiers to other types. For example, gene set enrichment analysis is very common in omics downstream process...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Gene ID conversion | Genekitr: Gene Analysis Toolkit based on R">
-<meta name="twitter:description" content="The popular gene ID types include Symbol, NCBI Entrez and Ensembl. ID conversion among different types is very common.  3.1 Current tools Now there are many tools could handle id conversion...">
+<meta name="twitter:title" content="Chapter 4 Gene ID conversion | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:description" content="If you have handled genomics analysis, then you may spend much time converting gene identifiers to other types. For example, gene set enrichment analysis is very common in omics downstream process...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -46,21 +46,23 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">📖 Introduction</a></li>
+<li><a class="" href="index.html">🧬 Welcome to genekitr!</a></li>
+<li><a class="" href="quick-start.html"><span class="header-section-number">1</span> Quick start</a></li>
 <li class="book-part">Part I: Search Information</li>
-<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">1</span> Search gene metadata</a></li>
-<li><a class="" href="search-pubmed.html"><span class="header-section-number">2</span> Search PubMed records</a></li>
+<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">2</span> Search gene metadata</a></li>
+<li><a class="" href="search-pubmed.html"><span class="header-section-number">3</span> Search PubMed records</a></li>
 <li class="book-part">Part II: ID Conversion</li>
-<li><a class="active" href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></li>
-<li><a class="" href="protein-id-conversion.html"><span class="header-section-number">4</span> Protein ID conversion</a></li>
-<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></li>
+<li><a class="active" href="gene-id-conversion.html"><span class="header-section-number">4</span> Gene ID conversion</a></li>
+<li><a class="" href="protein-id-conversion.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
+<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
-<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
+<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
+<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea.html"><span class="header-section-number">10</span> Plot GSEA</a></li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea.html"><span class="header-section-number">11</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others.html"><span class="header-section-number">12</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -70,67 +72,98 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="gene-id-conversion" class="section level1">
 <h1>
-<span class="header-section-number">3</span> Gene ID conversion<a class="anchor" aria-label="anchor" href="#gene-id-conversion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Gene ID conversion<a class="anchor" aria-label="anchor" href="#gene-id-conversion"><i class="fas fa-link"></i></a>
 </h1>
-<p>The popular gene ID types include Symbol, NCBI Entrez and Ensembl. ID conversion among different types is very common.</p>
+<p>If you have handled genomics analysis, then you may spend much time converting gene identifiers to other types.</p>
+<blockquote>
+<p>For example, gene set enrichment analysis is very common in omics downstream process which is mainly based on MsigDb. According to its <a href="https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/MSigDB_v7.0_Release_Notes">release note</a>, <strong>since MSigDB 7.0, identifiers for genes are mapped to their HGNC approved Gene Symbol and NCBI Gene ID through annotations extracted from Ensembl’s BioMart data service</strong>, and will be updated at each MSigDB release with the latest available version of Ensembl. Currently, MSigDB 7.5 has updated human gene annotations to Ensembl v105.</p>
+</blockquote>
+<p>Hence, id conversion could help keeping update with the latest annotations.</p>
+<p>The most common gene id types are <strong>symbol</strong> (e.g. TP53),<strong>NCBI Entrez</strong> (e.g. 7157) and <strong>Ensembl</strong> (e.g. ENSG00000141510). ID conversion among different types is very common and there are two main concerns: performance and flexibility.</p>
 <div id="convertion-current-tools" class="section level2">
 <h2>
-<span class="header-section-number">3.1</span> Current tools<a class="anchor" aria-label="anchor" href="#convertion-current-tools"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Current tools<a class="anchor" aria-label="anchor" href="#convertion-current-tools"><i class="fas fa-link"></i></a>
 </h2>
-<p>Now there are many tools could handle id conversion including <a href="http://bioconductor.org/packages/biomaRt">biomaRt</a>, <a href="http://bioconductor.org/packages/clusterProfiler.">clusterProfiler.</a> .</p>
-<p>biomaRt is frequently used to access Ensembl database while clusterProfiler depends on NCBI database via Bioconductor annotation packages.</p>
-<p>Genekitr combines both Ensembl and NCBI database to provide more comprehensive gene id mapping. Also id conversion supports many species (see also <a href="search-gene-metadata.html#geninfo-supported-species">session 1.2</a>)</p>
+<p>Currently various tools are available, however different methods has their drawbacks:</p>
+<ul>
+<li>
+<a href="http://bioconductor.org/packages/biomaRt">biomaRt</a>: The R package is frequently used to access up-to-date Ensembl database. It has to access online database each time and built-in parameters are too many.</li>
+<li>
+<a href="http://bioconductor.org/packages/clusterProfiler">clusterProfiler</a>: The R package depends on Bioconductor annotation packages to extract NCBI gene. NCBI database updates every day while Bioconductor package updates nearly every six months. Besides, it only supports 20 organisms and user should download and load annotation data before mapping.</li>
+<li>
+<a href="https://biit.cs.ut.ee/gprofiler/convert">gProfiler</a>: The web server supports 40 types of IDs for more than 60 species. But it only supports one-to-one conversion, for example, if user want to convert gene symbol to both Entrez and Ensembl, it could not happen. Besides, the output result is not convenient to further process.</li>
+<li>
+<a href="https://david.ncifcrf.gov/conversion.jsp">DAVID</a>: The web server interface is not user-friendly.</li>
+<li>
+<a href="https://www.uniprot.org/uploadlists/">UniProt</a>: The large protein database may support almost all species but user needs to specify input id type and only converts to protein id.</li>
+<li>
+<a href="http://resource.ibab.ac.in/GIDCON/geneid/home.html">GIDcon</a>: The web server only covers human, mouse and rat. User must seperates gene ids with comma if does batch query. Five symbols will take 8 secs to convert.</li>
+</ul>
+<p>Considered above problems, <strong>genekitr combines both Ensembl and NCBI database</strong> to provide more comprehensive result while optimizes running speed.</p>
+<p>Also it supports <strong>196 vertebrate species, 120 plant species and 2 bacteria species</strong> (see also <a href="search-gene-metadata.html#geninfo-supported-species">session 1.1</a>).</p>
 </div>
 <div id="transid-basic-usage" class="section level2">
 <h2>
-<span class="header-section-number">3.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#transid-basic-usage"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#transid-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
-<p><code>transId</code> is a sub function of <code>genInfo</code>, which has five arguments:</p>
+<p><code>transId</code> provides five arguments:</p>
 <ul>
-<li><p><code>id</code>: gene id (symbol, Entrez or Ensembl) or protein id</p></li>
-<li><p><code>transTo</code>: the conversion target type. User could select <strong>one or more</strong> from “symbol”, “entrez”, “ensembl” or “uniprot”</p></li>
+<li><p><code>id</code>: gene id (symbol, Entrez or Ensembl), protein id (see also <a href="##protein-id-conversion">session 4.2</a>) or microarray id (see also <a href="##probe-id-conversion">session 5.1</a>)</p></li>
+<li><p><code>transTo</code>: the conversion target type. User could select <strong>more than one</strong> from “symbol”, “entrez”, “ensembl” or “uniprot”. Besides, abbreviation is acceptable (e.g. “ens” is fine for “ensembl” but “en” will raise error because it could not separate from “entrez”)</p></li>
 <li><p><code>org</code>: organism name, default is human</p></li>
-<li><p><code>unique</code>: <code>TRUE</code> or <code>FALSE</code>. If <code>TRUE</code>, only returns one matched id. Default is <code>FALSE</code>.</p></li>
-<li><p><code>keepNA</code>: <code>TRUE</code> or <code>FALSE</code>. Some id has none matched id, save it or not. Default is <code>FALSE</code>.</p></li>
+<li><p><code>unique</code>: <code>TRUE</code> or <code>FALSE</code> (default). If <code>TRUE</code>, only returns one matched id.</p></li>
+<li><p><code>keepNA</code>: <code>TRUE</code> or <code>FALSE</code> (default). If some id has no matched one, keep it or not.</p></li>
 </ul>
-<p>The argument below “ens” represents “ensembl”, if you do not want to type too many characters like me, just spell first characters.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'AKT3'</span>,<span class="st">'SSX6P'</span>,<span class="st">'FAKE_ID'</span>,<span class="st">'BCC7'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'ens'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># human genes</span>
+<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AKT3"</span>, <span class="st">"SSX6P"</span>, <span class="st">"FAKE_ID"</span>, <span class="st">"BCC7"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">"ens"</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id         ensembl
 ## 1     AKT3 ENSG00000275199
 ## 2     AKT3 ENSG00000117020
 ## 3    SSX6P ENSG00000171483
 ## 4     BCC7 ENSG00000141510</code></pre>
-<p>Due to NA was removed, the result order is slightly different from input id. If you want to get the same order, you can save NA:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'ens'</span>,keepNA <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># fruit fly genes</span>
+<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span>
+  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"10178780"</span>, <span class="st">"10178777"</span>, <span class="st">"10178786"</span>, <span class="st">"10178792"</span><span class="op">)</span>,
+  transTo <span class="op">=</span> <span class="st">"sym"</span>, org <span class="op">=</span> <span class="st">"fly"</span>
+<span class="op">)</span></code></pre></div>
+<pre><code>##   input_id          symbol
+## 1 10178780         CR33929
+## 2 10178777         CG42835
+## 3 10178786 Su(Ste):CR40820
+## 4 10178792         CG42694</code></pre>
+<p>See the human example above, due to NA was removed, the result order is slightly different from input id.</p>
+<p>If you want to get the same order, you can set <code>keepNA = TRUE</code>:</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">"ens"</span>, keepNA <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id         ensembl
 ## 1     AKT3 ENSG00000275199
 ## 2     AKT3 ENSG00000117020
 ## 3    SSX6P ENSG00000171483
 ## 4  FAKE_ID            &lt;NA&gt;
 ## 5     BCC7 ENSG00000141510</code></pre>
-<p>If you want to get one-to-one mapping and keep input id order:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'ens'</span>,keepNA <span class="op">=</span> <span class="cn">TRUE</span>,unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>##   input_id         ensembl
-## 1     AKT3 ENSG00000275199
-## 2    SSX6P ENSG00000171483
-## 3  FAKE_ID            &lt;NA&gt;
-## 4     BCC7 ENSG00000141510</code></pre>
+<p>If you want to get one-to-one mapping, you can set <code>unique = TRUE</code>:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">"ens"</span>, keepNA <span class="op">=</span> <span class="cn">TRUE</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code>##    input_id         ensembl
+## 21     AKT3 ENSG00000117020
+## 1     SSX6P ENSG00000171483
+## 2   FAKE_ID            &lt;NA&gt;
+## 3      BCC7 ENSG00000141510</code></pre>
 </div>
 <div id="transid-features" class="section level2">
 <h2>
-<span class="header-section-number">3.3</span> Features<a class="anchor" aria-label="anchor" href="#transid-features"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Features<a class="anchor" aria-label="anchor" href="#transid-features"><i class="fas fa-link"></i></a>
 </h2>
 <div id="transid-feature-1" class="section level3">
 <h3>
-<span class="header-section-number">3.3.1</span> Feature1: convert to several types<a class="anchor" aria-label="anchor" href="#transid-feature-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1</span> f1: convert to several types<a class="anchor" aria-label="anchor" href="#transid-feature-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Just pass the wanted types to <code>transTo</code> parameter:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'ens'</span>,<span class="st">'ent'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><code>transTo</code> could accepts more than one type:</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ens"</span>, <span class="st">"ent"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id         ensembl entrezid
 ## 1     AKT3 ENSG00000275199    10000
 ## 2     AKT3 ENSG00000117020    10000
@@ -139,12 +172,13 @@
 </div>
 <div id="transid-feature-2" class="section level3">
 <h3>
-<span class="header-section-number">3.3.2</span> Feature2: distinguish from symbol and alias<a class="anchor" aria-label="anchor" href="#transid-feature-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.2</span> f2: distinguish from symbol and alias<a class="anchor" aria-label="anchor" href="#transid-feature-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>Gene alias is an alternative name for official gene symbol, like “BCC7” is actually alias for “TP53”. Sometimes gene alias is much famous than official symbol, for example, “PDL1” is the alias for “CD274” in fact.</p>
-<p>Here, <code>transId</code> could utilize both NCBI and Ensembl alias metadata to easily recognize them, user just need to set <code>transTo = 'symbol'</code></p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>,<span class="st">"TP53"</span>,<span class="st">"PD1"</span>,<span class="st">"PDL1"</span>,<span class="st">"TET2"</span><span class="op">)</span>,<span class="st">'sym'</span><span class="op">)</span></code></pre></div>
+<p>One big common problem for <a href="gene-id-conversion.html#convertion-current-tools">current tools</a> is confusion of gene symbol and gene alias.</p>
+<p>Gene alias is an alternative name of official gene symbol, like “BCC7” is actually alias for “TP53”. Sometimes gene alias is more widely used than official symbol. For example, “PDL1” is the alias for “CD274” in fact.</p>
+<p>Due to combination of NCBI and Ensembl metadata, <code>transId</code> could easily recognize gene symbol and alias by setting <code>transTo = 'symbol'</code>.</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>, <span class="st">"TP53"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span>, <span class="st">"TET2"</span><span class="op">)</span>, <span class="st">"sym"</span><span class="op">)</span></code></pre></div>
 <pre><code>##   input_id symbol
 ## 1     BCC7   TP53
 ## 2     TP53   TP53
@@ -156,127 +190,257 @@
 </div>
 <div id="transid-feature-3" class="section level3">
 <h3>
-<span class="header-section-number">3.3.3</span> Feature3: no worry for Ensembl version<a class="anchor" aria-label="anchor" href="#transid-feature-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.3</span> f3: no worry for Ensembl version<a class="anchor" aria-label="anchor" href="#transid-feature-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>An Ensembl stable ID consists of five parts: ENS(species)(object type)(identifier). (version)
 For example, <code>ENSG00000141510.11</code> is TP53 while the version <code>.11</code> may confuse many tools.
 However using <code>transId</code>, user will not worry this issue any more.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="st">'ENSG00000141510.11'</span>,<span class="st">'symbol'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="st">"ENSG00000141510.11"</span>, <span class="st">"symbol"</span><span class="op">)</span></code></pre></div>
 <pre><code>##          input_id symbol
 ## 1 ENSG00000141510   TP53</code></pre>
 </div>
 </div>
-<div id="transid-real-exp" class="section level2">
+<div id="transid-ex1-data" class="section level2">
 <h2>
-<span class="header-section-number">3.4</span> Real Example<a class="anchor" aria-label="anchor" href="#transid-real-exp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Excercise 1: DEG result<a class="anchor" aria-label="anchor" href="#transid-ex1-data"><i class="fas fa-link"></i></a>
 </h2>
-<div id="transid-real-exp-data" class="section level3">
-<h3>
-<span class="header-section-number">3.4.1</span> Example data<a class="anchor" aria-label="anchor" href="#transid-real-exp-data"><i class="fas fa-link"></i></a>
-</h3>
-<p>We got a differential expression analysis result from <a href="https://www.ncbi.nlm.nih.gov//geo/query/acc.cgi?acc=GSE42872">GSE42872</a>.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>,package <span class="op">=</span> <span class="st">'genekitr'</span><span class="op">)</span>
-<span class="va">id</span> <span class="op">=</span> <span class="va">deg</span><span class="op">$</span><span class="va">ENTREZID</span>
+<p>The built-in example data is differentially expressed genes from: <a href="https://www.ncbi.nlm.nih.gov//geo/query/acc.cgi?acc=GSE42872">GSE42872</a></p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">deg</span><span class="op">$</span><span class="va">change</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##   down stable     up 
+##    451  17009    579</code></pre>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="va">deg</span><span class="op">$</span><span class="va">entrezid</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 18591</code></pre>
-<p>Here we will take gene symbols in the result to compare id conversion efficiency of various tools.</p>
-</div>
-<div id="transid-real-exp-bitr" class="section level3">
+<pre><code>## [1] 18039</code></pre>
+<div id="transid-ex1-bitr" class="section level3">
 <h3>
-<span class="header-section-number">3.4.2</span> bitr from clusterProfiler<a class="anchor" aria-label="anchor" href="#transid-real-exp-bitr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1</span> <code>clusterProfiler::bitr</code><a class="anchor" aria-label="anchor" href="#transid-ex1-bitr"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">### Using bitr</span>
-<span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span><span class="op">)</span>
-<span class="va">bitr_res</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/bitr.html">bitr</a></span><span class="op">(</span><span class="va">id</span>,fromType <span class="op">=</span> <span class="st">'ENTREZID'</span>,toType <span class="op">=</span> <span class="st">'SYMBOL'</span>,OrgDb <span class="op">=</span> <span class="st">'org.Hs.eg.db'</span><span class="op">)</span>
-<span class="va">bitr_sym</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">bitr_res</span><span class="op">$</span><span class="va">SYMBOL</span><span class="op">)</span>
+<p>User needs to specify input id type and converted type from <code>columns(org.Hs.eg.db)</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># User must firstly install the org.Hs.eg.db</span>
+<span class="co"># BiocManager::install('org.Hs.eg.db')</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span>
+<span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></code></pre></div>
+<pre><code>##  [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
+##  [6] "ENTREZID"     "ENZYME"       "EVIDENCE"     "EVIDENCEALL"  "GENENAME"    
+## [11] "GO"           "GOALL"        "IPI"          "MAP"          "OMIM"        
+## [16] "ONTOLOGY"     "ONTOLOGYALL"  "PATH"         "PFAM"         "PMID"        
+## [21] "PROSITE"      "REFSEQ"       "SYMBOL"       "UCSCKG"       "UNIGENE"     
+## [26] "UNIPROT"</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bitr_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/bitr.html">bitr</a></span><span class="op">(</span><span class="va">id</span>, fromType <span class="op">=</span> <span class="st">"ENTREZID"</span>, toType <span class="op">=</span> <span class="st">"SYMBOL"</span>, OrgDb <span class="op">=</span> <span class="st">"org.Hs.eg.db"</span><span class="op">)</span>
+<span class="va">bitr_sym</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">bitr_res</span><span class="op">$</span><span class="va">SYMBOL</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">bitr_sym</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 18579</code></pre>
+<pre><code>## [1] 18036</code></pre>
 </div>
-<div id="transid-real-exp-transid" class="section level3">
+<div id="transid-ex1-biomart" class="section level3">
 <h3>
-<span class="header-section-number">3.4.3</span> transId from genekitr<a class="anchor" aria-label="anchor" href="#transid-real-exp-transid"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.2</span> <code>biomaRt::getBM</code><a class="anchor" aria-label="anchor" href="#transid-ex1-biomart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transid_res</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,transTo <span class="op">=</span> <span class="st">'sym'</span><span class="op">)</span>
-<span class="va">transid_sym</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">transid_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span>
+<p>The initializing process depends mainly on Ensembl’s web access speed. Usually, it may take tens of seconds.</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># initializing...</span>
+<span class="va">ensembl</span> <span class="op">&lt;-</span> <span class="fu">biomaRt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biomaRt/man/useEnsembl.html">useEnsembl</a></span><span class="op">(</span>
+  biomart <span class="op">=</span> <span class="st">"genes"</span>,
+  dataset <span class="op">=</span> <span class="st">"hsapiens_gene_ensembl"</span>
+<span class="op">)</span>
+<span class="co"># conversion</span>
+<span class="va">biomart_res</span> <span class="op">&lt;-</span> <span class="fu">biomaRt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biomaRt/man/getBM.html">getBM</a></span><span class="op">(</span>
+  attributes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"entrezgene_id"</span>, <span class="st">"external_gene_name"</span><span class="op">)</span>,
+  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"entrezgene_id"</span><span class="op">)</span>,
+  mart <span class="op">=</span> <span class="va">ensembl</span>,
+  values <span class="op">=</span> <span class="va">id</span>
+<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">biomart_sym</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">biomart_res</span><span class="op">$</span><span class="va">external_gene_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_remove_empty.html">stri_remove_empty</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">biomart_sym</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 16085</code></pre>
+</div>
+<div id="transid-ex1-transid" class="section level3">
+<h3>
+<span class="header-section-number">4.4.3</span> <code>genekitr::transId</code><a class="anchor" aria-label="anchor" href="#transid-ex1-transid"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">transid_res</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">"sym"</span>, unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">transid_sym</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">transid_res</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">transid_sym</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 18600</code></pre>
+<pre><code>## [1] 18039</code></pre>
 </div>
-<div id="transid-real-exp-compare" class="section level3">
+<div id="transid-ex1-compare" class="section level3">
 <h3>
-<span class="header-section-number">3.4.4</span> compare results<a class="anchor" aria-label="anchor" href="#transid-real-exp-compare"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.4</span> compare three results<a class="anchor" aria-label="anchor" href="#transid-ex1-compare"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>bitr_sym<span class="op">=</span><span class="va">bitr_sym</span>,transid_sym<span class="op">=</span><span class="va">transid_sym</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-20-1.png" width="98%"></div>
-<p>There are 114 genes only in <code>bitr</code> result:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bitr_sym</span><span class="op">[</span><span class="op">!</span><span class="va">bitr_sym</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">transid_sym</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "FAM122C"      "LOC100287896" "TMEM159"      "C8orf31"      "RRNAD1"      
-## [6] "CCDC58"</code></pre>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># let's take a look for the first one FAM122C, which is converted from gene 159091</span>
-<span class="va">bitr_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">SYMBOL</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="st">'FAM122C'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">ENTREZID</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "159091"</code></pre>
-<p>When we search NCBI <a href="https://www.ncbi.nlm.nih.gov/gene/159091">159091</a> and we could see the official symbol is “PABIR3” now while “FAM122C” is an alias. When we look back into <code>transId</code> result, it keeps update with NCBI web.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transid_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="st">'159091'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "PABIR3"</code></pre>
-<p>Besides, there are 140 unique symbols in <code>transId</code> result:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transid_sym</span><span class="op">[</span><span class="op">!</span><span class="va">transid_sym</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">bitr_sym</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "PABIR3"    "LIPT2-AS1" "LDAF1"     "LINC02904" "METTL25B"  "MIX23"</code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># take a look at the second one: LIPT2-AS1</span>
-<span class="va">transid_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">symbol</span> <span class="op">==</span> <span class="st">"LIPT2-AS1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">input_id</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "100287896"</code></pre>
-<p>NCBI web also showed the same result with <code>transId</code>: <a href="https://www.ncbi.nlm.nih.gov/gene/100287896">100287896</a>, while <code>bitr</code> gets <code>LOC100287896</code> symbol for it.</p>
-<p>We have total 18591 entrez id as input, while we get 18578 ids in <code>transId</code> result, why?</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">transid_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">transid_res</span><span class="op">$</span><span class="va">input_id</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">transid_id</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 18578</code></pre>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">id</span><span class="op">[</span><span class="op">!</span><span class="va">id</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">transid_id</span><span class="op">]</span></code></pre></div>
-<pre><code>##  [1] "23285"     "283174"    "105377021" "102724237" "101928841" "643763"   
-##  [7] "54748"     "338809"    "387638"    "246734"    "84953"     "105374089"
-## [13] "10896"</code></pre>
-<p>When we search on NCBI web, we found the reason, they are replaced with new one. For example, the first one <a href="https://www.ncbi.nlm.nih.gov/gene/23285">23285</a> is discontinued on 9-Nov-2019 and replaced with <a href="https://www.ncbi.nlm.nih.gov/gene/284697">284697</a>.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># As we get the latest id, we could convert it immediately!</span>
-<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="st">'284697'</span>,transTo <span class="op">=</span> <span class="st">'sym'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  bitr <span class="op">=</span> <span class="va">bitr_sym</span>,
+  transid <span class="op">=</span> <span class="va">transid_sym</span>,
+  biomart <span class="op">=</span> <span class="va">biomart_sym</span>
+<span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-40-1.png" width="98%"></div>
+<div id="bitr-vs-transid" class="section level4">
+<h4>
+<span class="header-section-number">4.4.4.1</span> <strong><code>bitr</code> vs <code>transId</code></strong><a class="anchor" aria-label="anchor" href="#bitr-vs-transid"><i class="fas fa-link"></i></a>
+</h4>
+<p>There are 117 genes only in <code>bitr</code> result:</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bitr_sym</span><span class="op">[</span><span class="op">!</span><span class="va">bitr_sym</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">transid_sym</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "C19orf71"     "LINC00476"    "LOC100129484" "PP2672"       "LOC100130449"</code></pre>
+<p>Let’s take a look for the first one LINC00337, which is converted from gene <a href="https://www.ncbi.nlm.nih.gov/gene/148645">148645</a></p>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bitr_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">SYMBOL</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"LINC00337"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">ENTREZID</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "148645"</code></pre>
+<p>When we search it on NCBI and we could see the official symbol is “ICMT-DT” now while “LINC00337” is an alias. When we look back into <code>transId</code> result, it keeps update with NCBI web.</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">transid_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"148645"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "ICMT-DT"</code></pre>
+<p>Besides, there are 118 unique symbols in <code>transId</code> result:</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">transid_sym</span><span class="op">[</span><span class="op">!</span><span class="va">transid_sym</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">bitr_sym</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "TEKTIP1"     "ERCC6L2-AS1" "LINC02983"   "LINC02961"   "GPC1-AS1"</code></pre>
+<p>The above gene <code>ICMT-DT</code> is listed.</p>
+</div>
+<div id="biomart-vs-transid" class="section level4">
+<h4>
+<span class="header-section-number">4.4.4.2</span> <strong><code>biomart</code> vs <code>transId</code></strong><a class="anchor" aria-label="anchor" href="#biomart-vs-transid"><i class="fas fa-link"></i></a>
+</h4>
+<p>There are 13 genes only in <code>biomart</code> result:</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">biomart_sym</span><span class="op">[</span><span class="op">!</span><span class="va">biomart_sym</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">transid_sym</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "KLRK1"     "FLJ37453"  "C11orf49"  "C19orf71"  "ZNF761"    "LINC01588"</code></pre>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">biomart_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">external_gene_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"KLRK1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">entrezgene_id</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 100528032</code></pre>
+<p>When we search NCBI <a href="https://www.ncbi.nlm.nih.gov/gene/100528032">100528032</a> and we could see the official symbol is “KLRC4-KLRK1”. When we look back into <code>transId</code> and <code>bitr</code> result, they are the same with NCBI web.</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bitr_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ENTREZID</span> <span class="op">==</span> <span class="st">"100528032"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">SYMBOL</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "KLRC4-KLRK1"</code></pre>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">transid_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"100528032"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "KLRC4-KLRK1"</code></pre>
+</div>
+</div>
+</div>
+<div id="transid-ex2-data" class="section level2">
+<h2>
+<span class="header-section-number">4.5</span> Excercise 2: mixture of gene symbol and alias<a class="anchor" aria-label="anchor" href="#transid-ex2-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Compared with Entrez and Ensembl, gene symbol and alias is hard to distinguish. In real science life, the impact of misunderstanding both names is huge.</p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/29731861/">Takehara et al. (2018)</a> had to retract the published paper by its authors just because they misused “TAZ” as the actual research target “WWTR1” in which “TAZ” is an alias of “WWTR1”.</p>
+<p>The similar issues have published in paper: <a href="https://www.sciencedirect.com/science/article/pii/S0002929721003402">The risks of using unapproved gene symbols</a>. Of course, it is not only happens in human research. So we must raise alert of gene alias.</p>
+<div id="hgnchelper-vs-transid" class="section level3">
+<h3>
+<span class="header-section-number">4.5.1</span> <strong><code>HGNChelper</code> vs <code>transId</code></strong><a class="anchor" aria-label="anchor" href="#hgnchelper-vs-transid"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://CRAN.R-project.org/package=HGNChelper">HGNChelper</a> is mainly built for human research, so here we will give simple human gene list as example.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TBET"</span>, <span class="st">"B220"</span>, <span class="st">"BCC7"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span><span class="op">)</span>
+
+<span class="va">transid_res</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">"sym"</span>, unique <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">transid_res</span></code></pre></div>
 <pre><code>##   input_id symbol
-## 1   284697  BTBD8</code></pre>
+## 1     TBET  TBX21
+## 2     B220  PTPRC
+## 3     BCC7   TP53
+## 4      PD1  PDCD1
+## 5      PD1   SNCA
+## 6      PD1 SPATA2
+## 7     PDL1  CD274</code></pre>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hgnc_res</span> <span class="op">&lt;-</span> <span class="fu">HGNChelper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HGNChelper/man/checkGeneSymbols.html">checkGeneSymbols</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span>
+<span class="va">hgnc_res</span></code></pre></div>
+<pre><code>##      x Approved          Suggested.Symbol
+## 1 TBET    FALSE                      &lt;NA&gt;
+## 2 B220    FALSE                      &lt;NA&gt;
+## 3 BCC7    FALSE                      &lt;NA&gt;
+## 4  PD1    FALSE PDCD1 /// SNCA /// SPATA2
+## 5 PDL1    FALSE                     CD274</code></pre>
+<p>The first three genes are omitted in <code>HGNChelper</code>.</p>
+</div>
+<div id="genesymbolthesarus-vs-transid" class="section level3">
+<h3>
+<span class="header-section-number">4.5.2</span> <strong><code>GeneSymbolThesarus</code> vs <code>transId</code></strong><a class="anchor" aria-label="anchor" href="#genesymbolthesarus-vs-transid"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>GeneSymbolThesarus</code> is a function of <a href="https://CRAN.R-project.org/package=Seurat">Seurat</a> which finds current gene symbols from the HUGO Gene Nomenclature Committee (HGNC). It will search online so the speed will not fast.</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
+<span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">seurat_res</span> <span class="op">&lt;-</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/UpdateSymbolList.html">GeneSymbolThesarus</a></span><span class="op">(</span>symbols <span class="op">=</span> <span class="va">id</span><span class="op">)</span>
+<span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span><span class="op">)</span></code></pre></div>
+<pre><code>## Time difference of 57.67122 secs</code></pre>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">seurat_res</span></code></pre></div>
+<pre><code>##    PDL1 
+## "CD274"</code></pre>
+<p>Seurat only returns one records.</p>
+</div>
+<div id="alias2symbol-vs-transid" class="section level3">
+<h3>
+<span class="header-section-number">4.5.3</span> <strong><code>alias2Symbol</code> vs <code>transId</code></strong><a class="anchor" aria-label="anchor" href="#alias2symbol-vs-transid"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>alias2Symbol</code> is a function of <a href="http://bioconductor.org/packages/limma">limma</a> which depends on organism annotation package of Bioconductor.</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">limma_res</span> <span class="op">&lt;-</span> <span class="fu">limma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/alias2Symbol.html">alias2Symbol</a></span><span class="op">(</span><span class="va">id</span>, species <span class="op">=</span> <span class="st">"Hs"</span><span class="op">)</span>
+<span class="co"># compare with transId result</span>
+<span class="va">id</span></code></pre></div>
+<pre><code>## [1] "TBET" "B220" "BCC7" "PD1"  "PDL1"</code></pre>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">limma_res</span></code></pre></div>
+<pre><code>## [1] "CD274"  "TBX21"  "PDCD1"  "PTPRC"  "SNCA"   "TP53"   "SPATA2"</code></pre>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">transid_res</span><span class="op">$</span><span class="va">symbol</span></code></pre></div>
+<pre><code>## [1] "TBX21"  "PTPRC"  "TP53"   "PDCD1"  "SNCA"   "SPATA2" "CD274"</code></pre>
+<p>It seems that <code>alias2Symbol</code> result remains disorder from input id, which may cause misunderstanding for users, while <code>transId</code> keeps the original order (if user want to get one-to-one match, just pass <code>unique = TRUE</code> to function).</p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="search-pubmed.html"><span class="header-section-number">2</span> Search PubMed records</a></div>
-<div class="next"><a href="protein-id-conversion.html"><span class="header-section-number">4</span> Protein ID conversion</a></div>
+<div class="prev"><a href="search-pubmed.html"><span class="header-section-number">3</span> Search PubMed records</a></div>
+<div class="next"><a href="protein-id-conversion.html"><span class="header-section-number">5</span> Protein ID conversion</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#gene-id-conversion"><span class="header-section-number">3</span> Gene ID conversion</a></li>
-<li><a class="nav-link" href="#convertion-current-tools"><span class="header-section-number">3.1</span> Current tools</a></li>
-<li><a class="nav-link" href="#transid-basic-usage"><span class="header-section-number">3.2</span> Basic usage</a></li>
+<li><a class="nav-link" href="#gene-id-conversion"><span class="header-section-number">4</span> Gene ID conversion</a></li>
+<li><a class="nav-link" href="#convertion-current-tools"><span class="header-section-number">4.1</span> Current tools</a></li>
+<li><a class="nav-link" href="#transid-basic-usage"><span class="header-section-number">4.2</span> Basic usage</a></li>
 <li>
-<a class="nav-link" href="#transid-features"><span class="header-section-number">3.3</span> Features</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#transid-feature-1"><span class="header-section-number">3.3.1</span> Feature1: convert to several types</a></li>
-<li><a class="nav-link" href="#transid-feature-2"><span class="header-section-number">3.3.2</span> Feature2: distinguish from symbol and alias</a></li>
-<li><a class="nav-link" href="#transid-feature-3"><span class="header-section-number">3.3.3</span> Feature3: no worry for Ensembl version</a></li>
+<a class="nav-link" href="#transid-features"><span class="header-section-number">4.3</span> Features</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#transid-feature-1"><span class="header-section-number">4.3.1</span> f1: convert to several types</a></li>
+<li><a class="nav-link" href="#transid-feature-2"><span class="header-section-number">4.3.2</span> f2: distinguish from symbol and alias</a></li>
+<li><a class="nav-link" href="#transid-feature-3"><span class="header-section-number">4.3.3</span> f3: no worry for Ensembl version</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#transid-real-exp"><span class="header-section-number">3.4</span> Real Example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#transid-real-exp-data"><span class="header-section-number">3.4.1</span> Example data</a></li>
-<li><a class="nav-link" href="#transid-real-exp-bitr"><span class="header-section-number">3.4.2</span> bitr from clusterProfiler</a></li>
-<li><a class="nav-link" href="#transid-real-exp-transid"><span class="header-section-number">3.4.3</span> transId from genekitr</a></li>
-<li><a class="nav-link" href="#transid-real-exp-compare"><span class="header-section-number">3.4.4</span> compare results</a></li>
+<a class="nav-link" href="#transid-ex1-data"><span class="header-section-number">4.4</span> Excercise 1: DEG result</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#transid-ex1-bitr"><span class="header-section-number">4.4.1</span> clusterProfiler::bitr</a></li>
+<li><a class="nav-link" href="#transid-ex1-biomart"><span class="header-section-number">4.4.2</span> biomaRt::getBM</a></li>
+<li><a class="nav-link" href="#transid-ex1-transid"><span class="header-section-number">4.4.3</span> genekitr::transId</a></li>
+<li><a class="nav-link" href="#transid-ex1-compare"><span class="header-section-number">4.4.4</span> compare three results</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#transid-ex2-data"><span class="header-section-number">4.5</span> Excercise 2: mixture of gene symbol and alias</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hgnchelper-vs-transid"><span class="header-section-number">4.5.1</span> HGNChelper vs transId</a></li>
+<li><a class="nav-link" href="#genesymbolthesarus-vs-transid"><span class="header-section-number">4.5.2</span> GeneSymbolThesarus vs transId</a></li>
+<li><a class="nav-link" href="#alias2symbol-vs-transid"><span class="header-section-number">4.5.3</span> alias2Symbol vs transId</a></li>
 </ul>
 </li>
 </ul>
@@ -295,7 +459,7 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-07.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

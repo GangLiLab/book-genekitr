@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 3 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content="getPubmed function could use europepmc to easily get PubMed records by searching paper abstract. A user needs to input the term argument; if there is any supplement information, the keys parameter...">
+<meta name="description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 3 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="getPubmed function could use europepmc to easily get PubMed records by searching paper abstract. A user needs to input the term argument; if there is any supplement information, the keys parameter...">
+<meta property="og:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 2 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
-<meta name="twitter:description" content="getPubmed function could use europepmc to easily get PubMed records by searching paper abstract. A user needs to input the term argument; if there is any supplement information, the keys parameter...">
+<meta name="twitter:title" content="Chapter 3 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -46,21 +46,23 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">📖 Introduction</a></li>
+<li><a class="" href="index.html">🧬 Welcome to genekitr!</a></li>
+<li><a class="" href="quick-start.html"><span class="header-section-number">1</span> Quick start</a></li>
 <li class="book-part">Part I: Search Information</li>
-<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">1</span> Search gene metadata</a></li>
-<li><a class="active" href="search-pubmed.html"><span class="header-section-number">2</span> Search PubMed records</a></li>
+<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">2</span> Search gene metadata</a></li>
+<li><a class="active" href="search-pubmed.html"><span class="header-section-number">3</span> Search PubMed records</a></li>
 <li class="book-part">Part II: ID Conversion</li>
-<li><a class="" href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></li>
-<li><a class="" href="protein-id-conversion.html"><span class="header-section-number">4</span> Protein ID conversion</a></li>
-<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></li>
+<li><a class="" href="gene-id-conversion.html"><span class="header-section-number">4</span> Gene ID conversion</a></li>
+<li><a class="" href="protein-id-conversion.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
+<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
-<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li><a class="" href="ora-go-analysis.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
+<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
+<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea.html"><span class="header-section-number">10</span> Plot GSEA</a></li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea.html"><span class="header-section-number">11</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others.html"><span class="header-section-number">12</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -70,19 +72,19 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="search-pubmed" class="section level1">
 <h1>
-<span class="header-section-number">2</span> Search PubMed records<a class="anchor" aria-label="anchor" href="#search-pubmed"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Search PubMed records<a class="anchor" aria-label="anchor" href="#search-pubmed"><i class="fas fa-link"></i></a>
 </h1>
-<p><code>getPubmed</code> function could use <a href="https://CRAN.R-project.org/package=europepmc">europepmc</a> to easily get PubMed records by searching paper abstract.</p>
-<p>A user needs to input the <code>term</code> argument; if there is any supplement information, the <code>keys</code> parameter is available.</p>
-<p>For example, if we want to check papers for genes “Tp53”, “Brca1,” and “Tet2” in mouse stem cells, we could write codes like this:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>,<span class="st">"Brca1"</span>,<span class="st">"Tet2"</span><span class="op">)</span>
-<span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'stem cell'</span>,<span class="st">'mouse'</span><span class="op">)</span>
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">keys</span><span class="op">)</span>
+<p><code>getPubmed</code> function utilizes <a href="https://CRAN.R-project.org/package=europepmc">europepmc</a> to easily get PubMed records by searching paper abstract.</p>
+<p>Users need to input the <code>term</code> argument; if there is any supplement information, the <code>keys</code> parameter is available.</p>
+<p>For example, if user wants to check papers for genes “Tp53”, “Brca1,” and “Tet2” research of mouse stem cells:</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
+<span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
+<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">keys</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Tp53"  "Brca1" "Tet2"</code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">Tp53</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">Tp53</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 28
 ##   id        source pmid     pmcid    doi   title authorString journalTitle issue
 ##   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;
@@ -102,21 +104,23 @@
 <p><strong>NOTICE</strong>:
 A minor update has been made in version 0.8.6 or above. Argument <code>keys</code> is replaced with <code>add_term</code> for easy understanding, and the <code>num</code> parameter is added to specify the number of returned records.</p>
 </blockquote>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>,<span class="st">"Brca1"</span>,<span class="st">"Tet2"</span><span class="op">)</span>
-<span class="va">add_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'stem cell'</span>,<span class="st">'mouse'</span><span class="op">)</span>
-<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>,<span class="va">add_term</span>,num<span class="op">=</span><span class="fl">30</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
+<span class="va">add_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
+<span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">add_term</span>, num <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
+<span class="co"># set "num" larger to get all records</span>
+<span class="va">all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">add_term</span>, num <span class="op">=</span> <span class="fl">666666</span><span class="op">)</span></code></pre></div>
 
 </div>
 
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="search-gene-metadata.html"><span class="header-section-number">1</span> Search gene metadata</a></div>
-<div class="next"><a href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></div>
+<div class="prev"><a href="search-gene-metadata.html"><span class="header-section-number">2</span> Search gene metadata</a></div>
+<div class="next"><a href="gene-id-conversion.html"><span class="header-section-number">4</span> Gene ID conversion</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#search-pubmed"><span class="header-section-number">2</span> Search PubMed records</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#search-pubmed"><span class="header-section-number">3</span> Search PubMed records</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -132,7 +136,7 @@ A minor update has been made in version 0.8.6 or above. Argument <code>keys</cod
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-07.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

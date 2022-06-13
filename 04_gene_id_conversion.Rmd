@@ -1,0 +1,292 @@
+# (PART\*) Part II: ID Conversion {-}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(genekitr)
+library(clusterProfiler)
+library(dplyr)
+```
+
+# Gene ID conversion {#gene-id-conversion-1}
+
+If you have handled genomics analysis, then you may spend much time converting gene identifiers to other types. 
+
+> For example, gene set enrichment analysis is very common in omics downstream process which is mainly based on MsigDb. According to its [release note](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/MSigDB_v7.0_Release_Notes), **since MSigDB 7.0, identifiers for genes are mapped to their HGNC approved Gene Symbol and NCBI Gene ID through annotations extracted from Ensembl's BioMart data service**, and will be updated at each MSigDB release with the latest available version of Ensembl. Currently, MSigDB 7.5 has updated human gene annotations to Ensembl v105. 
+
+Hence, id conversion could help keeping update with the latest annotations.
+
+The most common gene id types are **symbol** (e.g. TP53),**NCBI Entrez** (e.g. 7157) and **Ensembl** (e.g. ENSG00000141510). ID conversion among different types is very common and there are two main concerns: performance and flexibility.
+
+
+## Current tools {#convertion-current-tools}
+
+Currently various tools are available, however different methods has their drawbacks:
+
+- `r Biocpkg("biomaRt")`: The R package is frequently used to access up-to-date Ensembl database. It has to access online database each time and built-in parameters are too many.
+- `r Biocpkg("clusterProfiler")`: The R package depends on Bioconductor annotation packages to extract NCBI gene. NCBI database updates every day while Bioconductor package updates nearly every six months. Besides, it only supports 20 organisms and user should download and load annotation data before mapping.
+- [gProfiler](https://biit.cs.ut.ee/gprofiler/convert): The web server supports 40 types of IDs for more than 60 species. But it only supports one-to-one conversion, for example, if user want to convert gene symbol to both Entrez and Ensembl, it could not happen. Besides, the output result is not convenient to further process.
+- [DAVID](https://david.ncifcrf.gov/conversion.jsp): The web server interface is not user-friendly.
+- [UniProt](https://www.uniprot.org/uploadlists/): The large protein database may support almost all species but user needs to specify input id type and only converts to protein id.
+- [GIDcon](http://resource.ibab.ac.in/GIDCON/geneid/home.html): The web server only covers human, mouse and rat. User must seperates gene ids with comma if does batch query. Five symbols will take 8 secs to convert.
+
+
+Considered above problems, **genekitr combines both Ensembl and NCBI database** to provide more comprehensive result while optimizes running speed. 
+
+Also it supports **196 vertebrate species, 120 plant species and 2 bacteria species** (see also [session 1.1](#geninfo-supported-species)).
+
+## Basic usage {#transid-basic-usage}
+
+`transId` provides five arguments:
+
+- `id`: gene id (symbol, Entrez or Ensembl), protein id (see also [session 4.2](##protein-id-conversion)) or microarray id (see also [session 5.1](##probe-id-conversion))
+
+- `transTo`: the conversion target type. User could select **more than one** from "symbol", "entrez", "ensembl" or "uniprot". Besides, abbreviation is acceptable (e.g. "ens" is fine for "ensembl" but "en" will raise error because it could not separate from "entrez")
+
+- `org`: organism name, default is human
+
+- `unique`: `TRUE` or `FALSE` (default). If `TRUE`, only returns one matched id. 
+
+- `keepNA`: `TRUE` or `FALSE` (default). If some id has no matched one, keep it or not. 
+
+```{r transid_basic_usage, warning=FALSE}
+# human genes
+id <- c("AKT3", "SSX6P", "FAKE_ID", "BCC7")
+transId(id, transTo = "ens")
+
+# fruit fly genes
+transId(
+  id = c("10178780", "10178777", "10178786", "10178792"),
+  transTo = "sym", org = "fly"
+)
+```
+
+See the human example above, due to NA was removed, the result order is slightly different from input id. 
+
+If you want to get the same order, you can set `keepNA = TRUE`:
+```{r}
+transId(id, transTo = "ens", keepNA = TRUE)
+```
+
+If you want to get one-to-one mapping, you can set `unique = TRUE`:
+```{r}
+transId(id, transTo = "ens", keepNA = TRUE, unique = TRUE)
+```
+
+
+## Features {#transid-features}
+
+### f1: convert to several types {#transid-feature-1}
+
+`transTo` could accepts more than one type:
+
+```{r}
+transId(id, transTo = c("ens", "ent"))
+```
+
+### f2: distinguish from symbol and alias {#transid-feature-2}
+
+One big common problem for [current tools](#convertion-current-tools) is confusion of gene symbol and gene alias.
+
+Gene alias is an alternative name of official gene symbol, like "BCC7" is actually alias for "TP53". Sometimes gene alias is more widely used than official symbol. For example, "PDL1" is the alias for "CD274" in fact.
+
+Due to combination of NCBI and Ensembl metadata, `transId` could easily recognize gene symbol and alias by setting `transTo = 'symbol'`.
+
+```{r}
+transId(c("BCC7", "TP53", "PD1", "PDL1", "TET2"), "sym")
+```
+
+### f3: no worry for Ensembl version {#transid-feature-3}
+
+An Ensembl stable ID consists of five parts: ENS(species)(object type)(identifier). (version)
+For example, `ENSG00000141510.11` is TP53 while the version `.11` may confuse many tools.
+However using `transId`, user will not worry this issue any more.
+
+```{r}
+transId("ENSG00000141510.11", "symbol")
+```
+
+
+## Excercise 1: DEG result {#transid-ex1-data}
+The built-in example data is differentially expressed genes from: [GSE42872](https://www.ncbi.nlm.nih.gov//geo/query/acc.cgi?acc=GSE42872)
+
+```{r}
+data(deg, package = "genekitr")
+table(deg$change)
+id <- deg$entrezid
+length(id)
+```
+
+
+### `clusterProfiler::bitr`  {#transid-ex1-bitr}
+
+User needs to specify input id type and converted type from `columns(org.Hs.eg.db)`.
+
+```{r}
+# User must firstly install the org.Hs.eg.db
+# BiocManager::install('org.Hs.eg.db')
+library(org.Hs.eg.db)
+library(clusterProfiler)
+AnnotationDbi::columns(org.Hs.eg.db)
+bitr_res <- bitr(id, fromType = "ENTREZID", toType = "SYMBOL", OrgDb = "org.Hs.eg.db")
+bitr_sym <- unique(bitr_res$SYMBOL)
+length(bitr_sym)
+```
+
+### `biomaRt::getBM`  {#transid-ex1-biomart}
+
+The initializing process depends mainly on Ensembl's web access speed. Usually, it may take tens of seconds.
+
+```{r eval=FALSE}
+# initializing...
+ensembl <- biomaRt::useEnsembl(
+  biomart = "genes",
+  dataset = "hsapiens_gene_ensembl"
+)
+# conversion
+biomart_res <- biomaRt::getBM(
+  attributes = c("entrezgene_id", "external_gene_name"),
+  filters = c("entrezgene_id"),
+  mart = ensembl,
+  values = id
+)
+```
+
+
+```{r include=FALSE}
+load("data/biomart_res.rda")
+```
+
+```{r}
+biomart_sym <- unique(biomart_res$external_gene_name) %>%
+  stringi::stri_remove_empty()
+length(biomart_sym)
+```
+
+
+### `genekitr::transId` {#transid-ex1-transid}
+```{r}
+transid_res <- genekitr::transId(id, transTo = "sym", unique = T)
+transid_sym <- unique(transid_res$symbol)
+length(transid_sym)
+```
+
+
+### compare three results {#transid-ex1-compare}
+
+```{r}
+plotVenn(list(
+  bitr = bitr_sym,
+  transid = transid_sym,
+  biomart = biomart_sym
+))
+```
+
+#### **`bitr` vs `transId`**
+
+There are 117 genes only in `bitr` result:
+```{r}
+bitr_sym[!bitr_sym %in% transid_sym] %>% head(5)
+```
+
+Let's take a look for the first one LINC00337, which is converted from gene `r Entrez("148645")`
+```{r}
+bitr_res %>%
+  filter(SYMBOL %in% "LINC00337") %>%
+  pull(ENTREZID)
+```
+
+
+When we search it on NCBI and we could see the official symbol is "ICMT-DT" now while "LINC00337" is an alias. When we look back into `transId` result, it keeps update with NCBI web.
+
+```{r}
+transid_res %>%
+  filter(input_id %in% "148645") %>%
+  pull(symbol)
+```
+
+Besides, there are 118 unique symbols in `transId` result:
+```{r}
+transid_sym[!transid_sym %in% bitr_sym] %>% head(5)
+```
+
+The above gene `ICMT-DT` is listed.
+
+
+#### **`biomart` vs `transId`**
+
+There are 13 genes only in `biomart` result:
+
+```{r}
+biomart_sym[!biomart_sym %in% transid_sym] %>% head()
+biomart_res %>%
+  filter(external_gene_name %in% "KLRK1") %>%
+  pull(entrezgene_id)
+```
+
+When we search NCBI `r Entrez(100528032)` and we could see the official symbol is "KLRC4-KLRK1". When we look back into `transId` and `bitr` result, they are the same with NCBI web.
+
+```{r}
+bitr_res %>%
+  filter(ENTREZID == "100528032") %>%
+  pull(SYMBOL)
+transid_res %>%
+  filter(input_id %in% "100528032") %>%
+  pull(symbol)
+```
+
+## Excercise 2: mixture of gene symbol and alias {#transid-ex2-data}
+
+Compared with Entrez and Ensembl, gene symbol and alias is hard to distinguish. In real science life, the impact of misunderstanding both names is huge.
+
+[Takehara et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29731861/) had to retract the published paper by its authors just because they misused "TAZ" as the actual research target "WWTR1" in which "TAZ" is an alias of "WWTR1".
+
+The similar issues have published in paper: [The risks of using unapproved gene symbols](https://www.sciencedirect.com/science/article/pii/S0002929721003402). Of course, it is not only happens in human research. So we must raise alert of gene alias.
+
+
+### **`HGNChelper` vs `transId`**
+
+`r CRANpkg("HGNChelper")` is mainly built for human research, so here we will give simple human gene list as example.
+
+```{r}
+id <- c("TBET", "B220", "BCC7", "PD1", "PDL1")
+
+transid_res <- genekitr::transId(id, transTo = "sym", unique = FALSE)
+transid_res
+
+hgnc_res <- HGNChelper::checkGeneSymbols(id)
+hgnc_res
+```
+
+The first three genes are omitted in `HGNChelper`.
+
+### **`GeneSymbolThesarus` vs `transId`**
+
+`GeneSymbolThesarus` is a function of `r CRANpkg("Seurat")` which finds current gene symbols from  the HUGO Gene Nomenclature Committee (HGNC). It will search online so the speed will not fast.
+
+```{r message=TRUE}
+library(Seurat)
+start <- Sys.time()
+seurat_res <- Seurat::GeneSymbolThesarus(symbols = id)
+end <- Sys.time()
+(end - start)
+
+seurat_res
+```
+
+Seurat only returns one records.
+
+### **`alias2Symbol` vs `transId`**
+
+`alias2Symbol` is a function of `r Biocpkg("limma")` which depends on organism annotation package of Bioconductor. 
+
+```{r}
+limma_res <- limma::alias2Symbol(id, species = "Hs")
+# compare with transId result
+id
+limma_res
+transid_res$symbol
+```
+
+It seems that `alias2Symbol` result remains disorder from input id, which may cause misunderstanding for users, while `transId` keeps the original order (if user want to get one-to-one match, just pass `unique = TRUE` to function).
+

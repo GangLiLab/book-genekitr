@@ -1,0 +1,127 @@
+# Plot others {#plot-others-1}
+
+```{r include=FALSE}
+library(knitr)
+library(ggplot2)
+library(igraph)
+library(ggraph)
+library(patchwork)
+library(genekitr)
+```
+
+In this part, we will introduce `plotVenn` and `plotVolcano`.
+
+## Venn Plot
+
+Venn plot needs a list of gene sets, for example:
+
+```{r}
+set1 <- paste0(rep("gene", 100), sample(1:1000, 100))
+set2 <- paste0(rep("gene", 100), sample(1:1000, 100))
+set3 <- paste0(rep("gene", 100), sample(1:1000, 100))
+set4 <- paste0(rep("gene", 100), sample(1:1000, 100))
+set5 <- paste0(rep("gene", 100), sample(1:1000, 100))
+
+# three groups
+sm_gene_list <- list(gset1 = set1, gset2 = set2, gset3 = set3)
+
+# five groups
+la_gene_list <- list(
+  gset1 = set1, gset2 = set2, gset3 = set3,
+  gset4 = set4, gset5 = set5
+)
+```
+
+`plotVenn` supports two types: Venn (default) and UpSet. Besides, it also supports modification of text size, alpha degree, colors and other parameters from `plot_theme`.
+
+(ref:vennScap) Venn plot
+
+(ref:vennCap) **Venn plot** 
+
+```{r venn, fig.height=5, fig.width=6, fig.cap="(ref:vennCap)", fig.scap="(ref:vennScap)", dpi=300}
+plotVenn(sm_gene_list,
+  text_size = 1.5,
+  alpha_degree = 1,
+  remove_grid = TRUE,
+  color = ggsci::pal_lancet()(3) # three colors for three elements in sm_gene_list
+)
+```
+
+UpSet plot is better for over four groups of genes:
+
+(ref:upsetVennScap) UpSet plot
+
+(ref:upsetVennCap) **UpSet plot** 
+
+```{r upsetVenn, fig.height=7, fig.width=6, fig.cap="(ref:upsetVennCap)", fig.scap="(ref:upsetVennScap)", dpi=300}
+plotVenn(la_gene_list,
+  use_venn = FALSE,
+  text_size = 15,
+  alpha_degree = 0.2,
+  border_thick = 2,
+  remove_grid = TRUE
+)
+```
+
+## Volcano Plot
+
+After finishing differential expression analysis, we could get differentially expressed genes (DEG).
+Volcano plot is widely used for these up/down regulated genes visualization.
+
+The example data is micro array differential expression analysis:
+
+```{r}
+data(deg, package = "genekitr")
+head(deg,5)
+```
+
+
+`plotVolcano` mainly uses a DEG result which should include gene id, fold change and statistic value. 
+
+It also has other parameters:
+
+- `stat_metric`: choose from "pvalue" and "p.adjust"
+- `stat_cutoff`: cutoff for significant statistic value, default is 0.05
+- `logFC_cutoff`: cutoff for log2 (fold change), default is 1 which is actually two fold changes
+- `up_color`: color for up-regulated genes
+- `down_color`: color for down-regulated genes
+- `show_gene`: show some gene names, default is none. Suggest renaming the column with these genes as "gene".
+- `dot_size`: volcano dot size
+
+(ref:degVolcanoScap) Volcano plot
+
+(ref:degVolcanoCap) **Volcano plot** 
+
+```{r degVolcano, fig.height=5, fig.width=6, fig.cap="(ref:degVolcanoCap)", fig.scap="(ref:degVolcanoScap)", dpi=300}
+plotVolcano(deg, "p.adjust", remove_legend = T, dot_size = 3)
+```
+
+If we want to show some genes:
+
+(ref:degVolcano2Scap) Volcano plot with genes
+
+(ref:degVolcano2Cap) **Volcano plot with genes.** 
+
+```{r degVolcano2, fig.height=5, fig.width=6, fig.cap="(ref:degVolcano2Cap)", fig.scap="(ref:degVolcano2Scap)", dpi=300}
+plotVolcano(deg, "p.adjust",
+  remove_legend = T,
+  show_gene = c("CD36", "DUSP6", "IER3", "CDH7")
+)
+```
+
+> Trick for increasing text size:
+
+User could hide all x/y-axis labels and raise `main_text_size` to enlarge gene text, then export the figure into PPT to add labels.
+
+```{r}
+plotVolcano(deg, "p.adjust",
+  remove_legend = T,
+  remove_main_text = T,
+  show_gene = c("CD36", "DUSP6", "IER3", "CDH7"),
+   main_text_size = 15, dot_size = 2.5
+)
+```
+
+
+
+

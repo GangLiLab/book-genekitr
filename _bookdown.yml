@@ -1,3 +1,16 @@
 book_filename: "genekitr"
 chapter_name: "Chapter "
 delete_merged_file: true
+rmd_files: ["index.Rmd",
+  "01_quick_start.Rmd",
+  "02_search_gene_metadata.Rmd",
+  "03_search_pubmed.Rmd",
+  "04_gene_id_conversion.Rmd",
+  "05_protein_id_conversion.Rmd",
+  "06_probe_id_conversion.Rmd",
+  "07_GO_analysis.Rmd",
+  "08_KEGG_analysis.Rmd",
+  "09_GSEA_analysis.Rmd",
+  "10_plot_go_kegg.Rmd",
+  "11_plot_gsea.Rmd",
+  "12_plot_others.Rmd"]

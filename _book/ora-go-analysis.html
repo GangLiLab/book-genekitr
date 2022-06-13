@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 7 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="As the paper “Urgent need for consistent standards in functional enrichment analysis” mentioned, popular functional enrichment tools can be classified into two main categories: (1)...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 7 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="As the paper “Urgent need for consistent standards in functional enrichment analysis” mentioned, popular functional enrichment tools can be classified into two main categories: (1)...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 7 ORA GO analysis | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="As the paper “Urgent need for consistent standards in functional enrichment analysis” mentioned, popular functional enrichment tools can be classified into two main categories: (1)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -46,21 +46,23 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">📖 Introduction</a></li>
+<li><a class="" href="index.html">🧬 Welcome to genekitr!</a></li>
+<li><a class="" href="quick-start.html"><span class="header-section-number">1</span> Quick start</a></li>
 <li class="book-part">Part I: Search Information</li>
-<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">1</span> Search gene metadata</a></li>
-<li><a class="" href="search-pubmed.html"><span class="header-section-number">2</span> Search PubMed records</a></li>
+<li><a class="" href="search-gene-metadata.html"><span class="header-section-number">2</span> Search gene metadata</a></li>
+<li><a class="" href="search-pubmed.html"><span class="header-section-number">3</span> Search PubMed records</a></li>
 <li class="book-part">Part II: ID Conversion</li>
-<li><a class="" href="gene-id-conversion.html"><span class="header-section-number">3</span> Gene ID conversion</a></li>
-<li><a class="" href="protein-id-conversion.html"><span class="header-section-number">4</span> Protein ID conversion</a></li>
-<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></li>
+<li><a class="" href="gene-id-conversion.html"><span class="header-section-number">4</span> Gene ID conversion</a></li>
+<li><a class="" href="protein-id-conversion.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
+<li><a class="" href="probe-id-conversion.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="active" href="ora-go-analysis.html"><span class="header-section-number">6</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></li>
-<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">8</span> Functional Class Scoring</a></li>
+<li><a class="active" href="ora-go-analysis.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
+<li><a class="" href="ora-kegg-analysis.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
+<li><a class="" href="functional-class-scoring.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">9</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea.html"><span class="header-section-number">10</span> Plot GSEA</a></li>
+<li><a class="" href="plot-go-kegg.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea.html"><span class="header-section-number">11</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others.html"><span class="header-section-number">12</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -70,26 +72,27 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ora-go-analysis" class="section level1">
 <h1>
-<span class="header-section-number">6</span> ORA GO analysis<a class="anchor" aria-label="anchor" href="#ora-go-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> ORA GO analysis<a class="anchor" aria-label="anchor" href="#ora-go-analysis"><i class="fas fa-link"></i></a>
 </h1>
 <p>As the paper <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009935">“Urgent need for consistent standards in functional enrichment analysis”</a> mentioned, popular functional enrichment tools can be classified into two main categories: (1) over-representation analysis (ORA) and (2) functional class scoring (FCS) .</p>
 <p>According to paper <a href="https://academic.oup.com/bioinformatics/article/31/1/102/2365686?login=true">“Over-representation of correlation analysis (ORCA): a method for identifying associations between variable sets”</a>:</p>
 <blockquote>
 <p>Over-representation analysis (ORA) is a simple method for objectively deciding whether a set of variables of known or suspected biological relevance, such as a gene set or pathway, is more prevalent in a set of variables of interest than we expect by chance.</p>
 </blockquote>
-<p>ORA usually has these precedures:</p>
+<p>ORA usually has these procedures:</p>
 <ol style="list-style-type: decimal">
-<li>Identify biomolecules, such as mRNA, proteins or microarray probes, considered “differentially expressed” in two or more conditions</li>
-<li>Determine the number of differentially expressed biomolecules in each pathway</li>
-<li>For each pathway, using a hypergeometric distribution to calculate a probability value ( P -value) of obtaining the number of differentially expressed biomolecules against the background list of all biomolecules</li>
+<li>Identify features, such as mRNA, proteins or microarray probes, considered “differentially expressed” in two or more conditions</li>
+<li>Determine the number of differentially expressed features in each pathway</li>
+<li>For each pathway, using a hypergeometric distribution to calculate a probability value ( P -value) of obtaining the number of differentially expressed features against the background list of all features</li>
 </ol>
-<p>In this chapter, we will introduce two popular gene annotation databases: GO and KEGG.</p>
 <div id="go-introduction" class="section level2">
 <h2>
-<span class="header-section-number">6.1</span> GO intruduction<a class="anchor" aria-label="anchor" href="#go-introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> GO intruduction<a class="anchor" aria-label="anchor" href="#go-introduction"><i class="fas fa-link"></i></a>
 </h2>
-<p>According to Wikipedia, “Ontologies consist of detectable or directly observable representations of things and the relationships between those things.”
-GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis is to find the associations between gene products and GO terms， which has three domains:</p>
+<blockquote>
+<p>According to Wikipedia, “Ontologies consist of detectable or directly observable representations of things and the relationships between those things.”</p>
+</blockquote>
+<p>GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis is to find the associations between gene products and GO terms， which has three domains:</p>
 <ul>
 <li>Biological Processes (BP)
 <ul>
@@ -114,10 +117,10 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 </div>
 <div id="go-basic-usage" class="section level2">
 <h2>
-<span class="header-section-number">6.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#go-basic-usage"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#go-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
-<p><code>genGO</code> is built on <code><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">clusterProfiler::enrichGO</a></code></p>
+<p><code>genGO</code> is built on <code><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">clusterProfiler::enrichGO</a></code> and optimizes analysis process to make better understanding.</p>
 </blockquote>
 <p>The simplest arguments are:</p>
 <ul>
@@ -130,14 +133,15 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 <li><code>pvalueCutoff</code></li>
 <li><code>qvalueCutoff</code></li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span>
 <span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">id</span>,
-             org <span class="op">=</span> <span class="st">"human"</span>, 
-             ont <span class="op">=</span> <span class="st">"bp"</span>, 
-             pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
-             qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
+  org <span class="op">=</span> <span class="st">"human"</span>,
+  ont <span class="op">=</span> <span class="st">"bp"</span>,
+  pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
+  qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>
+<span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ego</span><span class="op">)</span></code></pre></div>
 <pre><code>##              Hs_BP_ID
 ## GO:0050673 GO:0050673
@@ -181,32 +185,62 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 ## GO:0010165     5  23.965955 0.15625000
 ## GO:1901992     7  11.422072 0.07446809
 ## GO:1901989     7   9.760680 0.06363636</code></pre>
-<p>If input id is not a symbol, <code>genGO</code> will automatically convert to a symbol for easy understanding.</p>
-<p>Besides, <code>genGO</code> set four measurement aspects: “Count”, “GeneRatio”, “FoldEnrichment” and “RichFactor”.</p>
+<div id="go-additional-arguments" class="section level3">
+<h3>
+<span class="header-section-number">7.2.1</span> Additional arguments<a class="anchor" aria-label="anchor" href="#go-additional-arguments"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<code>pAdjustMethod</code>: choose from “holm”, “hochberg”, “hommel”, “bonferroni”, “BH”, “BY”, “fdr”, “none”</li>
+<li>
+<code>minGSSize</code>: Minimal size of each gene set for analysis. Default is 10. Pathway with less than ten genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0062196">GO:0062196</a> is a child term with 8-gene in the bottom of the directed acyclic graph).</li>
+<li>
+<code>maxGSSize</code>: Maximal size. Default is 500. The pathway will more than 500 genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0007049">GO:0007049</a> has 1796 genes as parent nodes at the top of the directed acyclic graph).</li>
+<li>
+<code>universe</code>: If uses have their background genes, set them as <code>universe</code>. Otherwise, the program will take all genes in the <code>orgDb</code> annotation package (e.g. <code>org.Hs.eg.db</code>).</li>
+</ul>
+</div>
+<div id="go-new-features" class="section level3">
+<h3>
+<span class="header-section-number">7.2.2</span> New features<a class="anchor" aria-label="anchor" href="#go-new-features"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>If input id is not a symbol, <code>genGO</code> will convert to a symbol for easy understanding.</li>
+<li>No need to sepcify input id type, <code>genGO</code> will allocate automatically.</li>
+<li>
+<code>genGO</code> sets four measurement aspects: “Count”, “GeneRatio”, “FoldEnrichment” and “RichFactor”.
 <ul>
 <li>Bg Ratio: Total number of specific pathway gene/ Universal gene numbers (e.g., all human protein-coding genes)</li>
 <li>Gene Ratio: Genes of interest in specific pathway/gene of interest (e.g., differentially expressed genes)</li>
 <li>Fold Enrichment: GeneRatio / BgRatio</li>
 <li>Rich Factor: Genes of interest in specific pathway/ Total number of specific pathway gene</li>
 </ul>
+</li>
+<li>Return as data frame format which is easy to select and export interested pathways</li>
+</ul>
+</div>
 </div>
 <div id="go-group-enrichment" class="section level2">
 <h2>
-<span class="header-section-number">6.3</span> Group enrichment<a class="anchor" aria-label="anchor" href="#go-group-enrichment"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Group enrichment analysis<a class="anchor" aria-label="anchor" href="#go-group-enrichment"><i class="fas fa-link"></i></a>
 </h2>
-<p>A user needs to specify gene groups and set them as the <code>group_list</code> argument:</p>
-<p>Group list with one group:</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">id2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>,<span class="fl">50</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span>
-<span class="va">one_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group1  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'up'</span>,<span class="fl">50</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'down'</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<p>If there are multi-group comparison (e.g. up and down-regulated genes), user needs to specify gene groups and set them as the <code>group_list</code> argument:</p>
+<div id="comparison-with-one-group" class="section level3">
+<h3>
+<span class="header-section-number">7.3.1</span> Comparison with one group:<a class="anchor" aria-label="anchor" href="#comparison-with-one-group"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">id2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>
+<span class="va">one_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">gego1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">id2</span>, 
-               group_list <span class="op">=</span> <span class="va">one_group</span>,
-               org <span class="op">=</span> <span class="st">"human"</span>, 
-               ont <span class="op">=</span> <span class="st">"bp"</span>, 
-               pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
-               qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego1</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<span class="va">gego1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">id2</span>,
+  group_list <span class="op">=</span> <span class="va">one_group</span>,
+  org <span class="op">=</span> <span class="st">"human"</span>,
+  ont <span class="op">=</span> <span class="st">"bp"</span>,
+  pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
+  qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego1</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Cluster group1   Hs_BP_ID                       Description  GeneRatio
 ## 1    down   down GO:0000217   DNA secondary structure binding 0.06250000
 ## 2    down   down GO:0008094     DNA-dependent ATPase activity 0.08333333
@@ -225,78 +259,85 @@ GO is short for <a href="http://geneontology.org">Gene Ontology</a>. GO analysis
 ## 3 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673 0.02392344
 ## 4       BLM/RAD51/CDC45/MCM10     4   13.41520 0.03508772
 ## 5                   BLM/XRCC2     2   44.98039 0.11764706</code></pre>
-<p>Group list with over one group:</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">two_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group1  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'up'</span>,<span class="fl">50</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'down'</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span>,
-                  group2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="fl">40</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">'B'</span>,<span class="fl">60</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gego2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">id2</span>, 
-               group_list <span class="op">=</span> <span class="va">two_group</span>,
-               org <span class="op">=</span> <span class="st">"human"</span>, 
-               ont <span class="op">=</span> <span class="st">"bp"</span>, 
-               pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
-               qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego2</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Cluster group1 group2   Hs_BP_ID                       Description  GeneRatio
-## 1  down.B   down      B GO:0000217   DNA secondary structure binding 0.06250000
-## 2  down.B   down      B GO:0008094     DNA-dependent ATPase activity 0.08333333
-## 3  down.B   down      B GO:0140097 catalytic activity, acting on DNA 0.10416667
-## 4  down.B   down      B GO:0003697       single-stranded DNA binding 0.08333333
-## 5  down.B   down      B GO:0000400     four-way junction DNA binding 0.04166667
-##     BgRatio       pvalue   p.adjust      qvalue                   geneID
-## 1  34/18352 9.491897e-05 0.01079486 0.007262958           641/7516/63967
-## 2 108/18352 1.808164e-04 0.01079486 0.007262958      54821/641/5888/7516
-## 3 209/18352 2.099890e-04 0.01079486 0.007262958 54821/5427/641/5888/9156
-## 4 114/18352 2.225745e-04 0.01079486 0.007262958      641/5888/8318/55388
-## 5  17/18352 8.884883e-04 0.03447335 0.023194220                 641/7516
-##                 geneID_symbol Count FoldEnrich RichFactor
-## 1             BLM/XRCC2/CLSPN     3   33.73529 0.08823529
-## 2      ERCC6L/BLM/RAD51/XRCC2     4   14.16049 0.03703704
-## 3 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673 0.02392344
-## 4       BLM/RAD51/CDC45/MCM10     4   13.41520 0.03508772
-## 5                   BLM/XRCC2     2   44.98039 0.11764706</code></pre>
 </div>
-<div id="go-additional-arguments" class="section level2">
-<h2>
-<span class="header-section-number">6.4</span> Additional arguments<a class="anchor" aria-label="anchor" href="#go-additional-arguments"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li>
-<code>pAdjustMethod</code>: choose from “holm”, “hochberg”, “hommel”, “bonferroni”, “BH”, “BY”, “fdr”, “none”</li>
-<li>
-<code>minGSSize</code>: Minimal size of each gene set for analysis. Default is 10. Pathway with less than ten genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0062196">GO:0062196</a> is a child term with 8-gene in the bottom of the directed acyclic graph).</li>
-<li>
-<code>maxGSSize</code>: Maximal size. Default is 500. The pathway will more than 500 genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0007049">GO:0007049</a> has 1796 genes as parent nodes at the top of the directed acyclic graph).</li>
-<li>
-<code>universe</code>: If uses have their background genes, set them as <code>universe</code>. Otherwise, the program will take all genes in the <code>orgDb</code> annotation package (e.g. <code>org.Hs.eg.db</code>).</li>
-</ul>
+<div id="comparison-with-more-than-one-group" class="section level3">
+<h3>
+<span class="header-section-number">7.3.2</span> Comparison with more than one group<a class="anchor" aria-label="anchor" href="#comparison-with-more-than-one-group"><i class="fas fa-link"></i></a>
+</h3>
+<p>If there are two group conditions (e.g. up/down regulated; treatment on serial time points), user needs to set two-group list.</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">two_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  exp_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>,
+  time_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"time1"</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"time2"</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">gego2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">id2</span>,
+  group_list <span class="op">=</span> <span class="va">two_groups</span>,
+  org <span class="op">=</span> <span class="st">"human"</span>,
+  ont <span class="op">=</span> <span class="st">"bp"</span>,
+  pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
+  qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego2</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>##      Cluster exp_group time_group   Hs_BP_ID                       Description
+## 1 down.time2      down      time2 GO:0000217   DNA secondary structure binding
+## 2 down.time2      down      time2 GO:0008094     DNA-dependent ATPase activity
+## 3 down.time2      down      time2 GO:0140097 catalytic activity, acting on DNA
+## 4 down.time2      down      time2 GO:0003697       single-stranded DNA binding
+## 5 down.time2      down      time2 GO:0000400     four-way junction DNA binding
+##    GeneRatio   BgRatio       pvalue   p.adjust      qvalue
+## 1 0.06250000  34/18352 9.491897e-05 0.01079486 0.007262958
+## 2 0.08333333 108/18352 1.808164e-04 0.01079486 0.007262958
+## 3 0.10416667 209/18352 2.099890e-04 0.01079486 0.007262958
+## 4 0.08333333 114/18352 2.225745e-04 0.01079486 0.007262958
+## 5 0.04166667  17/18352 8.884883e-04 0.03447335 0.023194220
+##                     geneID               geneID_symbol Count FoldEnrich
+## 1           641/7516/63967             BLM/XRCC2/CLSPN     3   33.73529
+## 2      54821/641/5888/7516      ERCC6L/BLM/RAD51/XRCC2     4   14.16049
+## 3 54821/5427/641/5888/9156 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673
+## 4      641/5888/8318/55388       BLM/RAD51/CDC45/MCM10     4   13.41520
+## 5                 641/7516                   BLM/XRCC2     2   44.98039
+##   RichFactor
+## 1 0.08823529
+## 2 0.03703704
+## 3 0.02392344
+## 4 0.03508772
+## 5 0.11764706</code></pre>
+</div>
 </div>
 <div id="go-advanced-usage" class="section level2">
 <h2>
-<span class="header-section-number">6.5</span> Advanced usage<a class="anchor" aria-label="anchor" href="#go-advanced-usage"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Advanced usage<a class="anchor" aria-label="anchor" href="#go-advanced-usage"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the below example, we will input some symbols with alias and set universal genes as Entrez ID.
-Even if they are not the same type, we still could utilize <code>transId</code> to automatically convert them to the same type.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id2</span>,transTo <span class="op">=</span> <span class="st">'symbol'</span>,unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
-<span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">symbol_id</span>,<span class="st">'BCC7'</span>,<span class="st">'PD1'</span>,<span class="st">"PDL1"</span><span class="op">)</span>
+<div id="different-types-of-input-and-backgroud-genes" class="section level3">
+<h3>
+<span class="header-section-number">7.4.1</span> Different types of input and backgroud genes<a class="anchor" aria-label="anchor" href="#different-types-of-input-and-backgroud-genes"><i class="fas fa-link"></i></a>
+</h3>
+<blockquote>
+<p><code>genGO</code> could utilize <code>transId</code> to make the same gene type</p>
+</blockquote>
+<p>In the below example, we will set input id as symbols and background id as Entrez.</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id2</span>, transTo <span class="op">=</span> <span class="st">"symbol"</span>, unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
+<span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">symbol_id</span>, <span class="st">"BCC7"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">symbol_id</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "CD36"       "DCT"        "PRUNE2"     "ST6GALNAC2" "TCN1"      
 ## [6] "CD24"</code></pre>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "948"       "1638"      "158471"    "10610"     "6947"      "100133941"</code></pre>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">symbol_id</span>,
-             org <span class="op">=</span> <span class="st">"human"</span>, 
-             ont <span class="op">=</span> <span class="st">"bp"</span>, 
-             pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
-             qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
-             pAdjustMethod <span class="op">=</span> <span class="st">"fdr"</span>,
-             minGSSize <span class="op">=</span> <span class="fl">5</span>,
-             maxGSSize <span class="op">=</span> <span class="fl">2000</span>,
-             universe <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">)</span>
+  org <span class="op">=</span> <span class="st">"human"</span>,
+  ont <span class="op">=</span> <span class="st">"bp"</span>,
+  pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
+  qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
+  pAdjustMethod <span class="op">=</span> <span class="st">"fdr"</span>,
+  minGSSize <span class="op">=</span> <span class="fl">5</span>,
+  maxGSSize <span class="op">=</span> <span class="fl">2000</span>,
+  universe <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">diy_ego</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">diy_ego</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##              Hs_BP_ID                              Description  GeneRatio
 ## GO:0010165 GO:0010165                        response to X-ray 0.05882353
 ## GO:0006260 GO:0006260                          DNA replication 0.11764706
@@ -304,11 +345,11 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
 ## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 0.18627451
 ## GO:0033554 GO:0033554              cellular response to stress 0.30392157
 ##               BgRatio       pvalue     p.adjust       qvalue Count
-## GO:0010165   29/16019 2.423427e-08 0.0000786402 5.619799e-05     6
-## GO:0006260  261/16019 1.001346e-07 0.0001624684 1.161035e-04    12
-## GO:0050673  413/16019 3.474181e-07 0.0003757906 2.685481e-04    14
-## GO:0006974  801/16019 6.106590e-07 0.0004886526 3.492017e-04    19
-## GO:0033554 1946/16019 7.529315e-07 0.0004886526 3.492017e-04    31
+## GO:0010165   29/16024 2.418982e-08 7.849597e-05 5.609492e-05     6
+## GO:0006260  261/16024 9.980090e-08 1.619270e-04 1.157165e-04    12
+## GO:0050673  413/16024 3.461281e-07 3.743953e-04 2.675510e-04    14
+## GO:0006974  801/16024 6.078077e-07 4.853426e-04 3.468363e-04    19
+## GO:0033554 1946/16024 7.478314e-07 4.853426e-04 3.468363e-04    31
 ##                                                                                                                                                                                                 geneID
 ## GO:0010165                                                                                                                                                            SFRP1/BLM/RAD51/CCND1/XRCC2/BCC7
 ## GO:0006260                                                                                                                        POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/FAM111B/BCC7
@@ -322,36 +363,36 @@ Even if they are not the same type, we still could utilize <code>transId</code> 
 ## GO:0006974                                                                              NUPR1/SNAI2/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/TP53
 ## GO:0033554 CD36/NUPR1/CYP1B1/SESN3/SNAI2/SLC38A3/FOLR1/CRYAB/TP53INP1/SLC1A1/MIR222/SFRP1/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/TLR4/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/ETV5/TP53
 ##            FoldEnrich RichFactor
-## GO:0010165  32.492901 0.20689655
-## GO:0006260   7.220645 0.04597701
-## GO:0050673   5.323696 0.03389831
-## GO:0006974   3.725258 0.02372035
-## GO:0033554   2.501809 0.01593011</code></pre>
-<p>In this result, the input gene alias is also recognized and converted to the official symbol (e.g. <code>BCC7</code>):</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+## GO:0010165  32.503043 0.20689655
+## GO:0006260   7.222898 0.04597701
+## GO:0050673   5.325357 0.03389831
+## GO:0006974   3.726420 0.02372035
+## GO:0033554   2.502590 0.01593011</code></pre>
+<p>In this result, the input <strong>gene alias is also recognized</strong> and converted to the official symbol (e.g. <code>BCC7</code>):</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span><span class="op">$</span><span class="va">geneID</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] "SFRP1/BLM/RAD51/CCND1/XRCC2/BCC7"</code></pre>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span><span class="op">$</span><span class="va">geneID_symbol</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] "SFRP1/BLM/RAD51/CCND1/XRCC2/TP53"</code></pre>
 </div>
-<div id="go-import" class="section level2">
-<h2>
-<span class="header-section-number">6.6</span> Import external data<a class="anchor" aria-label="anchor" href="#go-import"><i class="fas fa-link"></i></a>
-</h2>
-<p>For now, <code>genekitr</code> support <a href="http://pantherdb.org/webservices/go/overrep.jsp">panther</a> data from <a href="http://geneontology.org/">GeneOntology</a>.</p>
+<div id="go-import" class="section level3">
+<h3>
+<span class="header-section-number">7.4.2</span> Import external data<a class="anchor" aria-label="anchor" href="#go-import"><i class="fas fa-link"></i></a>
+</h3>
+<p>For now, <code>genekitr</code> support importing <a href="http://pantherdb.org/webservices/go/overrep.jsp">panther</a> result from <a href="http://geneontology.org/">GeneOntology</a> and formatting as <code>genGO</code> result.</p>
 
 
 <div class="figure">
 <span style="display:block;" id="fig:goPanther"></span>
-<img src="figures/panther_exp.png" alt="Panther result." width="100%"><p class="caption">
-Figure 6.1: <strong>Panther result.</strong>
+<img src="figures/panther_exp.png" alt="Import panther result." width="100%"><p class="caption">
+Figure 7.1: <strong>Import panther result.</strong>
 </p>
 </div>
-<p><code>importPanther</code> will tidy the panther data and calculate both fold enrichment and rich factor.</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">panther_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/importPanther.html">importPanther</a></span><span class="op">(</span><span class="st">'analysis.txt'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">panther_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<p>For example, we save panther result as “analysis.txt” and pass to <code>importPanther</code>. It will tidy the data and calculate both fold enrichment and rich factor.</p>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">panther_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/importPanther.html">importPanther</a></span><span class="op">(</span><span class="st">"data/analysis.txt"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">panther_res</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##           ID
 ## 1 GO:1901295
 ## 2 GO:0036520
@@ -377,53 +418,117 @@ Figure 6.1: <strong>Panther result.</strong>
 ## 4                     +   490.2143 2.42e-05 9.26e-04     2 9.713925e-05
 ## 5                     +   490.2143 2.42e-05 9.23e-04     2 9.713925e-05</code></pre>
 </div>
-<div id="comparison-with-other-tools" class="section level2">
-<h2>
-<span class="header-section-number">6.7</span> Comparison with other tools<a class="anchor" aria-label="anchor" href="#comparison-with-other-tools"><i class="fas fa-link"></i></a>
-</h2>
-<div id="genekitrgengo-vs-clusterprofilerenrichgo" class="section level3">
+<div id="go-simplify" class="section level3">
 <h3>
-<span class="header-section-number">6.7.1</span> <code>genekitr::genGO</code> vs <code>clusterProfiler::enrichGO</code><a class="anchor" aria-label="anchor" href="#genekitrgengo-vs-clusterprofilerenrichgo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.3</span> Simplify GO result<a class="anchor" aria-label="anchor" href="#go-simplify"><i class="fas fa-link"></i></a>
 </h3>
-<p><code>genGO</code> could utilize <code>transId</code> of <a href="https://CRAN.R-project.org/package=genekitr">genekitr</a> to automatically convert gene alias to symbol for better explanation of gene product.</p>
-<p>For example, if we have several genes:</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">check_gene</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>,<span class="st">"TP53"</span>,<span class="st">"PDL1"</span>,<span class="st">"CD274"</span>,<span class="st">"PD1"</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">=</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">check_gene</span>, ont<span class="op">=</span><span class="st">'bp'</span>,org <span class="op">=</span> <span class="st">'hs'</span>,pvalueCutoff <span class="op">=</span> <span class="fl">1</span>,qvalueCutoff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">x2</span>  <span class="op">=</span><span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span><span class="va">check_gene</span>,
-                               OrgDb <span class="op">=</span> <span class="st">'org.Hs.eg.db'</span>,
-                               keyType <span class="op">=</span> <span class="st">'SYMBOL'</span>,
-                               pvalueCutoff <span class="op">=</span> <span class="fl">1</span>,
-                               qvalueCutoff <span class="op">=</span> <span class="fl">1</span>,
-                               ont <span class="op">=</span> <span class="st">'BP'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
+<p><code>simGO</code> utilizes <code><a href="https://rdrr.io/pkg/GOSemSim/man/goSim.html">GOSemSim::goSim()</a></code> to calculate semantic similarity between two GO terms, then passes to <code><a href="https://rdrr.io/pkg/rrvgo/man/reduceSimMatrix.html">rrvgo::reduceSimMatrix()</a></code> to reduce redundant terms.</p>
+<p>Methods of calculating the similarity between nodes: “Resnik”, “Lin”, “Rel”, “Jiang” , “Wang” and “JC” (Jaccard similarity coefficient).</p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sim_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/simGO.html">simGO</a></span><span class="op">(</span><span class="va">diy_ego</span>,sim_method <span class="op">=</span> <span class="st">'Wang'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">diy_ego</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sim_go</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 105  12</code></pre>
+<pre><code>## [1] 25 12</code></pre>
+<p>Let’s look which terms are considered as redundant:</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">diy_ego</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">[</span><span class="op">!</span><span class="va">diy_ego</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">sim_go</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "GO:0006974" "GO:0008283" "GO:0051093" "GO:0010212" "GO:0071479"
+## [6] "GO:0006979"</code></pre>
 
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x2</span><span class="op">$</span><span class="va">ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">x</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">)</span></code></pre></div>
+
+<div class="figure">
+<span style="display:block;" id="fig:goSim"></span>
+<img src="figures/gosim_exp.png" alt="Term GO:0006974" width="100%"><p class="caption">
+Figure 7.2: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong>
+</p>
+</div>
+<p>The first record <a href="https://www.ebi.ac.uk/QuickGO/term/GO:0006974">GO:0006974</a> is actually child node of <code>GO:0033554</code>, which is remained in <code>sim_go</code>.</p>
+</div>
+</div>
+<div id="go-tools-comparsion" class="section level2">
+<h2>
+<span class="header-section-number">7.5</span> Comparison with other tools<a class="anchor" aria-label="anchor" href="#go-tools-comparsion"><i class="fas fa-link"></i></a>
+</h2>
+<div id="gengo-vs-enrichgo" class="section level3">
+<h3>
+<span class="header-section-number">7.5.1</span> <code>genGO</code> vs <code>enrichGO</code><a class="anchor" aria-label="anchor" href="#gengo-vs-enrichgo"><i class="fas fa-link"></i></a>
+</h3>
+<p>If input id contains gene alias, <code>genGO</code> will invoke <code>transId</code> to automatically convert gene alias to symbol for better explanation.</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">check_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>, <span class="st">"PDL1"</span>, <span class="st">"PD1"</span>, <span class="st">"TET2"</span>, <span class="st">"BRCA1"</span><span class="op">)</span>
+
+<span class="va">genekitr_res</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">check_gene</span>, ont <span class="op">=</span> <span class="st">"bp"</span>, org <span class="op">=</span> <span class="st">"hs"</span>, 
+                                pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>, qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
+
+<span class="va">clustp_res</span> <span class="op">&lt;-</span> <span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span><span class="va">check_gene</span>,
+  OrgDb <span class="op">=</span> <span class="st">"org.Hs.eg.db"</span>,
+  keyType <span class="op">=</span> <span class="st">"SYMBOL"</span>,
+  pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
+  qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
+  ont <span class="op">=</span> <span class="st">"BP"</span>
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">genekitr_res</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 35 12</code></pre>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">clustp_res</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 11  9</code></pre>
+<p>If you check these two results, you may find that <code>clustp_res</code> only contains two genes: <code>TET2</code> and <code>BRCA1</code>, while <code>genekitr_res</code> includes all five genes.</p>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">genekitr_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>##              Hs_BP_ID                                         Description
+## GO:0070234 GO:0070234     positive regulation of T cell apoptotic process
+## GO:0070230 GO:0070230 positive regulation of lymphocyte apoptotic process
+## GO:2000108 GO:2000108  positive regulation of leukocyte apoptotic process
+## GO:0070232 GO:0070232              regulation of T cell apoptotic process
+## GO:0070231 GO:0070231                            T cell apoptotic process
+##            GeneRatio  BgRatio       pvalue     p.adjust       qvalue Count
+## GO:0070234       0.6 14/18866 3.250141e-09 2.141843e-06 5.234438e-07     3
+## GO:0070230       0.6 18/18866 7.283713e-09 2.399983e-06 5.865305e-07     3
+## GO:2000108       0.6 29/18866 3.258750e-08 7.158387e-06 1.749434e-06     3
+## GO:0070232       0.6 34/18866 5.334592e-08 8.788740e-06 2.147875e-06     3
+## GO:0070231       0.6 49/18866 1.640494e-07 2.162171e-05 5.284119e-06     3
+##                   geneID    geneID_symbol FoldEnrich RichFactor
+## GO:0070234 BCC7/PDL1/PD1 TP53/CD274/PDCD1   808.5429 0.21428571
+## GO:0070230 BCC7/PDL1/PD1 TP53/CD274/PDCD1   628.8667 0.16666667
+## GO:2000108 BCC7/PDL1/PD1 TP53/CD274/PDCD1   390.3310 0.10344828
+## GO:0070232 BCC7/PDL1/PD1 TP53/CD274/PDCD1   332.9294 0.08823529
+## GO:0070231 BCC7/PDL1/PD1 TP53/CD274/PDCD1   231.0122 0.06122449</code></pre>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">clustp_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>##                    ID                      Description GeneRatio   BgRatio
+## GO:0051568 GO:0051568        histone H3-K4 methylation       2/2  57/18866
+## GO:0044728 GO:0044728 DNA methylation or demethylation       2/2  98/18866
+## GO:0034968 GO:0034968       histone lysine methylation       2/2 116/18866
+## GO:0006304 GO:0006304                 DNA modification       2/2 120/18866
+## GO:0018022 GO:0018022      peptidyl-lysine methylation       2/2 132/18866
+##                  pvalue    p.adjust       qvalue     geneID Count
+## GO:0051568 8.968633e-06 0.001892382 9.440666e-06 TET2/BRCA1     2
+## GO:0044728 2.670922e-05 0.002006407 1.000951e-05 TET2/BRCA1     2
+## GO:0034968 3.748169e-05 0.002006407 1.000951e-05 TET2/BRCA1     2
+## GO:0006304 4.012283e-05 0.002006407 1.000951e-05 TET2/BRCA1     2
+## GO:0018022 4.858571e-05 0.002006407 1.000951e-05 TET2/BRCA1     2</code></pre>
+<p>If you look into deeper, you may find six terms are unique in <code>clustp_res</code>, such as <code>GO:0016571</code>:</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op">[</span><span class="op">!</span><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">genekitr_res</span><span class="op">$</span><span class="va">Hs_BP_ID</span> <span class="op">]</span></code></pre></div>
+<pre><code>## [1] "GO:0016571" "GO:0006479" "GO:0008213" "GO:0043414" "GO:0032259"
+## [6] "GO:0018205"</code></pre>
+<p><strong>Question1: Why some terms are omited in <code>genGO</code> result?</strong></p>
+<p>To get adjusted p value, the critical parameter is the number of testing. For simple explaination, <code>adj.p = f * p (f&gt;1)</code> and f is related with testing methods and the number of tests.</p>
+<p>In the above example, <code>genGO</code> recognizes five genes so we need to do five testings while <code>enrichGO</code> includes two genes so the testing number will be less. This directly causes <code>adj.Pvalue</code> of those “disappeared” terms becomes higher and filtered by cutoff <code>0.01</code>.</p>
+<p>If we set cutoff higher(e.g. 0.05), then we will still get those terms:</p>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genekitr_res2</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">check_gene</span>, ont <span class="op">=</span> <span class="st">"bp"</span>, org <span class="op">=</span> <span class="st">"hs"</span>, 
+                                pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>, qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">genekitr_res2</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## TRUE 
-##  500</code></pre>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">x2</span><span class="op">$</span><span class="va">ID</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## FALSE  TRUE 
-##     2   500</code></pre>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">[</span><span class="op">!</span><span class="va">x</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">x2</span><span class="op">$</span><span class="va">ID</span><span class="op">]</span></code></pre></div>
-<pre><code>## [1] "GO:0050777" "GO:0006959"</code></pre>
-<p>Seems that gene pathways belong to “PD1”. If we only look into this gene, we will find there is no result from <code>enrichGO</code>:</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x11</span> <span class="op">=</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span> <span class="st">"PD1"</span>,ont<span class="op">=</span><span class="st">'bp'</span>,org <span class="op">=</span> <span class="st">'hs'</span>,pvalueCutoff <span class="op">=</span> <span class="fl">1</span>,qvalueCutoff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">x21</span>  <span class="op">=</span><span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span><span class="st">"PD1"</span>,
-                                OrgDb <span class="op">=</span> <span class="st">'org.Hs.eg.db'</span>,
-                                keyType <span class="op">=</span> <span class="st">'SYMBOL'</span>,
-                                pvalueCutoff <span class="op">=</span> <span class="fl">1</span>,
-                                qvalueCutoff <span class="op">=</span> <span class="fl">1</span>,
-                                ont <span class="op">=</span> <span class="st">'BP'</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x11</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">x21</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 28 12</code></pre>
-<pre><code>## [1] 0 0</code></pre>
-<p>Gene “PD1” do not have any pathways in clusterProfiler result, it is not right obviously for this essential gene. The reason is that “PD1” is actually called “PDCD1” while <code>enrichGO</code> only accepts official symbols if user specify <code>keyType = 'SYMBOL'</code>. This function is based on organism annotation package (e.g. <code>org.Hs.eg.db</code>) and it has different types of data:</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+##   11</code></pre>
+<p><strong>Question2: why <code>enrichGO</code> only recognize two genes?</strong></p>
+<p>Such gene “BCC7”, “PD1” or “PDL1” are essential so they must have related pathways.</p>
+<p>The core reason is they are actually gene aliases but <code>enrichGO</code> set argument <code>keyType = "SYMBOL"</code> which cause <code>enrichGO</code> only accepts official symbols. This function is based on organism annotation package (e.g. <code>org.Hs.eg.db</code>) and it accepts different types of data:</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
 <span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
@@ -432,35 +537,57 @@ Figure 6.1: <strong>Panther result.</strong>
 ## [16] "ONTOLOGY"     "ONTOLOGYALL"  "PATH"         "PFAM"         "PMID"        
 ## [21] "PROSITE"      "REFSEQ"       "SYMBOL"       "UCSCKG"       "UNIGENE"     
 ## [26] "UNIPROT"</code></pre>
-<p>Only by specifying <code>keyType = 'ALIAS'</code>, this program could recognize gene alias like “PD1”. Even though, it could not distinguish the mix names of symbol and alias.</p>
+<p>Only by specifying <code>keyType = 'ALIAS'</code>, this program could recognize gene alias, however it still could not distinguish the mixture of symbol and alias.</p>
 </div>
-<div id="genekitrgengo-vs-panther-web" class="section level3">
+<div id="gengo-vs-panther-web" class="section level3">
 <h3>
-<span class="header-section-number">6.7.2</span> <code>genekitr::genGO</code> vs <code>Panther web</code><a class="anchor" aria-label="anchor" href="#genekitrgengo-vs-panther-web"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.2</span> <code>genGO</code> vs <code>Panther web</code><a class="anchor" aria-label="anchor" href="#gengo-vs-panther-web"><i class="fas fa-link"></i></a>
 </h3>
-<p>Just check two genes: “PD1” and “PDL1” which are all gene alias.</p>
-<p>Panther could recognize “PDL1” but not “PD1”, while <code>genGO</code> could recognize both.</p>
+<p>Still using the above five check genes.</p>
+<p>Panther could recognize “PDL1” but not “PD1”, as well as “BCC7” is omited.</p>
+
+
+<div class="figure">
+<span style="display:block;" id="fig:pantherFail"></span>
+<img src="figures/panther_fail_exp.png" alt="Panther result" width="98%"><p class="caption">
+Figure 7.3: <strong>Panther result</strong>
+</p>
+</div>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="probe-id-conversion.html"><span class="header-section-number">5</span> Probe ID conversion</a></div>
-<div class="next"><a href="ora-kegg-analysis.html"><span class="header-section-number">7</span> ORA KEGG analysis</a></div>
+<div class="prev"><a href="probe-id-conversion.html"><span class="header-section-number">6</span> Probe ID conversion</a></div>
+<div class="next"><a href="ora-kegg-analysis.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ora-go-analysis"><span class="header-section-number">6</span> ORA GO analysis</a></li>
-<li><a class="nav-link" href="#go-introduction"><span class="header-section-number">6.1</span> GO intruduction</a></li>
-<li><a class="nav-link" href="#go-basic-usage"><span class="header-section-number">6.2</span> Basic usage</a></li>
-<li><a class="nav-link" href="#go-group-enrichment"><span class="header-section-number">6.3</span> Group enrichment</a></li>
-<li><a class="nav-link" href="#go-additional-arguments"><span class="header-section-number">6.4</span> Additional arguments</a></li>
-<li><a class="nav-link" href="#go-advanced-usage"><span class="header-section-number">6.5</span> Advanced usage</a></li>
-<li><a class="nav-link" href="#go-import"><span class="header-section-number">6.6</span> Import external data</a></li>
+<li><a class="nav-link" href="#ora-go-analysis"><span class="header-section-number">7</span> ORA GO analysis</a></li>
+<li><a class="nav-link" href="#go-introduction"><span class="header-section-number">7.1</span> GO intruduction</a></li>
 <li>
-<a class="nav-link" href="#comparison-with-other-tools"><span class="header-section-number">6.7</span> Comparison with other tools</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#genekitrgengo-vs-clusterprofilerenrichgo"><span class="header-section-number">6.7.1</span> genekitr::genGO vs clusterProfiler::enrichGO</a></li>
-<li><a class="nav-link" href="#genekitrgengo-vs-panther-web"><span class="header-section-number">6.7.2</span> genekitr::genGO vs Panther web</a></li>
+<a class="nav-link" href="#go-basic-usage"><span class="header-section-number">7.2</span> Basic usage</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#go-additional-arguments"><span class="header-section-number">7.2.1</span> Additional arguments</a></li>
+<li><a class="nav-link" href="#go-new-features"><span class="header-section-number">7.2.2</span> New features</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#go-group-enrichment"><span class="header-section-number">7.3</span> Group enrichment analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#comparison-with-one-group"><span class="header-section-number">7.3.1</span> Comparison with one group:</a></li>
+<li><a class="nav-link" href="#comparison-with-more-than-one-group"><span class="header-section-number">7.3.2</span> Comparison with more than one group</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#go-advanced-usage"><span class="header-section-number">7.4</span> Advanced usage</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#different-types-of-input-and-backgroud-genes"><span class="header-section-number">7.4.1</span> Different types of input and backgroud genes</a></li>
+<li><a class="nav-link" href="#go-import"><span class="header-section-number">7.4.2</span> Import external data</a></li>
+<li><a class="nav-link" href="#go-simplify"><span class="header-section-number">7.4.3</span> Simplify GO result</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#go-tools-comparsion"><span class="header-section-number">7.5</span> Comparison with other tools</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#gengo-vs-enrichgo"><span class="header-section-number">7.5.1</span> genGO vs enrichGO</a></li>
+<li><a class="nav-link" href="#gengo-vs-panther-web"><span class="header-section-number">7.5.2</span> genGO vs Panther web</a></li>
 </ul>
 </li>
 </ul>
@@ -479,7 +606,7 @@ Figure 6.1: <strong>Panther result.</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-07.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

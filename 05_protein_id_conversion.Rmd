@@ -1,0 +1,69 @@
+# Protein ID conversion {#protein-id-conversion-1}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(genekitr)
+library(dplyr)
+```
+
+If you have handled proteomics or metabolomics data (e.g. mass spectrometry), you may need to convert protein to gene id before downstream analysis.
+
+## Example data {#protein-example-data}
+
+For example, in this data article [Dataset from proteomic analysis of rat, mouse, and human liver microsomes and S9 fractions](https://www.sciencedirect.com/science/article/pii/S2352340915000189#ec0005) , we could get [rat proteomic analysis data](https://ars.els-cdn.com/content/image/1-s2.0-S2352340915000189-mmc1.zip)
+
+
+Firstly, take a look at the data:
+
+```{r include=FALSE}
+load("data/rat_pro.rda")
+```
+
+
+```{r}
+colnames(rat_prodata)
+head(rat_prodata, 5)
+```
+
+The second column is rat protein id, and the third one is gene name.
+
+## Id conversion {#protein-id-conversion-2}
+
+Here we will convert protein id to gene symbol and compare with the original one.
+
+```{r}
+protein_id <- rat_prodata[, "Acc"]
+gname <- transId(protein_id, "symbol", "rat", unique = T)
+
+new_res <- merge(rat_prodata, gname,
+  by.x = "Acc", by.y = "input_id", all.x = T
+) %>%
+  dplyr::relocate(symbol, .after = Gene)
+
+head(new_res, 5)
+```
+
+Maybe you have noticed that some gene names are different from the original data. For example, the second one: `r Uniprot("A0JPQ8")` is called `Alkmo` before, but the latest name is `Agmo`.
+
+Some proteins have new gene names like above, while some may have no names for now.
+
+```{r}
+old_name <- unique(new_res$Gene) %>%
+  stringr::str_remove_all("_RAT")
+new_name <- unique(toupper(new_res$symbol))
+new_res[which(is.na(new_res$symbol)), ] %>%
+  dplyr::select(Acc, Gene, symbol)
+```
+
+We could see the result above: the protein id `r Uniprot("P01835")` has replaced the gene name with `NA`.
+
+The Venn plot shows that primary protein ids have changed their gene names. If users continue to use the old gene names, they may lose the latest gene information even enriched pathways.
+
+```{r}
+plotVenn(list(old_name = old_name, new_name = na.omit(new_name)))
+```
+
+
+
+
