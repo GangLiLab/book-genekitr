@@ -16,7 +16,7 @@ After selecting interested terms or pathways from `genGO` or `genKEGG` result, u
 It is worth mentioning that **almost all plots are based on `r CRANpkg("ggplot2")`** and `plot_theme` function could easily change their border, legend, label etc., which helps user make their own plot.
 
 
-## Bar Plot
+## GO/KEGG: Bar Plot
 
 Bar plot is the simplest way to show enriched terms. The x-axis is enrichment metric (e.g. Gene ratio; Fold enrichment); the y-axis is selected terms. The bar color represents statistical value.
 
@@ -84,7 +84,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 30))
 ```
 
-## Bubble Plot
+## GO/KEGG: Bubble Plot
 
 Enriched gene sets are shown as bubbles with different sizes.
 
@@ -123,7 +123,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 30))
 ```
 
-## Dot Plot
+## GO/KEGG: Dot Plot
 
 Similar with bar plot, dot plot is also widely used in enrichment analysis plotting. Like bubble plot, dot size represents gene number of enriched term.
 
@@ -160,7 +160,7 @@ pp + plot_annotation(tag_levels = "A") &
 ```
 
 
-## WEGO Plot
+## GO: WEGO Plot
 
 If user analyzed more than one ontology, he may want to show them in one figure.
 Inspired by [WEGO](https://wego.genomics.cn/), `genekitr` utilized `r CRANpkg("ggplot2")` to reproduce this plot.
@@ -187,7 +187,7 @@ head(all_ego)
 plotEnrich(all_ego, plot_type = "wego")
 ```
 
-## Lollipop Plot
+## GO/KEGG: Lollipop Plot
 
 Lollipop is like combination of barplot and dotplot
 
@@ -227,7 +227,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 30))
 ```
 
-## Heatmap Plot
+## GO/KEGG: Heatmap Plot
 
 Heatmap plot shows interactions between enriched terms and their genes.
 If fold change is given, heatmap will add color for up and down-regulated genes.
@@ -260,7 +260,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 20))
 ```
 
-## Chord Plot
+## GO/KEGG: Chord Plot
 
 Inspired by [GOplot](https://wencke.github.io/), chord plot is reproduced using `r CRANpkg("ggplot2")` and it shows similar content with heatmap plot.
 
@@ -294,7 +294,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 20))
 ```
 
-## Network Plot
+## GO: Network Plot
 
 Inspired by `enrichplot::emapplot`, `genekitr` reproduced this plot to enhance modification.
 Enriched terms are the nodes in the network, the overlapping gene sets are edges. Terms with more overlapped genes are tend to cluster together and the edge will be thicker.
@@ -340,7 +340,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 20))
 ```
 
-## Map Plot
+## GO: Map Plot
 
 GO terms are built in a directed acyclic graph with a parent-child relationship.
 Here the map plot utilized `r Biocpkg("GOSemSim")` to extract parent and child terms, also utilized `r CRANpkg("ggraph")` and `r CRANpkg("igraph")` to draw with default layout "sugiyama".
@@ -369,7 +369,7 @@ plotEnrich(ego, plot_type = "gomap", wrap_length = 25,
 pp
 ```
 
-## GO Heatmap Plot
+## GO: Terms Heatmap Plot
 
 Inspired by `r Biocpkg("rrvgo")`, `genekitr` scratches main codes to cluster GO terms. Also it could use five methods to calculate the similarity between terms.
 
@@ -389,7 +389,7 @@ plotEnrich(ego,
 ```
 
 
-## GO Tangram Plot
+## GO: Terms Tangram Plot
 
 According to [rrvgo vignettes](http://bioconductor.org/packages/release/bioc/vignettes/rrvgo/inst/doc/rrvgo.html), tangram plot is space-filling visualization of hierarchical structures. The terms are grouped and colored based on their parent, and the space used by the term is proportional to the score.  
 
@@ -401,7 +401,7 @@ According to [rrvgo vignettes](http://bioconductor.org/packages/release/bioc/vig
 plotEnrich(ego, plot_type = "gotangram", sim_method = "Rel")
 ```
 
-## Wordcloud Plot
+## GO/KEGG: Wordcloud Plot
 
 Wordcloud plot shows term emphasis based on text frequency.
 
@@ -410,10 +410,10 @@ Wordcloud plot shows term emphasis based on text frequency.
 (ref:wordcloudCap) **Wordcloud plot of enrichment analysis.** 
 
 ```{r wordcloud, fig.height=5, fig.width=8, fig.cap="(ref:wordcloudCap)", fig.scap="(ref:wordcloudScap)",results='hide'}
-plotEnrich(ego, plot_type = "wordcloud", sim_method = "Rel")
+plotEnrich(ego, plot_type = "wordcloud")
 ```
 
-## Upset Plot
+## GO/KEGG: Upset Plot
 
 Inspired by `r CRANpkg("UpSetR")`, the upset plot shows the association between genes and enriched terms. Unlike common Venn diagram, it could emphasize complex relationship among many gene sets.
 
