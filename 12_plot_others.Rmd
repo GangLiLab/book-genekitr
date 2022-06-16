@@ -40,10 +40,11 @@ la_gene_list <- list(
 
 ```{r venn, fig.height=5, fig.width=6, fig.cap="(ref:vennCap)", fig.scap="(ref:vennScap)", dpi=300}
 plotVenn(sm_gene_list,
-  text_size = 1.5,
-  alpha_degree = 1,
-  remove_grid = TRUE,
-  color = ggsci::pal_lancet()(3) # three colors for three elements in sm_gene_list
+         use_venn = TRUE,
+         color = ggsci::pal_lancet()(3),
+         alpha_degree = 1,
+         main_text_size = 1.5,
+         border_thick = 0
 )
 ```
 
@@ -53,13 +54,12 @@ UpSet plot is better for over four groups of genes:
 
 (ref:upsetVennCap) **UpSet plot** 
 
-```{r upsetVenn, fig.height=7, fig.width=6, fig.cap="(ref:upsetVennCap)", fig.scap="(ref:upsetVennScap)", dpi=300}
+```{r upsetVenn, fig.height=4, fig.width=8, fig.cap="(ref:upsetVennCap)", fig.scap="(ref:upsetVennScap)", dpi=300}
 plotVenn(la_gene_list,
-  use_venn = FALSE,
-  text_size = 15,
-  alpha_degree = 0.2,
-  border_thick = 2,
-  remove_grid = TRUE
+         use_venn = FALSE,
+         main_text_size = 15,
+         legend_text_size = 8,
+         legend_position = 'left'
 )
 ```
 
