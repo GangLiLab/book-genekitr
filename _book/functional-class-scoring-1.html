@@ -101,7 +101,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 </p>
 </div>
 <blockquote>
-<p>If you are interested in GSEA detailed procedure, please visit: <a href="https://www.pathwaycommons.org/guide/primers/data_analysis/gsea" class="uri">https://www.pathwaycommons.org/guide/primers/data_analysis/gsea</a></p>
+<p>If you are interested in GSEA detailed procedure, please visit: <a href="https://www.pathwaycommons.org/guide/primers/data_analysis/gsea" class="uri">https://www.pathwaycommons.org/guide/primers/data_analysis/gsea</a> OR <a href="https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md" class="uri">https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md</a></p>
 </blockquote>
 <p><a href="http://www.gsea-msigdb.org/gsea/msigdb/collections.jsp">Msigdb categories</a> is the best GSEA partner which have 9 major collections and several sub-collections from 32880 gene sets:</p>
 <ul>
@@ -231,6 +231,26 @@ Figure 9.1: <strong>GSEA overview</strong>
 ## HALLMARK_MYC_TARGETS_V1    130 0.6951872
 ## HALLMARK_MYC_TARGETS_V2     47 0.8703704
 ## HALLMARK_MITOTIC_SPINDLE    63 0.3197970</code></pre>
+<p>A positive normalized enrichment scores (NES) will indicate that genes in set S will be mostly represented at the top of your list (logFC &gt; 0 or up-regulated genes).</p>
+</div>
+<div id="export-result" class="section level2">
+<h2>
+<span class="header-section-number">9.3</span> Export result<a class="anchor" aria-label="anchor" href="#export-result"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>Genekitr</code> sets an easy way to export analysis result for editing and sharing. User could save multiple data sets as different sheets in one excel file.</p>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/expoSheet.html">expoSheet</a></span><span class="op">(</span>data_list <span class="op">=</span> <span class="va">gse</span>,
+                    data_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>,
+                    filename <span class="op">=</span> <span class="st">"gsea_result.xlsx"</span>,
+                    dir <span class="op">=</span> <span class="st">"./"</span><span class="op">)</span></code></pre></div>
+
+
+<div class="figure">
+<span style="display:block;" id="fig:exposheet"></span>
+<img src="figures/exposheet.png" alt="Export result" width="100%"><p class="caption">
+Figure 9.2: <strong>Export result</strong>
+</p>
+</div>
 
 </div>
 </div>
@@ -246,6 +266,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 <li><a class="nav-link" href="#functional-class-scoring-1"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
 <li><a class="nav-link" href="#gsea-introduction"><span class="header-section-number">9.1</span> GSEA intruduction</a></li>
 <li><a class="nav-link" href="#gsea-basic-usage"><span class="header-section-number">9.2</span> Basic usage</a></li>
+<li><a class="nav-link" href="#export-result"><span class="header-section-number">9.3</span> Export result</a></li>
 </ul>
 
       <div class="book-extra">

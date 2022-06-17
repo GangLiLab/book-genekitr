@@ -36,7 +36,7 @@ Three steps in GSEA:
 knitr::include_graphics("figures/gsea_overview.png")
 ```
 
-> If you are interested in GSEA detailed procedure, please visit: https://www.pathwaycommons.org/guide/primers/data_analysis/gsea
+> If you are interested in GSEA detailed procedure, please visit: https://www.pathwaycommons.org/guide/primers/data_analysis/gsea OR https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md
 
 [Msigdb categories](http://www.gsea-msigdb.org/gsea/msigdb/collections.jsp) is the best GSEA partner which have 9 major collections and several sub-collections from 32880 gene sets: 
 
@@ -93,6 +93,24 @@ head(gse$geneset)
 head(gse$gsea_df, 5)
 ```
 
+A positive normalized enrichment scores (NES) will indicate that genes in set S will be mostly represented at the top of your list (logFC > 0 or up-regulated genes). 
 
+## Export result
 
+`Genekitr` sets an easy way to export analysis result for editing and sharing. User could save multiple data sets as different sheets in one excel file.
+
+```{r eval=FALSE}
+genekitr::expoSheet(data_list = gse,
+                    data_name = names(gse),
+                    filename = "gsea_result.xlsx",
+                    dir = "./")
+```
+
+(ref:exposheetScap) Export result
+
+(ref:exposheetCap) **Export result**
+
+```{r exposheet, out.width="100%", echo=FALSE, fig.cap="(ref:exposheetCap)", fig.scap="(ref:exposheetScap)"}
+knitr::include_graphics("figures/exposheet.png")
+```
 

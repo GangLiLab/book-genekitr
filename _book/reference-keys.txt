@@ -3,6 +3,7 @@ fig:goSim
 fig:pantherFail
 fig:keggoverview
 fig:gseaoverview
+fig:exposheet
 fig:barplot
 fig:bubbleplot
 fig:dotplot
@@ -100,6 +101,7 @@ kegg-group-enrichment
 functional-class-scoring-1
 gsea-introduction
 gsea-basic-usage
+export-result
 plot-go-kegg-1
 gokegg-bar-plot
 gokegg-bubble-plot

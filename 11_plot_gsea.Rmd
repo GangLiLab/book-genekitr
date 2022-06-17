@@ -37,7 +37,9 @@ plotGSEA(gse, plot_type = "classic", show_pathway = pathways, show_gene = genes)
 
 ## Volcano Pathway Plot
 
-Slightly different with DEG volcano plot, the x-axis is represented as NES (normalized enrichment score), which corrects for enrichment score differences among gene-sets.
+In this plot, the degree of enrichment is indicated by a normalized enrichment score or NES.
+
+Slightly different with DEG volcano plot, the x-axis is represented as NES, which corrects for enrichment score differences among gene-sets.
 
 A significant positive NES value indicates that members of the gene set tend to appear at the top of the ranked data (e.g. fold change of DEG) and a significant negative NES indicates the opposite.
 
