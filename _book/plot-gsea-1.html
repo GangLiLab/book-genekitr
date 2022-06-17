@@ -75,7 +75,7 @@
 <span class="header-section-number">11</span> Plot GSEA<a class="anchor" aria-label="anchor" href="#plot-gsea-1"><i class="fas fa-link"></i></a>
 </h1>
 <p><a href="functional-class-scoring-1.html#gsea-basic-usage">GSEA analysis</a> returns a list result, which could be directly passed to <code>plotGSEA</code>. The function could help draw classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar plot.</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>
   genelist <span class="op">=</span> <span class="va">geneList</span>, org <span class="op">=</span> <span class="st">"human"</span>,
@@ -89,7 +89,7 @@
 <p>If user wants to show specific pathways or genes, just pass to according parameters: <code>show_pathway</code> and <code>show_gene</code>.</p>
 
 
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_P53_PATHWAY"</span>, <span class="st">"HALLMARK_GLYCOLYSIS"</span>, <span class="st">"HALLMARK_DNA_REPAIR"</span><span class="op">)</span>
 <span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MET"</span>, <span class="st">"TP53"</span>, <span class="st">"PMM2"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"classic"</span>, show_pathway <span class="op">=</span> <span class="va">pathways</span>, show_gene <span class="op">=</span> <span class="va">genes</span><span class="op">)</span></code></pre></div>
@@ -107,12 +107,12 @@ Figure 11.1: <strong>Classic pathway plot of GSEA.</strong>
 <p>Slightly different with DEG volcano plot, the x-axis is represented as NES (normalized enrichment score), which corrects for enrichment score differences among gene-sets.</p>
 <p>A significant positive NES value indicates that members of the gene set tend to appear at the top of the ranked data (e.g. fold change of DEG) and a significant negative NES indicates the opposite.</p>
 <p>Default shows the top(N) pathways. If user wants to show specific pathway, also pass the argument to <code>show_pathway</code>.</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_P53_PATHWAY"</span>, <span class="st">"HALLMARK_GLYCOLYSIS"</span>, <span class="st">"HALLMARK_DNA_REPAIR"</span><span class="op">)</span>
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"volcano"</span>, show_pathway <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"volcano"</span>, show_pathway <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/patchwork/man/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
 
 
 <div class="figure">
@@ -128,12 +128,12 @@ Figure 11.2: <strong>Volcano pathway plot of GSEA.</strong> default (A), select 
 </h2>
 <p>If user wants to show a bunch of selected pathways, <code>plotGSEA</code> has scratched some codes from <a href="http://bioconductor.org/packages/fgsea">fgsea</a>.</p>
 <p>Default shows the top(N) pathways. If user wants to show specific pathway, also pass the argument to <code>show_pathway</code>.</p>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_P53_PATHWAY"</span>, <span class="st">"HALLMARK_GLYCOLYSIS"</span>, <span class="st">"HALLMARK_DNA_REPAIR"</span><span class="op">)</span>
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"fgsea"</span>, show_pathway <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"fgsea"</span>, show_pathway <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/patchwork/man/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
 
 
 <div class="figure">
@@ -150,7 +150,7 @@ Figure 11.3: <strong>Multi-pathway plot of GSEA.</strong> default (A), select pa
 <p>Ridge plot will visualize enriched pathways of up/down regulated genes. The x-axis is fold change and y-axis is pathways. Color represents statistical value (e.g. pvalue/p.adjust/qvalue)</p>
 
 
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>,
   plot_type <span class="op">=</span> <span class="st">"ridge"</span>,
   show_pathway <span class="op">=</span> <span class="fl">10</span>, stats_metric <span class="op">=</span> <span class="st">"p.adjust"</span>
@@ -169,7 +169,7 @@ Figure 11.4: <strong>Ridge plot of GSEA.</strong>
 <p>The barplot will separate positive and negative NES into two sides. User could specify <code>color</code> for the two sides. Meanwhile, non-significant pathways (e.g. Pvalue &gt; 0.05) will be colored as “grey”.</p>
 
 
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"navyblue"</span>, <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:twosideBar"></span>
@@ -208,7 +208,7 @@ Figure 11.5: <strong>Two-side bar plot of GSEA.</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-16.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

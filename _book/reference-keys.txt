@@ -110,7 +110,7 @@ gokegg-heatmap-plot
 gokegg-chord-plot
 gokegg-wordcloud-plot
 gokegg-upset-plot
-go-network-plot
+gokegg-network-plot
 go-map-plot
 go-terms-heatmap-plot
 go-terms-tangram-plot

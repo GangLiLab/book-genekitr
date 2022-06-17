@@ -112,7 +112,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <li><code>pvalueCutoff</code></li>
 <li><code>qvalueCutoff</code></li>
 </ul>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span>
 <span class="va">keg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genKEGG.html">genKEGG</a></span><span class="op">(</span><span class="va">id</span>,
@@ -152,7 +152,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 ## hsa03440    12   5.305366  0.2926829
 ## hsa03430     9   7.093043  0.3913043</code></pre>
 <p>Input type is not limited to Entrez ID, other gene types will be automatically converted to Entrez ID.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sym</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"BRCA1"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span>,<span class="st">"BRCA2"</span>,<span class="st">"TET2"</span><span class="op">)</span>
 <span class="va">keg2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genKEGG.html">genKEGG</a></span><span class="op">(</span><span class="va">sym</span>,
   org <span class="op">=</span> <span class="st">"human"</span>,
@@ -184,7 +184,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <span class="header-section-number">8.3</span> Group enrichment<a class="anchor" aria-label="anchor" href="#kegg-group-enrichment"><i class="fas fa-link"></i></a>
 </h2>
 <p>Like <a href="ora-go-analysis-1.html#go-group-enrichment">GO enrichment analysis</a>, KEGG also supports multi-group gene enrichment analysis.</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 <span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   group1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>,
@@ -251,7 +251,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-16.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

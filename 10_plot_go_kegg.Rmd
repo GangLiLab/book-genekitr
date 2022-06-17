@@ -325,13 +325,13 @@ plotEnrich(ego, plot_type = "upset",main_text_size = 15,legend_text_size = 8)
 ```
 
 
-## GO: Network Plot
+## GO/KEGG: Network Plot
 
 Inspired by `enrichplot::emapplot`, `genekitr` reproduced this plot to enhance modification.
 Enriched terms are the nodes in the network, the overlapping gene sets are edges. Terms with more overlapped genes are tend to cluster together and the edge will be thicker.
 
-- GO analysis result could use five methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang" and "Wang" methods.
-- KEGG only supports JC method.
+- GO analysis result could use five methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang", "Wang" and "JC"(Jaccard’s similarity index) methods.
+- KEGG only supports "JC" method.
 
 User could define `layout` argument derived from `r CRANpkg("ggraph")`, including "nicely" (default), "circle", "dh", "drl", "fr", "graphopt", "grid","lgl", "kk", "mds", "randomly", "star" etc.
 
@@ -376,7 +376,7 @@ pp + plot_annotation(tag_levels = "A") &
 GO terms are built in a directed acyclic graph with a parent-child relationship.
 Here the map plot utilized `r Biocpkg("GOSemSim")` to extract parent and child terms, also utilized `r CRANpkg("ggraph")` and `r CRANpkg("igraph")` to draw with default layout "sugiyama".
 
-To avoid too much unrelated terms messed up, `genekitr` **only shows the closest parent and child with selected terms**. Besides, the top parent term will be also plotted.
+To avoid too much unrelated terms messed up, `genekitr` **only shows the closest parent and child with selected terms**. Besides, the top three parent term with more edges will be plotted.
 
 ```{r include= F}
 library(igraph)

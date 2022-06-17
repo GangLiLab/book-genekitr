@@ -379,13 +379,20 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 </h3>
 <p><code>GeneSymbolThesarus</code> is a function of <a href="https://CRAN.R-project.org/package=Seurat">Seurat</a> which finds current gene symbols from the HUGO Gene Nomenclature Committee (HGNC). It will search online so the speed will not fast.</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
-<span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span></code></pre></div>
+<pre><code>## Attaching SeuratObject</code></pre>
+<pre><code>## 
+## Attaching package: 'Seurat'</code></pre>
+<pre><code>## The following object is masked from 'package:DT':
+## 
+##     JS</code></pre>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">seurat_res</span> <span class="op">&lt;-</span> <span class="fu">Seurat</span><span class="fu">::</span><span class="fu"><a href="https://satijalab.org/seurat/reference/UpdateSymbolList.html">GeneSymbolThesarus</a></span><span class="op">(</span>symbols <span class="op">=</span> <span class="va">id</span><span class="op">)</span>
 <span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span><span class="op">)</span></code></pre></div>
-<pre><code>## Time difference of 57.67122 secs</code></pre>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<pre><code>## Time difference of 58.06221 secs</code></pre>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">seurat_res</span></code></pre></div>
 <pre><code>##    PDL1 
 ## "CD274"</code></pre>
@@ -396,15 +403,15 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <span class="header-section-number">4.5.3</span> <strong><code>alias2Symbol</code> vs <code>transId</code></strong><a class="anchor" aria-label="anchor" href="#alias2symbol-vs-transid"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>alias2Symbol</code> is a function of <a href="http://bioconductor.org/packages/limma">limma</a> which depends on organism annotation package of Bioconductor.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">limma_res</span> <span class="op">&lt;-</span> <span class="fu">limma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/limma/man/alias2Symbol.html">alias2Symbol</a></span><span class="op">(</span><span class="va">id</span>, species <span class="op">=</span> <span class="st">"Hs"</span><span class="op">)</span>
 <span class="co"># compare with transId result</span>
 <span class="va">id</span></code></pre></div>
 <pre><code>## [1] "TBET" "B220" "BCC7" "PD1"  "PDL1"</code></pre>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">limma_res</span></code></pre></div>
 <pre><code>## [1] "CD274"  "TBX21"  "PDCD1"  "PTPRC"  "SNCA"   "TP53"   "SPATA2"</code></pre>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">transid_res</span><span class="op">$</span><span class="va">symbol</span></code></pre></div>
 <pre><code>## [1] "TBX21"  "PTPRC"  "TP53"   "PDCD1"  "SNCA"   "SPATA2" "CD274"</code></pre>
 <p>It seems that <code>alias2Symbol</code> result remains disorder from input id, which may cause misunderstanding for users, while <code>transId</code> keeps the original order (if user want to get one-to-one match, just pass <code>unique = TRUE</code> to function).</p>
@@ -459,7 +466,7 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-16.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
