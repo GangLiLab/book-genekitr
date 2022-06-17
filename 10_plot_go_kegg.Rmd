@@ -179,12 +179,14 @@ head(all_ego)
 
 > If you just want to show two ontologies, you can rbind both dataframes and give the new dataframe a new column "ONTOLOGY" to distinguish different ontologies.
 
+**NOTICE:** `plotEnrich` has a parameter `n_term` for WEGO plot, which specify number of terms. If you want to plot all terms, just set `n_term` higher.
+
 (ref:wegoplotScap) WEGO plot of enrichment analysis.
 
 (ref:wegoplotCap) **WEGO plot of enrichment analysis.** 
 
 ```{r wegoplot, fig.height=3, fig.width=8, fig.cap="(ref:wegoplotCap)", fig.scap="(ref:wegoplotScap)"}
-plotEnrich(all_ego, plot_type = "wego")
+plotEnrich(all_ego, plot_type = "wego", n_term = 5)
 ```
 
 ## GO/KEGG: Lollipop Plot
