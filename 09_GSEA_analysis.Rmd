@@ -97,7 +97,7 @@ A positive normalized enrichment scores (NES) will indicate that genes in set S 
 
 ## Export result
 
-`Genekitr` sets an easy way to export analysis result for editing and sharing. User could save multiple data sets as different sheets in one excel file.
+`Genekitr` sets an easy way to export analysis result for editing and sharing. User could save multiple data sets as different sheets in one excel file. Besides, colmun names are automatically formated with bold style.
 
 ```{r eval=FALSE}
 genekitr::expoSheet(data_list = gse,
