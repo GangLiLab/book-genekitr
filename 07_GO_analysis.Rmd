@@ -45,7 +45,7 @@ GO terms are built in a directed acyclic graph with a parent-child relationship.
 
 The simplest arguments are: 
 
-- `id`: gene id of entrez, ensembl or symbol (alias is also accepted)
+- `id`: gene id of entrez, ensembl, symbol (alias is also accepted) or uniprot
 - `org`: organism (from `genekitr::biocOrg_name`)
 - `ont`: ontology of "bp", "mf", "cc" or "all"
 - `pvalueCutoff`
@@ -62,6 +62,30 @@ ego <- genGO(id,
 )
 head(ego)
 ```
+
+If user has proteomics data, protein IDs could directly do GO analysis instead of gene conversion.
+Here we will use data from: [rat protein example data](#protein-example-data)
+
+```{r include=FALSE}
+load("data/rat_pro.rda")
+```
+
+```{r}
+pro_id <- rat_prodata$Acc
+head(pro_id, 10)
+
+rat_ego <- genGO(pro_id[1:100], 
+                 org = 'rat', 
+                 ont = 'bp',
+                 pvalueCutoff = 0.01, 
+                 qvalueCutoff = 0.01)
+
+head(rat_ego)
+```
+
+Except for the GO enrichment result, protein IDs are also mapped to gene symbols which is easy understanding.
+
+
 
 ### Additional arguments {#go-additional-arguments}
 
