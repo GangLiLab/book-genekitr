@@ -161,23 +161,23 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">keg2</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##                ID              Description GeneRatio  BgRatio       pvalue
-## hsa05224 hsa05224            Breast cancer 0.4285714 147/8157 0.0001903443
-## hsa03440 hsa03440 Homologous recombination 0.2857143  41/8157 0.0005094781
-## hsa03460 hsa03460   Fanconi anemia pathway 0.2857143  54/8157 0.0008843800
-## hsa01524 hsa01524 Platinum drug resistance 0.2857143  73/8157 0.0016115463
-## hsa05212 hsa05212        Pancreatic cancer 0.2857143  76/8157 0.0017455330
-##            p.adjust      qvalue       geneID    geneID_symbol Count FoldEnrich
-## hsa05224 0.01123031 0.009016308 7157/672/675 TP53/BRCA1/BRCA2     3   23.78134
-## hsa03440 0.01502960 0.012066587      672/675      BRCA1/BRCA2     2   56.84321
-## hsa03460 0.01739281 0.013963895      672/675      BRCA1/BRCA2     2   43.15873
-## hsa01524 0.02059729 0.016536628     7157/672       TP53/BRCA1     2   31.92564
-## hsa05212 0.02059729 0.016536628     7157/675       TP53/BRCA2     2   30.66541
-##          RichFactor
-## hsa05224 0.02040816
-## hsa03440 0.04878049
-## hsa03460 0.03703704
-## hsa01524 0.02739726
-## hsa05212 0.02631579</code></pre>
+## hsa05224 hsa05224            Breast cancer       0.6 147/8157 5.585086e-05
+## hsa03440 hsa03440 Homologous recombination       0.4  41/8157 2.441614e-04
+## hsa03460 hsa03460   Fanconi anemia pathway       0.4  54/8157 4.247311e-04
+## hsa01524 hsa01524 Platinum drug resistance       0.4  73/8157 7.763692e-04
+## hsa05212 hsa05212        Pancreatic cancer       0.4  76/8157 8.413308e-04
+##             p.adjust      qvalue           geneID    geneID_symbol Count
+## hsa05224 0.003127648 0.002057663 TP53/BRCA1/BRCA2 TP53/BRCA1/BRCA2     3
+## hsa03440 0.006836518 0.004497709      BRCA1/BRCA2      BRCA1/BRCA2     2
+## hsa03460 0.007928314 0.005215996      BRCA1/BRCA2      BRCA1/BRCA2     2
+## hsa01524 0.009422905 0.006199280       TP53/BRCA1       TP53/BRCA1     2
+## hsa05212 0.009422905 0.006199280       TP53/BRCA2       TP53/BRCA2     2
+##          FoldEnrich RichFactor
+## hsa05224   33.29388 0.02040816
+## hsa03440   79.58049 0.04878049
+## hsa03460   60.42222 0.03703704
+## hsa01524   44.69589 0.02739726
+## hsa05212   42.93158 0.02631579</code></pre>
 </div>
 <div id="kegg-group-enrichment" class="section level2">
 <h2>

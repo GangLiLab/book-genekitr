@@ -159,6 +159,36 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 30))
 ```
 
+After analyzing group enrichment analysis for [GO](#go-group-enrichment) or [KEGG](#kegg-group-enrichment), we could use `dotplot` to show the result:
+
+```{r include=FALSE}
+id <- c(head(names(geneList), 50), tail(names(geneList), 50))
+two_groups <- list(
+  exp_group = c(rep("up", 50), rep("down", 50)),
+  time_group = c(rep("time1", 40), rep("time2", 60))
+)
+gego2 <- genGO(id,
+  group_list = two_groups,
+  org = "human",
+  ont = "bp",
+  pvalueCutoff = 0.05,
+  qvalueCutoff = 0.05
+)
+```
+
+(ref:dptplotGroupScap) Dot plot of group enrichment analysis.
+
+(ref:dotplotGroupCap) **Dot plot of group enrichment analysis.** 
+
+```{r dotplotGroup, fig.height=6, fig.width=10, fig.cap="(ref:dotplotGroupCap)", fig.scap="(ref:dotplotGroupScap)",echo = T, dpi=300}
+plotEnrich(gego2,
+           plot_type = 'dot',
+           scale_ratio = 2, # dot size
+           main_text_size = 10,
+           legend_text_size =8,
+           n_term = 6) # show terms
+```
+
 
 ## GO: WEGO Plot
 

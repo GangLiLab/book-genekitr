@@ -15,7 +15,7 @@ library(DT)
 
 ## Supported organisms {#geninfo-supported-species}
 
-It supports 196 vertebrate species, 120 plant species, and two bacteria species. All data is up-to-date.
+It supports 195 vertebrate species, 120 plant species, and two bacteria species. All data is up-to-date.
 
 ```{r geninfo-orgname}
 # install.packages('DT')

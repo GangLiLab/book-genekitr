@@ -14,8 +14,10 @@ library(genekitr)
 ```{r}
 data(geneList, package = "genekitr")
 gse <- genGSEA(
-  genelist = geneList, org = "human",
-  category = "H", use_symbol = TRUE, pvalueCutoff = 0.05
+  genelist = geneList, 
+  org = "human",
+  category = "H", 
+  pvalueCutoff = 0.05
 )
 ```
 
@@ -123,7 +125,7 @@ The barplot will separate positive and negative NES into two sides. User could s
 (ref:twosideBarCap) **Two-side bar plot of GSEA.** 
 
 ```{r twosideBar, fig.height=5, fig.width=6, fig.cap="(ref:twosideBarCap)", fig.scap="(ref:twosideBarScap)", dpi=300}
-plotGSEA(gse, plot_type = "bar", color = c("navyblue", "orange"))
+plotGSEA(gse, plot_type = "bar", colour = c("navyblue", "orange"))
 ```
 
 

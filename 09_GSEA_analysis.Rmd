@@ -62,7 +62,7 @@ knitr::include_graphics("figures/gsea_overview.png")
 
 ## Basic usage {#gsea-basic-usage}
 
-> `genKEGG` is built on `msigdbr` and `clusterProfiler::GSEA`, then optimizes analysis process to make better understanding. 
+> `genKEGG` is built on `msigdbr` and `clusterProfiler::GSEA` which is also built on `fgsea`. Also `genKEGG` optimizes analysis process to make better performance. 
 
 The simplest arguments are: 
 
@@ -78,8 +78,7 @@ data(geneList, package = "genekitr")
 gse <- genGSEA(
   genelist = geneList,
   org = "human",
-  category = "H",
-  use_symbol = TRUE
+  category = "H"
 )
 class(gse)
 names(gse)
@@ -92,6 +91,14 @@ head(gse$genelist)
 head(gse$geneset)
 head(gse$gsea_df, 5)
 ```
+
+> About the `gsea_df` result
+
+- `setSize`: according to the [documentation](https://rdrr.io/github/ctlab/fgsea/man/fgseaLabel.html) of `r Biocpkg("fgsea")`, it is the size of the pathway after removing genes not present in `names(stats)`. To be more specific, if we input a pathway gene set with 58 genes (e.g. [HALLMARK_MYC_TARGETS_V2](https://www.gsea-msigdb.org/gsea/msigdb/cards/HALLMARK_MYC_TARGETS_V2.html) ), while our gene list only have 54 of it, so the result will only show `setSize = 54` 
+
+- `enrichmentScore`: also called `ES`, same as in [Broad GSEA implementation](https://www.gsea-msigdb.org/gsea/doc/GSEAUserGuideFrame.html?Interpreting_GSEA). It reflects the degree to which a gene set is overrepresented at the top or bottom of a ranked list of genes. 
+
+- `NES`: normalized enrichment score is the primary statistic for examining gene set enrichment results. By normalizing the enrichment score, GSEA accounts for differences in gene set size and in correlations between gene sets and the expression dataset. Therefore, NES can be used to compare analysis results across gene sets.
 
 A positive normalized enrichment scores (NES) will indicate that genes in set S will be mostly represented at the top of your list (logFC > 0 or up-regulated genes). 
 

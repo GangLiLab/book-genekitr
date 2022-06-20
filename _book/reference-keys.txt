@@ -7,6 +7,7 @@ fig:exposheet
 fig:barplot
 fig:bubbleplot
 fig:dotplot
+fig:dotplotGroup
 fig:wegoplot
 fig:lolliplot
 fig:heatmap
