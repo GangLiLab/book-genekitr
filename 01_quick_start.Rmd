@@ -98,8 +98,7 @@ data(geneList, package = "genekitr")
 gse <- genGSEA(
   genelist = geneList,
   org = "human",
-  category = "H",
-  use_symbol = TRUE
+  category = "H"
 )
 ```
 

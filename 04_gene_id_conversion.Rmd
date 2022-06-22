@@ -33,7 +33,7 @@ Currently various tools are available, however different methods has their drawb
 
 Considered above problems, **genekitr combines both Ensembl and NCBI database** to provide more comprehensive result while optimizes running speed. 
 
-Also it supports **196 vertebrate species, 120 plant species and 2 bacteria species** (see also [session 1.1](#geninfo-supported-species)).
+Also it supports **195 vertebrate species, 120 plant species and 2 bacteria species** (see also [session 1.1](#geninfo-supported-species)).
 
 ## Basic usage {#transid-basic-usage}
 

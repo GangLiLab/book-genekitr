@@ -329,7 +329,7 @@ Figure 10.7: <strong>Heatmap plot of enrichment analysis.</strong> all genes (A,
 <span class="va">show_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BRCA2"</span>, <span class="st">"CDK1"</span>, <span class="st">"JUN"</span>, <span class="st">"MCM8"</span>, <span class="st">"TIPIN"</span><span class="op">)</span>
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"genechord"</span>, 
                  show_gene <span class="op">=</span> <span class="va">show_gene</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
 <span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"genechord"</span>, 
                  show_gene <span class="op">=</span> <span class="va">show_gene</span>, 
                  fold_change <span class="op">=</span> <span class="va">logfc</span>,
@@ -551,7 +551,7 @@ Figure 10.15: <strong>Plot theme.</strong> default theme (A), modify text size (
               stats_metric <span class="op">=</span> <span class="st">"p.adjust"</span>,
               xlim_left <span class="op">=</span> <span class="fl">25</span>, xlim_right <span class="op">=</span> <span class="fl">15</span>
 <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:twogroup1"></span>
 <img src="genekitr_files/figure-html/twogroup1-1.png" alt="Visualize two groups together when plot_type = " one width="98%"><p class="caption">
@@ -615,7 +615,7 @@ Figure 10.17: <strong>Visualize two groups seperately when <code>plot_type = "tw
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-20.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
