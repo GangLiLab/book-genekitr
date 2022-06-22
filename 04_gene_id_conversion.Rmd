@@ -63,12 +63,13 @@ transId(
 
 See the human example above, due to NA was removed, the result order is slightly different from input id. 
 
-If you want to get the same order, you can set `keepNA = TRUE`:
+If you want to **get the same order**, you can set `keepNA = TRUE`:
 ```{r}
 transId(id, transTo = "ens", keepNA = TRUE)
 ```
 
-If you want to get one-to-one mapping, you can set `unique = TRUE`:
+If you want to **get one-to-one mapping**, you can set `unique = TRUE` and the result with more comprehensive information will return:
+
 ```{r}
 transId(id, transTo = "ens", keepNA = TRUE, unique = TRUE)
 ```

@@ -50,6 +50,8 @@ geninfo-features
 geninfo-feature-1
 geninfo-feature-2
 geninfo-feature-3
+distinguish-from-gene-symbol-and-alias
+distinguish-gene-symbol-with-special-characters
 geninfo-feature-4
 geninfo-feature-5
 geninfo-feature-6

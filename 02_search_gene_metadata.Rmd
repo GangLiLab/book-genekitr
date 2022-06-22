@@ -78,7 +78,9 @@ all_info[, 1:4]
 ```
 
 
-### f3: distinguish gene symbol and alias {#geninfo-feature-3}
+### f3: disambiguation feature {#geninfo-feature-3}
+
+#### distinguish from gene symbol and alias
 
 Many common gene names are gene alias, but many tools only accept gene symbols which cause gene information to be lost. For example, "BCC7" is the alias of "TP53" and "PD1" has three aliases: "PDCD1", "SNCA" and "SPATA2" while few enrichment analyses tools recognize "BCC7".
 
@@ -86,6 +88,14 @@ Many common gene names are gene alias, but many tools only accept gene symbols w
 id <- c("BCC7", "PD1")
 genInfo(id)[1:4]
 ```
+
+#### distinguish gene symbol with special characters
+
+```{r}
+id <- c("TNF-α", "κB-Ras2")
+genInfo(id)[1:4]
+```
+
 
 ### f4: count organism gene types {#geninfo-feature-4}
 

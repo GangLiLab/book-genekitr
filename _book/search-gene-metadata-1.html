@@ -238,8 +238,12 @@
 </div>
 <div id="geninfo-feature-3" class="section level3">
 <h3>
-<span class="header-section-number">2.3.3</span> f3: distinguish gene symbol and alias<a class="anchor" aria-label="anchor" href="#geninfo-feature-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.3</span> f3: disambiguation feature<a class="anchor" aria-label="anchor" href="#geninfo-feature-3"><i class="fas fa-link"></i></a>
 </h3>
+<div id="distinguish-from-gene-symbol-and-alias" class="section level4">
+<h4>
+<span class="header-section-number">2.3.3.1</span> distinguish from gene symbol and alias<a class="anchor" aria-label="anchor" href="#distinguish-from-gene-symbol-and-alias"><i class="fas fa-link"></i></a>
+</h4>
 <p>Many common gene names are gene alias, but many tools only accept gene symbols which cause gene information to be lost. For example, “BCC7” is the alias of “TP53” and “PD1” has three aliases: “PDCD1”, “SNCA” and “SPATA2” while few enrichment analyses tools recognize “BCC7”.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>, <span class="st">"PD1"</span><span class="op">)</span>
@@ -251,14 +255,33 @@
 ## 4      PD1   SNCA     6622 ENSG00000145335
 ## 5      PD1 SPATA2     9825 ENSG00000158480</code></pre>
 </div>
+<div id="distinguish-gene-symbol-with-special-characters" class="section level4">
+<h4>
+<span class="header-section-number">2.3.3.2</span> distinguish gene symbol with special characters<a class="anchor" aria-label="anchor" href="#distinguish-gene-symbol-with-special-characters"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TNF-α"</span>, <span class="st">"κB-Ras2"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<pre><code>##      input_id  symbol entrezid         ensembl
+## 1   TNF-alpha     TNF     7124 ENSG00000228978
+## 2   TNF-alpha     TNF     7124 ENSG00000228321
+## 3   TNF-alpha     TNF     7124 ENSG00000232810
+## 4   TNF-alpha     TNF     7124 ENSG00000204490
+## 5   TNF-alpha     TNF     7124 ENSG00000230108
+## 6   TNF-alpha     TNF     7124 ENSG00000223952
+## 7   TNF-alpha     TNF     7124 ENSG00000206439
+## 8   TNF-alpha     TNF     7124 ENSG00000228849
+## 9 kappaB-Ras2 NKIRAS2    28511 ENSG00000168256</code></pre>
+</div>
+</div>
 <div id="geninfo-feature-4" class="section level3">
 <h3>
 <span class="header-section-number">2.3.4</span> f4: count organism gene types<a class="anchor" aria-label="anchor" href="#geninfo-feature-4"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uniq_symbol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gene_biotype</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/distinct.html">distinct</a></span><span class="op">(</span><span class="va">symbol</span>, .keep_all <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gene_biotype</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">symbol</span>, .keep_all <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="va">uniq_symbol</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
   <span class="op">{</span>
@@ -309,15 +332,15 @@
 <span class="header-section-number">2.3.5</span> f5: extract specific biotype genes<a class="anchor" aria-label="anchor" href="#geninfo-feature-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>Get all human protein-coding genes:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hg_pro_gene</span> <span class="op">&lt;-</span> <span class="va">uniq_symbol</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">hg_pro_gene</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 19572</code></pre>
 <p>Compare with <a href="http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt">HGNC data</a>:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hgnc_data</span> <span class="op">&lt;-</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt"</span><span class="op">)</span>
 <span class="va">hgnc_symbol</span> <span class="op">&lt;-</span> <span class="va">hgnc_data</span><span class="op">$</span><span class="va">symbol</span>
 <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
@@ -325,11 +348,11 @@
   hgnc_symbol <span class="op">=</span> <span class="va">hgnc_symbol</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Check some missing gene names in our result:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">check_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hgnc_symbol</span><span class="op">[</span><span class="op">!</span><span class="va">hgnc_symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">hg_pro_gene</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">hgnc_data</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">check_genes</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">check_genes</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>
     <span class="va">symbol</span>, <span class="va">date_approved_reserved</span>, <span class="va">date_symbol_changed</span>,
     <span class="va">entrez_id</span>
   <span class="op">)</span></code></pre></div>
@@ -340,7 +363,7 @@
 <p>Let’s look at the first one “ABTB3”:</p>
 <p>It seems that the gene “ABTB3” is recently modified, <a href="https://www.genecards.org/Search/Keyword?queryString=ABTB3">GeneCards: ABTB3</a> also shows no result.</p>
 <p>When we look at its EntrezID <a href="https://www.ncbi.nlm.nih.gov/gene/121551">121551</a>, it is also known as “BTBD11” which matched with our Ensembl data: <a href="https://www.ensembl.org/id/ENSG00000151136">ENSG00000151136</a></p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span><span class="st">"121551"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>##   input_id         ensembl symbol
 ## 1   121551 ENSG00000151136 BTBD11</code></pre>
@@ -351,7 +374,7 @@
 <span class="header-section-number">2.3.6</span> f6: extract all metadata<a class="anchor" aria-label="anchor" href="#geninfo-feature-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>If user only wants to get all information, just give <code>org</code> argument alone.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_human_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">all_human_data</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 92441    22</code></pre>
@@ -363,13 +386,13 @@
 <p><a href="http://xteam.xbio.top/CellMarker/index.jsp">CellMarker database</a> has manually curated over 100,000 published papers, 4,124 entries including the cell marker information, tissue type, cell type, cancer information and source.</p>
 <p>Here, <code>geneInfo</code> integrated human cell markers into <code>cell_marker</code> column.</p>
 <p>The naming rules is: <code>tissue_type | cancer_type: Tumor(T) or Normal(N) | cell_type</code>, if one gene matches many cell types, they are seperated with <code>;</code>.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hg_marker_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">cell_marker</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/separate_rows.html">separate_rows</a></span><span class="op">(</span><span class="va">cell_marker</span>, sep <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>cell_marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^.*\\|"</span>, <span class="st">""</span>, <span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">cell_marker</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_rows.html">separate_rows</a></span><span class="op">(</span><span class="va">cell_marker</span>, sep <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cell_marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^.*\\|"</span>, <span class="st">""</span>, <span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hg_marker_all</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   symbol cell_marker                                       
@@ -380,11 +403,11 @@
 ## 4 ADA    Retinoid acid signaling-responsive fetal germ cell
 ## 5 ADA    Oogenesis phase fetal germ cell                   
 ## 6 ADA    Mitotic arrest phase fetal germ cell</code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># select stromal cell markers</span>
 <span class="va">hg_marker_all</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">cell_marker</span> <span class="op">==</span> <span class="st">"Stromal cell"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cell_marker</span> <span class="op">==</span> <span class="st">"Stromal cell"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "ALCAM"   "ANPEP"   "BST1"    "CD34"    "CD44"    "COL5A1"  "ENG"    
 ##  [8] "GREM1"   "ICAM1"   "ICAM2"   "ICAM3"   "ITGA1"   "ITGA4"   "ITGAV"  
@@ -410,7 +433,7 @@
 <a class="nav-link" href="#geninfo-features"><span class="header-section-number">2.3</span> Features</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#geninfo-feature-1"><span class="header-section-number">2.3.1</span> f1: keep input order</a></li>
 <li><a class="nav-link" href="#geninfo-feature-2"><span class="header-section-number">2.3.2</span> f2: keep unique or not</a></li>
-<li><a class="nav-link" href="#geninfo-feature-3"><span class="header-section-number">2.3.3</span> f3: distinguish gene symbol and alias</a></li>
+<li><a class="nav-link" href="#geninfo-feature-3"><span class="header-section-number">2.3.3</span> f3: disambiguation feature</a></li>
 <li><a class="nav-link" href="#geninfo-feature-4"><span class="header-section-number">2.3.4</span> f4: count organism gene types</a></li>
 <li><a class="nav-link" href="#geninfo-feature-5"><span class="header-section-number">2.3.5</span> f5: extract specific biotype genes</a></li>
 <li><a class="nav-link" href="#geninfo-feature-6"><span class="header-section-number">2.3.6</span> f6: extract all metadata</a></li>
