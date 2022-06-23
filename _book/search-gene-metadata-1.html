@@ -280,8 +280,8 @@
 </h3>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">uniq_symbol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gene_biotype</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">symbol</span>, .keep_all <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gene_biotype</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/distinct.html">distinct</a></span><span class="op">(</span><span class="va">symbol</span>, .keep_all <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 
 <span class="va">uniq_symbol</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
   <span class="op">{</span>
@@ -334,8 +334,8 @@
 <p>Get all human protein-coding genes:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hg_pro_gene</span> <span class="op">&lt;-</span> <span class="va">uniq_symbol</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">gene_biotype</span> <span class="op">==</span> <span class="st">"protein_coding"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">hg_pro_gene</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 19572</code></pre>
@@ -351,8 +351,8 @@
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">check_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hgnc_symbol</span><span class="op">[</span><span class="op">!</span><span class="va">hgnc_symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">hg_pro_gene</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">hgnc_data</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">check_genes</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">check_genes</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span>
     <span class="va">symbol</span>, <span class="va">date_approved_reserved</span>, <span class="va">date_symbol_changed</span>,
     <span class="va">entrez_id</span>
   <span class="op">)</span></code></pre></div>
@@ -388,11 +388,11 @@
 <p>The naming rules is: <code>tissue_type | cancer_type: Tumor(T) or Normal(N) | cell_type</code>, if one gene matches many cell types, they are seperated with <code>;</code>.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hg_marker_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">cell_marker</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">symbol</span>, <span class="va">cell_marker</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
   <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_rows.html">separate_rows</a></span><span class="op">(</span><span class="va">cell_marker</span>, sep <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cell_marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^.*\\|"</span>, <span class="st">""</span>, <span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>cell_marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^.*\\|"</span>, <span class="st">""</span>, <span class="va">cell_marker</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hg_marker_all</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   symbol cell_marker                                       
@@ -406,8 +406,8 @@
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># select stromal cell markers</span>
 <span class="va">hg_marker_all</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cell_marker</span> <span class="op">==</span> <span class="st">"Stromal cell"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">cell_marker</span> <span class="op">==</span> <span class="st">"Stromal cell"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genekitr/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "ALCAM"   "ANPEP"   "BST1"    "CD34"    "CD44"    "COL5A1"  "ENG"    
 ##  [8] "GREM1"   "ICAM1"   "ICAM2"   "ICAM3"   "ITGA1"   "ITGA4"   "ITGAV"  
@@ -456,7 +456,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-22.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -201,8 +201,8 @@ Here we generate all three ontologies (BP,MF and CC) result.
 all_ego <- genGO(id,
   org = "human",
   ont = "all",
-  pvalueCutoff = 0.01,
-  qvalueCutoff = 0.01
+  pvalueCutoff = 0.05,
+  qvalueCutoff = 0.05
 )
 head(all_ego)
 ```
@@ -565,9 +565,9 @@ There are two visulization types:
 ```{r twogroup1, fig.width=7, fig.height=5, fig.cap="(ref:twogroup1Cap)", fig.scap="(ref:twogroup1Scap)", dpi=300}
 plotEnrichAdv(up_go, down_go,
               plot_type = "one",
+              term_metric = "FoldEnrich",
               stats_metric = "p.adjust",
-              xlim_left = 25, xlim_right = 15
-) +
+              xlim_left = 25, xlim_right = 15) +
   theme(legend.position = c(0.15, 0.9))
 ```
 
@@ -611,6 +611,7 @@ pp <- left + right
 ```{r eval = F}
 plotEnrichAdv(up_go, down_go,
               plot_type = "two",
+              term_metric = "FoldEnrich",
               stats_metric = "qvalue"
 )
 ```
