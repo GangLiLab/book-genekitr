@@ -1,3 +1,4 @@
+fig:BTBD11GO
 fig:goPanther
 fig:goSim
 fig:pantherFail

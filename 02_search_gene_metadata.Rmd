@@ -125,8 +125,9 @@ length(hg_pro_gene)
 
 Compare with [HGNC data](http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt):
 
-```{r include=FALSE}
-hgnc_data <- rio::import("data/gene_with_protein_product.txt")
+
+```{r eval=FALSE}
+hgnc_data <- vroom::vroom("http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt")
 hgnc_symbol <- hgnc_data$symbol
 plotVenn(list(
   genekitr_symbol = hg_pro_gene,
@@ -135,8 +136,8 @@ plotVenn(list(
 ```
 
 
-```{r eval=FALSE}
-hgnc_data <- vroom::vroom("http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt")
+```{r echo=FALSE}
+hgnc_data <- rio::import("data/gene_with_protein_product.txt")
 hgnc_symbol <- hgnc_data$symbol
 plotVenn(list(
   genekitr_symbol = hg_pro_gene,
@@ -157,9 +158,7 @@ hgnc_data %>%
 
 Let's look at the first one "ABTB3":
 
-It seems that the gene "ABTB3" is recently modified, [GeneCards: ABTB3](https://www.genecards.org/Search/Keyword?queryString=ABTB3) also shows no result.
-
-When we look at its EntrezID `r Entrez("121551")`, it is also known as "BTBD11" which matched with our Ensembl data: `r Ensembl("ENSG00000151136")`
+It seems that the gene "ABTB3" is recently modified, while it is also known as "BTBD11" which matched with our Ensembl data: `r Ensembl("ENSG00000151136")`
 
 ```{r}
 genInfo("121551")[1:3]
@@ -167,6 +166,21 @@ genInfo("121551")[1:3]
 
 So the reason for the mismatch is out-of-sync of the large database Ensembl and NCBI. However, the mismatch number is small so the effect is not serious.
 
+> Here is my personal view:
+
+NCBI updates backend data everydata while Ensembl follows a quarterly update cycle.
+
+As long as our genes are not so outdated, it can also finish gene annotation such as enrichment analysis. It is not recommended to keep gene names updated like NCBI because other large databases could not follow a very high updating frequency. 
+
+For example, the gene "BTBD11" (BTB/POZ domain-containing protein 11) could be recognized in [GeneOntology](http://geneontology.org/) while the latest one "ABTB3" is not synced yet. If using NCBI name, user may not get related enrichment information about this gene.
+
+(ref:BTBD11GOScap) BTBD11 vs ABTB3 in GeneOntology
+
+(ref:BTBD11GOCap) **BTBD11 vs ABTB3 in GeneOntology** 
+
+```{r BTBD11GO, out.width="100%", echo=FALSE, fig.cap="(ref:BTBD11GOCap)", fig.scap="(ref:BTBD11GOScap)"}
+knitr::include_graphics("figures/panther-gene-btbd11.png")
+```
 
 ### f6: extract all metadata {#geninfo-feature-6}
 

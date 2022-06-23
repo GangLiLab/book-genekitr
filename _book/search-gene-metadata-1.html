@@ -347,6 +347,7 @@
   genekitr_symbol <span class="op">=</span> <span class="va">hg_pro_gene</span>,
   hgnc_symbol <span class="op">=</span> <span class="va">hgnc_symbol</span>
 <span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-22-1.png" width="98%"></div>
 <p>Check some missing gene names in our result:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">check_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hgnc_symbol</span><span class="op">[</span><span class="op">!</span><span class="va">hgnc_symbol</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">hg_pro_gene</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
@@ -361,13 +362,26 @@
 ## 2 ADGRF2             2002-11-26          2015-03-03    222611
 ## 3  AKR7L             2008-12-09                &lt;NA&gt;    246181</code></pre>
 <p>Let’s look at the first one “ABTB3”:</p>
-<p>It seems that the gene “ABTB3” is recently modified, <a href="https://www.genecards.org/Search/Keyword?queryString=ABTB3">GeneCards: ABTB3</a> also shows no result.</p>
-<p>When we look at its EntrezID <a href="https://www.ncbi.nlm.nih.gov/gene/121551">121551</a>, it is also known as “BTBD11” which matched with our Ensembl data: <a href="https://www.ensembl.org/id/ENSG00000151136">ENSG00000151136</a></p>
+<p>It seems that the gene “ABTB3” is recently modified, while it is also known as “BTBD11” which matched with our Ensembl data: <a href="https://www.ensembl.org/id/ENSG00000151136">ENSG00000151136</a></p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genInfo.html">genInfo</a></span><span class="op">(</span><span class="st">"121551"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <pre><code>##   input_id         ensembl symbol
 ## 1   121551 ENSG00000151136 BTBD11</code></pre>
 <p>So the reason for the mismatch is out-of-sync of the large database Ensembl and NCBI. However, the mismatch number is small so the effect is not serious.</p>
+<blockquote>
+<p>Here is my personal view:</p>
+</blockquote>
+<p>NCBI updates backend data everydata while Ensembl follows a quarterly update cycle.</p>
+<p>As long as our genes are not so outdated, it can also finish gene annotation such as enrichment analysis. It is not recommended to keep gene names updated like NCBI because other large databases could not follow a very high updating frequency.</p>
+<p>For example, the gene “BTBD11” (BTB/POZ domain-containing protein 11) could be recognized in <a href="http://geneontology.org/">GeneOntology</a> while the latest one “ABTB3” is not synced yet. If using NCBI name, user may not get related enrichment information about this gene.</p>
+
+
+<div class="figure">
+<span style="display:block;" id="fig:BTBD11GO"></span>
+<img src="figures/panther-gene-btbd11.png" alt="BTBD11 vs ABTB3 in GeneOntology" width="100%"><p class="caption">
+Figure 2.1: <strong>BTBD11 vs ABTB3 in GeneOntology</strong>
+</p>
+</div>
 </div>
 <div id="geninfo-feature-6" class="section level3">
 <h3>
