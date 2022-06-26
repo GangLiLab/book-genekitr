@@ -56,6 +56,9 @@ distinguish-gene-symbol-with-special-characters
 geninfo-feature-4
 geninfo-feature-5
 geninfo-feature-6
+get-all-human-protein-coding-genes
+compare-with-hgnc-data
+compare-with-orgdb-in-bioconductor
 geneinfo-feature-7
 search-pubmed-1
 gene-id-conversion-1

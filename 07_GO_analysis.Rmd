@@ -45,7 +45,7 @@ GO terms are built in a directed acyclic graph with a parent-child relationship.
 
 The simplest arguments are: 
 
-- `id`: gene id of entrez, ensembl, symbol (alias is also accepted) or uniprot
+- `id`: gene id of entrez (numeric id is also supported), ensembl, symbol (alias is also accepted) or uniprot
 - `org`: organism (from `genekitr::biocOrg_name`)
 - `ont`: ontology of "bp", "mf", "cc" or "all"
 - `pvalueCutoff`

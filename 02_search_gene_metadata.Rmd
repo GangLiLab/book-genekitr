@@ -100,7 +100,8 @@ genInfo(id)[1:4]
 ### f4: count organism gene types {#geninfo-feature-4}
 
 ```{r}
-uniq_symbol <- genInfo(org = "hs") %>%
+org <- "hs"
+uniq_symbol <- genInfo(org = org) %>%
   dplyr::filter(!is.na(gene_biotype)) %>%
   dplyr::distinct(symbol, .keep_all = T)
 
@@ -110,10 +111,19 @@ uniq_symbol %>%
   }
 ```
 
+### f5: extract all metadata {#geninfo-feature-5}
 
-### f5: extract specific biotype genes {#geninfo-feature-5}
+If user only wants to get all information, just give `org` argument alone.
 
-Get all human protein-coding genes:
+```{r}
+all_human_data <- genInfo(org = "human")
+dim(all_human_data)
+```
+
+
+### f6: extract specific biotype genes {#geninfo-feature-6}
+
+##### Get all human protein-coding genes:
 
 ```{r}
 hg_pro_gene <- uniq_symbol %>%
@@ -123,7 +133,7 @@ hg_pro_gene <- uniq_symbol %>%
 length(hg_pro_gene)
 ```
 
-Compare with [HGNC data](http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt):
+#####  Compare with [HGNC data](http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt):
 
 
 ```{r eval=FALSE}
@@ -182,14 +192,50 @@ For example, the gene "BTBD11" (BTB/POZ domain-containing protein 11) could be r
 knitr::include_graphics("figures/panther-gene-btbd11.png")
 ```
 
-### f6: extract all metadata {#geninfo-feature-6}
+##### Compare with `orgDb` in Bioconductor
 
-If user only wants to get all information, just give `org` argument alone.
+Because `genekitr` combines both Ensembl and NCBI data, it could handle more gene ids than common organism-level (‘org’) packages in Bioconductor.
 
 ```{r}
-all_human_data <- genInfo(org = "human")
-dim(all_human_data)
+# using orgdb
+library(org.Hs.eg.db)
+org_dat = select(org.Hs.eg.db,
+                keys = keys(org.Hs.eg.db),
+                keytype = 'ENTREZID',
+                columns = 'SYMBOL')
+org_sym <- unique(org_dat$SYMBOL)
+length(org_sym)
+
+# using genekitr
+genekitr_sym <- unique(na.omit(all_human_data$symbol))
+length(genekitr_sym)
+
+plotVenn(list(
+  org_sym = org_sym,
+  genekitr_sym = genekitr_sym
+))
 ```
+
+Some genes only exist in `genekitr`:
+
+```{r}
+genekitr_sym[!genekitr_sym%in%org_sym] %>% head()
+genInfo("SPDYE12")[1:4]
+```
+
+For example, gene `r Entrez("100101268")` is officially named as  `SPDYE12`, while in orgdb the name is:
+
+```{r}
+org_dat[org_dat$ENTREZID=="100101268","SYMBOL"]
+```
+
+Do not worry, if you use `genekitr`, you can still get exact match:
+
+```{r}
+genInfo("SPDYE12P")[1:4]
+```
+
+
 
 ### f7: extract human cell markers {#geneinfo-feature-7}
 

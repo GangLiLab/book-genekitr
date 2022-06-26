@@ -35,7 +35,7 @@ knitr::include_graphics("figures/kegg_overview.png")
 
 The simplest arguments are: 
 
-- `id`: gene id of entrez, ensembl or symbol (alias is also accepted)
+- `id`: gene id of entrez (numeric id is also supported), ensembl or symbol (alias is also accepted)
 - `org`: organism (7254 species from `genekitr::keggOrg_name`)
 - `pvalueCutoff`
 - `qvalueCutoff`

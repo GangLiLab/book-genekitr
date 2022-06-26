@@ -106,13 +106,13 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <p>The simplest arguments are:</p>
 <ul>
 <li>
-<code>id</code>: gene id of entrez, ensembl or symbol (alias is also accepted)</li>
+<code>id</code>: gene id of entrez (numeric id is also supported), ensembl or symbol (alias is also accepted)</li>
 <li>
 <code>org</code>: organism (7254 species from <code><a href="https://rdrr.io/pkg/genekitr/man/Datasets.html">genekitr::keggOrg_name</a></code>)</li>
 <li><code>pvalueCutoff</code></li>
 <li><code>qvalueCutoff</code></li>
 </ul>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span>
 <span class="va">keg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genKEGG.html">genKEGG</a></span><span class="op">(</span><span class="va">id</span>,
@@ -122,17 +122,17 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">keg</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##                ID              Description  GeneRatio  BgRatio       pvalue
-## hsa03030 hsa03030          DNA replication 0.04222222  36/8157 3.069219e-15
-## hsa04110 hsa04110               Cell cycle 0.07333333 126/8157 1.922027e-14
-## hsa03460 hsa03460   Fanconi anemia pathway 0.03111111  54/8157 8.372886e-07
-## hsa03440 hsa03440 Homologous recombination 0.02666667  41/8157 1.252525e-06
-## hsa03430 hsa03430          Mismatch repair 0.02000000  23/8157 1.785023e-06
+## hsa03030 hsa03030          DNA replication 0.04222222  36/8158 3.062409e-15
+## hsa04110 hsa04110               Cell cycle 0.07333333 126/8158 1.915408e-14
+## hsa03460 hsa03460   Fanconi anemia pathway 0.03111111  54/8158 8.360663e-07
+## hsa03440 hsa03440 Homologous recombination 0.02666667  41/8158 1.250913e-06
+## hsa03430 hsa03430          Mismatch repair 0.02000000  23/8158 1.783210e-06
 ##              p.adjust       qvalue
-## hsa03030 9.299733e-13 8.399967e-13
-## hsa04110 2.911871e-12 2.630142e-12
-## hsa03460 8.456614e-05 7.638422e-05
-## hsa03440 9.487875e-05 8.569906e-05
-## hsa03430 1.081724e-04 9.770655e-05
+## hsa03030 9.279100e-13 8.381331e-13
+## hsa04110 2.901844e-12 2.621085e-12
+## hsa03460 8.444270e-05 7.627271e-05
+## hsa03440 9.475669e-05 8.558881e-05
+## hsa03430 1.080625e-04 9.760729e-05
 ##                                                                                                                                                                 geneID
 ## hsa03030                                                             57804/2237/5426/6118/5982/1763/5984/23649/10714/5557/5111/4172/4171/4176/5983/4174/4173/4175/5427
 ## hsa04110 7040/7042/995/5347/891/1870/1021/7465/9700/5933/1017/699/890/4609/5111/990/4172/7272/1869/4171/4176/4174/4085/4173/983/4175/9088/23594/4998/595/8318/993/9134
@@ -146,13 +146,13 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 ## hsa03440                                                                                                            ABRAXAS1/POLD4/RPA2/EME1/POLD3/BRCA1/BRIP1/RAD54L/BRCA2/BLM/RAD51/XRCC2
 ## hsa03430                                                                                                                                     POLD4/MSH2/RPA2/RFC2/RFC4/POLD3/PCNA/RFC3/EXO1
 ##          Count FoldEnrich RichFactor
-## hsa03030    19   9.566852  0.5277778
-## hsa04110    33   4.747460  0.2619048
-## hsa03460    14   4.699506  0.2592593
-## hsa03440    12   5.305366  0.2926829
-## hsa03430     9   7.093043  0.3913043</code></pre>
+## hsa03030    19   9.568025  0.5277778
+## hsa04110    33   4.748042  0.2619048
+## hsa03460    14   4.700082  0.2592593
+## hsa03440    12   5.306016  0.2926829
+## hsa03430     9   7.093913  0.3913043</code></pre>
 <p>Input type is not limited to Entrez ID, other gene types will be automatically converted to Entrez ID.</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sym</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"BRCA1"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span>,<span class="st">"BRCA2"</span>,<span class="st">"TET2"</span><span class="op">)</span>
 <span class="va">keg2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genKEGG.html">genKEGG</a></span><span class="op">(</span><span class="va">sym</span>,
   org <span class="op">=</span> <span class="st">"human"</span>,
@@ -161,30 +161,30 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">keg2</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##                ID              Description GeneRatio  BgRatio       pvalue
-## hsa05224 hsa05224            Breast cancer       0.6 147/8157 5.585086e-05
-## hsa03440 hsa03440 Homologous recombination       0.4  41/8157 2.441614e-04
-## hsa03460 hsa03460   Fanconi anemia pathway       0.4  54/8157 4.247311e-04
-## hsa01524 hsa01524 Platinum drug resistance       0.4  73/8157 7.763692e-04
-## hsa05212 hsa05212        Pancreatic cancer       0.4  76/8157 8.413308e-04
+## hsa05224 hsa05224            Breast cancer       0.6 147/8158 0.0000558305
+## hsa03440 hsa03440 Homologous recombination       0.4  41/8158 0.0002441018
+## hsa03460 hsa03460   Fanconi anemia pathway       0.4  54/8158 0.0004246277
+## hsa01524 hsa01524 Platinum drug resistance       0.4  73/8158 0.0007761805
+## hsa05212 hsa05212        Pancreatic cancer       0.4  76/8158 0.0008411265
 ##             p.adjust      qvalue           geneID    geneID_symbol Count
-## hsa05224 0.003127648 0.002057663 TP53/BRCA1/BRCA2 TP53/BRCA1/BRCA2     3
-## hsa03440 0.006836518 0.004497709      BRCA1/BRCA2      BRCA1/BRCA2     2
-## hsa03460 0.007928314 0.005215996      BRCA1/BRCA2      BRCA1/BRCA2     2
-## hsa01524 0.009422905 0.006199280       TP53/BRCA1       TP53/BRCA1     2
-## hsa05212 0.009422905 0.006199280       TP53/BRCA2       TP53/BRCA2     2
+## hsa05224 0.003126508 0.002056913 TP53/BRCA1/BRCA2 TP53/BRCA1/BRCA2     3
+## hsa03440 0.006834850 0.004496612      BRCA1/BRCA2      BRCA1/BRCA2     2
+## hsa03460 0.007926383 0.005214726      BRCA1/BRCA2      BRCA1/BRCA2     2
+## hsa01524 0.009420616 0.006197774       TP53/BRCA1       TP53/BRCA1     2
+## hsa05212 0.009420616 0.006197774       TP53/BRCA2       TP53/BRCA2     2
 ##          FoldEnrich RichFactor
-## hsa05224   33.29388 0.02040816
-## hsa03440   79.58049 0.04878049
-## hsa03460   60.42222 0.03703704
-## hsa01524   44.69589 0.02739726
-## hsa05212   42.93158 0.02631579</code></pre>
+## hsa05224   33.29796 0.02040816
+## hsa03440   79.59024 0.04878049
+## hsa03460   60.42963 0.03703704
+## hsa01524   44.70137 0.02739726
+## hsa05212   42.93684 0.02631579</code></pre>
 </div>
 <div id="kegg-group-enrichment" class="section level2">
 <h2>
 <span class="header-section-number">8.3</span> Group enrichment<a class="anchor" aria-label="anchor" href="#kegg-group-enrichment"><i class="fas fa-link"></i></a>
 </h2>
 <p>Like <a href="ora-go-analysis-1.html#go-group-enrichment">GO enrichment analysis</a>, KEGG also supports multi-group gene enrichment analysis.</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 <span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   group1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>,
@@ -204,17 +204,17 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 ## 4  down.A   down      A hsa04114                          Oocyte meiosis
 ## 5  down.B   down      B hsa03440                Homologous recombination
 ##   GeneRatio  BgRatio       pvalue     p.adjust       qvalue
-## 1 0.4444444 126/8157 6.442363e-06 9.019308e-05 6.781434e-05
-## 2 0.2222222  36/8157 6.686677e-04 4.680674e-03 3.519304e-03
-## 3 0.2222222 102/8157 5.264204e-03 2.456629e-02 1.847089e-02
-## 4 0.2222222 131/8157 8.558563e-03 2.995497e-02 2.252254e-02
-## 5 0.1315789  41/8157 1.108128e-06 1.396241e-04 1.271431e-04
+## 1 0.4444444 126/8158 6.439252e-06 9.014952e-05 0.0000677816
+## 2 0.2222222  36/8158 6.685054e-04 4.679538e-03 0.0035184493
+## 3 0.2222222 102/8158 5.262951e-03 2.456044e-02 0.0184664933
+## 4 0.2222222 131/8158 8.556543e-03 2.994790e-02 0.0225172179
+## 5 0.1315789  41/8158 1.107465e-06 1.395406e-04 0.0001270670
 ##                   geneID                geneID_symbol Count FoldEnrich
-## 1     4173/983/4175/9088        MCM4/CDK1/MCM6/PKMYT1     4   28.77249
-## 2              4173/4175                    MCM4/MCM6     2   50.35185
-## 3               983/9088                  CDK1/PKMYT1     2   17.77124
-## 4               983/9088                  CDK1/PKMYT1     2   13.83715
-## 5 8438/675/641/5888/7516 RAD54L/BRCA2/BLM/RAD51/XRCC2     5   26.17779
+## 1     4173/983/4175/9088        MCM4/CDK1/MCM6/PKMYT1     4   28.77601
+## 2              4173/4175                    MCM4/MCM6     2   50.35802
+## 3               983/9088                  CDK1/PKMYT1     2   17.77342
+## 4               983/9088                  CDK1/PKMYT1     2   13.83885
+## 5 8438/675/641/5888/7516 RAD54L/BRCA2/BLM/RAD51/XRCC2     5   26.18100
 ##   RichFactor
 ## 1 0.03174603
 ## 2 0.05555556
@@ -251,7 +251,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-23.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
