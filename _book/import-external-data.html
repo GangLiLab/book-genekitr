@@ -302,15 +302,13 @@ Figure 10.5: <strong>Two-side bar plot after modifying labels.</strong>
 
 <div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">do_easy</span>, 
-           plot_type <span class="op">=</span> <span class="st">"network"</span>, 
-           layout <span class="op">=</span> <span class="st">"circle"</span>, 
-           scale_ratio <span class="op">=</span> <span class="fl">1</span>,
-           main_text_size <span class="op">=</span> <span class="fl">7</span>,
-           legend_text_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+           plot_type <span class="op">=</span> <span class="st">"geneheat"</span>,
+           fold_change <span class="op">=</span> <span class="va">geneList</span>,
+           show_gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'S100A9'</span>,<span class="st">'AGTR1'</span>,<span class="st">'BIRC5'</span>,<span class="st">'MMP1'</span>,<span class="st">'CXCL10'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:impCPDO"></span>
-<img src="genekitr_files/figure-html/impCPDO-1.png" alt="Chord plot of clusterProfiler result." width="98%"><p class="caption">
-Figure 10.6: <strong>Chord plot of clusterProfiler result.</strong>
+<img src="genekitr_files/figure-html/impCPDO-1.png" alt="Heatmap of clusterProfiler result." width="98%"><p class="caption">
+Figure 10.6: <strong>Heatmap of clusterProfiler result.</strong>
 </p>
 </div>
 

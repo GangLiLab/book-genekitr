@@ -173,17 +173,15 @@ Then you could select interested terms and utilize plot functions on [Chapter 11
 
 For example:
 
-(ref:impCPDOScap) Chord plot of clusterProfiler result.
+(ref:impCPDOScap) Heatmap of clusterProfiler result.
 
-(ref:impCPDOCap) **Chord plot of clusterProfiler result.** 
+(ref:impCPDOCap) **Heatmap of clusterProfiler result.** 
 
-```{r impCPDO, fig.height=10, fig.width=10, fig.cap="(ref:impCPDOCap)", fig.scap="(ref:impCPDOScap)",dpi=300}
+```{r impCPDO, fig.height=7, fig.width=14, fig.cap="(ref:impCPDOCap)", fig.scap="(ref:impCPDOScap)",dpi=300}
 plotEnrich(do_easy, 
-           plot_type = "network", 
-           layout = "circle", 
-           scale_ratio = 1,
-           main_text_size = 7,
-           legend_text_size = 10)
+           plot_type = "geneheat",
+           fold_change = geneList,
+           show_gene = c('S100A9','AGTR1','BIRC5','MMP1','CXCL10'))
 ```
 
 
