@@ -53,6 +53,8 @@ head(keg, 5)
 
 Input type is not limited to Entrez ID, other gene types will be automatically converted to Entrez ID.
 
+> If input id is mixture of gene symbol and alias, the result will convert alias to symbol automatically and result will show two columns `geneID` and `geneID_symbol`. **If input id is symbol and the result only has `geneID`, that means the input symbol do not have any alias.** 
+
 ```{r}
 sym <- c("TP53","BRCA1", "PD1", "PDL1","BRCA2","TET2")
 keg2 <- genKEGG(sym,

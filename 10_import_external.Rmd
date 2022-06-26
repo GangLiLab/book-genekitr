@@ -1,0 +1,194 @@
+# Import External Data {#import-external-data}
+
+```{r include=FALSE}
+library(knitr)
+library(ggplot2)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(genekitr)
+```
+
+
+## Import GO panther {#import-panther}
+
+`genekitr::importPanther()` support importing [panther](http://pantherdb.org/webservices/go/overrep.jsp) result from [GeneOntology](http://geneontology.org/) and formatting as `genGO` result.
+
+(ref:goPantherscap) Import panther result.
+
+(ref:goPanthercap) **Import panther result.**
+
+```{r goPanther, out.width="100%", echo=FALSE, fig.cap="(ref:goPanthercap)", fig.scap="(ref:goPantherscap)"}
+knitr::include_graphics("figures/panther_exp.png")
+```
+
+For example, we save panther result as "analysis.txt" and pass to `importPanther`. It will tidy the data and calculate both fold enrichment and rich factor.
+
+```{r}
+panther_res <- importPanther("data/analysis.txt")
+head(panther_res, 5)
+```
+
+Then, you could select interested terms and utilize plot functions on [Chapter 11](#plot-go-kegg-1).
+
+For example:
+
+(ref:impPantherScap) Bar plot of Panther result.
+
+(ref:impPantherCap) **Bar plot of Panther result.** 
+
+```{r impPanther, fig.width=8, fig.height=6, fig.cap="(ref:impPantherCap)", fig.scap="(ref:impPantherScap)", dpi=300}
+plotEnrich(panther_res[c(50,100,350,580,700),], 
+           plot_type = "bar",
+           stats_metric = "qvalue", 
+           term_metric = "GeneRatio",
+           main_text_size = 13,
+           legend_text_size = 10
+           )
+```
+
+## Import clusterProfiler object {#import-clusterProfiler}
+
+`r Biocpkg("clusterProfiler")` is a popular R package of enrichment analysis. However, it requires user has some programming skills to operate its S4 object, which may cause inconvenience in data cleaning and visualization.
+
+Here, `genekitr::importCP()` could easily import the S4 object with additional attributes (e.g. FoldEnrich, RichFactor) to help users communicate with data more fluently.
+
+### clusterProfiler ORA-GO result
+
+```{r}
+## example data
+library(clusterProfiler)
+library(org.Hs.eg.db)
+data(geneList, package="DOSE")
+gene <- names(geneList)[abs(geneList) > 2]
+
+## GO result from clusterProfiler
+go <- enrichGO(gene          = gene,
+                OrgDb         = org.Hs.eg.db,
+                ont           = "BP",
+                pAdjustMethod = "BH",
+                pvalueCutoff  = 0.01,
+                qvalueCutoff  = 0.05)
+
+isS4(go) # return a S4 object
+
+## import 
+go_easy <- importCP(go, type = "go")
+is.data.frame(go_easy)
+# keep the same as the original result
+identical(as.data.frame(go)[,1], go_easy[,1])
+
+head(go_easy)
+```
+
+Then you could select interested terms and utilize plot functions on [Chapter 11](#plot-go-kegg-1).
+
+For example:
+
+(ref:impCPGOScap) Chord plot of clusterProfiler result.
+
+(ref:impCPGOCap) **Chord plot of clusterProfiler result.** 
+
+```{r impCPGO, fig.height=10, fig.width=15, fig.cap="(ref:impCPGOCap)", fig.scap="(ref:impCPGOScap)", dpi=300}
+plotEnrich(tail(go_easy,20), 
+           plot_type = "genechord", 
+           show_gene = c("UBE2C", "CDC20", "NDC80"),
+           main_text_size = 10,
+           legend_text_size = 10
+           )
+```
+
+### clusterProfiler GSEA result
+
+```{r}
+data(geneList, package="DOSE")
+## GSEA result from clusterProfiler
+kk <- gseKEGG(geneList     = geneList,
+               organism     = 'hsa',
+               minGSSize    = 120,
+               pvalueCutoff = 0.05,
+               verbose      = FALSE)
+
+## import
+kk_easy <- importCP(kk,type = 'gsea')
+identical(kk@result[,1], kk_easy$gsea_df[,1])
+```
+
+Then you could select interested terms and utilize plot functions on [Chapter 12](##plot-gsea-1).
+
+For example:
+
+(ref:impCPGSEA1Scap) Two-side bar plot of clusterProfiler result.
+
+(ref:impCPGSEA1Cap) **Two-side bar plot of clusterProfiler result.** 
+
+
+```{r impCPGSEA1, fig.height=6, fig.width=10, fig.cap="(ref:impCPGSEA1Cap)", fig.scap="(ref:impCPGSEA1Scap)", dpi=300}
+plotGSEA(kk_easy, plot_type = "bar",
+         main_text_size = 15)
+```
+
+The IDs in the plot are actually from `ID` column in `kk_easy` result. If we want to add more content, just modify the `ID` column:
+
+```{r}
+kk_easy$gsea_df$ID <- paste(kk_easy$gsea_df$ID, kk_easy$gsea_df$Description,sep = ": ")
+```
+
+(ref:impCPGSEA2Scap) Two-side bar plot after modifying labels.
+
+(ref:impCPGSEA2Cap) **Two-side bar plot after modifying labels.** 
+
+```{r impCPGSEA2, fig.height=6, fig.width=10, fig.cap="(ref:impCPGSEA2Cap)", fig.scap="(ref:impCPGSEA2Scap)",dpi=300}
+plotGSEA(kk_easy, plot_type = "bar",
+         main_text_size = 15)
+```
+
+
+### clusterProfiler KEGG/DOSE/WikiPathways... result
+
+`clusterProfiler` supports many gene sets, including [Disease Ontology (DO)](https://disease-ontology.org/), [WikiPathways](https://www.wikipathways.org/), [ReactomePA](http://bioconductor.org/packages/ReactomePA)
+
+Take DO as example:
+
+```{r}
+library(DOSE)
+data(geneList)
+gene <- names(geneList)[abs(geneList) > 1.5]
+
+## ORA-DO result from clusterProfiler
+do <- enrichDO(gene          = gene,
+              ont           = "DO",
+              pvalueCutoff  = 0.05,
+              pAdjustMethod = "BH",
+              universe      = names(geneList),
+              minGSSize     = 5,
+              maxGSSize     = 500,
+              qvalueCutoff  = 0.05)
+
+# import
+do_easy <- importCP(do,type = 'other')
+identical(as.data.frame(do)[,1], do_easy[,1])
+```
+
+
+Then you could select interested terms and utilize plot functions on [Chapter 11](#plot-go-kegg-1).
+
+For example:
+
+(ref:impCPDOScap) Chord plot of clusterProfiler result.
+
+(ref:impCPDOCap) **Chord plot of clusterProfiler result.** 
+
+```{r impCPDO, fig.height=10, fig.width=10, fig.cap="(ref:impCPDOCap)", fig.scap="(ref:impCPDOScap)",dpi=300}
+plotEnrich(do_easy, 
+           plot_type = "network", 
+           layout = "circle", 
+           scale_ratio = 1,
+           main_text_size = 7,
+           legend_text_size = 10)
+```
+
+
+
+
+
+
+

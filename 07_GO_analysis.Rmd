@@ -97,7 +97,7 @@ Except for the GO enrichment result, protein IDs are also mapped to gene symbols
 
 ### New features {#go-new-features}
 
-+ If input id is not a symbol, `genGO` will convert to a symbol for easy understanding.
++ If input id is not a symbol, `genGO` will convert to a symbol for easy understanding. Besides, if input id is mixture of gene symbol and alias, the result will convert alias to symbol automatically and result will show two columns `geneID` and `geneID_symbol`. **If input id is symbol and the result only has `geneID`, that means the input symbol do not have any alias.** 
 + No need to sepcify input id type, `genGO` will allocate automatically.
 + `genGO` sets four measurement aspects: "Count", "GeneRatio", "FoldEnrichment" and "RichFactor".
   - Bg Ratio: Total number of specific pathway gene/ Universal gene numbers (e.g., all human protein-coding genes)
@@ -180,25 +180,6 @@ In this result, the input **gene alias is also recognized** and converted to the
 ```{r}
 diy_ego$geneID[1]
 diy_ego$geneID_symbol[1]
-```
-
-### Import external data {#go-import}
-
-For now, `genekitr` support importing [panther](http://pantherdb.org/webservices/go/overrep.jsp) result from [GeneOntology](http://geneontology.org/) and formatting as `genGO` result.
-
-(ref:goPantherscap) Import panther result.
-
-(ref:goPanthercap) **Import panther result.**
-
-```{r goPanther, out.width="100%", echo=FALSE, fig.cap="(ref:goPanthercap)", fig.scap="(ref:goPantherscap)"}
-knitr::include_graphics("figures/panther_exp.png")
-```
-
-For example, we save panther result as "analysis.txt" and pass to `importPanther`. It will tidy the data and calculate both fold enrichment and rich factor.
-
-```{r}
-panther_res <- importPanther("data/analysis.txt")
-head(panther_res, 5)
 ```
 
 ### Simplify GO result {#go-simplify}

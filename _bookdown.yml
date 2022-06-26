@@ -11,6 +11,7 @@ rmd_files: ["index.Rmd",
   "07_GO_analysis.Rmd",
   "08_KEGG_analysis.Rmd",
   "09_GSEA_analysis.Rmd",
-  "10_plot_go_kegg.Rmd",
-  "11_plot_gsea.Rmd",
-  "12_plot_others.Rmd"]
+  "10_import_external.Rmd",
+  "11_plot_go_kegg.Rmd",
+  "12_plot_gsea.Rmd",
+  "13_plot_others.Rmd"]

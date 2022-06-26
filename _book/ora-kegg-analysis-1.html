@@ -59,10 +59,11 @@
 <li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
 <li><a class="active" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
 <li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data.html"><span class="header-section-number">10</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">11</span> Plot GSEA</a></li>
-<li><a class="" href="plot-others-1.html"><span class="header-section-number">12</span> Plot others</a></li>
+<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">11</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -112,7 +113,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <li><code>pvalueCutoff</code></li>
 <li><code>qvalueCutoff</code></li>
 </ul>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span>
 <span class="va">keg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genKEGG.html">genKEGG</a></span><span class="op">(</span><span class="va">id</span>,
@@ -152,7 +153,10 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 ## hsa03440    12   5.306016  0.2926829
 ## hsa03430     9   7.093913  0.3913043</code></pre>
 <p>Input type is not limited to Entrez ID, other gene types will be automatically converted to Entrez ID.</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<blockquote>
+<p>If input id is mixture of gene symbol and alias, the result will convert alias to symbol automatically and result will show two columns <code>geneID</code> and <code>geneID_symbol</code>. <strong>If input id is symbol and the result only has <code>geneID</code>, that means the input symbol do not have any alias.</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sym</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"BRCA1"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span>,<span class="st">"BRCA2"</span>,<span class="st">"TET2"</span><span class="op">)</span>
 <span class="va">keg2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genKEGG.html">genKEGG</a></span><span class="op">(</span><span class="va">sym</span>,
   org <span class="op">=</span> <span class="st">"human"</span>,
@@ -184,7 +188,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <span class="header-section-number">8.3</span> Group enrichment<a class="anchor" aria-label="anchor" href="#kegg-group-enrichment"><i class="fas fa-link"></i></a>
 </h2>
 <p>Like <a href="ora-go-analysis-1.html#go-group-enrichment">GO enrichment analysis</a>, KEGG also supports multi-group gene enrichment analysis.</p>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 <span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   group1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>,
@@ -197,30 +201,24 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
   qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gkeg</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Cluster group1 group2       ID                             Description
-## 1  down.A   down      A hsa04110                              Cell cycle
-## 2  down.A   down      A hsa03030                         DNA replication
-## 3  down.A   down      A hsa04914 Progesterone-mediated oocyte maturation
-## 4  down.A   down      A hsa04114                          Oocyte meiosis
-## 5  down.B   down      B hsa03440                Homologous recombination
-##   GeneRatio  BgRatio       pvalue     p.adjust       qvalue
-## 1 0.4444444 126/8158 6.439252e-06 9.014952e-05 0.0000677816
-## 2 0.2222222  36/8158 6.685054e-04 4.679538e-03 0.0035184493
-## 3 0.2222222 102/8158 5.262951e-03 2.456044e-02 0.0184664933
-## 4 0.2222222 131/8158 8.556543e-03 2.994790e-02 0.0225172179
-## 5 0.1315789  41/8158 1.107465e-06 1.395406e-04 0.0001270670
-##                   geneID                geneID_symbol Count FoldEnrich
-## 1     4173/983/4175/9088        MCM4/CDK1/MCM6/PKMYT1     4   28.77601
-## 2              4173/4175                    MCM4/MCM6     2   50.35802
-## 3               983/9088                  CDK1/PKMYT1     2   17.77342
-## 4               983/9088                  CDK1/PKMYT1     2   13.83885
-## 5 8438/675/641/5888/7516 RAD54L/BRCA2/BLM/RAD51/XRCC2     5   26.18100
-##   RichFactor
-## 1 0.03174603
-## 2 0.05555556
-## 3 0.01960784
-## 4 0.01526718
-## 5 0.12195122</code></pre>
+<pre><code>##   Cluster       ID                             Description GeneRatio  BgRatio
+## 1  down.A hsa04110                              Cell cycle 0.4444444 126/8158
+## 2  down.A hsa03030                         DNA replication 0.2222222  36/8158
+## 3  down.A hsa04914 Progesterone-mediated oocyte maturation 0.2222222 102/8158
+## 4  down.A hsa04114                          Oocyte meiosis 0.2222222 131/8158
+## 5  down.B hsa03440                Homologous recombination 0.1315789  41/8158
+##         pvalue     p.adjust       qvalue                 geneID
+## 1 6.439252e-06 9.014952e-05 0.0000677816     4173/983/4175/9088
+## 2 6.685054e-04 4.679538e-03 0.0035184493              4173/4175
+## 3 5.262951e-03 2.456044e-02 0.0184664933               983/9088
+## 4 8.556543e-03 2.994790e-02 0.0225172179               983/9088
+## 5 1.107465e-06 1.395406e-04 0.0001270670 8438/675/641/5888/7516
+##                  geneID_symbol Count FoldEnrich RichFactor
+## 1        MCM4/CDK1/MCM6/PKMYT1     4   28.77601 0.03174603
+## 2                    MCM4/MCM6     2   50.35802 0.05555556
+## 3                  CDK1/PKMYT1     2   17.77342 0.01960784
+## 4                  CDK1/PKMYT1     2   13.83885 0.01526718
+## 5 RAD54L/BRCA2/BLM/RAD51/XRCC2     5   26.18100 0.12195122</code></pre>
 <p>Other additional arguments could refer to <a href="ora-go-analysis-1.html#go-additional-arguments">GO analysis</a>.</p>
 
 </div>
@@ -251,7 +249,7 @@ Figure 8.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-26.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Plot GSEA | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 12 Plot GSEA | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="GSEA analysis returns a list result, which could be directly passed to plotGSEA. The function could help draw classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Plot GSEA | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 12 Plot GSEA | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="GSEA analysis returns a list result, which could be directly passed to plotGSEA. The function could help draw classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Plot GSEA | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 12 Plot GSEA | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="GSEA analysis returns a list result, which could be directly passed to plotGSEA. The function could help draw classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -59,10 +59,11 @@
 <li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
 <li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data.html"><span class="header-section-number">10</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></li>
-<li><a class="active" href="plot-gsea-1.html"><span class="header-section-number">11</span> Plot GSEA</a></li>
-<li><a class="" href="plot-others-1.html"><span class="header-section-number">12</span> Plot others</a></li>
+<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">11</span> Plot GO and KEGG</a></li>
+<li><a class="active" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -72,10 +73,10 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="plot-gsea-1" class="section level1">
 <h1>
-<span class="header-section-number">11</span> Plot GSEA<a class="anchor" aria-label="anchor" href="#plot-gsea-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> Plot GSEA<a class="anchor" aria-label="anchor" href="#plot-gsea-1"><i class="fas fa-link"></i></a>
 </h1>
 <p><a href="functional-class-scoring-1.html#gsea-basic-usage">GSEA analysis</a> returns a list result, which could be directly passed to <code>plotGSEA</code>. The function could help draw classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar plot.</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>
   genelist <span class="op">=</span> <span class="va">geneList</span>, 
@@ -85,75 +86,75 @@
 <span class="op">)</span></code></pre></div>
 <div id="classic-pathway-plot" class="section level2">
 <h2>
-<span class="header-section-number">11.1</span> Classic Pathway Plot<a class="anchor" aria-label="anchor" href="#classic-pathway-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Classic Pathway Plot<a class="anchor" aria-label="anchor" href="#classic-pathway-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Running enrichment score of a gene set is drawn as classic pathway plot lines. The function will walks down the ranked gene list. The vertical lines in the middle show the location of gene set members.</p>
 <p>If user wants to show specific pathways or genes, just pass to according parameters: <code>show_pathway</code> and <code>show_gene</code>.</p>
 
 
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_P53_PATHWAY"</span>, <span class="st">"HALLMARK_GLYCOLYSIS"</span>, <span class="st">"HALLMARK_DNA_REPAIR"</span><span class="op">)</span>
 <span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MET"</span>, <span class="st">"TP53"</span>, <span class="st">"PMM2"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"classic"</span>, show_pathway <span class="op">=</span> <span class="va">pathways</span>, show_gene <span class="op">=</span> <span class="va">genes</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:classicGSEA"></span>
 <img src="genekitr_files/figure-html/classicGSEA-1.png" alt="Classic pathway plot of GSEA." width="98%"><p class="caption">
-Figure 11.1: <strong>Classic pathway plot of GSEA.</strong>
+Figure 12.1: <strong>Classic pathway plot of GSEA.</strong>
 </p>
 </div>
 </div>
 <div id="volcano-pathway-plot" class="section level2">
 <h2>
-<span class="header-section-number">11.2</span> Volcano Pathway Plot<a class="anchor" aria-label="anchor" href="#volcano-pathway-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Volcano Pathway Plot<a class="anchor" aria-label="anchor" href="#volcano-pathway-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this plot, the degree of enrichment is indicated by a normalized enrichment score or NES.</p>
 <p>Slightly different with DEG volcano plot, the x-axis is represented as NES, which corrects for enrichment score differences among gene-sets.</p>
 <p>A significant positive NES value indicates that members of the gene set tend to appear at the top of the ranked data (e.g. fold change of DEG) and a significant negative NES indicates the opposite.</p>
 <p>Default shows the top(N) pathways. If user wants to show specific pathway, also pass the argument to <code>show_pathway</code>.</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_P53_PATHWAY"</span>, <span class="st">"HALLMARK_GLYCOLYSIS"</span>, <span class="st">"HALLMARK_DNA_REPAIR"</span><span class="op">)</span>
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"volcano"</span>, show_pathway <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"volcano"</span>, show_pathway <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/patchwork/man/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
 
 
 <div class="figure">
 <span style="display:block;" id="fig:volcanoGSEA"></span>
 <img src="genekitr_files/figure-html/volcanoGSEA-1.png" alt="Volcano pathway plot of GSEA. default (A), select pathways (B)." width="98%"><p class="caption">
-Figure 11.2: <strong>Volcano pathway plot of GSEA.</strong> default (A), select pathways (B).
+Figure 12.2: <strong>Volcano pathway plot of GSEA.</strong> default (A), select pathways (B).
 </p>
 </div>
 </div>
 <div id="multi-pathway-plot" class="section level2">
 <h2>
-<span class="header-section-number">11.3</span> Multi-pathway Plot<a class="anchor" aria-label="anchor" href="#multi-pathway-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> Multi-pathway Plot<a class="anchor" aria-label="anchor" href="#multi-pathway-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>If user wants to show a bunch of selected pathways, <code>plotGSEA</code> has scratched some codes from <a href="http://bioconductor.org/packages/fgsea">fgsea</a>.</p>
 <p>Default shows the top(N) pathways. If user wants to show specific pathway, also pass the argument to <code>show_pathway</code>.</p>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_P53_PATHWAY"</span>, <span class="st">"HALLMARK_GLYCOLYSIS"</span>, <span class="st">"HALLMARK_DNA_REPAIR"</span><span class="op">)</span>
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"fgsea"</span>, show_pathway <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"fgsea"</span>, show_pathway <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/patchwork/man/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
 
 
 <div class="figure">
 <span style="display:block;" id="fig:fgseaGSEA"></span>
 <img src="genekitr_files/figure-html/fgseaGSEA-1.png" alt="Multi-pathway plot of GSEA. default (A), select pathways (B)." width="98%"><p class="caption">
-Figure 11.3: <strong>Multi-pathway plot of GSEA.</strong> default (A), select pathways (B).
+Figure 12.3: <strong>Multi-pathway plot of GSEA.</strong> default (A), select pathways (B).
 </p>
 </div>
 </div>
 <div id="ridge-plot" class="section level2">
 <h2>
-<span class="header-section-number">11.4</span> Ridge Plot<a class="anchor" aria-label="anchor" href="#ridge-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4</span> Ridge Plot<a class="anchor" aria-label="anchor" href="#ridge-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Ridge plot will visualize enriched pathways of up/down regulated genes. The x-axis is fold change and y-axis is pathways. Color represents statistical value (e.g. pvalue/p.adjust/qvalue)</p>
 
 
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>,
   plot_type <span class="op">=</span> <span class="st">"ridge"</span>,
   show_pathway <span class="op">=</span> <span class="fl">10</span>, stats_metric <span class="op">=</span> <span class="st">"p.adjust"</span>
@@ -161,40 +162,40 @@ Figure 11.3: <strong>Multi-pathway plot of GSEA.</strong> default (A), select pa
 <div class="figure">
 <span style="display:block;" id="fig:ridge"></span>
 <img src="genekitr_files/figure-html/ridge-1.png" alt="Ridge plot of GSEA." width="98%"><p class="caption">
-Figure 11.4: <strong>Ridge plot of GSEA.</strong>
+Figure 12.4: <strong>Ridge plot of GSEA.</strong>
 </p>
 </div>
 </div>
 <div id="two-side-barplot" class="section level2">
 <h2>
-<span class="header-section-number">11.5</span> Two-side Barplot<a class="anchor" aria-label="anchor" href="#two-side-barplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.5</span> Two-side Barplot<a class="anchor" aria-label="anchor" href="#two-side-barplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>The barplot will separate positive and negative NES into two sides. User could specify <code>color</code> for the two sides. Meanwhile, non-significant pathways (e.g. Pvalue &gt; 0.05) will be colored as “grey”.</p>
 
 
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"navyblue"</span>, <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:twosideBar"></span>
 <img src="genekitr_files/figure-html/twosideBar-1.png" alt="Two-side bar plot of GSEA." width="98%"><p class="caption">
-Figure 11.5: <strong>Two-side bar plot of GSEA.</strong>
+Figure 12.5: <strong>Two-side bar plot of GSEA.</strong>
 </p>
 </div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="plot-go-kegg-1.html"><span class="header-section-number">10</span> Plot GO and KEGG</a></div>
-<div class="next"><a href="plot-others-1.html"><span class="header-section-number">12</span> Plot others</a></div>
+<div class="prev"><a href="plot-go-kegg-1.html"><span class="header-section-number">11</span> Plot GO and KEGG</a></div>
+<div class="next"><a href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#plot-gsea-1"><span class="header-section-number">11</span> Plot GSEA</a></li>
-<li><a class="nav-link" href="#classic-pathway-plot"><span class="header-section-number">11.1</span> Classic Pathway Plot</a></li>
-<li><a class="nav-link" href="#volcano-pathway-plot"><span class="header-section-number">11.2</span> Volcano Pathway Plot</a></li>
-<li><a class="nav-link" href="#multi-pathway-plot"><span class="header-section-number">11.3</span> Multi-pathway Plot</a></li>
-<li><a class="nav-link" href="#ridge-plot"><span class="header-section-number">11.4</span> Ridge Plot</a></li>
-<li><a class="nav-link" href="#two-side-barplot"><span class="header-section-number">11.5</span> Two-side Barplot</a></li>
+<li><a class="nav-link" href="#plot-gsea-1"><span class="header-section-number">12</span> Plot GSEA</a></li>
+<li><a class="nav-link" href="#classic-pathway-plot"><span class="header-section-number">12.1</span> Classic Pathway Plot</a></li>
+<li><a class="nav-link" href="#volcano-pathway-plot"><span class="header-section-number">12.2</span> Volcano Pathway Plot</a></li>
+<li><a class="nav-link" href="#multi-pathway-plot"><span class="header-section-number">12.3</span> Multi-pathway Plot</a></li>
+<li><a class="nav-link" href="#ridge-plot"><span class="header-section-number">12.4</span> Ridge Plot</a></li>
+<li><a class="nav-link" href="#two-side-barplot"><span class="header-section-number">12.5</span> Two-side Barplot</a></li>
 </ul>
 
       <div class="book-extra">
@@ -211,7 +212,7 @@ Figure 11.5: <strong>Two-side bar plot of GSEA.</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-26.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -66,7 +66,7 @@ knitr::include_graphics("figures/gsea_overview.png")
 
 The simplest arguments are: 
 
-- `genelist`: Order ranked genelist in decreasing order, gene can be entrez, ensembl or symbol.
+- `genelist`: Order ranked genelist in decreasing order, gene can be **Entrez, Ensembl or symbol.**
 - `org`: organism (from `genekitr::msig_org`)
 - `category`: one of C1','C2','C3', 'C4','C5','C6','C7','C8','H'
 - `subcategory`: choose from `genekitr::msig_category`. If category has no subcategory, leave it as NULL.
@@ -93,6 +93,8 @@ head(gse$gsea_df, 5)
 ```
 
 > About the `gsea_df` result
+
+- If input id is mixture of gene symbol and alias, the result will convert alias to symbol automatically and result will show two columns `geneID` and `geneID_symbol`. **If input id is symbol and the result only has `geneID`, that means the input symbol do not have any alias.** 
 
 - `setSize`: according to the [documentation](https://rdrr.io/github/ctlab/fgsea/man/fgseaLabel.html) of `r Biocpkg("fgsea")`, it is the size of the pathway after removing genes not present in `names(stats)`. To be more specific, if we input a pathway gene set with 58 genes (e.g. [HALLMARK_MYC_TARGETS_V2](https://www.gsea-msigdb.org/gsea/msigdb/cards/HALLMARK_MYC_TARGETS_V2.html) ), while our gene list only have 54 of it, so the result will only show `setSize = 54` 
 

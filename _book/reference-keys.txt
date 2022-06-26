@@ -1,10 +1,15 @@
 fig:BTBD11GO
-fig:goPanther
 fig:goSim
 fig:pantherFail
 fig:keggoverview
 fig:gseaoverview
 fig:exposheet
+fig:goPanther
+fig:impPanther
+fig:impCPGO
+fig:impCPGSEA1
+fig:impCPGSEA2
+fig:impCPDO
 fig:barplot
 fig:bubbleplot
 fig:dotplot
@@ -96,7 +101,6 @@ comparison-with-one-group
 comparison-with-more-than-one-group
 go-advanced-usage
 different-types-of-input-and-backgroud-genes
-go-import
 go-simplify
 go-tools-comparsion
 gengo-vs-enrichgo
@@ -109,6 +113,12 @@ functional-class-scoring-1
 gsea-introduction
 gsea-basic-usage
 export-result
+import-external-data
+import-panther
+import-clusterProfiler
+clusterprofiler-ora-go-result
+clusterprofiler-gsea-result
+clusterprofiler-keggdosewikipathways-result
 plot-go-kegg-1
 gokegg-bar-plot
 gokegg-bubble-plot
