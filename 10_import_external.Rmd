@@ -177,7 +177,7 @@ For example:
 
 (ref:impCPDOCap) **Heatmap of clusterProfiler result.** 
 
-```{r impCPDO, fig.height=7, fig.width=14, fig.cap="(ref:impCPDOCap)", fig.scap="(ref:impCPDOScap)",dpi=300}
+```{r impCPDO, fig.height=6, fig.width=12, fig.cap="(ref:impCPDOCap)", fig.scap="(ref:impCPDOScap)",dpi=300}
 plotEnrich(do_easy, 
            plot_type = "geneheat",
            fold_change = geneList,

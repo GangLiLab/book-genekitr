@@ -109,6 +109,8 @@ ora-kegg-analysis-1
 kegg-introduction
 kegg-basic-usage
 kegg-group-enrichment
+comparison-with-one-group-1
+comparison-with-more-than-one-group-1
 functional-class-scoring-1
 gsea-introduction
 gsea-basic-usage

@@ -134,7 +134,7 @@
 <li><code>pvalueCutoff</code></li>
 <li><code>qvalueCutoff</code></li>
 </ul>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span>
 <span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">id</span>,
@@ -188,12 +188,12 @@
 ## GO:1901989     7   9.760680 0.06363636</code></pre>
 <p>If user has proteomics data, protein IDs could directly do GO analysis instead of gene conversion.
 Here we will use data from: <a href="protein-id-conversion-1.html#protein-example-data">rat protein example data</a></p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pro_id</span> <span class="op">&lt;-</span> <span class="va">rat_prodata</span><span class="op">$</span><span class="va">Acc</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pro_id</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "P27364" "P17475" "P14046" "P00507" "P15650" "P08503" "P16638" "P18484"
 ##  [9] "P06757" "P24483"</code></pre>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rat_ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">pro_id</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>, 
                  org <span class="op">=</span> <span class="st">'rat'</span>, 
                  ont <span class="op">=</span> <span class="st">'bp'</span>,
@@ -282,7 +282,7 @@ Here we will use data from: <a href="protein-id-conversion-1.html#protein-exampl
 <h3>
 <span class="header-section-number">7.3.1</span> Comparison with one group:<a class="anchor" aria-label="anchor" href="#comparison-with-one-group"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>
 <span class="va">one_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>group1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
@@ -294,31 +294,43 @@ Here we will use data from: <a href="protein-id-conversion-1.html#protein-exampl
   qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego1</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Cluster group1   Hs_BP_ID                       Description  GeneRatio
-## 1    down   down GO:0000217   DNA secondary structure binding 0.06250000
-## 2    down   down GO:0008094     DNA-dependent ATPase activity 0.08333333
-## 3    down   down GO:0140097 catalytic activity, acting on DNA 0.10416667
-## 4    down   down GO:0003697       single-stranded DNA binding 0.08333333
-## 5    down   down GO:0000400     four-way junction DNA binding 0.04166667
-##     BgRatio       pvalue   p.adjust      qvalue                   geneID
-## 1  34/18352 9.491897e-05 0.01079486 0.007262958           641/7516/63967
-## 2 108/18352 1.808164e-04 0.01079486 0.007262958      54821/641/5888/7516
-## 3 209/18352 2.099890e-04 0.01079486 0.007262958 54821/5427/641/5888/9156
-## 4 114/18352 2.225745e-04 0.01079486 0.007262958      641/5888/8318/55388
-## 5  17/18352 8.884883e-04 0.03447335 0.023194220                 641/7516
-##                 geneID_symbol Count FoldEnrich RichFactor
-## 1             BLM/XRCC2/CLSPN     3   33.73529 0.08823529
-## 2      ERCC6L/BLM/RAD51/XRCC2     4   14.16049 0.03703704
-## 3 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673 0.02392344
-## 4       BLM/RAD51/CDC45/MCM10     4   13.41520 0.03508772
-## 5                   BLM/XRCC2     2   44.98039 0.11764706</code></pre>
+<pre><code>##   Cluster   Hs_BP_ID                                                Description
+## 1    down GO:0006260                                            DNA replication
+## 2    down GO:1901992 positive regulation of mitotic cell cycle phase transition
+## 3    down GO:0045931                  positive regulation of mitotic cell cycle
+## 4    down GO:1901989         positive regulation of cell cycle phase transition
+## 5    down GO:0010165                                          response to X-ray
+##   GeneRatio   BgRatio       pvalue     p.adjust       qvalue
+## 1      0.24 273/18866 4.930656e-12 8.229265e-09 5.932358e-09
+## 2      0.14  94/18866 5.096508e-09 4.253036e-06 3.065952e-06
+## 3      0.16 168/18866 1.306551e-08 6.402841e-06 4.615716e-06
+## 4      0.14 110/18866 1.534534e-08 6.402841e-06 4.615716e-06
+## 5      0.10  32/18866 2.031273e-08 6.780389e-06 4.887884e-06
+##                                                              geneID
+## 1 5427/157570/641/5888/6241/8318/9156/9134/55388/63967/51514/374393
+## 2                           407007/113130/595/407006/8318/993/51514
+## 3                      407007/113130/595/407006/7039/8318/993/51514
+## 4                           407007/113130/595/407006/8318/993/51514
+## 5                                            6422/641/5888/595/7516
+##                                                         geneID_symbol Count
+## 1 POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/DTL/FAM111B    12
+## 2                          MIR222/CDCA5/CCND1/MIR221/CDC45/CDC25A/DTL     7
+## 3                     MIR222/CDCA5/CCND1/MIR221/TGFA/CDC45/CDC25A/DTL     8
+## 4                          MIR222/CDCA5/CCND1/MIR221/CDC45/CDC25A/DTL     7
+## 5                                         SFRP1/BLM/RAD51/CCND1/XRCC2     5
+##   FoldEnrich RichFactor
+## 1   16.58549 0.04395604
+## 2   28.09830 0.07446809
+## 3   17.96762 0.04761905
+## 4   24.01127 0.06363636
+## 5   58.95625 0.15625000</code></pre>
 </div>
 <div id="comparison-with-more-than-one-group" class="section level3">
 <h3>
 <span class="header-section-number">7.3.2</span> Comparison with more than one group<a class="anchor" aria-label="anchor" href="#comparison-with-more-than-one-group"><i class="fas fa-link"></i></a>
 </h3>
 <p>If there are two group conditions (e.g. up/down regulated; treatment on serial time points), user needs to set two-group list.</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">two_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   exp_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>,
   time_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"time1"</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"time2"</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span>
@@ -331,30 +343,42 @@ Here we will use data from: <a href="protein-id-conversion-1.html#protein-exampl
   qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gego2</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##      Cluster exp_group time_group   Hs_BP_ID                       Description
-## 1 down.time2      down      time2 GO:0000217   DNA secondary structure binding
-## 2 down.time2      down      time2 GO:0008094     DNA-dependent ATPase activity
-## 3 down.time2      down      time2 GO:0140097 catalytic activity, acting on DNA
-## 4 down.time2      down      time2 GO:0003697       single-stranded DNA binding
-## 5 down.time2      down      time2 GO:0000400     four-way junction DNA binding
-##    GeneRatio   BgRatio       pvalue   p.adjust      qvalue
-## 1 0.06250000  34/18352 9.491897e-05 0.01079486 0.007262958
-## 2 0.08333333 108/18352 1.808164e-04 0.01079486 0.007262958
-## 3 0.10416667 209/18352 2.099890e-04 0.01079486 0.007262958
-## 4 0.08333333 114/18352 2.225745e-04 0.01079486 0.007262958
-## 5 0.04166667  17/18352 8.884883e-04 0.03447335 0.023194220
-##                     geneID               geneID_symbol Count FoldEnrich
-## 1           641/7516/63967             BLM/XRCC2/CLSPN     3   33.73529
-## 2      54821/641/5888/7516      ERCC6L/BLM/RAD51/XRCC2     4   14.16049
-## 3 54821/5427/641/5888/9156 ERCC6L/POLE2/BLM/RAD51/EXO1     5    9.14673
-## 4      641/5888/8318/55388       BLM/RAD51/CDC45/MCM10     4   13.41520
-## 5                 641/7516                   BLM/XRCC2     2   44.98039
-##   RichFactor
-## 1 0.08823529
-## 2 0.03703704
-## 3 0.02392344
-## 4 0.03508772
-## 5 0.11764706</code></pre>
+<pre><code>##      Cluster   Hs_BP_ID
+## 1 down.time2 GO:0006260
+## 2 down.time2 GO:1901992
+## 3 down.time2 GO:0045931
+## 4 down.time2 GO:1901989
+## 5 down.time2 GO:0010165
+##                                                  Description GeneRatio
+## 1                                            DNA replication      0.24
+## 2 positive regulation of mitotic cell cycle phase transition      0.14
+## 3                  positive regulation of mitotic cell cycle      0.16
+## 4         positive regulation of cell cycle phase transition      0.14
+## 5                                          response to X-ray      0.10
+##     BgRatio       pvalue     p.adjust       qvalue
+## 1 273/18866 4.930656e-12 8.229265e-09 5.932358e-09
+## 2  94/18866 5.096508e-09 4.253036e-06 3.065952e-06
+## 3 168/18866 1.306551e-08 6.402841e-06 4.615716e-06
+## 4 110/18866 1.534534e-08 6.402841e-06 4.615716e-06
+## 5  32/18866 2.031273e-08 6.780389e-06 4.887884e-06
+##                                                              geneID
+## 1 5427/157570/641/5888/6241/8318/9156/9134/55388/63967/51514/374393
+## 2                           407007/113130/595/407006/8318/993/51514
+## 3                      407007/113130/595/407006/7039/8318/993/51514
+## 4                           407007/113130/595/407006/8318/993/51514
+## 5                                            6422/641/5888/595/7516
+##                                                         geneID_symbol Count
+## 1 POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/DTL/FAM111B    12
+## 2                          MIR222/CDCA5/CCND1/MIR221/CDC45/CDC25A/DTL     7
+## 3                     MIR222/CDCA5/CCND1/MIR221/TGFA/CDC45/CDC25A/DTL     8
+## 4                          MIR222/CDCA5/CCND1/MIR221/CDC45/CDC25A/DTL     7
+## 5                                         SFRP1/BLM/RAD51/CCND1/XRCC2     5
+##   FoldEnrich RichFactor
+## 1   16.58549 0.04395604
+## 2   28.09830 0.07446809
+## 3   17.96762 0.04761905
+## 4   24.01127 0.06363636
+## 5   58.95625 0.15625000</code></pre>
 </div>
 </div>
 <div id="go-advanced-usage" class="section level2">
@@ -369,16 +393,16 @@ Here we will use data from: <a href="protein-id-conversion-1.html#protein-exampl
 <p><code>genGO</code> could utilize <code>transId</code> to make the same gene type</p>
 </blockquote>
 <p>In the below example, we will set input id as symbols and background id as Entrez.</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id2</span>, transTo <span class="op">=</span> <span class="st">"symbol"</span>, unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id2</span>, transTo <span class="op">=</span> <span class="st">"symbol"</span>, unique <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span>
 <span class="va">symbol_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">symbol_id</span>, <span class="st">"BCC7"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">symbol_id</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "CD36"       "DCT"        "PRUNE2"     "ST6GALNAC2" "TCN1"      
 ## [6] "CD24"</code></pre>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "948"       "1638"      "158471"    "10610"     "6947"      "100133941"</code></pre>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">symbol_id</span>,
   org <span class="op">=</span> <span class="st">"human"</span>,
   ont <span class="op">=</span> <span class="st">"bp"</span>,
@@ -392,42 +416,42 @@ Here we will use data from: <a href="protein-id-conversion-1.html#protein-exampl
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">diy_ego</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##              Hs_BP_ID                              Description  GeneRatio
+## GO:0006260 GO:0006260                          DNA replication 0.12745098
 ## GO:0010165 GO:0010165                        response to X-ray 0.05882353
-## GO:0006260 GO:0006260                          DNA replication 0.11764706
+## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 0.19607843
+## GO:0033554 GO:0033554              cellular response to stress 0.31372549
 ## GO:0050673 GO:0050673            epithelial cell proliferation 0.13725490
-## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 0.18627451
-## GO:0033554 GO:0033554              cellular response to stress 0.30392157
 ##               BgRatio       pvalue     p.adjust       qvalue
-## GO:0010165   29/16024 2.418982e-08 7.849597e-05 5.609492e-05
-## GO:0006260  261/16024 9.980090e-08 1.619270e-04 1.157165e-04
-## GO:0050673  413/16024 3.461281e-07 3.743953e-04 2.675510e-04
-## GO:0006974  801/16024 6.078077e-07 4.853426e-04 3.468363e-04
-## GO:0033554 1946/16024 7.478314e-07 4.853426e-04 3.468363e-04
-##                                                                                                                                                                                                 geneID
-## GO:0010165                                                                                                                                                            SFRP1/BLM/RAD51/CCND1/XRCC2/BCC7
-## GO:0006260                                                                                                                        POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/FAM111B/BCC7
-## GO:0050673                                                                                                          SERPINF1/NUPR1/IGFBP5/SNAI2/LGR5/MIR222/SFRP1/UHRF1/CCND1/TGFA/TLR4/AREG/ITGB3/FST
-## GO:0006974                                                                              NUPR1/SNAI2/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/BCC7
-## GO:0033554 CD36/NUPR1/CYP1B1/SESN3/SNAI2/SLC38A3/FOLR1/CRYAB/TP53INP1/SLC1A1/MIR222/SFRP1/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/TLR4/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/ETV5/BCC7
-##                                                                                                                                                                                          geneID_symbol
-## GO:0010165                                                                                                                                                            SFRP1/BLM/RAD51/CCND1/XRCC2/TP53
-## GO:0006260                                                                                                                        POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/FAM111B/TP53
-## GO:0050673                                                                                                          SERPINF1/NUPR1/IGFBP5/SNAI2/LGR5/MIR222/SFRP1/UHRF1/CCND1/TGFA/TLR4/AREG/ITGB3/FST
-## GO:0006974                                                                              NUPR1/SNAI2/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/TP53
-## GO:0033554 CD36/NUPR1/CYP1B1/SESN3/SNAI2/SLC38A3/FOLR1/CRYAB/TP53INP1/SLC1A1/MIR222/SFRP1/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/TLR4/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/ETV5/TP53
+## GO:0006260  261/16024 1.086449e-08 3.524442e-05 2.534286e-05
+## GO:0010165   29/16024 2.418982e-08 3.923589e-05 2.821297e-05
+## GO:0006974  801/16024 1.282570e-07 1.386886e-04 9.972543e-05
+## GO:0033554 1946/16024 2.227431e-07 1.806446e-04 1.298944e-04
+## GO:0050673  413/16024 3.461281e-07 2.245679e-04 1.614779e-04
+##                                                                                                                                                                                                     geneID
+## GO:0006260                                                                                                                        POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/DTL/FAM111B/BCC7
+## GO:0010165                                                                                                                                                                SFRP1/BLM/RAD51/CCND1/XRCC2/BCC7
+## GO:0006974                                                                              NUPR1/SNAI2/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/DTL/BCC7
+## GO:0033554 CD36/NUPR1/CYP1B1/SESN3/SNAI2/SLC38A3/FOLR1/CRYAB/TP53INP1/SLC1A1/MIR222/SFRP1/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/TLR4/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/DTL/ETV5/BCC7
+## GO:0050673                                                                                                              SERPINF1/NUPR1/IGFBP5/SNAI2/LGR5/MIR222/SFRP1/UHRF1/CCND1/TGFA/TLR4/AREG/ITGB3/FST
+##                                                                                                                                                                                              geneID_symbol
+## GO:0006260                                                                                                                        POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/DTL/FAM111B/TP53
+## GO:0010165                                                                                                                                                                SFRP1/BLM/RAD51/CCND1/XRCC2/TP53
+## GO:0006974                                                                              NUPR1/SNAI2/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/DTL/TP53
+## GO:0033554 CD36/NUPR1/CYP1B1/SESN3/SNAI2/SLC38A3/FOLR1/CRYAB/TP53INP1/SLC1A1/MIR222/SFRP1/UHRF1/CDCA5/PMAIP1/POLE2/ESCO2/BLM/RAD51/CCND1/MIR221/XRCC2/TLR4/CDC45/EXO1/DDIAS/IER3/MCM10/CLSPN/DTL/ETV5/TP53
+## GO:0050673                                                                                                              SERPINF1/NUPR1/IGFBP5/SNAI2/LGR5/MIR222/SFRP1/UHRF1/CCND1/TGFA/TLR4/AREG/ITGB3/FST
 ##            Count FoldEnrich RichFactor
+## GO:0006260    13   7.824807 0.04980843
 ## GO:0010165     6  32.503043 0.20689655
-## GO:0006260    12   7.222898 0.04597701
-## GO:0050673    14   5.325357 0.03389831
-## GO:0006974    19   3.726420 0.02372035
-## GO:0033554    31   2.502590 0.01593011</code></pre>
+## GO:0006974    20   3.922548 0.02496879
+## GO:0033554    32   2.583318 0.01644399
+## GO:0050673    14   5.325357 0.03389831</code></pre>
 <p>In this result, the input <strong>gene alias is also recognized</strong> and converted to the official symbol (e.g. <code>BCC7</code>):</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span><span class="op">$</span><span class="va">geneID</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
-<pre><code>## [1] "SFRP1/BLM/RAD51/CCND1/XRCC2/BCC7"</code></pre>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<pre><code>## [1] "POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/DTL/FAM111B/BCC7"</code></pre>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">diy_ego</span><span class="op">$</span><span class="va">geneID_symbol</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
-<pre><code>## [1] "SFRP1/BLM/RAD51/CCND1/XRCC2/TP53"</code></pre>
+<pre><code>## [1] "POLE2/ESCO2/BLM/RAD51/RRM2/CDC45/EXO1/CCNE2/MCM10/CLSPN/DTL/FAM111B/TP53"</code></pre>
 </div>
 <div id="go-simplify" class="section level3">
 <h3>
@@ -435,16 +459,16 @@ Here we will use data from: <a href="protein-id-conversion-1.html#protein-exampl
 </h3>
 <p><code>simGO</code> utilizes <code><a href="https://rdrr.io/pkg/GOSemSim/man/goSim.html">GOSemSim::goSim()</a></code> to calculate semantic similarity between two GO terms, then passes to <code><a href="https://rdrr.io/pkg/rrvgo/man/reduceSimMatrix.html">rrvgo::reduceSimMatrix()</a></code> to reduce redundant terms.</p>
 <p>Methods of calculating the similarity between nodes: “Resnik”, “Lin”, “Rel”, “Jiang” , “Wang” and “JC” (Jaccard similarity coefficient).</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sim_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/simGO.html">simGO</a></span><span class="op">(</span><span class="va">diy_ego</span>,sim_method <span class="op">=</span> <span class="st">'Wang'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">diy_ego</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sim_go</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 105  12</code></pre>
-<pre><code>## [1] 25 12</code></pre>
+<pre><code>## [1] 100  12</code></pre>
+<pre><code>## [1] 23 12</code></pre>
 <p>Let’s look which terms are considered as redundant:</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">diy_ego</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">[</span><span class="op">!</span><span class="va">diy_ego</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">sim_go</span><span class="op">$</span><span class="va">Hs_BP_ID</span><span class="op">]</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "GO:0006974" "GO:0008283" "GO:0051093" "GO:0010212" "GO:0071479"
-## [6] "GO:0006979"</code></pre>
+<pre><code>## [1] "GO:0033554" "GO:0022402" "GO:0009314" "GO:0051093" "GO:0010212"
+## [6] "GO:0071479"</code></pre>
 
 
 <div class="figure">
@@ -465,7 +489,7 @@ Figure 7.1: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong
 <span class="header-section-number">7.5.1</span> <code>genGO</code> vs <code>enrichGO</code><a class="anchor" aria-label="anchor" href="#gengo-vs-enrichgo"><i class="fas fa-link"></i></a>
 </h3>
 <p>If input id contains gene alias, <code>genGO</code> will invoke <code>transId</code> to automatically convert gene alias to symbol for better explanation.</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">check_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>, <span class="st">"PDL1"</span>, <span class="st">"PD1"</span>, <span class="st">"TET2"</span>, <span class="st">"BRCA1"</span><span class="op">)</span>
 
 <span class="va">genekitr_res</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">check_gene</span>, ont <span class="op">=</span> <span class="st">"bp"</span>, org <span class="op">=</span> <span class="st">"hs"</span>, 
@@ -481,11 +505,11 @@ Figure 7.1: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong
 
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">genekitr_res</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 35 12</code></pre>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">clustp_res</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 11  9</code></pre>
 <p>If you check these two results, you may find that <code>clustp_res</code> only contains two genes: <code>TET2</code> and <code>BRCA1</code>, while <code>genekitr_res</code> includes all five genes.</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">genekitr_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##              Hs_BP_ID                                         Description
 ## GO:0070234 GO:0070234     positive regulation of T cell apoptotic process
@@ -505,7 +529,7 @@ Figure 7.1: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong
 ## GO:2000108 BCC7/PDL1/PD1 TP53/CD274/PDCD1     3   390.3310 0.10344828
 ## GO:0070232 BCC7/PDL1/PD1 TP53/CD274/PDCD1     3   332.9294 0.08823529
 ## GO:0070231 BCC7/PDL1/PD1 TP53/CD274/PDCD1     3   231.0122 0.06122449</code></pre>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">clustp_res</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##                    ID                      Description GeneRatio   BgRatio
 ## GO:0051568 GO:0051568        histone H3-K4 methylation       2/2  57/18866
@@ -520,7 +544,7 @@ Figure 7.1: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong
 ## GO:0006304 4.012283e-05 0.002006407 1.000951e-05 TET2/BRCA1     2
 ## GO:0018022 4.858571e-05 0.002006407 1.000951e-05 TET2/BRCA1     2</code></pre>
 <p>If you look into deeper, you may find six terms are unique in <code>clustp_res</code>, such as <code>GO:0016571</code>:</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op">[</span><span class="op">!</span><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">genekitr_res</span><span class="op">$</span><span class="va">Hs_BP_ID</span> <span class="op">]</span></code></pre></div>
 <pre><code>## [1] "GO:0016571" "GO:0006479" "GO:0008213" "GO:0043414" "GO:0032259"
 ## [6] "GO:0018205"</code></pre>
@@ -528,7 +552,7 @@ Figure 7.1: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong
 <p>To get adjusted p value, the critical parameter is the number of testing. For simple explaination, <code>adj.p = f * p (f&gt;1)</code> and f is related with testing methods and the number of tests.</p>
 <p>In the above example, <code>genGO</code> recognizes five genes so we need to do five testings while <code>enrichGO</code> includes two genes so the testing number will be less. This directly causes <code>adj.Pvalue</code> of those “disappeared” terms becomes higher and filtered by cutoff <code>0.01</code>.</p>
 <p>If we set cutoff higher(e.g. 0.05), then we will still get those terms:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genekitr_res2</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGO.html">genGO</a></span><span class="op">(</span><span class="va">check_gene</span>, ont <span class="op">=</span> <span class="st">"bp"</span>, org <span class="op">=</span> <span class="st">"hs"</span>, 
                                 pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>, qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
 
@@ -539,7 +563,7 @@ Figure 7.1: <strong>Term <a href="GO:0006974" class="uri">GO:0006974</a></strong
 <p><strong>Question2: why <code>enrichGO</code> only recognize two genes?</strong></p>
 <p>Such gene “BCC7”, “PD1” or “PDL1” are essential so they must have related pathways.</p>
 <p>The core reason is they are actually gene aliases but <code>enrichGO</code> set argument <code>keyType = "SYMBOL"</code> which cause <code>enrichGO</code> only accepts official symbols. This function is based on organism annotation package (e.g. <code>org.Hs.eg.db</code>) and it accepts different types of data:</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
 <span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
