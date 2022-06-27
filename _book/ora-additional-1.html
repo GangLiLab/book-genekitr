@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 ORA Additional | Genekitr: Gene Analysis Toolkit based on R</title>
+<meta name="author" content="Yunze Liu">
+<meta name="description" content="In this part, we will go through other practical ORA methods, including human disease enrichment analysis and WikiPathway analysis.  9.1 Available arguments  id: gene id of Entrez, Ensembl, symbol...">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="Chapter 9 ORA Additional | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this part, we will go through other practical ORA methods, including human disease enrichment analysis and WikiPathway analysis.  9.1 Available arguments  id: gene id of Entrez, Ensembl, symbol...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 ORA Additional | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:description" content="In this part, we will go through other practical ORA methods, including human disease enrichment analysis and WikiPathway analysis.  9.1 Available arguments  id: gene id of Entrez, Ensembl, symbol...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.22/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genekitr: Gene Analysis Toolkit based on R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">🧬 Welcome to genekitr!</a></li>
+<li><a class="" href="quick-start.html"><span class="header-section-number">1</span> Quick start</a></li>
+<li class="book-part">Part I: Search Information</li>
+<li><a class="" href="search-gene-metadata-1.html"><span class="header-section-number">2</span> Search gene metadata</a></li>
+<li><a class="" href="search-pubmed-1.html"><span class="header-section-number">3</span> Search PubMed records</a></li>
+<li class="book-part">Part II: ID Conversion</li>
+<li><a class="" href="gene-id-conversion-1.html"><span class="header-section-number">4</span> Gene ID conversion</a></li>
+<li><a class="" href="protein-id-conversion-1.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
+<li><a class="" href="probe-id-conversion-1.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
+<li class="book-part">Part III: Enrichment Analysis</li>
+<li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
+<li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
+<li><a class="active" href="ora-additional-1.html"><span class="header-section-number">9</span> ORA Additional</a></li>
+<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
+<li class="book-part">Part IV: Plotting</li>
+<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">12</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">14</span> Plot others</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ora-additional-1" class="section level1">
+<h1>
+<span class="header-section-number">9</span> ORA Additional<a class="anchor" aria-label="anchor" href="#ora-additional-1"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this part, we will go through other practical ORA methods, including human disease enrichment analysis and WikiPathway analysis.</p>
+<div id="ora-aavailable-arguments" class="section level2">
+<h2>
+<span class="header-section-number">9.1</span> Available arguments<a class="anchor" aria-label="anchor" href="#ora-aavailable-arguments"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<code>id</code>: gene id of Entrez, Ensembl, symbol or Uniprot</li>
+<li>
+<code>type</code>: choose one from <code>do</code> (Disease Ontology), <code>ncg</code> (Network of Cancer Gene) and <code>dgn</code> (DisGeNET)</li>
+<li>
+<code>group_list</code>: gene set comparison groups, default is NULL.</li>
+<li>
+<code>pAdjustMethod</code>: choose one from “holm”, “hochberg”, “hommel”, “bonferroni”, “BH”, “BY”, “fdr”, “none”.</li>
+<li>
+<code>pvalueCutoff</code>: pvalue cutoff, default is 0.05.</li>
+<li>
+<code>qvalueCutoff</code>: adjusted pvalue cutoff, default is 0.05.</li>
+<li>
+<code>minGSSize</code>: minimal size of each geneSet for analyzing, default is 10.</li>
+<li>
+<code>maxGSSize</code>: maximal size of each geneSet for analyzing, default is 500. Program will choose gene set in range [minGSSize,maxGSSize] to analyze</li>
+<li>
+<code>universe</code>: Background genes of Entrez, Ensembl, symbol or Uniprot. Default is NULL.</li>
+</ul>
+</div>
+<div id="ora-do" class="section level2">
+<h2>
+<span class="header-section-number">9.2</span> Human Disease Ontology (DO)<a class="anchor" aria-label="anchor" href="#ora-do"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <a href="https://disease-ontology.org/">Disease Ontology</a> has been developed as a standardized ontology for human disease with the purpose of providing the biomedical community with consistent, reusable and sustainable descriptions of human disease terms.</p>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
+<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span>
+<span class="va">edo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">edo</span><span class="op">)</span></code></pre></div>
+<pre><code>##                        ID                    Description  GeneRatio  BgRatio
+## DOID:10283     DOID:10283                prostate cancer 0.12204007 425/8007
+## DOID:3856       DOID:3856 male reproductive organ cancer 0.12204007 435/8007
+## DOID:0060100 DOID:0060100  musculoskeletal system cancer 0.11111111 439/8007
+## DOID:3908       DOID:3908  non-small cell lung carcinoma 0.10746812 431/8007
+## DOID:5517       DOID:5517              stomach carcinoma 0.05282332 153/8007
+## DOID:1793       DOID:1793              pancreatic cancer 0.08378871 319/8007
+##                    pvalue     p.adjust       qvalue
+## DOID:10283   4.864568e-11 3.760311e-08 2.928982e-08
+## DOID:3856    1.390840e-10 5.375595e-08 4.187159e-08
+## DOID:0060100 5.581859e-08 1.438259e-05 1.120289e-05
+## DOID:3908    1.603083e-07 3.097958e-05 2.413062e-05
+## DOID:5517    4.063259e-07 6.281799e-05 4.893019e-05
+## DOID:1793    9.345826e-07 1.144534e-04 8.915003e-05
+##                                                                                                                                                                                                                                                                                                                                                      geneID
+## DOID:10283   10628/3488/6591/3725/5915/10891/563/2246/6696/5087/4582/26959/360/9099/4321/2650/5764/8837/4324/79054/590/4524/3603/3958/780/5159/7040/6286/2952/5295/3339/597/10553/4436/5468/5347/891/3486/1958/332/5329/56999/3487/6059/8797/3576/5933/7421/1956/390/2115/4288/4609/5111/1969/672/4312/83990/4176/675/407007/595/407006/7039/374/3690/10253
+## DOID:3856    10628/3488/6591/3725/5915/10891/563/2246/6696/5087/4582/26959/360/9099/4321/2650/5764/8837/4324/79054/590/4524/3603/3958/780/5159/7040/6286/2952/5295/3339/597/10553/4436/5468/5347/891/3486/1958/332/5329/56999/3487/6059/8797/3576/5933/7421/1956/390/2115/4288/4609/5111/1969/672/4312/83990/4176/675/407007/595/407006/7039/374/3690/10253
+## DOID:0060100                           948/158471/100133941/5176/6591/4045/2348/3725/5915/6657/6696/8850/347/4582/1513/2549/1191/27122/9961/1634/59/2200/4035/3676/4524/2263/4060/3958/5159/7040/2952/2896/6302/968/4436/5468/4071/6573/3486/332/26354/5329/3576/7421/1956/3624/4288/890/4609/65059/1969/7980/672/4312/8091/4171/4085/27063/595/407006/3690
+## DOID:3908                                      100133941/1545/5915/1272/563/3248/6696/7846/1803/4582/9961/1244/5764/8837/3162/4524/51147/4060/3958/780/11149/7040/6286/2952/11080/4436/5468/5451/891/3486/332/51176/7465/1894/11065/3576/7421/1956/3624/9212/4288/2030/4609/5111/1969/7980/1138/672/7447/1869/4171/4023/1846/8061/11009/675/6422/6241/10253
+## DOID:5517                                                                                                                                                                                                   6414/3725/3248/6696/4582/3570/51196/3162/4524/7040/5468/5347/9314/3486/332/8797/3576/1956/4288/3099/4609/7298/5111/1969/641/595/7039/3690/57214
+## DOID:1793                                                                                                           1545/10628/3725/2044/2191/4582/3570/5587/718/5764/8828/8837/79054/57447/4524/4060/3958/7040/6286/4436/5347/332/51176/5329/8797/3576/1956/2030/4609/7298/5111/3976/1969/7980/4860/672/8091/1869/7052/9076/11009/5888/6241/7516/7099/8870
+##                                                                                                                                                                                                                                                                                                                                                                                                       geneID_symbol
+## DOID:10283   TXNIP/IGFBP5/SNAI2/JUN/RARB/PPARGC1A/AZGP1/FGF1/SPP1/PBX1/MUC1/HBP1/AQP3/USP2/MMP12/GCNT1/PTN/CFLAR/MMP15/TRPM8/BCHE/MTHFR/IL16/LGALS3/DDR1/PDGFRB/TGFB1/S100P/GSTT1/PIK3R1/HSPG2/BCL2A1/HTATIP2/MSH2/PPARG/PLK1/CCNB1/IGFBP3/EGR1/BIRC5/PLAUR/ADAMTS9/IGFBP4/ABCE1/TNFRSF10A/CXCL8/RBL1/VDR/EGFR/RND3/ETV1/MKI67/MYC/PCNA/EPHA2/BRCA1/MMP1/BRIP1/MCM7/BRCA2/MIR222/CCND1/MIR221/TGFA/AREG/ITGB3/SPRY2
+## DOID:3856    TXNIP/IGFBP5/SNAI2/JUN/RARB/PPARGC1A/AZGP1/FGF1/SPP1/PBX1/MUC1/HBP1/AQP3/USP2/MMP12/GCNT1/PTN/CFLAR/MMP15/TRPM8/BCHE/MTHFR/IL16/LGALS3/DDR1/PDGFRB/TGFB1/S100P/GSTT1/PIK3R1/HSPG2/BCL2A1/HTATIP2/MSH2/PPARG/PLK1/CCNB1/IGFBP3/EGR1/BIRC5/PLAUR/ADAMTS9/IGFBP4/ABCE1/TNFRSF10A/CXCL8/RBL1/VDR/EGFR/RND3/ETV1/MKI67/MYC/PCNA/EPHA2/BRCA1/MMP1/BRIP1/MCM7/BRCA2/MIR222/CCND1/MIR221/TGFA/AREG/ITGB3/SPRY2
+## DOID:0060100                                             CD36/PRUNE2/CD24/SERPINF1/SNAI2/LSAMP/FOLR1/JUN/RARB/SOX2/SPP1/KAT2B/APOD/MUC1/CTSK/GAB1/CLU/DKK3/MVP/DCN/ACTA2/FBN1/LRP1/ITGA4/MTHFR/FGFR2/LUM/LGALS3/PDGFRB/TGFB1/GSTT1/GRN/TSPAN31/CD68/MSH2/PPARG/TM4SF1/SLC19A1/IGFBP3/BIRC5/GNL3/PLAUR/CXCL8/VDR/EGFR/INHBA/MKI67/CCNA2/MYC/RAPH1/EPHA2/TFPI2/BRCA1/MMP1/HMGA2/MCM2/MAD2L1/ANKRD1/CCND1/MIR221/ITGB3
+## DOID:3908                                                               CD24/CYP1B1/RARB/CNTN1/AZGP1/HPGD/SPP1/TUBA1A/DPP4/MUC1/MVP/ABCC2/PTN/CFLAR/HMOX1/MTHFR/ING4/LUM/LGALS3/DDR1/BVES/TGFB1/S100P/GSTT1/DNAJB4/MSH2/PPARG/POU2F1/CCNB1/IGFBP3/BIRC5/LEF1/WEE1/ECT2/UBE2C/CXCL8/VDR/EGFR/INHBA/AURKB/MKI67/SLC29A1/MYC/PCNA/EPHA2/TFPI2/CHRNA5/BRCA1/VSNL1/E2F1/MCM2/LPL/DUSP4/FOSL1/IL24/BRCA2/SFRP1/RRM2/SPRY2
+## DOID:5517                                                                                                                                                                                                                                        SELENOP/JUN/HPGD/SPP1/MUC1/IL6R/PLCE1/HMOX1/MTHFR/TGFB1/PPARG/PLK1/KLF4/IGFBP3/BIRC5/TNFRSF10A/CXCL8/EGFR/MKI67/HK2/MYC/TYMS/PCNA/EPHA2/BLM/CCND1/TGFA/ITGB3/CEMIP
+## DOID:1793                                                                                                                                               CYP1B1/TXNIP/JUN/EPHA5/FAP/MUC1/IL6R/PRKD1/C3/PTN/NRP2/CFLAR/TRPM8/NDRG2/MTHFR/LUM/LGALS3/TGFB1/S100P/MSH2/PLK1/BIRC5/LEF1/PLAUR/TNFRSF10A/CXCL8/EGFR/SLC29A1/MYC/TYMS/PCNA/LIF/EPHA2/TFPI2/PNP/BRCA1/HMGA2/E2F1/TGM2/CLDN1/IL24/RAD51/RRM2/XRCC2/TLR4/IER3
+##              Count FoldEnrich RichFactor
+## DOID:10283      67   2.299235  0.1576471
+## DOID:3856       67   2.246379  0.1540230
+## DOID:0060100    61   2.026576  0.1389522
+## DOID:3908       59   1.996513  0.1368910
+## DOID:5517       29   2.764420  0.1895425
+## DOID:1793       46   2.103123  0.1442006</code></pre>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># if we input ensembl genes</span>
+<span class="va">ens_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId</a></span><span class="op">(</span><span class="va">id</span>,<span class="st">'ens'</span>,unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>
+<span class="va">ens_edo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">ens_id</span>, type <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ens_edo</span><span class="op">)</span></code></pre></div>
+<pre><code>##                        ID                    Description  GeneRatio  BgRatio
+## DOID:10283     DOID:10283                prostate cancer 0.12204007 425/8007
+## DOID:3856       DOID:3856 male reproductive organ cancer 0.12204007 435/8007
+## DOID:0060100 DOID:0060100  musculoskeletal system cancer 0.11111111 439/8007
+## DOID:3908       DOID:3908  non-small cell lung carcinoma 0.10746812 431/8007
+## DOID:5517       DOID:5517              stomach carcinoma 0.05282332 153/8007
+## DOID:1793       DOID:1793              pancreatic cancer 0.08378871 319/8007
+##                    pvalue     p.adjust       qvalue
+## DOID:10283   4.864568e-11 3.760311e-08 2.928982e-08
+## DOID:3856    1.390840e-10 5.375595e-08 4.187159e-08
+## DOID:0060100 5.581859e-08 1.438259e-05 1.120289e-05
+## DOID:3908    1.603083e-07 3.097958e-05 2.413062e-05
+## DOID:5517    4.063259e-07 6.281799e-05 4.893019e-05
+## DOID:1793    9.345826e-07 1.144534e-04 8.915003e-05
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       geneID
+## DOID:10283   ENSG00000265972/ENSG00000115461/ENSG00000019549/ENSG00000177606/ENSG00000077092/ENSG00000109819/ENSG00000160862/ENSG00000113578/ENSG00000118785/ENSG00000185630/ENSG00000185499/ENSG00000105856/ENSG00000165272/ENSG00000036672/ENSG00000262406/ENSG00000187210/ENSG00000105894/ENSG00000003402/ENSG00000102996/ENSG00000144481/ENSG00000114200/ENSG00000177000/ENSG00000172349/ENSG00000131981/ENSG00000204580/ENSG00000113721/ENSG00000105329/ENSG00000163993/ENSG00000277656/ENSG00000145675/ENSG00000142798/ENSG00000140379/ENSG00000109854/ENSG00000095002/ENSG00000132170/ENSG00000166851/ENSG00000134057/ENSG00000146674/ENSG00000120738/ENSG00000089685/ENSG00000011422/ENSG00000163638/ENSG00000141753/ENSG00000164163/ENSG00000104689/ENSG00000169429/ENSG00000080839/ENSG00000111424/ENSG00000146648/ENSG00000115963/ENSG00000006468/ENSG00000148773/ENSG00000136997/ENSG00000132646/ENSG00000142627/ENSG00000012048/ENSG00000196611/ENSG00000136492/ENSG00000166508/ENSG00000139618/ENSG00000207725/ENSG00000110092/ENSG00000207870/ENSG00000163235/ENSG00000109321/ENSG00000259207/ENSG00000136158
+## DOID:3856    ENSG00000265972/ENSG00000115461/ENSG00000019549/ENSG00000177606/ENSG00000077092/ENSG00000109819/ENSG00000160862/ENSG00000113578/ENSG00000118785/ENSG00000185630/ENSG00000185499/ENSG00000105856/ENSG00000165272/ENSG00000036672/ENSG00000262406/ENSG00000187210/ENSG00000105894/ENSG00000003402/ENSG00000102996/ENSG00000144481/ENSG00000114200/ENSG00000177000/ENSG00000172349/ENSG00000131981/ENSG00000204580/ENSG00000113721/ENSG00000105329/ENSG00000163993/ENSG00000277656/ENSG00000145675/ENSG00000142798/ENSG00000140379/ENSG00000109854/ENSG00000095002/ENSG00000132170/ENSG00000166851/ENSG00000134057/ENSG00000146674/ENSG00000120738/ENSG00000089685/ENSG00000011422/ENSG00000163638/ENSG00000141753/ENSG00000164163/ENSG00000104689/ENSG00000169429/ENSG00000080839/ENSG00000111424/ENSG00000146648/ENSG00000115963/ENSG00000006468/ENSG00000148773/ENSG00000136997/ENSG00000132646/ENSG00000142627/ENSG00000012048/ENSG00000196611/ENSG00000136492/ENSG00000166508/ENSG00000139618/ENSG00000207725/ENSG00000110092/ENSG00000207870/ENSG00000163235/ENSG00000109321/ENSG00000259207/ENSG00000136158
+## DOID:0060100                                                                                                 ENSG00000135218/ENSG00000106772/ENSG00000272398/ENSG00000132386/ENSG00000019549/ENSG00000185565/ENSG00000110195/ENSG00000177606/ENSG00000077092/ENSG00000181449/ENSG00000118785/ENSG00000114166/ENSG00000189058/ENSG00000185499/ENSG00000143387/ENSG00000109458/ENSG00000120885/ENSG00000050165/ENSG00000013364/ENSG00000011465/ENSG00000107796/ENSG00000166147/ENSG00000123384/ENSG00000115232/ENSG00000177000/ENSG00000066468/ENSG00000139329/ENSG00000131981/ENSG00000113721/ENSG00000105329/ENSG00000277656/ENSG00000030582/ENSG00000135452/ENSG00000129226/ENSG00000095002/ENSG00000132170/ENSG00000169908/ENSG00000173638/ENSG00000146674/ENSG00000089685/ENSG00000163938/ENSG00000011422/ENSG00000169429/ENSG00000111424/ENSG00000146648/ENSG00000122641/ENSG00000148773/ENSG00000145386/ENSG00000136997/ENSG00000173166/ENSG00000142627/ENSG00000105825/ENSG00000012048/ENSG00000196611/ENSG00000149948/ENSG00000073111/ENSG00000164109/ENSG00000148677/ENSG00000110092/ENSG00000207870/ENSG00000259207
+## DOID:3908                                                                                                                                    ENSG00000272398/ENSG00000138061/ENSG00000077092/ENSG00000018236/ENSG00000160862/ENSG00000164120/ENSG00000118785/ENSG00000167552/ENSG00000197635/ENSG00000185499/ENSG00000013364/ENSG00000023839/ENSG00000105894/ENSG00000003402/ENSG00000100292/ENSG00000177000/ENSG00000111653/ENSG00000139329/ENSG00000131981/ENSG00000204580/ENSG00000112276/ENSG00000105329/ENSG00000163993/ENSG00000277656/ENSG00000162616/ENSG00000095002/ENSG00000132170/ENSG00000143190/ENSG00000134057/ENSG00000146674/ENSG00000089685/ENSG00000138795/ENSG00000166483/ENSG00000114346/ENSG00000175063/ENSG00000169429/ENSG00000111424/ENSG00000146648/ENSG00000122641/ENSG00000178999/ENSG00000148773/ENSG00000112759/ENSG00000136997/ENSG00000132646/ENSG00000142627/ENSG00000105825/ENSG00000169684/ENSG00000012048/ENSG00000163032/ENSG00000101412/ENSG00000073111/ENSG00000175445/ENSG00000120875/ENSG00000175592/ENSG00000162892/ENSG00000139618/ENSG00000104332/ENSG00000171848/ENSG00000136158
+## DOID:5517                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ENSG00000250722/ENSG00000177606/ENSG00000164120/ENSG00000118785/ENSG00000185499/ENSG00000160712/ENSG00000138193/ENSG00000100292/ENSG00000177000/ENSG00000105329/ENSG00000132170/ENSG00000166851/ENSG00000136826/ENSG00000146674/ENSG00000089685/ENSG00000104689/ENSG00000169429/ENSG00000146648/ENSG00000148773/ENSG00000159399/ENSG00000136997/ENSG00000176890/ENSG00000132646/ENSG00000142627/ENSG00000197299/ENSG00000110092/ENSG00000163235/ENSG00000259207/ENSG00000103888
+## DOID:1793                                                                                                                                                                                                                                                                                                                                                    ENSG00000138061/ENSG00000265972/ENSG00000177606/ENSG00000145242/ENSG00000078098/ENSG00000185499/ENSG00000160712/ENSG00000184304/ENSG00000125730/ENSG00000105894/ENSG00000118257/ENSG00000003402/ENSG00000144481/ENSG00000165795/ENSG00000177000/ENSG00000139329/ENSG00000131981/ENSG00000105329/ENSG00000163993/ENSG00000095002/ENSG00000166851/ENSG00000089685/ENSG00000138795/ENSG00000011422/ENSG00000104689/ENSG00000169429/ENSG00000146648/ENSG00000112759/ENSG00000136997/ENSG00000176890/ENSG00000132646/ENSG00000128342/ENSG00000142627/ENSG00000105825/ENSG00000198805/ENSG00000012048/ENSG00000149948/ENSG00000101412/ENSG00000198959/ENSG00000163347/ENSG00000162892/ENSG00000051180/ENSG00000171848/ENSG00000196584/ENSG00000136869/ENSG00000137331
+##                                                                                                                                                                                                                                                                                                                                                                                                       geneID_symbol
+## DOID:10283   TXNIP/IGFBP5/SNAI2/JUN/RARB/PPARGC1A/AZGP1/FGF1/SPP1/PBX1/MUC1/HBP1/AQP3/USP2/MMP12/GCNT1/PTN/CFLAR/MMP15/TRPM8/BCHE/MTHFR/IL16/LGALS3/DDR1/PDGFRB/TGFB1/S100P/GSTT1/PIK3R1/HSPG2/BCL2A1/HTATIP2/MSH2/PPARG/PLK1/CCNB1/IGFBP3/EGR1/BIRC5/PLAUR/ADAMTS9/IGFBP4/ABCE1/TNFRSF10A/CXCL8/RBL1/VDR/EGFR/RND3/ETV1/MKI67/MYC/PCNA/EPHA2/BRCA1/MMP1/BRIP1/MCM7/BRCA2/MIR222/CCND1/MIR221/TGFA/AREG/ITGB3/SPRY2
+## DOID:3856    TXNIP/IGFBP5/SNAI2/JUN/RARB/PPARGC1A/AZGP1/FGF1/SPP1/PBX1/MUC1/HBP1/AQP3/USP2/MMP12/GCNT1/PTN/CFLAR/MMP15/TRPM8/BCHE/MTHFR/IL16/LGALS3/DDR1/PDGFRB/TGFB1/S100P/GSTT1/PIK3R1/HSPG2/BCL2A1/HTATIP2/MSH2/PPARG/PLK1/CCNB1/IGFBP3/EGR1/BIRC5/PLAUR/ADAMTS9/IGFBP4/ABCE1/TNFRSF10A/CXCL8/RBL1/VDR/EGFR/RND3/ETV1/MKI67/MYC/PCNA/EPHA2/BRCA1/MMP1/BRIP1/MCM7/BRCA2/MIR222/CCND1/MIR221/TGFA/AREG/ITGB3/SPRY2
+## DOID:0060100                                             CD36/PRUNE2/CD24/SERPINF1/SNAI2/LSAMP/FOLR1/JUN/RARB/SOX2/SPP1/KAT2B/APOD/MUC1/CTSK/GAB1/CLU/DKK3/MVP/DCN/ACTA2/FBN1/LRP1/ITGA4/MTHFR/FGFR2/LUM/LGALS3/PDGFRB/TGFB1/GSTT1/GRN/TSPAN31/CD68/MSH2/PPARG/TM4SF1/SLC19A1/IGFBP3/BIRC5/GNL3/PLAUR/CXCL8/VDR/EGFR/INHBA/MKI67/CCNA2/MYC/RAPH1/EPHA2/TFPI2/BRCA1/MMP1/HMGA2/MCM2/MAD2L1/ANKRD1/CCND1/MIR221/ITGB3
+## DOID:3908                                                               CD24/CYP1B1/RARB/CNTN1/AZGP1/HPGD/SPP1/TUBA1A/DPP4/MUC1/MVP/ABCC2/PTN/CFLAR/HMOX1/MTHFR/ING4/LUM/LGALS3/DDR1/BVES/TGFB1/S100P/GSTT1/DNAJB4/MSH2/PPARG/POU2F1/CCNB1/IGFBP3/BIRC5/LEF1/WEE1/ECT2/UBE2C/CXCL8/VDR/EGFR/INHBA/AURKB/MKI67/SLC29A1/MYC/PCNA/EPHA2/TFPI2/CHRNA5/BRCA1/VSNL1/E2F1/MCM2/LPL/DUSP4/FOSL1/IL24/BRCA2/SFRP1/RRM2/SPRY2
+## DOID:5517                                                                                                                                                                                                                                        SELENOP/JUN/HPGD/SPP1/MUC1/IL6R/PLCE1/HMOX1/MTHFR/TGFB1/PPARG/PLK1/KLF4/IGFBP3/BIRC5/TNFRSF10A/CXCL8/EGFR/MKI67/HK2/MYC/TYMS/PCNA/EPHA2/BLM/CCND1/TGFA/ITGB3/CEMIP
+## DOID:1793                                                                                                                                               CYP1B1/TXNIP/JUN/EPHA5/FAP/MUC1/IL6R/PRKD1/C3/PTN/NRP2/CFLAR/TRPM8/NDRG2/MTHFR/LUM/LGALS3/TGFB1/S100P/MSH2/PLK1/BIRC5/LEF1/PLAUR/TNFRSF10A/CXCL8/EGFR/SLC29A1/MYC/TYMS/PCNA/LIF/EPHA2/TFPI2/PNP/BRCA1/HMGA2/E2F1/TGM2/CLDN1/IL24/RAD51/RRM2/XRCC2/TLR4/IER3
+##              Count FoldEnrich RichFactor
+## DOID:10283      67   2.299235  0.1576471
+## DOID:3856       67   2.246379  0.1540230
+## DOID:0060100    61   2.026576  0.1389522
+## DOID:3908       59   1.996513  0.1368910
+## DOID:5517       29   2.764420  0.1895425
+## DOID:1793       46   2.103123  0.1442006</code></pre>
+</div>
+<div id="ora-ncg" class="section level2">
+<h2>
+<span class="header-section-number">9.3</span> Human Network of Cancer Gene (NCG)<a class="anchor" aria-label="anchor" href="#ora-ncg"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="http://ncg.kcl.ac.uk/">NCG</a> is a manually curated collection of cancer genes, healthy drivers and their properties.</p>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">encg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ncg"</span>,
+               pvalueCutoff <span class="op">=</span> <span class="fl">1</span>,qvalueCutoff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">encg</span><span class="op">)</span></code></pre></div>
+<pre><code>##                                                                ID
+## triple_negative_breast_cancer       triple_negative_breast_cancer
+## gastric_adenocarcinoma                     gastric_adenocarcinoma
+## esophageal_squamous_carcinoma       esophageal_squamous_carcinoma
+## glioblastoma                                         glioblastoma
+## pancreatic_ductal_adenocarcinoma pancreatic_ductal_adenocarcinoma
+## colorectal_adenocarcinoma               colorectal_adenocarcinoma
+##                                                       Description  GeneRatio
+## triple_negative_breast_cancer       triple_negative_breast_cancer 0.03373819
+## gastric_adenocarcinoma                     gastric_adenocarcinoma 0.03193882
+## esophageal_squamous_carcinoma       esophageal_squamous_carcinoma 0.01979307
+## glioblastoma                                         glioblastoma 0.05083221
+## pancreatic_ductal_adenocarcinoma pancreatic_ductal_adenocarcinoma 0.06837607
+## colorectal_adenocarcinoma               colorectal_adenocarcinoma 0.06792623
+##                                   BgRatio      pvalue  p.adjust    qvalue
+## triple_negative_breast_cancer     75/2372 0.007112922 0.3765989 0.3765989
+## gastric_adenocarcinoma            71/2372 0.009298737 0.3765989 0.3765989
+## esophageal_squamous_carcinoma     44/2372 0.056044382 0.7907147 0.7907147
+## glioblastoma                     116/2372 0.057607770 0.7907147 0.7907147
+## pancreatic_ductal_adenocarcinoma 157/2372 0.059998955 0.7907147 0.7907147
+## colorectal_adenocarcinoma        156/2372 0.062381236 0.7907147 0.7907147
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               geneID
+## triple_negative_breast_cancer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              2903/5295/55294/4851/10499/4286/2045/2065/7157/4921/58508/4853/2066/324/5728/861/7248/1788/8405/3815/7403/1387/472/55193/2033/5290/285220/3845/5293/29110/57521/7048/4914/8289/8085/5789/1029/5925/2120/5979/2624/4854/2078/10000/4297/3480/1030/8626/1616/207/2271/355/2625/867/238/4763/5291/23405/1499/5781/1789/2260/22894/55164/898/4170/1316/7490/4233/2047/4436/6790/7128/4609/675
+## gastric_adenocarcinoma                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               53353/1272/79633/22808/5764/151056/140831/2064/2737/192670/114788/9723/7157/56776/324/54796/1999/5728/23140/6146/56171/169966/5788/54880/5290/199920/92/4087/57018/119749/23136/1262/3845/577/84107/999/7048/5921/5314/1496/9699/80731/2070/4089/54894/494119/8289/6014/2847/81309/495/4588/387/3354/8661/7273/10349/6708/7057/338/10060/84075/1756/1499/23499/51163/9201/6701/56339/57619/7272
+## esophageal_squamous_carcinoma                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  53353/222663/3339/55294/4851/114788/83872/7157/58508/4853/5728/5727/22999/56884/55561/7403/1387/2033/53616/26986/5290/387638/4780/2195/7048/460/341359/8085/1029/127074/2196/5925/7273/54768/4854/284451/79755/8452/81839/3516/84962/221061/6935/2312
+## glioblastoma                                                                                                                                                                                                                                                      80036/57554/10512/4060/1007/5295/9444/2064/1016/6335/84674/9758/9723/667/1780/221322/7157/284521/3792/8425/7799/546/2264/284391/5728/440275/93492/57592/8216/286464/25791/10735/84612/6125/5290/3417/9651/148823/23281/139628/5314/5598/2880/222546/460/1281/7652/23592/7062/5243/2913/8807/79883/10430/145264/1811/5925/4430/54084/799/6406/4036/2243/147409/6708/222256/133558/126206/56302/8912/2765/90167/10060/79190/2561/1278/173/1046/146852/199834/3480/11086/27181/9915/1616/7472/337976/2559/4763/2554/55503/5156/2050/1816/4009/79799/5781/54439/375248/219527/340578/55023/84451/27284/4322/10849/6502/92856/2956/84767/8797/1956/9816
+## pancreatic_ductal_adenocarcinoma 9122/1008/23024/54510/65217/2157/55511/2918/8506/2737/781/285313/23086/1183/83872/259232/22859/26050/7157/58508/6249/56776/3482/11214/1289/3664/25988/6660/27253/5046/80314/23191/55561/27332/2977/53942/7403/114815/472/55193/9578/7399/6310/2033/1012/80059/9096/26986/80070/114805/23469/5290/435/6239/10347/26047/145581/341350/3561/23451/55117/4780/7450/3845/149371/6416/577/3553/26058/160418/11215/166824/23281/1770/4620/7048/343406/1496/2892/1741/219743/4089/94137/57194/117154/54894/5506/122742/440279/10057/8289/8085/84620/5789/1029/91010/54674/2196/3682/4622/9920/375033/2006/80243/5582/9940/23251/1804/2778/54437/388591/1794/283383/6708/127294/29998/2125/196528/10395/4224/4297/6651/9542/7455/7840/7173/116285/6331/6511/8241/7143/84448/54758/6597/29775/339145/85452/51134/51199/9774/81501/23499/8312/79728/119559/3066/9100/27340/84128/7837/2312/675
+## colorectal_adenocarcinoma                            57554/53353/79633/10082/80824/7227/55294/136895/4343/1606/114788/83872/2065/80336/7157/27445/3597/63895/324/1999/5728/1289/339479/23345/3895/93492/64689/9380/80230/4952/165215/6262/1108/283149/51438/7403/255967/10095/472/54806/64478/84256/6932/7757/1910/9053/5290/3984/4820/841/9378/197131/92/4087/9144/26047/710/339967/23245/7058/3845/121364/2195/3575/4437/91/4248/23281/171023/6646/999/5588/7048/688/4089/94025/1767/25813/54894/8200/8289/56155/56165/221545/1814/9312/5925/4430/8313/8078/92922/4585/2778/57144/7273/1610/6662/10048/54768/25942/6299/3697/166968/84033/29993/10335/55289/84700/132884/2011/84808/170572/140453/6934/3305/84643/349136/1756/8241/1499/55226/7976/9538/5093/119/5609/10664/7050/55636/139285/9508/996/51765/154664/3621/643677/10492/10061/5782/1729/5604/51593/199953/26278/10915/2956/4751/54434/678/23310/4605
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    geneID_symbol
+## triple_negative_breast_cancer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             GRIN2A/PIK3R1/FBXW7/NOTCH1/NCOA2/MITF/EPHA7/ERBB3/TP53/DDR2/KMT2C/NOTCH2/ERBB4/APC/PTEN/RUNX1/TSC1/DNMT3A/SPOP/KIT/KDM6A/CREBBP/ATM/PBRM1/EP300/PIK3CA/EPHA6/KRAS/PIK3CD/TBK1/RPTOR/TGFBR2/NTRK1/ARID1A/KMT2D/PTPRD/CDKN2A/RB1/ETV6/RET/GATA2/NOTCH3/ERG/AKT3/KMT2A/IGF1R/CDKN2B/TP63/DAXX/AKT1/FH/FAS/GATA3/CBL/ALK/NF1/PIK3CB/DICER1/CTNNB1/PTPN11/DNMT3B/FGFR1/DIS3/SHQ1/CCNE1/MCL1/KLF6/WT1/MET/EPHB1/MSH2/AURKA/TNFAIP3/MYC/BRCA2
+## gastric_adenocarcinoma                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           LRP1B/CNTN1/FAT4/MRAS/PTN/PLB1/ZSWIM3/ERBB2/GLI3/AGO4/CSMD3/SEMA3E/TP53/FMN2/APC/BNC2/ELF3/PTEN/ZZEF1/RPL22/DNAH7/TENT5D/PTPRC/BCOR/PIK3CA/FYB2/ACVR2A/SMAD2/CCNL1/OR4C46/EPB41L3/CNGA4/KRAS/ADGRB3/ZIC4/CDH1/TGFBR2/RASA1/PKHD1/CTNNA2/RIMS2/THSD7B/EYA4/SMAD4/RNF43/SPANXN2/ARID1A/RIT2/MCHR1/OR4C15/ATP4A/MUC6/RHOA/HTR1E/EIF3A/TTN/ABCA10/SPTA1/THBS1/APOB/ABCC9/FSCB/DMD/CTNNB1/MACF1/DBR1/DCLK1/SPRR2B/METTL3/SHROOM3/TTK
+## esophageal_squamous_carcinoma                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           LRP1B/SCUBE3/HSPG2/FBXW7/NOTCH1/CSMD3/HMCN1/TP53/KMT2C/NOTCH2/PTEN/PTCH1/RIMS1/FSTL5/CDC42BPG/KDM6A/CREBBP/EP300/ADAM22/PABPC1/PIK3CA/NFE2L2/FAT1/TGFBR2/ASTN1/SYT10/KMT2D/CDKN2A/OR2T4/FAT2/RB1/TTN/HYDIN/NOTCH3/ODF3L2/ZNF750/CUL3/VANGL1/RBPJ/AJUBA/FAM171A1/ZEB1/FLG
+## glioblastoma                                                                                                                                                                                                                                                                           TRPM3/LRRC7/SEMA3C/LUM/CDH9/PIK3R1/QKI/ERBB2/CDH18/SCN9A/CARD6/FRMPD4/SEMA3E/DST/DYNC1I1/TBC1D32/TP53/OR2L13/KEL/LTBP4/PRDM2/ATRX/FGFR4/ZNF844/PTEN/EIF2AK4/TPTE2/ZNF687/LZTR1/CFAP47/NGEF/STAG2/PARD6B/RPL5/PIK3CA/IDH1/PLCH2/GCSAML/MTUS2/FOXR2/PKHD1/MAPK7/GPX5/RFX6/ASTN1/COL3A1/ZNF99/LEMD3/TCHH/ABCB1/GRM3/IL18RAP/PODNL1/TMEM147/SERPINA12/SLC26A3/RB1/MYO1B/TSPEAR/CALCR/SEMG1/LRP2/FGA/DSG4/SPTA1/CDHR3/MROH2B/NLRP5/TRPV5/CACNA1H/GML/FRMD7/ABCC9/IRX6/GABRB2/COL1A2/AFM/CDX4/ODF4/LCE4A/IGF1R/ADAM29/SIGLEC8/ARNT2/DAXX/WNT2/KRTAP20-2/GABRA6/NF1/GABRA1/TRPV6/PDGFRA/EPHB4/DRD5/LMX1A/UGT2A3/PTPN11/RBM27/ANKRD36/LRRC55/DCAF12L2/PHIP/MAP3K21/SULT1B1/MMP13/POLR1G/SKP2/IMP4/MSH6/TRIM51/TNFRSF10A/EGFR/URB2
+## pancreatic_ductal_adenocarcinoma SLC16A4/CDH10/PDZRN3/PCDH18/PCDH15/F8/SAGE1/GRM8/CNTNAP1/GLI3/CACNA2D1/IGSF10/EXPH5/CLCN4/HMCN1/NALCN/ADGRL1/SLITRK5/TP53/KMT2C/CLIP1/FMN2/IGF2R/AKAP13/COL5A1/IRF6/HINFP/SOX5/PCDH17/PCSK6/EPC1/CYFIP1/CDC42BPG/ZNF638/GUCY1A2/CNTN5/KDM6A/SORCS1/ATM/PBRM1/CDC42BPB/USH2A/ATXN1/EP300/CDH13/LRRTM4/TBX18/PABPC1/ADAMTS20/GALNT13/PHF3/PIK3CA/ASL/RREB1/ABCA7/CNTNAP2/LRFN5/OVCH1/IL2RG/SF3B1/SLC6A15/NFE2L2/VWF/KRAS/EXOC8/MAP2K4/ADGRB3/IL1B/GIGYF2/TMTC3/AKAP11/RASSF6/MTUS2/DNAH9/MYH2/TGFBR2/OR10R2/CTNNA2/GRIA3/DLG3/TYSND1/SMAD4/RP1L1/ATP10A/DACH2/RNF43/PPP1R3A/OR4L1/UNC13C/ABCC5/ARID1A/KMT2D/ST6GAL2/PTPRD/CDKN2A/FMNL3/LRRN3/FAT2/ITGAE/MYH4/KBTBD11/PEAR1/ELN/PREX2/PRKCG/DLEC1/MINAR1/DPP6/GNAS/SEMA5B/RNF207/DOCK2/ADGRD1/SPTA1/MYOM3/BICRA/EVPL/ARID2/DLC1/MEP1A/KMT2A/SON/NRG2/ZAN/ALMS1/TPO/ACSM1/SCN5A/SLC1A6/RBM10/TNR/ABLIM2/KLHDC4/SMARCA4/CARD10/CIBAR2/CFAP74/CEP83/NIN/BCLAF1/DCSTAMP/MACF1/AXIN1/PALB2/SFXN4/HDAC2/USP10/UTP20/WDR75/PXDN/FLG/BRCA2
+## colorectal_adenocarcinoma                                  LRRC7/LRP1B/FAT4/GPC6/DUSP16/TRPS1/FBXW7/C7orf31/MOV10/DGKA/CSMD3/HMCN1/ERBB3/PABPC1L/TP53/PCLO/IL13RA1/PIEZO2/APC/ELF3/PTEN/COL5A1/BRINP3/SYNE1/KTN1/TPTE2/GORASP1/GRHPR/RUFY1/OCRL/FAM171B/RYR2/CHD4/BCL9L/MAGEC2/KDM6A/PAN3/ARPC1B/ATM/AHI1/CSMD1/FLYWCH1/TCF7/ZNF208/EDNRB/MAP7/PIK3CA/LIMK1/NKTR/CASP8/NRXN1/UBR1/ACVR2A/SMAD2/SYNGR2/CNTNAP2/SERPING1/TMPRSS11A/ASTN2/THBS2/KRAS/OR10A7/FAT1/IL7R/MSH3/ACVR1B/MGAT3/MTUS2/ASXL1/SOAT1/CDH1/PRKCQ/TGFBR2/KLF5/SMAD4/MUC16/DNAH5/SAMM50/RNF43/GDF5/ARID1A/TEX14/TDRD1/C6orf136/DRD3/KCNB2/RB1/MYO1B/AXIN2/USP5/CCDC102A/MUC4/GNAS/PAK5/TTN/DAO/SOX9/RANBP9/HYDIN/SIN3A/SALL1/ITIH1/MIER3/OBSCN/PACSIN1/IRAG1/ACOXL/MYO18B/EVC2/MARK2/PERM1/HTR3C/MUC17/TCF7L2/HSPA1L/KIF2B/WDR86/DMD/RBM10/CTNNB1/NAT10/FZD3/EI24/PCBP1/ADD2/MAP2K7/CTCF/TGIF1/CHD7/AMER1/ADAMTS3/CDC27/STK26/ABCA13/ING1/CCDC168/SYNCRIP/ABCF2/PTPN12/DIAPH1/MAP2K1/SRRT/TMEM201/SACS/TCERG1/MSH6/NEK2/SSH1/ZFP36L2/NCAPD3/MYBL2
+##                                  Count FoldEnrich RichFactor
+## triple_negative_breast_cancer       75   1.067027  1.0000000
+## gastric_adenocarcinoma              71   1.067027  1.0000000
+## esophageal_squamous_carcinoma       44   1.067027  1.0000000
+## glioblastoma                       113   1.039431  0.9741379
+## pancreatic_ductal_adenocarcinoma   152   1.033045  0.9681529
+## colorectal_adenocarcinoma          151   1.032827  0.9679487</code></pre>
+</div>
+<div id="ora-dgn" class="section level2">
+<h2>
+<span class="header-section-number">9.4</span> Human DisGeNET (DGN)<a class="anchor" aria-label="anchor" href="#ora-dgn"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://www.disgenet.org/">DisGeNET</a> is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.</p>
+<p>DisGeNET integrates data from expert curated repositories, GWAS catalogues, animal models and the scientific literature. DisGeNET data are homogeneously annotated with controlled vocabularies and community-driven ontologies. Additionally, several original metrics are provided to assist the prioritization of genotype–phenotype relationships.</p>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">edgn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"dgn"</span>, 
+               pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>, 
+               qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="ora-wiki" class="section level2">
+<h2>
+<span class="header-section-number">9.5</span> WikiPathways<a class="anchor" aria-label="anchor" href="#ora-wiki"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://www.wikipathways.org/index.php/WikiPathways">WikiPathways</a> was established to facilitate the contribution and maintenance of pathway information by the biology community. Each month it produces a set of pathways as <code>.gmt</code> files on <a href="https://wikipathways-data.wmcloud.org/" class="uri">https://wikipathways-data.wmcloud.org/</a>.</p>
+<p>Now, <code>genekitr</code> support 16 organisms:</p>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="st">"Arabidopsis thaliana"</span>
+<span class="st">"Bos taurus"</span>
+<span class="st">"Caenorhabditis elegans"</span>
+<span class="st">"Canis familiaris"</span>
+<span class="st">"Danio rerio"</span>
+<span class="st">"Drosophila melanogaster"</span>
+<span class="st">"Equus caballus"</span>
+<span class="st">"Gallus gallus"</span>
+<span class="st">"Homo sapiens"</span>
+<span class="st">"Mus musculus"</span>
+<span class="st">"Pan troglodytes"</span>
+<span class="st">"Populus trichocarpa"</span>
+<span class="st">"Rattus norvegicus"</span>
+<span class="st">"Saccharomyces cerevisiae"</span>
+<span class="st">"Solanum lycopersicum"</span>
+<span class="st">"Sus scrofa"</span></code></pre></div>
+<p><code>genekitr</code> has prepared these data and will keep up-to-date, users do not have to download and load by themselves.</p>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ewiki</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"wiki"</span>, org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ewiki</span><span class="op">)</span></code></pre></div>
+<pre><code>##            ID                                 Description  GeneRatio  BgRatio
+## WP466   WP466                             DNA replication 0.04828974  42/7846
+## WP2446 WP2446               Retinoblastoma gene in cancer 0.06438632  90/7846
+## WP45     WP45                  G1 to S cell cycle control 0.05231388  64/7846
+## WP179   WP179                                  Cell cycle 0.06438632 120/7846
+## WP4016 WP4016 DNA IR-damage and cellular response via ATR 0.04828974  81/7846
+## WP531   WP531                         DNA mismatch repair 0.02213280  23/7846
+##              pvalue     p.adjust       qvalue
+## WP466  1.236651e-18 6.306922e-16 5.610492e-16
+## WP2446 1.317951e-16 3.360776e-14 2.989668e-14
+## WP45   2.322882e-15 3.948899e-13 3.512850e-13
+## WP179  1.254310e-12 1.599245e-10 1.422651e-10
+## WP4016 7.814692e-11 7.970986e-09 7.090805e-09
+## WP531  3.980092e-08 3.188582e-06 2.836489e-06
+##                                                                                                                                                               geneID
+## WP466                                   57804/5426/6118/1017/5982/5984/23649/10714/5557/5111/990/4172/51053/4171/4176/5983/4174/4173/4175/23594/4998/5427/8318/55388
+## WP2446 6839/891/1870/5426/6118/54443/1021/7465/1017/5984/890/10714/4609/7298/5557/5111/4172/7272/1869/4176/5983/4173/983/4175/10733/4998/5427/6241/595/8318/993/9134
+## WP45                                 891/1870/5426/6118/1021/7465/1017/23649/4609/5557/5111/4172/1869/4171/4176/4174/4173/983/4175/23594/4998/5427/595/8318/993/9134
+## WP179       7040/7042/995/5347/891/1870/1021/7465/9700/5933/1017/699/890/4609/5111/990/4172/7272/1869/4171/4176/4174/4173/983/4175/9088/23594/4998/595/8318/993/9134
+## WP4016                                     84142/995/4436/5347/2237/6118/7398/80010/1017/55159/2177/2175/5111/672/55215/1869/83990/4171/983/675/5888/8318/9156/63967
+## WP531                                                                                                       57804/4436/5426/6118/5982/5984/10714/5111/5983/5427/9156
+##                                                                                                                                                                      geneID_symbol
+## WP466                                               POLD4/POLE/RPA2/CDK2/RFC2/RFC4/POLA2/POLD3/PRIM1/PCNA/CDC6/MCM3/GMNN/MCM2/MCM7/RFC3/MCM5/MCM4/MCM6/ORC6/ORC1/POLE2/CDC45/MCM10
+## WP2446  SUV39H1/CCNB1/E2F2/POLE/RPA2/ANLN/CDK6/WEE1/CDK2/RFC4/CCNA2/POLD3/MYC/TYMS/PRIM1/PCNA/MCM3/TTK/E2F1/MCM7/RFC3/MCM4/CDK1/MCM6/PLK4/ORC1/POLE2/RRM2/CCND1/CDC45/CDC25A/CCNE2
+## WP45                                     CCNB1/E2F2/POLE/RPA2/CDK6/WEE1/CDK2/POLA2/MYC/PRIM1/PCNA/MCM3/E2F1/MCM2/MCM7/MCM5/MCM4/CDK1/MCM6/ORC6/ORC1/POLE2/CCND1/CDC45/CDC25A/CCNE2
+## WP179  TGFB1/TGFB2/CDC25C/PLK1/CCNB1/E2F2/CDK6/WEE1/ESPL1/RBL1/CDK2/BUB1/CCNA2/MYC/PCNA/CDC6/MCM3/TTK/E2F1/MCM2/MCM7/MCM5/MCM4/CDK1/MCM6/PKMYT1/ORC6/ORC1/CCND1/CDC45/CDC25A/CCNE2
+## WP4016                                    ABRAXAS1/CDC25C/MSH2/PLK1/FEN1/RPA2/USP1/RMI1/CDK2/RFWD3/FANCD2/FANCA/PCNA/BRCA1/FANCI/E2F1/BRIP1/MCM2/CDK1/BRCA2/RAD51/CDC45/EXO1/CLSPN
+## WP531                                                                                                                    POLD4/MSH2/POLE/RPA2/RFC2/RFC4/POLD3/PCNA/RFC3/POLE2/EXO1
+##        Count FoldEnrich RichFactor
+## WP466     24   9.020983  0.5714286
+## WP2446    32   5.613056  0.3555556
+## WP45      26   6.413355  0.4062500
+## WP179     32   4.209792  0.2666667
+## WP4016    24   4.677547  0.2962963
+## WP531     11   7.550171  0.4782609</code></pre>
+</div>
+<div id="groups-comparison" class="section level2">
+<h2>
+<span class="header-section-number">9.6</span> Groups comparison<a class="anchor" aria-label="anchor" href="#groups-comparison"><i class="fas fa-link"></i></a>
+</h2>
+<p>All these data sets support gene group comparison, just pass the <code>group_list</code> to function.</p>
+<p>Take disease ontology as example:</p>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">1000</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
+<span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  group1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"up"</span>, <span class="fl">1000</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>,
+  group2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="fl">1300</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="fl">700</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">gedo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"do"</span>, group_list <span class="op">=</span> <span class="va">group</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gedo</span><span class="op">)</span></code></pre></div>
+<pre><code>##   Cluster           ID                      Description  GeneRatio  BgRatio
+## 1  down.B    DOID:5683 hereditary breast ovarian cancer 0.08625337 222/8007
+## 2  down.B    DOID:2600              laryngeal carcinoma 0.02695418  26/8007
+## 3  down.B DOID:0060116            sensory system cancer 0.05929919 139/8007
+## 4  down.B    DOID:2174                    ocular cancer 0.05929919 139/8007
+## 5  down.B    DOID:5517                stomach carcinoma 0.06199461 153/8007
+## 6  down.B    DOID:3713             ovary adenocarcinoma 0.02964960  38/8007
+##         pvalue     p.adjust       qvalue
+## 1 7.639352e-09 5.232956e-06 4.213706e-06
+## 2 1.104010e-07 3.781235e-05 3.044744e-05
+## 3 3.524381e-07 6.035502e-05 4.859936e-05
+## 4 3.524381e-07 6.035502e-05 4.859936e-05
+## 5 4.926866e-07 6.749806e-05 5.435111e-05
+## 6 7.086486e-07 8.090405e-05 6.514594e-05
+##                                                                                                                                                            geneID
+## 1 259266/596/24137/2146/9221/1111/580/11144/7153/3875/3161/5347/5451/6790/6118/4602/1894/1017/2177/1956/4609/29089/672/8091/83990/675/29128/641/5888/595/374/3690
+## 2                                                                                                                   596/896/4436/891/332/3576/4288/4609/5111/4312
+## 3                                                       596/5422/5347/5451/6573/3486/332/1021/5933/1017/9928/4288/890/4609/7298/5111/55038/8091/1869/983/595/9134
+## 4                                                       596/5422/5347/5451/6573/3486/332/1021/5933/1017/9928/4288/890/4609/7298/5111/55038/8091/1869/983/595/9134
+## 5                                                596/10276/7153/3887/5468/5347/9314/3486/332/8797/3576/1956/4288/3099/4609/7298/5111/1969/641/595/7039/3690/57214
+## 6                                                                                                             896/3486/1956/3624/672/4171/4174/675/7039/3690/2119
+##                                                                                                                                                                      geneID_symbol
+## 1 ASPM/BCL2/KIF4A/EZH2/NOLC1/CHEK1/BARD1/DMC1/TOP2A/KRT18/HMMR/PLK1/POU2F1/AURKA/RPA2/MYB/ECT2/CDK2/FANCD2/EGFR/MYC/UBE2T/BRCA1/HMGA2/BRIP1/BRCA2/UHRF1/BLM/RAD51/CCND1/AREG/ITGB3
+## 2                                                                                                                            BCL2/CCND3/MSH2/CCNB1/BIRC5/CXCL8/MKI67/MYC/PCNA/MMP1
+## 3                                                     BCL2/POLA1/PLK1/POU2F1/SLC19A1/IGFBP3/BIRC5/CDK6/RBL1/CDK2/KIF14/MKI67/CCNA2/MYC/TYMS/PCNA/CDCA4/HMGA2/E2F1/CDK1/CCND1/CCNE2
+## 4                                                     BCL2/POLA1/PLK1/POU2F1/SLC19A1/IGFBP3/BIRC5/CDK6/RBL1/CDK2/KIF14/MKI67/CCNA2/MYC/TYMS/PCNA/CDCA4/HMGA2/E2F1/CDK1/CCND1/CCNE2
+## 5                                                 BCL2/NET1/TOP2A/KRT81/PPARG/PLK1/KLF4/IGFBP3/BIRC5/TNFRSF10A/CXCL8/EGFR/MKI67/HK2/MYC/TYMS/PCNA/EPHA2/BLM/CCND1/TGFA/ITGB3/CEMIP
+## 6                                                                                                                    CCND3/IGFBP3/EGFR/INHBA/BRCA1/MCM2/MCM5/BRCA2/TGFA/ITGB3/ETV5
+##   Count FoldEnrich RichFactor
+## 1    32   3.110949  0.1441441
+## 2    10   8.300850  0.3846154
+## 3    22   3.415889  0.1582734
+## 4    22   3.415889  0.1582734
+## 5    23   3.244385  0.1503268
+## 6    11   6.247482  0.2894737</code></pre>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></div>
+<div class="next"><a href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ora-additional-1"><span class="header-section-number">9</span> ORA Additional</a></li>
+<li><a class="nav-link" href="#ora-aavailable-arguments"><span class="header-section-number">9.1</span> Available arguments</a></li>
+<li><a class="nav-link" href="#ora-do"><span class="header-section-number">9.2</span> Human Disease Ontology (DO)</a></li>
+<li><a class="nav-link" href="#ora-ncg"><span class="header-section-number">9.3</span> Human Network of Cancer Gene (NCG)</a></li>
+<li><a class="nav-link" href="#ora-dgn"><span class="header-section-number">9.4</span> Human DisGeNET (DGN)</a></li>
+<li><a class="nav-link" href="#ora-wiki"><span class="header-section-number">9.5</span> WikiPathways</a></li>
+<li><a class="nav-link" href="#groups-comparison"><span class="header-section-number">9.6</span> Groups comparison</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

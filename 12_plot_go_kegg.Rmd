@@ -178,7 +178,7 @@ gego2 <- genGO(id,
 
 (ref:dptplotGroupScap) Dot plot of group enrichment analysis.
 
-(ref:dotplotGroupCap) **Dot plot of group enrichment analysis.** 
+(ref:dotplotGroupCap) **Dot plot of group enrichment analysis.** number in round brackets shows total gene number in selected pathways
 
 ```{r dotplotGroup, fig.height=6, fig.width=10, fig.cap="(ref:dotplotGroupCap)", fig.scap="(ref:dotplotGroupScap)",echo = T, dpi=300}
 plotEnrich(gego2,

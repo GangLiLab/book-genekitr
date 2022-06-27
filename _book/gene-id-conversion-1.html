@@ -58,7 +58,7 @@
 <li class="book-part">Part III: Enrichment Analysis</li>
 <li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="" href="ora-human-disease-analysis-1.html"><span class="header-section-number">9</span> ORA human disease analysis</a></li>
+<li><a class="" href="ora-additional-1.html"><span class="header-section-number">9</span> ORA Additional</a></li>
 <li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
 <li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
@@ -297,13 +297,13 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <p>Let’s take a look for the first one LINC00337, which is converted from gene <a href="https://www.ncbi.nlm.nih.gov/gene/148645">148645</a></p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bitr_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">SYMBOL</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"LINC00337"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">SYMBOL</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"LINC00337"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">pull</span><span class="op">(</span><span class="va">ENTREZID</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "148645"</code></pre>
 <p>When we search it on NCBI and we could see the official symbol is “ICMT-DT” now while “LINC00337” is an alias. When we look back into <code>transId</code> result, it keeps update with NCBI web.</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">transid_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"148645"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"148645"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">pull</span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "ICMT-DT"</code></pre>
 <p>Besides, there are 118 unique symbols in <code>transId</code> result:</p>
@@ -322,18 +322,18 @@ However using <code>transId</code>, user will not worry this issue any more.</p>
 <pre><code>## [1] "KLRK1"     "FLJ37453"  "C11orf49"  "C19orf71"  "ZNF761"    "LINC01588"</code></pre>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">biomart_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">external_gene_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"KLRK1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">external_gene_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"KLRK1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">pull</span><span class="op">(</span><span class="va">entrezgene_id</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 100528032</code></pre>
 <p>When we search NCBI <a href="https://www.ncbi.nlm.nih.gov/gene/100528032">100528032</a> and we could see the official symbol is “KLRC4-KLRK1”. When we look back into <code>transId</code> and <code>bitr</code> result, they are the same with NCBI web.</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bitr_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">ENTREZID</span> <span class="op">==</span> <span class="st">"100528032"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ENTREZID</span> <span class="op">==</span> <span class="st">"100528032"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">pull</span><span class="op">(</span><span class="va">SYMBOL</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "KLRC4-KLRK1"</code></pre>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">transid_res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"100528032"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">input_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"100528032"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">pull</span><span class="op">(</span><span class="va">symbol</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "KLRC4-KLRK1"</code></pre>
 </div>

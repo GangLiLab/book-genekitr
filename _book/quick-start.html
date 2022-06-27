@@ -58,7 +58,7 @@
 <li class="book-part">Part III: Enrichment Analysis</li>
 <li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="" href="ora-human-disease-analysis-1.html"><span class="header-section-number">9</span> ORA human disease analysis</a></li>
+<li><a class="" href="ora-additional-1.html"><span class="header-section-number">9</span> ORA Additional</a></li>
 <li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
 <li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
@@ -166,7 +166,7 @@
 </div>
 <div id="ora-human-disease-analysis" class="section level2">
 <h2>
-<span class="header-section-number">1.8</span> <a href="ora-human-disease-analysis-1.html#ora-human-disease-analysis-1">ORA human disease analysis</a><a class="anchor" aria-label="anchor" href="#ora-human-disease-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8</span> <a href="#ora-human-disease-analysis-1">ORA human disease analysis</a><a class="anchor" aria-label="anchor" href="#ora-human-disease-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># support `do` (Disease Ontology), `ncg` (Network of Cancer Gene) and `dgn` (DisGeNET)</span>
@@ -177,7 +177,8 @@
 <span class="va">encg</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ncg"</span><span class="op">)</span>
 <span class="va">edgn</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"dgn"</span>, 
                pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>, 
-               qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
+               qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
+<span class="va">ewiki</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"wiki"</span>, org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="fcs-gsea-analysis" class="section level2">
 <h2>

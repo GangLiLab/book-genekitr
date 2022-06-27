@@ -101,6 +101,7 @@ encg <- genORA(names(geneList), type = "ncg")
 edgn <- genORA(id, type = "dgn", 
                pvalueCutoff = 0.01, 
                qvalueCutoff = 0.01)
+ewiki <- genORA(id, type = "wiki", org = "human")
 ```
 
 

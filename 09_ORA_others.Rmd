@@ -1,10 +1,12 @@
-# ORA human disease analysis {#ora-human-disease-analysis-1}
+# ORA Additional {#ora-additional-1}
 
 ```{r include=FALSE}
 library(knitr)
 opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
 library(genekitr)
 ```
+
+In this part, we will go through other practical ORA methods, including human disease enrichment analysis and WikiPathway analysis.
 
 ## Available arguments {#ora-aavailable-arguments}
 
@@ -19,7 +21,7 @@ library(genekitr)
 - `universe`: Background genes of Entrez, Ensembl, symbol or Uniprot. Default is NULL. 
 
 
-## Disease Ontology (DO) {#ora-do}
+## Human Disease Ontology (DO) {#ora-do}
 
 The [Disease Ontology](https://disease-ontology.org/) has been developed as a standardized ontology for human disease with the purpose of providing the biomedical community with consistent, reusable and sustainable descriptions of human disease terms.
 
@@ -35,7 +37,7 @@ ens_edo <- genORA(ens_id, type = "do")
 head(ens_edo)
 ```
 
-## Network of Cancer Gene (NCG) {#ora-ncg}
+## Human Network of Cancer Gene (NCG) {#ora-ncg}
 
 [NCG](http://ncg.kcl.ac.uk/) is a manually curated collection of cancer genes, healthy drivers and their properties.
 
@@ -45,7 +47,7 @@ encg <- genORA(names(geneList), type = "ncg",
 head(encg)
 ```
 
-## DisGeNET (DGN) {#ora-dgn}
+## Human DisGeNET (DGN) {#ora-dgn}
 
 [DisGeNET](https://www.disgenet.org/) is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.
 
@@ -55,6 +57,40 @@ DisGeNET integrates data from expert curated repositories, GWAS catalogues, anim
 edgn <- genORA(id, type = "dgn", 
                pvalueCutoff = 0.01, 
                qvalueCutoff = 0.01)
+```
+
+
+## WikiPathways {#ora-wiki}
+
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) was established to facilitate the contribution and maintenance of pathway information by the biology community. Each month it produces a set of pathways as `.gmt` files on https://wikipathways-data.wmcloud.org/.
+
+Now, `genekitr` support 16 organisms:
+
+```{r eval=FALSE}
+"Arabidopsis thaliana"
+"Bos taurus"
+"Caenorhabditis elegans"
+"Canis familiaris"
+"Danio rerio"
+"Drosophila melanogaster"
+"Equus caballus"
+"Gallus gallus"
+"Homo sapiens"
+"Mus musculus"
+"Pan troglodytes"
+"Populus trichocarpa"
+"Rattus norvegicus"
+"Saccharomyces cerevisiae"
+"Solanum lycopersicum"
+"Sus scrofa"
+```
+
+
+`genekitr` has prepared these data and will keep up-to-date, users do not have to download and load by themselves.
+
+```{r}
+ewiki <- genORA(id, type = "wiki", org = "human")
+head(ewiki)
 ```
 
 

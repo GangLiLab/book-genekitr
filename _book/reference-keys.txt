@@ -115,11 +115,12 @@ kegg-basic-usage
 kegg-group-enrichment
 comparison-with-one-group-1
 comparison-with-more-than-one-group-1
-ora-human-disease-analysis-1
+ora-additional-1
 ora-aavailable-arguments
 ora-do
 ora-ncg
 ora-dgn
+ora-wiki
 groups-comparison
 functional-class-scoring-1
 gsea-introduction
