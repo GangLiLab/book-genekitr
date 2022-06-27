@@ -8,6 +8,8 @@ library(dplyr)
 library(DT)
 ```
 
+> This part helps users quickly go through function usage. Click each title to view more details.
+
 ## [Search gene metadata](#search-gene-metadata-1)
 
 ```{r eval=FALSE}
@@ -87,6 +89,21 @@ keg <- genKEGG(id,
 )
 ```
 
+## [ORA human disease analysis](#ora-human-disease-analysis-1)
+
+```{r eval=FALSE}
+# support `do` (Disease Ontology), `ncg` (Network of Cancer Gene) and `dgn` (DisGeNET)
+data(geneList, package = "genekitr")
+id <- names(geneList)[abs(geneList) > 1]
+
+edo <- genORA(id, type = "do")
+encg <- genORA(names(geneList), type = "ncg")
+edgn <- genORA(id, type = "dgn", 
+               pvalueCutoff = 0.01, 
+               qvalueCutoff = 0.01)
+```
+
+
 ## [FCS GSEA analysis](#functional-class-scoring-1)
 
 > FCS stands for "functional-class-scoring".
@@ -101,6 +118,52 @@ gse <- genGSEA(
   category = "H"
 )
 ```
+
+## [Import external data](#import-external-data-1)
+
+### Import Panther of GeneOntology website
+```{r eval=FALSE}
+# here we save panther result as "analysis.txt"
+panther_res <- importPanther("analysis.txt")
+```
+
+### Import clusterProfiler result
+```{r eval=FALSE}
+library(clusterProfiler)
+library(org.Hs.eg.db)
+data(geneList, package="DOSE")
+gene <- names(geneList)[abs(geneList) > 2]
+
+## GO result from clusterProfiler
+go <- enrichGO(gene          = gene,
+                OrgDb         = org.Hs.eg.db,
+                ont           = "BP",
+                pAdjustMethod = "BH",
+                pvalueCutoff  = 0.01,
+                qvalueCutoff  = 0.05)
+## GSEA result from clusterProfiler
+kk <- gseKEGG(geneList     = geneList,
+               organism     = 'hsa',
+               minGSSize    = 120,
+               pvalueCutoff = 0.05,
+               verbose      = FALSE)
+## Other ORA result from clusterProfiler 
+# (e.g. KEGG/DOSE/WikiPathways...)
+do <- enrichDO(gene          = gene,
+              ont           = "DO",
+              pvalueCutoff  = 0.05,
+              pAdjustMethod = "BH",
+              universe      = names(geneList),
+              minGSSize     = 5,
+              maxGSSize     = 500,
+              qvalueCutoff  = 0.05)
+
+## Import 
+go_easy <- importCP(go, type = "go")
+kk_easy <- importCP(kk,type = 'gsea')
+do_easy <- importCP(do,type = 'other')
+```
+
 
 ## [Plot GO and KEGG](#plot-go-kegg-1)
 

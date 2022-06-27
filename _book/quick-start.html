@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 1 Quick start | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content='1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD", "NUDT10") info &lt;- genInfo(id, org = "hs") # keep unique records info2 &lt;- genInfo(id, org = "hs", unique...'>
+<meta name="description" content='This part helps users quickly go through function usage. Click each title to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD",...'>
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Quick start | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
-<meta property="og:description" content='1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD", "NUDT10") info &lt;- genInfo(id, org = "hs") # keep unique records info2 &lt;- genInfo(id, org = "hs", unique...'>
+<meta property="og:description" content='This part helps users quickly go through function usage. Click each title to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD",...'>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 1 Quick start | Genekitr: Gene Analysis Toolkit based on R">
-<meta name="twitter:description" content='1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD", "NUDT10") info &lt;- genInfo(id, org = "hs") # keep unique records info2 &lt;- genInfo(id, org = "hs", unique...'>
+<meta name="twitter:description" content='This part helps users quickly go through function usage. Click each title to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD",...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -58,12 +58,13 @@
 <li class="book-part">Part III: Enrichment Analysis</li>
 <li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
-<li><a class="" href="import-external-data.html"><span class="header-section-number">10</span> Import External Data</a></li>
+<li><a class="" href="ora-human-disease-analysis-1.html"><span class="header-section-number">9</span> ORA human disease analysis</a></li>
+<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">11</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
-<li><a class="" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
+<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">12</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">14</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,6 +76,9 @@
 <h1>
 <span class="header-section-number">1</span> Quick start<a class="anchor" aria-label="anchor" href="#quick-start"><i class="fas fa-link"></i></a>
 </h1>
+<blockquote>
+<p>This part helps users quickly go through function usage. Click each title to view more details.</p>
+</blockquote>
 <div id="search-gene-metadata" class="section level2">
 <h2>
 <span class="header-section-number">1.1</span> <a href="search-gene-metadata-1.html#search-gene-metadata-1">Search gene metadata</a><a class="anchor" aria-label="anchor" href="#search-gene-metadata"><i class="fas fa-link"></i></a>
@@ -160,15 +164,30 @@
   qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
 <span class="op">)</span></code></pre></div>
 </div>
+<div id="ora-human-disease-analysis" class="section level2">
+<h2>
+<span class="header-section-number">1.8</span> <a href="ora-human-disease-analysis-1.html#ora-human-disease-analysis-1">ORA human disease analysis</a><a class="anchor" aria-label="anchor" href="#ora-human-disease-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># support `do` (Disease Ontology), `ncg` (Network of Cancer Gene) and `dgn` (DisGeNET)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
+<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span>
+
+<span class="va">edo</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span>
+<span class="va">encg</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ncg"</span><span class="op">)</span>
+<span class="va">edgn</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"dgn"</span>, 
+               pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>, 
+               qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
+</div>
 <div id="fcs-gsea-analysis" class="section level2">
 <h2>
-<span class="header-section-number">1.8</span> <a href="functional-class-scoring-1.html#functional-class-scoring-1">FCS GSEA analysis</a><a class="anchor" aria-label="anchor" href="#fcs-gsea-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9</span> <a href="functional-class-scoring-1.html#functional-class-scoring-1">FCS GSEA analysis</a><a class="anchor" aria-label="anchor" href="#fcs-gsea-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>FCS stands for “functional-class-scoring”.</p>
 </blockquote>
 <p><code>geneList</code> is an order ranked gene list in decreasing order. Gene inside can be Entrez, Ensembl or symbol.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu">genGSEA</span><span class="op">(</span>
   genelist <span class="op">=</span> <span class="va">geneList</span>,
@@ -176,13 +195,65 @@
   category <span class="op">=</span> <span class="st">"H"</span>
 <span class="op">)</span></code></pre></div>
 </div>
+<div id="import-external-data" class="section level2">
+<h2>
+<span class="header-section-number">1.10</span> <a href="import-external-data-1.html#import-external-data-1">Import external data</a><a class="anchor" aria-label="anchor" href="#import-external-data"><i class="fas fa-link"></i></a>
+</h2>
+<div id="import-panther-of-geneontology-website" class="section level3">
+<h3>
+<span class="header-section-number">1.10.1</span> Import Panther of GeneOntology website<a class="anchor" aria-label="anchor" href="#import-panther-of-geneontology-website"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># here we save panther result as "analysis.txt"</span>
+<span class="va">panther_res</span> <span class="op">&lt;-</span> <span class="fu">importPanther</span><span class="op">(</span><span class="st">"analysis.txt"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="import-clusterprofiler-result" class="section level3">
+<h3>
+<span class="header-section-number">1.10.2</span> Import clusterProfiler result<a class="anchor" aria-label="anchor" href="#import-clusterprofiler-result"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">"DOSE"</span><span class="op">)</span>
+<span class="va">gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span>
+
+<span class="co">## GO result from clusterProfiler</span>
+<span class="va">go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichGO.html">enrichGO</a></span><span class="op">(</span>gene          <span class="op">=</span> <span class="va">gene</span>,
+                OrgDb         <span class="op">=</span> <span class="va">org.Hs.eg.db</span>,
+                ont           <span class="op">=</span> <span class="st">"BP"</span>,
+                pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
+                pvalueCutoff  <span class="op">=</span> <span class="fl">0.01</span>,
+                qvalueCutoff  <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
+<span class="co">## GSEA result from clusterProfiler</span>
+<span class="va">kk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/gseKEGG.html">gseKEGG</a></span><span class="op">(</span>geneList     <span class="op">=</span> <span class="va">geneList</span>,
+               organism     <span class="op">=</span> <span class="st">'hsa'</span>,
+               minGSSize    <span class="op">=</span> <span class="fl">120</span>,
+               pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
+               verbose      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">## Other ORA result from clusterProfiler </span>
+<span class="co"># (e.g. KEGG/DOSE/WikiPathways...)</span>
+<span class="va">do</span> <span class="op">&lt;-</span> <span class="fu">enrichDO</span><span class="op">(</span>gene          <span class="op">=</span> <span class="va">gene</span>,
+              ont           <span class="op">=</span> <span class="st">"DO"</span>,
+              pvalueCutoff  <span class="op">=</span> <span class="fl">0.05</span>,
+              pAdjustMethod <span class="op">=</span> <span class="st">"BH"</span>,
+              universe      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>,
+              minGSSize     <span class="op">=</span> <span class="fl">5</span>,
+              maxGSSize     <span class="op">=</span> <span class="fl">500</span>,
+              qvalueCutoff  <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
+
+<span class="co">## Import </span>
+<span class="va">go_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">go</span>, type <span class="op">=</span> <span class="st">"go"</span><span class="op">)</span>
+<span class="va">kk_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">kk</span>,type <span class="op">=</span> <span class="st">'gsea'</span><span class="op">)</span>
+<span class="va">do_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">do</span>,type <span class="op">=</span> <span class="st">'other'</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
 <div id="plot-go-and-kegg" class="section level2">
 <h2>
-<span class="header-section-number">1.9</span> <a href="plot-go-kegg-1.html#plot-go-kegg-1">Plot GO and KEGG</a><a class="anchor" aria-label="anchor" href="#plot-go-and-kegg"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.11</span> <a href="plot-go-kegg-1.html#plot-go-kegg-1">Plot GO and KEGG</a><a class="anchor" aria-label="anchor" href="#plot-go-and-kegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>Supported types include: <code>bar</code>, <code>wego</code>, <code>bubble</code>, <code>dot</code>, <code>lollipop</code>, <code>geneheat</code>, <code>genechord</code>,
 <code>network</code>, <code>gomap</code>, <code>goheat</code>, <code>gotangram</code>, <code>wordcloud</code>, <code>upset</code> and <code>two-group barplot</code></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span>
 <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">keg</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span>
 <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span><span class="op">)</span>
@@ -190,10 +261,10 @@
 </div>
 <div id="plot-gsea" class="section level2">
 <h2>
-<span class="header-section-number">1.10</span> <a href="plot-gsea-1.html#plot-gsea-1">Plot GSEA</a><a class="anchor" aria-label="anchor" href="#plot-gsea"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.12</span> <a href="plot-gsea-1.html#plot-gsea-1">Plot GSEA</a><a class="anchor" aria-label="anchor" href="#plot-gsea"><i class="fas fa-link"></i></a>
 </h2>
 <p>Supported types include: <code>volcano</code>, <code>classic</code>, <code>fgsea</code>, <code>ridge</code> and <code>bar</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">plotGSEA</span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"volcano"</span>, show_pathway <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MET"</span>, <span class="st">"TP53"</span>, <span class="st">"PMM2"</span><span class="op">)</span>
@@ -203,12 +274,12 @@
 </div>
 <div id="plot-venn" class="section level2">
 <h2>
-<span class="header-section-number">1.11</span> <a href="plot-others-1.html#plot-others-1">Plot Venn</a><a class="anchor" aria-label="anchor" href="#plot-venn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.13</span> <a href="plot-others-1.html#plot-others-1">Plot Venn</a><a class="anchor" aria-label="anchor" href="#plot-venn"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">set1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">set2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">set3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">set1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<span class="va">set2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<span class="va">set3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># classic venn plot</span>
 <span class="fu">plotVenn</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>gset1 <span class="op">=</span> <span class="va">set1</span>, gset2 <span class="op">=</span> <span class="va">set2</span>, gset3 <span class="op">=</span> <span class="va">set3</span><span class="op">)</span>, use_venn <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -217,9 +288,9 @@
 </div>
 <div id="plot-deg-volcano" class="section level2">
 <h2>
-<span class="header-section-number">1.12</span> <a href="plot-others-1.html#plot-others-1">Plot DEG Volcano</a><a class="anchor" aria-label="anchor" href="#plot-deg-volcano"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.14</span> <a href="plot-others-1.html#plot-others-1">Plot DEG Volcano</a><a class="anchor" aria-label="anchor" href="#plot-deg-volcano"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="fu">plotVolcano</span><span class="op">(</span><span class="va">deg</span>, <span class="st">"p.adjust"</span>,
   remove_legend <span class="op">=</span> <span class="cn">T</span>,
@@ -245,11 +316,18 @@
 <li><a class="nav-link" href="#probe-id-conversion"><span class="header-section-number">1.5</span> Probe ID conversion</a></li>
 <li><a class="nav-link" href="#ora-go-analysis"><span class="header-section-number">1.6</span> ORA GO analysis</a></li>
 <li><a class="nav-link" href="#ora-kegg-analysis"><span class="header-section-number">1.7</span> ORA KEGG analysis</a></li>
-<li><a class="nav-link" href="#fcs-gsea-analysis"><span class="header-section-number">1.8</span> FCS GSEA analysis</a></li>
-<li><a class="nav-link" href="#plot-go-and-kegg"><span class="header-section-number">1.9</span> Plot GO and KEGG</a></li>
-<li><a class="nav-link" href="#plot-gsea"><span class="header-section-number">1.10</span> Plot GSEA</a></li>
-<li><a class="nav-link" href="#plot-venn"><span class="header-section-number">1.11</span> Plot Venn</a></li>
-<li><a class="nav-link" href="#plot-deg-volcano"><span class="header-section-number">1.12</span> Plot DEG Volcano</a></li>
+<li><a class="nav-link" href="#ora-human-disease-analysis"><span class="header-section-number">1.8</span> ORA human disease analysis</a></li>
+<li><a class="nav-link" href="#fcs-gsea-analysis"><span class="header-section-number">1.9</span> FCS GSEA analysis</a></li>
+<li>
+<a class="nav-link" href="#import-external-data"><span class="header-section-number">1.10</span> Import external data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#import-panther-of-geneontology-website"><span class="header-section-number">1.10.1</span> Import Panther of GeneOntology website</a></li>
+<li><a class="nav-link" href="#import-clusterprofiler-result"><span class="header-section-number">1.10.2</span> Import clusterProfiler result</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#plot-go-and-kegg"><span class="header-section-number">1.11</span> Plot GO and KEGG</a></li>
+<li><a class="nav-link" href="#plot-gsea"><span class="header-section-number">1.12</span> Plot GSEA</a></li>
+<li><a class="nav-link" href="#plot-venn"><span class="header-section-number">1.13</span> Plot Venn</a></li>
+<li><a class="nav-link" href="#plot-deg-volcano"><span class="header-section-number">1.14</span> Plot DEG Volcano</a></li>
 </ul>
 
       <div class="book-extra">

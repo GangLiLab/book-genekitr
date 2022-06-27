@@ -199,8 +199,8 @@ Because `genekitr` combines both Ensembl and NCBI data, it could handle more gen
 ```{r}
 # using orgdb
 library(org.Hs.eg.db)
-org_dat = select(org.Hs.eg.db,
-                keys = keys(org.Hs.eg.db),
+org_dat = AnnotationDbi::select(org.Hs.eg.db,
+                keys = AnnotationDbi::keys(org.Hs.eg.db),
                 keytype = 'ENTREZID',
                 columns = 'SYMBOL')
 org_sym <- unique(org_dat$SYMBOL)

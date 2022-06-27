@@ -1,0 +1,77 @@
+# ORA human disease analysis {#ora-human-disease-analysis-1}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(genekitr)
+```
+
+## Available arguments {#ora-aavailable-arguments}
+
+- `id`: gene id of Entrez, Ensembl, symbol or Uniprot
+- `type`: choose one from `do` (Disease Ontology), `ncg` (Network of Cancer Gene) and `dgn` (DisGeNET)
+- `group_list`: gene set comparison groups, default is NULL.
+- `pAdjustMethod`: choose one from "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none".
+- `pvalueCutoff`: pvalue cutoff, default is 0.05.
+- `qvalueCutoff`: adjusted pvalue cutoff, default is 0.05.
+- `minGSSize`: minimal size of each geneSet for analyzing, default is 10.
+- `maxGSSize`: maximal size of each geneSet for analyzing, default is 500. Program will choose gene set in range [minGSSize,maxGSSize] to analyze
+- `universe`: Background genes of Entrez, Ensembl, symbol or Uniprot. Default is NULL. 
+
+
+## Disease Ontology (DO) {#ora-do}
+
+The [Disease Ontology](https://disease-ontology.org/) has been developed as a standardized ontology for human disease with the purpose of providing the biomedical community with consistent, reusable and sustainable descriptions of human disease terms.
+
+```{r}
+data(geneList, package = "genekitr")
+id <- names(geneList)[abs(geneList) > 1]
+edo <- genORA(id, type = "do")
+head(edo)
+
+# if we input ensembl genes
+ens_id <- transId(id,'ens',unique = TRUE)[,2]
+ens_edo <- genORA(ens_id, type = "do")
+head(ens_edo)
+```
+
+## Network of Cancer Gene (NCG) {#ora-ncg}
+
+[NCG](http://ncg.kcl.ac.uk/) is a manually curated collection of cancer genes, healthy drivers and their properties.
+
+```{r}
+encg <- genORA(names(geneList), type = "ncg",
+               pvalueCutoff = 1,qvalueCutoff = 1)
+head(encg)
+```
+
+## DisGeNET (DGN) {#ora-dgn}
+
+[DisGeNET](https://www.disgenet.org/) is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.
+
+DisGeNET integrates data from expert curated repositories, GWAS catalogues, animal models and the scientific literature. DisGeNET data are homogeneously annotated with controlled vocabularies and community-driven ontologies. Additionally, several original metrics are provided to assist the prioritization of genotype–phenotype relationships.
+
+```{r}
+edgn <- genORA(id, type = "dgn", 
+               pvalueCutoff = 0.01, 
+               qvalueCutoff = 0.01)
+```
+
+
+## Groups comparison
+
+All these data sets support gene group comparison, just pass the `group_list` to function.
+
+Take disease ontology as example:
+
+```{r}
+id <- c(head(names(geneList), 1000), tail(names(geneList), 1000))
+group <- list(
+  group1 = c(rep("up", 1000), rep("down", 1000)),
+  group2 = c(rep("A", 1300), rep("B", 700))
+)
+gedo <- genORA(id, type = "do", group_list = group)
+head(gedo)
+```
+
+

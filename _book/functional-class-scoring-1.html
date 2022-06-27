@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 10 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 10 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 10 Functional Class Scoring | Genekitr: Gene Analysis Toolkit based on R">
 <meta name="twitter:description" content="ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -58,12 +58,13 @@
 <li class="book-part">Part III: Enrichment Analysis</li>
 <li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
 <li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="active" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
-<li><a class="" href="import-external-data.html"><span class="header-section-number">10</span> Import External Data</a></li>
+<li><a class="" href="ora-human-disease-analysis-1.html"><span class="header-section-number">9</span> ORA human disease analysis</a></li>
+<li><a class="active" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">11</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
-<li><a class="" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
+<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">12</span> Plot GO and KEGG</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">14</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -73,7 +74,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-class-scoring-1" class="section level1">
 <h1>
-<span class="header-section-number">9</span> Functional Class Scoring<a class="anchor" aria-label="anchor" href="#functional-class-scoring-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> Functional Class Scoring<a class="anchor" aria-label="anchor" href="#functional-class-scoring-1"><i class="fas fa-link"></i></a>
 </h1>
 <p><a href="quick-start.html#ora-go-analysis">ORA method</a> is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by fold change cutoff.</p>
 <p>Unlike ORA, FCS tools do not set a threshold for differentially expressed genes. Instead, it gives each detected gene a differential expression score and then evaluates whether the scores are more positive or negative than expected by chance for each gene set.</p>
@@ -84,7 +85,7 @@
 <p>Next, we will go through the popular Gene Set Enrichment Analysis (GSEA) tool, which uses FCS permutation approaches to determine whether a gene set is significantly associated with higher or lower scores.</p>
 <div id="gsea-introduction" class="section level2">
 <h2>
-<span class="header-section-number">9.1</span> GSEA intruduction<a class="anchor" aria-label="anchor" href="#gsea-introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> GSEA intruduction<a class="anchor" aria-label="anchor" href="#gsea-introduction"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>To do GSEA, user must have an ordered gene rank list (e.g., genes with decreasing logFC order).</p>
@@ -98,7 +99,7 @@
 <div class="figure">
 <span style="display:block;" id="fig:gseaoverview"></span>
 <img src="figures/gsea_overview.png" alt="GSEA overview" width="100%"><p class="caption">
-Figure 9.1: <strong>GSEA overview</strong>
+Figure 10.1: <strong>GSEA overview</strong>
 </p>
 </div>
 <blockquote>
@@ -143,7 +144,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 </div>
 <div id="gsea-basic-usage" class="section level2">
 <h2>
-<span class="header-section-number">9.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#gsea-basic-usage"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Basic usage<a class="anchor" aria-label="anchor" href="#gsea-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p><code>genKEGG</code> is built on <code>msigdbr</code> and <code><a href="https://rdrr.io/pkg/clusterProfiler/man/GSEA.html">clusterProfiler::GSEA</a></code> which is also built on <code>fgsea</code>. Also <code>genKEGG</code> optimizes analysis process to make better performance.</p>
@@ -162,7 +163,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 <li><code>pvalueCutoff</code></li>
 <li><code>qvalueCutoff</code></li>
 </ul>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>
   genelist <span class="op">=</span> <span class="va">geneList</span>,
@@ -171,11 +172,11 @@ Figure 9.1: <strong>GSEA overview</strong>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "gsea_df"  "genelist" "geneset"  "exponent" "org"</code></pre>
 <p>The GSEA result is a list including input genelist, target gene set and analysis result.</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">genelist</span><span class="op">)</span></code></pre></div>
 <pre><code>##                  ID    logfc
 ## 948             948 5.780170
@@ -184,7 +185,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 ## 10610         10610 3.875120
 ## 6947           6947 3.357670
 ## 100133941 100133941 3.322533</code></pre>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">geneset</span><span class="op">)</span></code></pre></div>
 <pre><code>##                 gs_name entrez_gene
 ## 1 HALLMARK_ADIPOGENESIS          19
@@ -193,7 +194,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 ## 4 HALLMARK_ADIPOGENESIS          33
 ## 5 HALLMARK_ADIPOGENESIS          34
 ## 6 HALLMARK_ADIPOGENESIS          35</code></pre>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##                                                ID              Description
 ## HALLMARK_E2F_TARGETS         HALLMARK_E2F_TARGETS     HALLMARK_E2F_TARGETS
@@ -250,10 +251,10 @@ Figure 9.1: <strong>GSEA overview</strong>
 </div>
 <div id="export-result" class="section level2">
 <h2>
-<span class="header-section-number">9.3</span> Export result<a class="anchor" aria-label="anchor" href="#export-result"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Export result<a class="anchor" aria-label="anchor" href="#export-result"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>Genekitr</code> sets an easy way to export analysis result for editing and sharing. User could save multiple data sets as different sheets in one excel file. Besides, colmun names are automatically formated with bold style.</p>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/expoSheet.html">expoSheet</a></span><span class="op">(</span>data_list <span class="op">=</span> <span class="va">gse</span>,
                     data_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>,
                     filename <span class="op">=</span> <span class="st">"gsea_result.xlsx"</span>,
@@ -263,22 +264,22 @@ Figure 9.1: <strong>GSEA overview</strong>
 <div class="figure">
 <span style="display:block;" id="fig:exposheet"></span>
 <img src="figures/exposheet.png" alt="Export result" width="100%"><p class="caption">
-Figure 9.2: <strong>Export result</strong>
+Figure 10.2: <strong>Export result</strong>
 </p>
 </div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></div>
-<div class="next"><a href="import-external-data.html"><span class="header-section-number">10</span> Import External Data</a></div>
+<div class="prev"><a href="ora-human-disease-analysis-1.html"><span class="header-section-number">9</span> ORA human disease analysis</a></div>
+<div class="next"><a href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#functional-class-scoring-1"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
-<li><a class="nav-link" href="#gsea-introduction"><span class="header-section-number">9.1</span> GSEA intruduction</a></li>
-<li><a class="nav-link" href="#gsea-basic-usage"><span class="header-section-number">9.2</span> Basic usage</a></li>
-<li><a class="nav-link" href="#export-result"><span class="header-section-number">9.3</span> Export result</a></li>
+<li><a class="nav-link" href="#functional-class-scoring-1"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
+<li><a class="nav-link" href="#gsea-introduction"><span class="header-section-number">10.1</span> GSEA intruduction</a></li>
+<li><a class="nav-link" href="#gsea-basic-usage"><span class="header-section-number">10.2</span> Basic usage</a></li>
+<li><a class="nav-link" href="#export-result"><span class="header-section-number">10.3</span> Export result</a></li>
 </ul>
 
       <div class="book-extra">
