@@ -1,4 +1,4 @@
-# Functional Class Scoring {#functional-class-scoring-1}
+# FCS-GSEA analysis {#functional-class-scoring-1}
 
 ```{r include=FALSE}
 library(knitr)

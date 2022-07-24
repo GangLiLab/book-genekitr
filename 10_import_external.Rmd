@@ -1,4 +1,4 @@
-# Import External Data {#import-external-data-1}
+# Import external data {#import-external-data-1}
 
 ```{r include=FALSE}
 library(knitr)

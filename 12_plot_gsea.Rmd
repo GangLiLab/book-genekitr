@@ -1,4 +1,4 @@
-# Plot GSEA {#plot-gsea-1}
+# Plot FCS-GSEA {#plot-gsea-1}
 
 ```{r include=FALSE}
 library(knitr)

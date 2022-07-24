@@ -39,6 +39,15 @@ Githubpkg <- function (user, pkg) {
     sprintf(fmt, pkg, gh, user, pkg)
 }
 
+pkgVersion <- function(pkg, col="#479E69") {
+    ver <- packageVersion(pkg)
+    uni <- paste0("![](https://img.shields.io/badge/%20",pkg,'-', ver, "-", col, ".svg)")
+    url <- paste0("https://github.com/GangLiLab/", pkg)
+    
+    res <- paste0("[", uni, "](", url, ")")
+    return(res)
+}
+
 Entrez <- function(gene){
   sprintf("[%s](https://www.ncbi.nlm.nih.gov/gene/%s)", gene, gene)
 }
@@ -58,6 +67,9 @@ opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE,
 
 
 # 🧬 Welcome to genekitr! {-}
+
+`r pkgVersion("genekitr")`
+`r pkgVersion("geneset")`
 
 The book is a tutorial for gene information query, gene identifier conversion, gene enrichment analysis, and publication-level plotting. If you are new to R, do not worry, I will set enough example codes to guide you through the book. After reading this book, you could plot figures based on your analysis result.
 

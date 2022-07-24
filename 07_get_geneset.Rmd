@@ -7,7 +7,7 @@ library(geneset)
 library(dplyr)
 ```
 
-# Get Gene Sets {#get-gene-sets-1}
+# Get gene sets {#get-gene-sets-1}
 
 > Gene sets and statistical methods are central parts for gene enrichment analysis (GEA).
 
