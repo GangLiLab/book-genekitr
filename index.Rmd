@@ -39,7 +39,7 @@ Githubpkg <- function (user, pkg) {
     sprintf(fmt, pkg, gh, user, pkg)
 }
 
-pkgVersion <- function(pkg, col="#479E69") {
+pkgVersion <- function(pkg, col="green") {
     ver <- packageVersion(pkg)
     uni <- paste0("![](https://img.shields.io/badge/%20",pkg,'-', ver, "-", col, ".svg)")
     url <- paste0("https://github.com/GangLiLab/", pkg)
