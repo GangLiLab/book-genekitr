@@ -1,0 +1,174 @@
+# Plot GSEA {#plot-gsea-1}
+
+```{r include=FALSE}
+library(knitr)
+library(ggplot2)
+library(igraph)
+library(ggraph)
+library(patchwork)
+library(genekitr)
+```
+
+[GSEA analysis](#gsea-basic-usage) returns a list result, there are two ways of visulization:
+
+- Directly pass the list to `plotGSEA` which enables 5 types (classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar plot).
+
+- Extract the analysis result (e.g. `gse_list$gsea_df`) then pass to `plotEnrich`, which enables 8 types (geneheat, genechord, wordcloud, upset, network, gomap, goheat, gotangram).
+
+## Get GSEA result
+
+> For more details, please refer to [chapter9](#gsea-basic-usage)
+
+```{r}
+# 1st step: prepare pre-ranked gene list
+data(geneList, package = "genekitr")
+head(geneList)
+
+# 2nd step: prepare gene set
+gs <- geneset::getMsigdb(org = "human",category = 'H')
+
+# 3rd step: GSEA analysis
+gse <- genGSEA(genelist = geneList, geneset = gs)
+```
+
+## Classic Pathway Plot
+
+Running enrichment score of a gene set is drawn as classic pathway plot lines. The function will walks down the ranked gene list. The vertical lines in the middle show the location of gene set members.
+
+If user wants to show specific pathways or genes, just pass to according parameters: 
+- `show_pathway`: IDs in GSEA result
+- `show_gene`: IDs in GSEA result
+
+(ref:classicGSEAScap) Classic pathway plot of GSEA.
+
+(ref:classicGSEACap) **Classic pathway plot of GSEA.** 
+
+```{r classicGSEA, fig.height=5, fig.width=8, fig.cap="(ref:classicGSEACap)", fig.scap="(ref:classicGSEAScap)", dpi=300}
+pathways <- c("HALLMARK_P53_PATHWAY", "HALLMARK_GLYCOLYSIS", "HALLMARK_DNA_REPAIR")
+genes <- c("MET", "TP53", "PMM2")
+plotGSEA(gse, plot_type = "classic", show_pathway = pathways, show_gene = genes)
+```
+
+## Volcano Pathway Plot
+
+In this plot, the degree of enrichment is indicated by a normalized enrichment score or NES.
+
+Slightly different with DEG volcano plot, the x-axis is represented as NES, which corrects for enrichment score differences among gene-sets.
+
+A significant positive NES value indicates that members of the gene set tend to appear at the top of the ranked data (e.g. fold change of DEG) and a significant negative NES indicates the opposite.
+
+Default shows the top(N) pathways. If user wants to show specific pathway, also pass the argument to `show_pathway`.
+
+```{r include= F}
+p1 <- plotGSEA(gse, plot_type = "volcano", show_pathway = 3, remove_legend = T)
+
+pathways <- c("HALLMARK_P53_PATHWAY", "HALLMARK_GLYCOLYSIS", "HALLMARK_DNA_REPAIR")
+p2 <- plotGSEA(gse, plot_type = "volcano", show_pathway = pathways)
+pp <- p1 + p2
+```
+
+```{r eval= F}
+library(patchwork)
+pathways <- c("HALLMARK_P53_PATHWAY", "HALLMARK_GLYCOLYSIS", "HALLMARK_DNA_REPAIR")
+p1 <- plotGSEA(gse, plot_type = "volcano", show_pathway = 3)
+p2 <- plotGSEA(gse, plot_type = "volcano", show_pathway = pathways)
+p1 + p2 + plot_annotation(tag_levels = "A")
+```
+
+(ref:volcanoGSEAScap) Volcano pathway plot of GSEA.
+
+(ref:volcanoGSEACap) **Volcano pathway plot of GSEA.** default (A), select pathways (B).
+
+```{r volcanoGSEA, fig.height=6, fig.width=12, fig.cap="(ref:volcanoGSEACap)", fig.scap="(ref:volcanoGSEAScap)",echo = F, dpi=300}
+pp
+```
+
+## Multi-pathway Plot
+
+If user wants to show a bunch of selected pathways, `plotGSEA` has scratched some codes from `r  Biocpkg("fgsea")`.
+
+Default shows the top(N) pathways. If user wants to show specific pathway, also pass the argument to `show_pathway`.
+
+```{r include= F}
+p1 <- plotGSEA(gse, plot_type = "fgsea", show_pathway = 5)
+
+pathways <- c("HALLMARK_P53_PATHWAY", "HALLMARK_GLYCOLYSIS", "HALLMARK_DNA_REPAIR")
+p2 <- plotGSEA(gse, plot_type = "fgsea", show_pathway = pathways)
+pp <- p1 + p2
+```
+
+```{r eval= F}
+library(patchwork)
+pathways <- c("HALLMARK_P53_PATHWAY", "HALLMARK_GLYCOLYSIS", "HALLMARK_DNA_REPAIR")
+p1 <- plotGSEA(gse, plot_type = "fgsea", show_pathway = 5)
+p2 <- plotGSEA(gse, plot_type = "fgsea", show_pathway = pathways)
+p1 + p2 + plot_annotation(tag_levels = "A")
+```
+
+(ref:fgseaGSEAScap) Multi-pathway plot of GSEA.
+
+(ref:fgseaGSEACap) **Multi-pathway plot of GSEA.** default (A), select pathways (B).
+
+```{r fgseaGSEA, fig.height=6, fig.width=14, fig.cap="(ref:fgseaGSEACap)", fig.scap="(ref:fgseaGSEAScap)",echo = F, dpi=300}
+pp
+```
+
+## Ridge Plot
+
+Ridge plot will visualize enriched pathways of up/down regulated genes. The x-axis is fold change and y-axis is pathways. Color represents statistical value (e.g. pvalue/p.adjust/qvalue)
+
+(ref:ridgeScap) Ridge plot of GSEA.
+
+(ref:ridgeCap) **Ridge plot of GSEA.** 
+
+```{r ridge, fig.height=5, fig.width=8, fig.cap="(ref:ridgeCap)", fig.scap="(ref:ridgeScap)", dpi=300}
+plotGSEA(gse,
+  plot_type = "ridge",
+  show_pathway = 10, stats_metric = "p.adjust"
+)
+```
+
+## Two-side Barplot
+
+The barplot will separate positive and negative NES into two sides. User could specify `color` for the two sides. Meanwhile, non-significant pathways (e.g. Pvalue > 0.05) will be colored as "grey".
+
+(ref:twosideBarScap) Two-side bar plot of GSEA.
+
+(ref:twosideBarCap) **Two-side bar plot of GSEA.** 
+
+```{r twosideBar, fig.height=5, fig.width=6, fig.cap="(ref:twosideBarCap)", fig.scap="(ref:twosideBarScap)", dpi=300}
+plotGSEA(gse, plot_type = "bar", colour = c("navyblue", "orange"))
+```
+
+## Borrow from plotEnrich
+
+> More plotting details at [chapter 11](#plot-ora-1)
+
+Take `geneheat` plot as example:
+
+```{r}
+plotEnrich(gse$gsea_df, 
+           plot_type = "geneheat", 
+           show_gene = c("BRCA2", "CDK1", "MCM8", "TIPIN","FBL","ABCC2"), 
+           fold_change = geneList)
+```
+
+
+## Tricks
+
+### Change figure labels
+
+If we want to DIY labels (e.g. make lower case for above plot), we need to figure out which column the labels from. 
+
+In the above `geneheat` plot, the labels are from `Description` column so we only need to change the column.
+
+```{r}
+gse2 <- gse
+gse2$gsea_df$Description <- tolower(gse2$gsea_df$Description)
+# plotEnrich will uppercase the first letter automatically.
+plotEnrich(gse2$gsea_df, 
+           plot_type = "geneheat", 
+           show_gene = c("BRCA2", "CDK1", "MCM8", "TIPIN","FBL","ABCC2"), 
+           fold_change = geneList)
+```
+

@@ -56,15 +56,14 @@
 <li><a class="" href="protein-id-conversion-1.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
 <li><a class="" href="probe-id-conversion-1.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="" href="ora-additional-1.html"><span class="header-section-number">9</span> ORA Additional</a></li>
-<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
-<li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
+<li><a class="" href="get-gene-sets-1.html"><span class="header-section-number">7</span> Get Gene Sets</a></li>
+<li><a class="" href="ora-analysis-1.html"><span class="header-section-number">8</span> ORA analysis</a></li>
+<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data-1.html"><span class="header-section-number">10</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">12</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></li>
-<li><a class="" href="plot-others-1.html"><span class="header-section-number">14</span> Plot others</a></li>
+<li><a class="" href="plot-ora-1.html"><span class="header-section-number">11</span> Plot ORA</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -79,34 +78,33 @@
 <p><code>getPubmed</code> function utilizes <a href="https://CRAN.R-project.org/package=europepmc">europepmc</a> to easily get PubMed records by searching paper abstract.</p>
 <p>Users need to input the <code>term</code> argument; if there is any supplement information, the <code>keys</code> parameter is available.</p>
 <p>For example, if user wants to check papers for genes “Tp53”, “Brca1,” and “Tet2” research of mouse stem cells:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
 <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">keys</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Tp53"  "Brca1" "Tet2"</code></pre>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">Tp53</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 28
-##   id        source pmid     pmcid    doi   title authorString journalTitle issue
-##   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;
-## 1 35409174  MED    35409174 PMC8998… 10.3… "Enh… Gringmuth M… Int J Mol S… 7    
-## 2 PPR467733 PPR    &lt;NA&gt;     &lt;NA&gt;     10.1… "Bia… Ohno T, Aka… &lt;NA&gt;         &lt;NA&gt; 
-## 3 35435331  MED    35435331 PMC9189… 10.1… "Ide… Thirouard L… Adv Sci (We… 17   
-## 4 35536873  MED    35536873 &lt;NA&gt;     10.1… "Com… Liu T, Zhao… Cancer Res   &lt;NA&gt; 
-## 5 PPR483807 PPR    &lt;NA&gt;     &lt;NA&gt;     10.2… "Nic… Yu Z, Tong … &lt;NA&gt;         &lt;NA&gt; 
-## # … with 19 more variables: journalVolume &lt;chr&gt;, pubYear &lt;chr&gt;,
-## #   journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;,
-## #   inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;,
-## #   citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,
-## #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
+##   id      source pmid  doi   title authorString journalTitle issue journalVolume
+##   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;        
+## 1 358640… MED    3586… 10.1… "Bia… Ohno T, Aka… Nat Commun   1     13           
+## 2 354091… MED    3540… 10.3… "Enh… Gringmuth M… Int J Mol S… 7     23           
+## 3 357633… MED    3576… 10.1… "Deg… Sellar RS, … J Clin Inve… &lt;NA&gt;  &lt;NA&gt;         
+## 4 PPR467… PPR    &lt;NA&gt;  10.1… "Bia… Ohno T, Aka… &lt;NA&gt;         &lt;NA&gt;  &lt;NA&gt;         
+## 5 354353… MED    3543… 10.1… "Ide… Thirouard L… Adv Sci (We… 17    9            
+## # … with 19 more variables: pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;,
+## #   pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;,
+## #   hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;, citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;,
+## #   hasTextMinedTerms &lt;chr&gt;, hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
 ## #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;,
-## #   firstPublicationDate &lt;chr&gt;</code></pre>
+## #   firstPublicationDate &lt;chr&gt;, pmcid &lt;chr&gt;</code></pre>
 <blockquote>
 <p><strong>NOTICE</strong>:
 A minor update has been made in version 0.8.6 or above. Argument <code>keys</code> is replaced with <code>add_term</code> for easy understanding, and the <code>num</code> parameter is added to specify the number of returned records.</p>
 </blockquote>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
 <span class="va">add_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">add_term</span>, num <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
@@ -138,7 +136,7 @@ A minor update has been made in version 0.8.6 or above. Argument <code>keys</cod
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-27.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

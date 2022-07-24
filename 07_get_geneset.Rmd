@@ -1,0 +1,257 @@
+# (PART\*) Part III: Enrichment Analysis {-}
+
+```{r include=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, warning = FALSE, eval = TRUE, echo = TRUE, cache = TRUE)
+library(geneset)
+library(dplyr)
+```
+
+# Get Gene Sets {#get-gene-sets-1}
+
+> Gene sets and statistical methods are central parts for gene enrichment analysis (GEA).
+
+To facilitate GEA, I developed the package `r CRANpkg("geneset")`, which provides comprehensive list of monthly-updating gene set (GS) libraries.
+
+## Geneset package intruduction 
+
+The R package curated [GO](http://geneontology.org/) (BP, CC and MF), [KEGG](https://www.kegg.jp/kegg/) (pathway, module, enzyme, network, drug and disease), [WikiPathway](https://wikipathways.org/), [MsigDb](https://www.gsea-msigdb.org/gsea/msigdb/), [EnrichrDb](https://maayanlab.cloud/Enrichr/), [Reactome](https://reactome.org/), [MeSH](https://www.ncbi.nlm.nih.gov/mesh/), [DisGeNET](https://www.disgenet.org/), [Disease Ontology](https://disease-ontology.org/) (DO), [Network of Cancer Gene](http://ncg.kcl.ac.uk/) (NCG) (version 6 and v7) and [COVID-19](https://maayanlab.cloud/covid19/). 
+
+It supports **both model and non-model species**.
+
+> For more details, please refer to [this site](https://genekitr.online/docs/species.html).
+
+- GO supports 143 species
+- KEGG supports 8213 species
+- MeSH supports 71 species
+- MsigDb supports 20 species
+- WikiPahtwaysupports 16 species
+- Reactome supports 11 species
+- EnrichrDB supports 5 species
+- Disease-related only support human (DO, NCG, DisGeNET and COVID-19)
+
+##  Get GO geneset {#geneset-go}
+
+### GO introduction
+
+> According to Wikipedia, "Ontologies consist of detectable or directly observable representations of things and the relationships between those things." 
+
+GO is short for [Gene Ontology](http://geneontology.org). GO analysis is to find the associations between gene products and GO terms， which has three domains:
+
++ Biological Processes (BP)
+  - A biological process represents a specific objective that the organism is genetically programmed to achieve.
++ Molecular Functions (MF)
+  - A molecular process that can be carried out by the action of a single macromolecular machine, usually via direct physical interactions with other molecular entities.
++ Cellular Components (CC)
+  - A location, relative to cellular compartments and structures, occupied by a macromolecular machine when it carries out a molecular function.
+
+GO terms are built in a directed acyclic graph with a parent-child relationship.
+
+> For more comprehensive introduction of GO, you may visit: https://advaitabio.com/faq-items/understanding-gene-ontology/ OR http://geneontology.org/docs/ontology-documentation/
+
+### Usage
+
+The arguments include: 
+- `org`: organism name
+- `ont`: choose from "bp", "mf" and "cc"
+
+The result is a list includes four parts:
+
+- `gene set` (formated as data frame): two columns contains GO term IDs and matched gene IDs
+- `geneset_name` (formated as data frame): two columns contains GO term IDs and matched GO descriptions
+- `organism`: stores `org` information
+- `type`: stores `ont` information
+
+
+```{r}
+gs <- getGO(org = "human", ont = "mf")
+str(gs)
+```
+
+##  Get KEGG geneset {#geneset-kegg}
+
+### KEGG intruduction
+
+KEGG is short for "Kyoto Encyclopedia of Genes and Genomes," a collection of databases dealing with genomes, biological pathways, diseases, drugs, and chemical substances.
+
+The pathway maps are classified into the following sections:
+
+1. Metabolism
+2. Genetic information processing (transcription, translation, replication and repair, etc.)
+3. Environmental information processing (membrane transport, signal transduction, etc.)
+4. Cellular processes (cell growth, cell death, cell membrane functions, etc.)
+5. Organismal systems (immune system, endocrine system, nervous system, etc.)
+6. Human diseases
+7. Drug development
+
+(ref:keggoverviewScap) KEGG overview.
+
+(ref:keggoverviewCap) **KEGG overview.** Figure taken from <https://paintomics.readthedocs.io/en/stable/1_kegg/>.
+
+```{r keggoverview, out.width="100%", echo=FALSE, fig.cap="(ref:keggoverviewCap)", fig.scap="(ref:keggoverviewScap)"}
+knitr::include_graphics("figures/kegg_overview.png")
+```
+
+### Usage
+
+The arguments include: 
+- `org`: organism name (e.g. "hsa")
+- `category`: choose from "pathway","module", "enzyme", "disease" (human only), "drug" (human only) or "network" (human only)
+
+```{r}
+gs <- getKEGG(org = "hsa",category = "pathway")
+str(gs)
+
+```
+
+
+##  Get MeSH geneset {#geneset-mesh}
+
+### MeSH intruduction
+
+Medical Subject Headings is a comprehensive controlled vocabulary for the purpose of indexing journal articles and books in the life sciences. It serves as a thesaurus that facilitates searching.
+
+### Usage
+
+The arguments include: 
+- `org`: organism name (e.g. "human")
+- `method`: Method of mapping MeSH ID to gene ID. Choose one from "gendoo", "gene2pubmed" or "RBBH" (mainly for some minor species). 
+- `category`: MeSH descriptor categories. More details refer to: [How to use MeSH-related Packages ](https://rdrr.io/bioc/meshr/f/inst/doc/MeSH.pdf)]
+
+
+```{r}
+gs <- getMesh(org = "human", method = "gendoo", category = "A")
+str(gs)
+```
+
+
+##  Get MsigDB geneset {#geneset-msigdb}
+
+### MsigDB intruduction
+
+[Msigdb categories](http://www.gsea-msigdb.org/gsea/msigdb/collections.jsp) is the best GSEA partner which have 9 major collections and several sub-collections from 32880 gene sets: 
+
++ H: hallmark gene sets (50 gene sets)
++ C1: positional gene sets (299 gene sets)
+  - by chromosome: chr1 => MT
++ C2: curated gene sets (6366 gene sets)
+  - CGP (chemical and genetic perturbations, 3384 gene sets)
+  - CP (canonical pathways, 2982 gene sets) includes BioCarta, KEGG, PID, Reactome and WikiPathways
++ C3: regulatory target gene sets (3726 gene sets)
+  - MIR (microRNA targets, 2598 gene sets)
+  - TFT (all transcription factor targets, 1128 gene sets)
++ C4: computational gene sets (858 gene sets)
+  - CGN (cancer gene neighborhoods, 427 gene sets)
+  - CM (cancer modules, 431 gene sets)
++ C5: ontology gene sets (15473 gene sets) includes BP, CC and MF
++ C6: oncogenic signature gene sets (189 gene sets)
++ C7: immunologic signature gene sets (5219 gene sets)
+  - IMMUNESIGDB (ImmuneSigDB gene sets, 4872 gene sets)
+  - VAX (vaccine response gene sets, 347 gene sets)
++ C8: cell type signature gene sets (700 gene sets)
+
+
+### Usage
+
+The arguments include: 
+- `org`: organism name (e.g. "human")
+- `category`: choose from "H", "C1", "C2-CGP", "C2-CP-BIOCARTA", "C2-CP-KEGG", "C2-CP-PID",
+"C2-CP-REACTOME", "C2-CP-WIKIPATHWAYS", "C3-MIR-MIRDB","C3-MIR-MIR_Legacy", "C3-TFT-GTRD",
+"C3-TFT-TFT_Legacy","C4-CGN", "C4-CM", "C5-GO-BP", "C5-GO-CC", "C5-GO-MF","C5-HPO", "C6",
+"C7-IMMUNESIGDB", "C7-VAX", "C8"
+
+The result is a list includes four parts:
+
+- `gene set` (formated as data frame): two columns contains pathway IDs and matched gene IDs
+- `geneset_name`: NA (because the pathway IDs and names are the same, so we just ignore them)
+- `organism`: stores `org` information
+- `type`: stores `ont` information
+
+```{r}
+gs <- getMsigdb(org = "human", category = "H")
+str(gs)
+```
+
+
+##  Get WikiPathways geneset {#geneset-wikipath}
+
+### WikiPathways intruduction
+
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) was established to facilitate the contribution and maintenance of pathway information by the biology community. Each month it produces a set of pathways as `.gmt` files on https://wikipathways-data.wmcloud.org/.
+
+
+### Usage
+
+Only need to input organism name.
+
+```{r}
+gs <- getWiki(org = "human")
+str(gs)
+```
+
+
+
+##  Get Reactome geneset {#geneset-reactome}
+
+### Reactome intruduction
+
+Reactome is a free online database of biological pathways.
+
+### Usage
+
+Only need to input organism name.
+
+```{r}
+gs <- getReactome(org = "human")
+str(gs)
+```
+
+
+
+
+##  Get Enrichr geneset {#geneset-enrichr}
+
+### Enrichr intruduction
+
+Enrichr is a comprehensive resource for curated gene sets and a search engine that accumulates biological knowledge for further biological discoveries.
+
+### Usage
+
+The arguments include: 
+- `org`: organism name (e.g. "human")
+- `library`: choose one library name from `geneset::enrichr_metadata` (e.g. "COVID-19_Related_Gene_Sets")
+
+```{r}
+gs <- getEnrichrdb(org = "human", library = "COVID-19_Related_Gene_Sets")
+str(gs)
+```
+
+
+##  Get Human disease-related geneset {#geneset-hg-disease}
+
+> For now, we suport human disease annotation data from: Disease Ontology (DO), DisGeNET, Network of Cancer Gene (NCG) version 6 and v7 and COVID-19
+
+Only need to input source name from "do", "ncg_v7", ncg_v6, "disgenet" and "covid19".
+
+- `do`: The [Disease Ontology](https://disease-ontology.org/) has been developed as a standardized ontology for human disease with the purpose of providing the biomedical community with consistent, reusable and sustainable descriptions of human disease terms.
+
+- `ncg_v7 & ncg_v6`: [Human Network of Cancer Gene (NCG)](http://ncg.kcl.ac.uk/) is a manually curated collection of cancer genes, healthy drivers and their properties.
+
+- `disgenet`: [DisGeNET](https://www.disgenet.org/) is a discovery platform containing one of the largest publicly available collections of genes and variants associated to human diseases.
+DisGeNET integrates data from expert curated repositories, GWAS catalogues, animal models and the scientific literature. DisGeNET data are homogeneously annotated with controlled vocabularies and community-driven ontologies. Additionally, several original metrics are provided to assist the prioritization of genotype–phenotype relationships.
+
+- `covid19`: [The COVID-19 Drug and Gene Set Library](https://maayanlab.cloud/covid19/). A collection of drug and gene sets related to COVID-19 research contributed by the community.
+
+
+```{r}
+gs <- getHgDisease(source = "do")
+str(gs)
+```
+
+
+
+
+
+
+
+

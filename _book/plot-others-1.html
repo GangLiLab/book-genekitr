@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 Plot others | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 13 Plot others | Genekitr: Gene Analysis Toolkit based on R</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content='In this part, we will introduce plotVenn and plotVolcano.  14.1 Venn Plot Venn plot needs a list of gene sets, for example: set1 &lt;- paste0(rep("gene", 100), sample(1:1000, 100)) set2 &lt;-...'>
+<meta name="description" content='In this part, we will introduce plotVenn and plotVolcano.  13.1 Venn Plot Venn plot needs a list of gene sets, for example: set1 &lt;- paste0(rep("gene", 50), sample(1:1000, 50)) set2 &lt;-...'>
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 14 Plot others | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 13 Plot others | Genekitr: Gene Analysis Toolkit based on R">
 <meta property="og:type" content="book">
-<meta property="og:description" content='In this part, we will introduce plotVenn and plotVolcano.  14.1 Venn Plot Venn plot needs a list of gene sets, for example: set1 &lt;- paste0(rep("gene", 100), sample(1:1000, 100)) set2 &lt;-...'>
+<meta property="og:description" content='In this part, we will introduce plotVenn and plotVolcano.  13.1 Venn Plot Venn plot needs a list of gene sets, for example: set1 &lt;- paste0(rep("gene", 50), sample(1:1000, 50)) set2 &lt;-...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 Plot others | Genekitr: Gene Analysis Toolkit based on R">
-<meta name="twitter:description" content='In this part, we will introduce plotVenn and plotVolcano.  14.1 Venn Plot Venn plot needs a list of gene sets, for example: set1 &lt;- paste0(rep("gene", 100), sample(1:1000, 100)) set2 &lt;-...'>
+<meta name="twitter:title" content="Chapter 13 Plot others | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:description" content='In this part, we will introduce plotVenn and plotVolcano.  13.1 Venn Plot Venn plot needs a list of gene sets, for example: set1 &lt;- paste0(rep("gene", 50), sample(1:1000, 50)) set2 &lt;-...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -56,15 +56,14 @@
 <li><a class="" href="protein-id-conversion-1.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
 <li><a class="" href="probe-id-conversion-1.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="" href="ora-additional-1.html"><span class="header-section-number">9</span> ORA Additional</a></li>
-<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
-<li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
+<li><a class="" href="get-gene-sets-1.html"><span class="header-section-number">7</span> Get Gene Sets</a></li>
+<li><a class="" href="ora-analysis-1.html"><span class="header-section-number">8</span> ORA analysis</a></li>
+<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data-1.html"><span class="header-section-number">10</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">12</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></li>
-<li><a class="active" href="plot-others-1.html"><span class="header-section-number">14</span> Plot others</a></li>
+<li><a class="" href="plot-ora-1.html"><span class="header-section-number">11</span> Plot ORA</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
+<li><a class="active" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -74,19 +73,19 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="plot-others-1" class="section level1">
 <h1>
-<span class="header-section-number">14</span> Plot others<a class="anchor" aria-label="anchor" href="#plot-others-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13</span> Plot others<a class="anchor" aria-label="anchor" href="#plot-others-1"><i class="fas fa-link"></i></a>
 </h1>
 <p>In this part, we will introduce <code>plotVenn</code> and <code>plotVolcano</code>.</p>
 <div id="venn-plot" class="section level2">
 <h2>
-<span class="header-section-number">14.1</span> Venn Plot<a class="anchor" aria-label="anchor" href="#venn-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Venn Plot<a class="anchor" aria-label="anchor" href="#venn-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Venn plot needs a list of gene sets, for example:</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">set1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">set2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">set3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="va">set4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">set1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>
+<span class="va">set2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span>
+<span class="va">set3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">70</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">70</span><span class="op">)</span><span class="op">)</span>
+<span class="va">set4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">80</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">80</span><span class="op">)</span><span class="op">)</span>
 <span class="va">set5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># three groups</span>
@@ -100,10 +99,10 @@
 <p><code>plotVenn</code> supports two types: Venn (default) and UpSet. Besides, it also supports modification of text size, alpha degree, colors and other parameters from <code>plot_theme</code>.</p>
 
 
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="va">sm_gene_list</span>,
          use_venn <span class="op">=</span> <span class="cn">TRUE</span>,
-         color <span class="op">=</span> <span class="fu">ggsci</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggsci/man/pal_lancet.html">pal_lancet</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,
+         color <span class="op">=</span> <span class="fu">ggsci</span><span class="fu">::</span><span class="fu"><a href="https://nanx.me/ggsci/reference/pal_lancet.html">pal_lancet</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,
          alpha_degree <span class="op">=</span> <span class="fl">1</span>,
          main_text_size <span class="op">=</span> <span class="fl">1.5</span>,
          border_thick <span class="op">=</span> <span class="fl">0</span>
@@ -111,13 +110,13 @@
 <div class="figure">
 <span style="display:block;" id="fig:venn"></span>
 <img src="genekitr_files/figure-html/venn-1.png" alt="Venn plot" width="98%"><p class="caption">
-Figure 14.1: <strong>Venn plot</strong>
+Figure 13.1: <strong>Venn plot</strong>
 </p>
 </div>
 <p>UpSet plot is better for over four groups of genes:</p>
 
 
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVenn.html">plotVenn</a></span><span class="op">(</span><span class="va">la_gene_list</span>,
          use_venn <span class="op">=</span> <span class="cn">FALSE</span>,
          main_text_size <span class="op">=</span> <span class="fl">15</span>,
@@ -127,18 +126,18 @@ Figure 14.1: <strong>Venn plot</strong>
 <div class="figure">
 <span style="display:block;" id="fig:upsetVenn"></span>
 <img src="genekitr_files/figure-html/upsetVenn-1.png" alt="UpSet plot" width="98%"><p class="caption">
-Figure 14.2: <strong>UpSet plot</strong>
+Figure 13.2: <strong>UpSet plot</strong>
 </p>
 </div>
 </div>
 <div id="volcano-plot" class="section level2">
 <h2>
-<span class="header-section-number">14.2</span> Volcano Plot<a class="anchor" aria-label="anchor" href="#volcano-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Volcano Plot<a class="anchor" aria-label="anchor" href="#volcano-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>After finishing differential expression analysis, we could get differentially expressed genes (DEG).
 Volcano plot is widely used for these up/down regulated genes visualization.</p>
 <p>The example data is micro array differential expression analysis:</p>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">deg</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>##   probe_id      logFC   AveExpr         t      P.Value   adj.P.Val          B
@@ -171,52 +170,55 @@ Volcano plot is widely used for these up/down regulated genes visualization.</p>
 <li>
 <code>dot_size</code>: volcano dot size</li>
 </ul>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVolcano.html">plotVolcano</a></span><span class="op">(</span><span class="va">deg</span>, <span class="st">"p.adjust"</span>, remove_legend <span class="op">=</span> <span class="cn">T</span>, dot_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:degVolcano"></span>
 <img src="genekitr_files/figure-html/degVolcano-1.png" alt="Volcano plot" width="98%"><p class="caption">
-Figure 14.3: <strong>Volcano plot</strong>
+Figure 13.3: <strong>Volcano plot</strong>
 </p>
 </div>
 <p>If we want to show some genes:</p>
 
 
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVolcano.html">plotVolcano</a></span><span class="op">(</span><span class="va">deg</span>, <span class="st">"p.adjust"</span>,
-  remove_legend <span class="op">=</span> <span class="cn">T</span>,
-  show_gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD36"</span>, <span class="st">"DUSP6"</span>, <span class="st">"IER3"</span>, <span class="st">"CDH7"</span><span class="op">)</span>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVolcano.html">plotVolcano</a></span><span class="op">(</span><span class="va">deg</span>, 
+            stat_metric <span class="op">=</span> <span class="st">"p.adjust"</span>,
+            remove_legend <span class="op">=</span> <span class="cn">T</span>,
+            show_gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD36"</span>, <span class="st">"DUSP6"</span>, <span class="st">"IER3"</span>, <span class="st">"CDH7"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:degVolcano2"></span>
 <img src="genekitr_files/figure-html/degVolcano2-1.png" alt="Volcano plot with genes." width="98%"><p class="caption">
-Figure 14.4: <strong>Volcano plot with genes.</strong>
+Figure 13.4: <strong>Volcano plot with genes.</strong>
 </p>
 </div>
 <blockquote>
 <p>Trick for increasing text size:</p>
 </blockquote>
 <p>User could hide all x/y-axis labels and raise <code>main_text_size</code> to enlarge gene text, then export the figure into PPT to add labels.</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVolcano.html">plotVolcano</a></span><span class="op">(</span><span class="va">deg</span>, <span class="st">"p.adjust"</span>,
-  remove_legend <span class="op">=</span> <span class="cn">T</span>,
-  remove_main_text <span class="op">=</span> <span class="cn">T</span>,
-  show_gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD36"</span>, <span class="st">"DUSP6"</span>, <span class="st">"IER3"</span>, <span class="st">"CDH7"</span><span class="op">)</span>,
-   main_text_size <span class="op">=</span> <span class="fl">15</span>, dot_size <span class="op">=</span> <span class="fl">2.5</span>
+<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVolcano.html">plotVolcano</a></span><span class="op">(</span><span class="va">deg</span>, 
+            <span class="st">"p.adjust"</span>,
+            remove_legend <span class="op">=</span> <span class="cn">T</span>,
+            remove_main_text <span class="op">=</span> <span class="cn">T</span>,
+            show_gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD36"</span>, <span class="st">"DUSP6"</span>, <span class="st">"IER3"</span>, <span class="st">"CDH7"</span><span class="op">)</span>,
+            main_text_size <span class="op">=</span> <span class="fl">15</span>, 
+            dot_size <span class="op">=</span> <span class="fl">2.5</span>
 <span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-138-1.png" width="98%"></div>
+<div class="inline-figure"><img src="genekitr_files/figure-html/unnamed-chunk-142-1.png" width="98%"></div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></div>
+<div class="prev"><a href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#plot-others-1"><span class="header-section-number">14</span> Plot others</a></li>
-<li><a class="nav-link" href="#venn-plot"><span class="header-section-number">14.1</span> Venn Plot</a></li>
-<li><a class="nav-link" href="#volcano-plot"><span class="header-section-number">14.2</span> Volcano Plot</a></li>
+<li><a class="nav-link" href="#plot-others-1"><span class="header-section-number">13</span> Plot others</a></li>
+<li><a class="nav-link" href="#venn-plot"><span class="header-section-number">13.1</span> Venn Plot</a></li>
+<li><a class="nav-link" href="#volcano-plot"><span class="header-section-number">13.2</span> Volcano Plot</a></li>
 </ul>
 
       <div class="book-extra">
@@ -233,7 +235,7 @@ Figure 14.4: <strong>Volcano plot with genes.</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-27.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

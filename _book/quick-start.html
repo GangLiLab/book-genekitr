@@ -56,15 +56,14 @@
 <li><a class="" href="protein-id-conversion-1.html"><span class="header-section-number">5</span> Protein ID conversion</a></li>
 <li><a class="" href="probe-id-conversion-1.html"><span class="header-section-number">6</span> Probe ID conversion</a></li>
 <li class="book-part">Part III: Enrichment Analysis</li>
-<li><a class="" href="ora-go-analysis-1.html"><span class="header-section-number">7</span> ORA GO analysis</a></li>
-<li><a class="" href="ora-kegg-analysis-1.html"><span class="header-section-number">8</span> ORA KEGG analysis</a></li>
-<li><a class="" href="ora-additional-1.html"><span class="header-section-number">9</span> ORA Additional</a></li>
-<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">10</span> Functional Class Scoring</a></li>
-<li><a class="" href="import-external-data-1.html"><span class="header-section-number">11</span> Import External Data</a></li>
+<li><a class="" href="get-gene-sets-1.html"><span class="header-section-number">7</span> Get Gene Sets</a></li>
+<li><a class="" href="ora-analysis-1.html"><span class="header-section-number">8</span> ORA analysis</a></li>
+<li><a class="" href="functional-class-scoring-1.html"><span class="header-section-number">9</span> Functional Class Scoring</a></li>
+<li><a class="" href="import-external-data-1.html"><span class="header-section-number">10</span> Import External Data</a></li>
 <li class="book-part">Part IV: Plotting</li>
-<li><a class="" href="plot-go-kegg-1.html"><span class="header-section-number">12</span> Plot GO and KEGG</a></li>
-<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">13</span> Plot GSEA</a></li>
-<li><a class="" href="plot-others-1.html"><span class="header-section-number">14</span> Plot others</a></li>
+<li><a class="" href="plot-ora-1.html"><span class="header-section-number">11</span> Plot ORA</a></li>
+<li><a class="" href="plot-gsea-1.html"><span class="header-section-number">12</span> Plot GSEA</a></li>
+<li><a class="" href="plot-others-1.html"><span class="header-section-number">13</span> Plot others</a></li>
 </ul>
 
         <div class="book-extra">
@@ -135,84 +134,78 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'205647_at'</span>,<span class="st">'204857_at'</span>,<span class="st">'201394_s_at'</span>,<span class="st">'210377_at'</span><span class="op">)</span>
 <span class="va">probe2sym</span> <span class="op">&lt;-</span> <span class="fu">transProbe</span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">'sym'</span>,org <span class="op">=</span> <span class="st">'hs'</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="ora-go-analysis" class="section level2">
-<h2>
-<span class="header-section-number">1.6</span> <a href="ora-go-analysis-1.html#ora-go-analysis-1">ORA GO analysis</a><a class="anchor" aria-label="anchor" href="#ora-go-analysis"><i class="fas fa-link"></i></a>
-</h2>
 <blockquote>
-<p>ORA stands for “over-representation analysis”.</p>
+<p>To faciliate gene enrichment analysis, I developed <a href="https://CRAN.R-project.org/package=geneset">geneset</a></p>
 </blockquote>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"BRCA1"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span><span class="op">)</span>
-<span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu">genGO</span><span class="op">(</span><span class="va">id</span>,
-  org <span class="op">=</span> <span class="st">"human"</span>,
-  ont <span class="op">=</span> <span class="st">"bp"</span>,
-  pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>,
-  qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>
-<span class="op">)</span></code></pre></div>
 </div>
-<div id="ora-kegg-analysis" class="section level2">
+<div id="get-gene-sets" class="section level2">
 <h2>
-<span class="header-section-number">1.7</span> <a href="ora-kegg-analysis-1.html#ora-kegg-analysis-1">ORA KEGG analysis</a><a class="anchor" aria-label="anchor" href="#ora-kegg-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> <a href="get-gene-sets-1.html#get-gene-sets-1">Get gene sets</a><a class="anchor" aria-label="anchor" href="#get-gene-sets"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("geneset")</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GangLiLab/geneset">geneset</a></span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getKEGG.html">getKEGG</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"hsa"</span>,category <span class="op">=</span> <span class="st">"pathway"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getMesh.html">getMesh</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, method <span class="op">=</span> <span class="st">"gendoo"</span>, category <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getMsigdb.html">getMsigdb</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getWiki.html">getWiki</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getReactome.html">getReactome</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getEnrichrdb.html">getEnrichrdb</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, library <span class="op">=</span> <span class="st">"COVID-19_Related_Gene_Sets"</span><span class="op">)</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getHgDisease.html">getHgDisease</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="ora-analysis-over-representation-analysis" class="section level2">
+<h2>
+<span class="header-section-number">1.7</span> <a href="ora-analysis-1.html#ora-analysis-1">ORA analysis (over-representation analysis)</a><a class="anchor" aria-label="anchor" href="#ora-analysis-over-representation-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"BRCA1"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span>,<span class="st">"BRCA2"</span>,<span class="st">"TET2"</span><span class="op">)</span>
-<span class="va">keg</span> <span class="op">&lt;-</span> <span class="fu">genKEGG</span><span class="op">(</span><span class="va">id</span>,
-  org <span class="op">=</span> <span class="st">"human"</span>,
-  pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
-  qvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>
+<code class="sourceCode R"><span class="co"># 1st step: get input IDs</span>
+<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"BRCA1"</span>, <span class="st">"PD1"</span>, <span class="st">"PDL1"</span><span class="op">)</span>
+<span class="co"># 2nd step: get gene set</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span>
+<span class="co"># 3rd: analysis</span>
+<span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>,
+              geneset <span class="op">=</span> <span class="va">gs</span>,
+              p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,
+              q_cutoff <span class="op">=</span> <span class="fl">0.05</span>
 <span class="op">)</span></code></pre></div>
-</div>
-<div id="ora-human-disease-analysis" class="section level2">
-<h2>
-<span class="header-section-number">1.8</span> <a href="#ora-human-disease-analysis-1">ORA human disease analysis</a><a class="anchor" aria-label="anchor" href="#ora-human-disease-analysis"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># support `do` (Disease Ontology), `ncg` (Network of Cancer Gene) and `dgn` (DisGeNET)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
-<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span>
-
-<span class="va">edo</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span>
-<span class="va">encg</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ncg"</span><span class="op">)</span>
-<span class="va">edgn</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"dgn"</span>, 
-               pvalueCutoff <span class="op">=</span> <span class="fl">0.01</span>, 
-               qvalueCutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
-<span class="va">ewiki</span> <span class="op">&lt;-</span> <span class="fu">genORA</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"wiki"</span>, org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="fcs-gsea-analysis" class="section level2">
 <h2>
-<span class="header-section-number">1.9</span> <a href="functional-class-scoring-1.html#functional-class-scoring-1">FCS GSEA analysis</a><a class="anchor" aria-label="anchor" href="#fcs-gsea-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8</span> <a href="functional-class-scoring-1.html#functional-class-scoring-1">FCS GSEA analysis</a><a class="anchor" aria-label="anchor" href="#fcs-gsea-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>FCS stands for “functional-class-scoring”.</p>
 </blockquote>
-<p><code>geneList</code> is an order ranked gene list in decreasing order. Gene inside can be Entrez, Ensembl or symbol.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
-<span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu">genGSEA</span><span class="op">(</span>
-  genelist <span class="op">=</span> <span class="va">geneList</span>,
-  org <span class="op">=</span> <span class="st">"human"</span>,
-  category <span class="op">=</span> <span class="st">"H"</span>
-<span class="op">)</span></code></pre></div>
+<p><code>geneList</code> is an order ranked gene list in decreasing order. Input IDs can be Entrez, Ensembl, symbol or UniProt IDs.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># 1st step: get pre-ranked gene list</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
+<span class="co"># 2nd step: get gene set</span>
+<span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span>
+<span class="co"># 3rd: analysis</span>
+<span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu">genGSEA</span><span class="op">(</span>genelist <span class="op">=</span> <span class="va">geneList</span>, 
+               geneset <span class="op">=</span> <span class="va">gs</span>,
+               p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,
+               q_cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="import-external-data" class="section level2">
 <h2>
-<span class="header-section-number">1.10</span> <a href="import-external-data-1.html#import-external-data-1">Import external data</a><a class="anchor" aria-label="anchor" href="#import-external-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9</span> <a href="import-external-data-1.html#import-external-data-1">Import external data</a><a class="anchor" aria-label="anchor" href="#import-external-data"><i class="fas fa-link"></i></a>
 </h2>
 <div id="import-panther-of-geneontology-website" class="section level3">
 <h3>
-<span class="header-section-number">1.10.1</span> Import Panther of GeneOntology website<a class="anchor" aria-label="anchor" href="#import-panther-of-geneontology-website"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9.1</span> Import Panther of GeneOntology website<a class="anchor" aria-label="anchor" href="#import-panther-of-geneontology-website"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># here we save panther result as "analysis.txt"</span>
 <span class="va">panther_res</span> <span class="op">&lt;-</span> <span class="fu">importPanther</span><span class="op">(</span><span class="st">"analysis.txt"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="import-clusterprofiler-result" class="section level3">
 <h3>
-<span class="header-section-number">1.10.2</span> Import clusterProfiler result<a class="anchor" aria-label="anchor" href="#import-clusterprofiler-result"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9.2</span> Import clusterProfiler result<a class="anchor" aria-label="anchor" href="#import-clusterprofiler-result"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">"DOSE"</span><span class="op">)</span>
@@ -248,13 +241,13 @@
 <span class="va">do_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">do</span>,type <span class="op">=</span> <span class="st">'other'</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="plot-go-and-kegg" class="section level2">
+<div id="plot-ora" class="section level2">
 <h2>
-<span class="header-section-number">1.11</span> <a href="plot-go-kegg-1.html#plot-go-kegg-1">Plot GO and KEGG</a><a class="anchor" aria-label="anchor" href="#plot-go-and-kegg"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.10</span> <a href="plot-ora-1.html#plot-ora-1">Plot ORA</a><a class="anchor" aria-label="anchor" href="#plot-ora"><i class="fas fa-link"></i></a>
 </h2>
 <p>Supported types include: <code>bar</code>, <code>wego</code>, <code>bubble</code>, <code>dot</code>, <code>lollipop</code>, <code>geneheat</code>, <code>genechord</code>,
 <code>network</code>, <code>gomap</code>, <code>goheat</code>, <code>gotangram</code>, <code>wordcloud</code>, <code>upset</code> and <code>two-group barplot</code></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span>
 <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">keg</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span>
 <span class="fu">plotEnrich</span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span><span class="op">)</span>
@@ -262,10 +255,10 @@
 </div>
 <div id="plot-gsea" class="section level2">
 <h2>
-<span class="header-section-number">1.12</span> <a href="plot-gsea-1.html#plot-gsea-1">Plot GSEA</a><a class="anchor" aria-label="anchor" href="#plot-gsea"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.11</span> <a href="plot-gsea-1.html#plot-gsea-1">Plot GSEA</a><a class="anchor" aria-label="anchor" href="#plot-gsea"><i class="fas fa-link"></i></a>
 </h2>
 <p>Supported types include: <code>volcano</code>, <code>classic</code>, <code>fgsea</code>, <code>ridge</code> and <code>bar</code></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">plotGSEA</span><span class="op">(</span><span class="va">gse</span>, plot_type <span class="op">=</span> <span class="st">"volcano"</span>, show_pathway <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MET"</span>, <span class="st">"TP53"</span>, <span class="st">"PMM2"</span><span class="op">)</span>
@@ -275,9 +268,9 @@
 </div>
 <div id="plot-venn" class="section level2">
 <h2>
-<span class="header-section-number">1.13</span> <a href="plot-others-1.html#plot-others-1">Plot Venn</a><a class="anchor" aria-label="anchor" href="#plot-venn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.12</span> <a href="plot-others-1.html#plot-others-1">Plot Venn</a><a class="anchor" aria-label="anchor" href="#plot-venn"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">set1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 <span class="va">set2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 <span class="va">set3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
@@ -289,9 +282,9 @@
 </div>
 <div id="plot-deg-volcano" class="section level2">
 <h2>
-<span class="header-section-number">1.14</span> <a href="plot-others-1.html#plot-others-1">Plot DEG Volcano</a><a class="anchor" aria-label="anchor" href="#plot-deg-volcano"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.13</span> <a href="plot-others-1.html#plot-others-1">Plot DEG Volcano</a><a class="anchor" aria-label="anchor" href="#plot-deg-volcano"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="fu">plotVolcano</span><span class="op">(</span><span class="va">deg</span>, <span class="st">"p.adjust"</span>,
   remove_legend <span class="op">=</span> <span class="cn">T</span>,
@@ -315,20 +308,19 @@
 <li><a class="nav-link" href="#gene-id-conversion"><span class="header-section-number">1.3</span> Gene ID conversion</a></li>
 <li><a class="nav-link" href="#protein-id-conversion"><span class="header-section-number">1.4</span> Protein ID conversion</a></li>
 <li><a class="nav-link" href="#probe-id-conversion"><span class="header-section-number">1.5</span> Probe ID conversion</a></li>
-<li><a class="nav-link" href="#ora-go-analysis"><span class="header-section-number">1.6</span> ORA GO analysis</a></li>
-<li><a class="nav-link" href="#ora-kegg-analysis"><span class="header-section-number">1.7</span> ORA KEGG analysis</a></li>
-<li><a class="nav-link" href="#ora-human-disease-analysis"><span class="header-section-number">1.8</span> ORA human disease analysis</a></li>
-<li><a class="nav-link" href="#fcs-gsea-analysis"><span class="header-section-number">1.9</span> FCS GSEA analysis</a></li>
+<li><a class="nav-link" href="#get-gene-sets"><span class="header-section-number">1.6</span> Get gene sets</a></li>
+<li><a class="nav-link" href="#ora-analysis-over-representation-analysis"><span class="header-section-number">1.7</span> ORA analysis (over-representation analysis)</a></li>
+<li><a class="nav-link" href="#fcs-gsea-analysis"><span class="header-section-number">1.8</span> FCS GSEA analysis</a></li>
 <li>
-<a class="nav-link" href="#import-external-data"><span class="header-section-number">1.10</span> Import external data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#import-panther-of-geneontology-website"><span class="header-section-number">1.10.1</span> Import Panther of GeneOntology website</a></li>
-<li><a class="nav-link" href="#import-clusterprofiler-result"><span class="header-section-number">1.10.2</span> Import clusterProfiler result</a></li>
+<a class="nav-link" href="#import-external-data"><span class="header-section-number">1.9</span> Import external data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#import-panther-of-geneontology-website"><span class="header-section-number">1.9.1</span> Import Panther of GeneOntology website</a></li>
+<li><a class="nav-link" href="#import-clusterprofiler-result"><span class="header-section-number">1.9.2</span> Import clusterProfiler result</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#plot-go-and-kegg"><span class="header-section-number">1.11</span> Plot GO and KEGG</a></li>
-<li><a class="nav-link" href="#plot-gsea"><span class="header-section-number">1.12</span> Plot GSEA</a></li>
-<li><a class="nav-link" href="#plot-venn"><span class="header-section-number">1.13</span> Plot Venn</a></li>
-<li><a class="nav-link" href="#plot-deg-volcano"><span class="header-section-number">1.14</span> Plot DEG Volcano</a></li>
+<li><a class="nav-link" href="#plot-ora"><span class="header-section-number">1.10</span> Plot ORA</a></li>
+<li><a class="nav-link" href="#plot-gsea"><span class="header-section-number">1.11</span> Plot GSEA</a></li>
+<li><a class="nav-link" href="#plot-venn"><span class="header-section-number">1.12</span> Plot Venn</a></li>
+<li><a class="nav-link" href="#plot-deg-volcano"><span class="header-section-number">1.13</span> Plot DEG Volcano</a></li>
 </ul>
 
       <div class="book-extra">
@@ -345,7 +337,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-06-27.</p>
+    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

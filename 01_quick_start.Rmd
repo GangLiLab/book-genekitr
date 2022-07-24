@@ -64,60 +64,57 @@ id <-  c('205647_at','204857_at','201394_s_at','210377_at')
 probe2sym <- transProbe(id, transTo = 'sym',org = 'hs')
 ```
 
-## [ORA GO analysis](#ora-go-analysis-1)
+> To faciliate gene enrichment analysis, I developed `r CRANpkg("geneset")`
 
-> ORA stands for "over-representation analysis".
+## [Get gene sets](#get-gene-sets-1)
 
 ```{r eval=FALSE}
+# install.packages("geneset")
+library(geneset)
+gs <- getGO(org = "human",ont = "mf")
+gs <- getKEGG(org = "hsa",category = "pathway")
+gs <- getMesh(org = "human", method = "gendoo", category = "A")
+gs <- getMsigdb(org = "human", category = "H")
+gs <- getWiki(org = "human")
+gs <- getReactome(org = "human")
+gs <- getEnrichrdb(org = "human", library = "COVID-19_Related_Gene_Sets")
+gs <- getHgDisease(source = "do")
+```
+
+
+## [ORA analysis (over-representation analysis)](#ora-analysis-1)
+
+```{r eval=FALSE}
+# 1st step: get input IDs
 id <- c("TP53","BRCA1", "PD1", "PDL1")
-ego <- genGO(id,
-  org = "human",
-  ont = "bp",
-  pvalueCutoff = 0.01,
-  qvalueCutoff = 0.01
+# 2nd step: get gene set
+gs <- geneset::getGO(org = "human",ont = "mf")
+# 3rd: analysis
+ego <- genORA(id,
+              geneset = gs,
+              p_cutoff = 0.05,
+              q_cutoff = 0.05
 )
 ```
 
-## [ORA KEGG analysis](#ora-kegg-analysis-1)
-
-```{r eval=FALSE}
-id <- c("TP53","BRCA1", "PD1", "PDL1","BRCA2","TET2")
-keg <- genKEGG(id,
-  org = "human",
-  pvalueCutoff = 0.05,
-  qvalueCutoff = 0.05
-)
-```
-
-## [ORA human disease analysis](#ora-human-disease-analysis-1)
-
-```{r eval=FALSE}
-# support `do` (Disease Ontology), `ncg` (Network of Cancer Gene) and `dgn` (DisGeNET)
-data(geneList, package = "genekitr")
-id <- names(geneList)[abs(geneList) > 1]
-
-edo <- genORA(id, type = "do")
-encg <- genORA(names(geneList), type = "ncg")
-edgn <- genORA(id, type = "dgn", 
-               pvalueCutoff = 0.01, 
-               qvalueCutoff = 0.01)
-ewiki <- genORA(id, type = "wiki", org = "human")
-```
 
 
 ## [FCS GSEA analysis](#functional-class-scoring-1)
 
 > FCS stands for "functional-class-scoring".
 
-`geneList` is an order ranked gene list in decreasing order. Gene inside can be Entrez, Ensembl or symbol.
+`geneList` is an order ranked gene list in decreasing order. Input IDs can be Entrez, Ensembl, symbol or UniProt IDs.
 
 ```{r eval=FALSE}
+# 1st step: get pre-ranked gene list
 data(geneList, package = "genekitr")
-gse <- genGSEA(
-  genelist = geneList,
-  org = "human",
-  category = "H"
-)
+# 2nd step: get gene set
+gs <- geneset::getGO(org = "human",ont = "mf")
+# 3rd: analysis
+gse <- genGSEA(genelist = geneList, 
+               geneset = gs,
+               p_cutoff = 0.05,
+               q_cutoff = 0.05)
 ```
 
 ## [Import external data](#import-external-data-1)
@@ -166,7 +163,7 @@ do_easy <- importCP(do,type = 'other')
 ```
 
 
-## [Plot GO and KEGG](#plot-go-kegg-1)
+## [Plot ORA](#plot-ora-1)
 
 Supported types include: `bar`, `wego`, `bubble`, `dot`, `lollipop`, `geneheat`, `genechord`,
 `network`, `gomap`, `goheat`, `gotangram`, `wordcloud`, `upset` and `two-group barplot`
