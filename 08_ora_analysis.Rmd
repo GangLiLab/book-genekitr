@@ -137,7 +137,7 @@ two_groups <- list(
 
 gora <- genORA(id_100, geneset = gs, group_list = two_groups)
 head(gora)
-table(gora[,1])
+table(gora$Cluster)
 ```
 
 

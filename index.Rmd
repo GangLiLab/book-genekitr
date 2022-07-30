@@ -75,7 +75,7 @@ The book is a tutorial for gene information query, gene identifier conversion, g
 
 
 ```{r workflow, echo=FALSE}
-# knitr::include_graphics("figures/workflow.png")
+knitr::include_graphics("figures/overview.png")
 ```
 
 
