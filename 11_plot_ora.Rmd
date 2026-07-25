@@ -11,13 +11,13 @@ library(patchwork)
 library(genekitr)
 ```
 
-After selecting interested terms or pathways from `genORA` or `genGSEA` result, user could pass the data frame to `plotEnrich`, which includes many **ready-made plot types**, including barplot, dotplot, heatmap, wego-like plot, chord plot, network, wordcloud etc.
+After selecting interested terms or pathways from `genORA` or `genGSEA` result, users can pass the data frame to `plotEnrich`, which includes many **ready-made plot types**, including barplot, dotplot, heatmap, wego-like plot, chord plot, network, wordcloud etc.
 
-It is worth mentioning that **almost all plots are based on `r CRANpkg("ggplot2")`** and `plot_theme` function could easily change their border, legend, label etc., which helps user make own plot.
+It is worth mentioning that **almost all plots are based on `r CRANpkg("ggplot2")`** and the `plot_theme` function can easily change their border, legend, label etc., which helps users make their own plots.
 
 ## Get ORA result
 
-> For more details, please refer to [chapter8](#ora-basic-usage)
+> For more details, please refer to [chapter 8](#ora-basic-usage)
 
 ```{r}
 # 1st step: prepare input IDs
@@ -38,12 +38,12 @@ head(ego)
 
 ## Bar Plot
 
-Bar plot is the simplest way to show enriched terms. The x-axis is enrichment metric (e.g. Gene ratio; Fold enrichment); the y-axis is selected terms. The bar color represents statistical value.
+Bar plot is the simplest way to show enriched terms. The x-axis is an enrichment metric (e.g. Gene ratio; Fold enrichment); the y-axis is selected terms. The bar color represents the statistical value.
 
 > **What's the difference between pvalue and p.adjust?**
 `p.adjust` has seven adjustment methods: <https://www.rdocumentation.org/packages/stats/versions/3.5.0/topics/p.adjust>.
-The adjusted p-value is always the p-value, multiplied with some factor: adj.p = f * p The actual size of this factor f depends on the strategy used to correct for multiple testing.
-By the way, the "q-value" stands for "false discovery rate (FDR)" method.
+The adjusted p-value is always the p-value, multiplied with some factor: adj.p = f * p. The actual size of this factor f depends on the strategy used to correct for multiple testing.
+By the way, the "q-value" stands for the "false discovery rate (FDR)" method.
 
 
 The basic arguments are: 
@@ -96,7 +96,7 @@ pp + plot_annotation(tag_levels = "A") &
 
 Enriched gene sets are shown as bubbles with different sizes.
 
-The x-axis is statistic value and the y-axis is "Fold Enrichment".
+The x-axis is the statistic value and the y-axis is "Fold Enrichment".
 
 The basic arguments are: 
 
@@ -133,7 +133,7 @@ pp + plot_annotation(tag_levels = "A") &
 
 ## Dot Plot
 
-Similar with bar plot, dot plot is also widely used in enrichment analysis plotting. Like bubble plot, dot size represents gene number of enriched term.
+Similar to the bar plot, the dot plot is also widely used in enrichment analysis plotting. Like the bubble plot, dot size represents the gene number of an enriched term.
 
 ```{r include= F}
 library(patchwork)
@@ -167,7 +167,7 @@ pp + plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 30))
 ```
 
-After analyzing group enrichment analysis for [ORA](#ora-group-enrichment), we could use `dotplot` to show the result:
+After analyzing group enrichment analysis for [ORA](#ora-group-enrichment), we can use `dotplot` to show the result:
 
 ```{r include=FALSE}
 id_100 <- c(head(names(geneList), 50), tail(names(geneList), 50))
@@ -196,7 +196,7 @@ plotEnrich(gego2,
 
 ## Lollipop Plot
 
-Lollipop is like combination of barplot and dotplot
+The lollipop plot is like a combination of the barplot and the dotplot.
 
 ```{r include= F}
 library(patchwork)
@@ -216,7 +216,7 @@ library(patchwork)
 p1 <- plotEnrich(ego, plot_type = "lollipop")
 p2 <- plotEnrich(ego,
   plot_type = "lollipop",
-  scale_ratio = 1.2,
+  scale_ratio = 1.5,
   stats_metric = "pvalue",
   term_metric = "RichFactor",
   up_color = "#a32a31",
@@ -227,7 +227,7 @@ p1 + p2 + plot_annotation(tag_levels = "A")
 
 (ref:lolliplotScap) Lollipop plot of enrichment analysis.
 
-(ref:lolliplotCap) **Lollipop plot of enrichment analysis.** defult (A), selected genes (B)
+(ref:lolliplotCap) **Lollipop plot of enrichment analysis.** default (A), selected genes (B)
 
 ```{r lolliplot, fig.height=10, fig.width=20, fig.cap="(ref:lolliplotCap)", fig.scap="(ref:lolliplotScap)",echo = F, dpi=300}
 pp + plot_annotation(tag_levels = "A") &
@@ -236,8 +236,8 @@ pp + plot_annotation(tag_levels = "A") &
 
 ## Heatmap Plot
 
-Heatmap plot shows interactions between enriched terms and their genes.
-If fold change is given, heatmap will add color for up and down-regulated genes.
+The heatmap plot shows interactions between enriched terms and their genes.
+If fold change is given, the heatmap will add color for up- and down-regulated genes.
 
 
 ```{r include= F}
@@ -253,6 +253,7 @@ pp <- p1 / p2 / p3
 
 ```{r eval= F}
 library(patchwork)
+logfc <- geneList
 p1 <- plotEnrich(ego, plot_type = "geneheat")
 show_gene = c('JUN','SOX2','CD24','TLR4')
 p2 <- plotEnrich(ego, plot_type = "geneheat", show_gene = show_gene)
@@ -271,7 +272,7 @@ pp + plot_annotation(tag_levels = "A") &
 
 ## Chord Plot
 
-Inspired by [GOplot](https://wencke.github.io/), chord plot is reproduced using `r CRANpkg("ggplot2")` and it shows similar content with heatmap plot.
+Inspired by [GOplot](https://wencke.github.io/), the chord plot is reproduced using `r CRANpkg("ggplot2")` and it shows content similar to the heatmap plot.
 
 - `gene_space`: The space between the gene labels and the chord.
 
@@ -290,6 +291,7 @@ pp <- p1 + p2
 
 ```{r eval= F}
 library(patchwork)
+logfc <- geneList
 show_gene = c('JUN','SOX2','CD24','TLR4')
 p1 <- plotEnrich(ego, plot_type = "genechord", 
                  show_gene = show_gene) +
@@ -297,13 +299,14 @@ p1 <- plotEnrich(ego, plot_type = "genechord",
 p2 <- plotEnrich(ego, plot_type = "genechord", 
                  show_gene = show_gene, 
                  fold_change = logfc,
+                 remove_legend_text = T,
                  gene_space = 0.5)
 p1 + p2 + plot_annotation(tag_levels = "A")
 ```
 
 (ref:chordScap) Chord plot of enrichment analysis.
 
-(ref:chordCap) **Heatmap plot of enrichment analysis.** selected genes (A), selected genes with logFC value (B).
+(ref:chordCap) **Chord plot of enrichment analysis.** selected genes (A), selected genes with logFC value (B).
 
 ```{r chord, fig.height=8, fig.width=15, fig.cap="(ref:chordCap)", fig.scap="(ref:chordScap)",echo = F, dpi=300}
 pp + plot_annotation(tag_levels = "A") &
@@ -312,7 +315,7 @@ pp + plot_annotation(tag_levels = "A") &
 
 ## Wordcloud Plot
 
-Wordcloud plot shows term emphasis based on text frequency.
+The wordcloud plot shows term emphasis based on text frequency.
 
 (ref:wordcloudScap) Wordcloud plot of enrichment analysis.
 
@@ -324,7 +327,7 @@ plotEnrich(ego, plot_type = "wordcloud")
 
 ## Upset Plot
 
-Inspired by `r CRANpkg("ComplexUpset")`, the upset plot shows the association between genes and enriched terms. Unlike common Venn diagram, it could emphasize complex relationship among many gene sets.
+Inspired by `r CRANpkg("ComplexUpset")`, the upset plot shows the association between genes and enriched terms. Unlike a common Venn diagram, it can emphasize the complex relationships among many gene sets.
 
 (ref:upsetScap) Upset plot of enrichment analysis.
 
@@ -337,13 +340,13 @@ plotEnrich(ego, plot_type = "upset",main_text_size = 15,legend_text_size = 8)
 
 ## Network Plot
 
-Inspired by `enrichplot::emapplot`, `genekitr` reproduced this plot to enhance modification.
-Enriched terms are the nodes in the network, the overlapping gene sets are edges. Terms with more overlapped genes are tend to cluster together and the edge will be thicker.
+Inspired by `enrichplot::emapplot`, `genekitr` reproduced this plot to enhance customization.
+Enriched terms are the nodes in the network, and the overlapping gene sets are edges. Terms with more overlapping genes tend to cluster together, and the edges will be thicker.
 
-- GO analysis result could use five methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang", "Wang" and "JC"(Jaccard’s similarity index) methods.
-- KEGG only supports "JC" method.
+- GO analysis results can use five semantic similarity methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang", "Wang", as well as the "JC" (Jaccard\u2019s similarity index) method.
+- KEGG only supports the "JC" method.
 
-User could define `layout` argument derived from `r CRANpkg("ggraph")`, including "nicely" (default), "circle", "dh", "drl", "fr", "graphopt", "grid","lgl", "kk", "mds", "randomly", "star" etc.
+Users can define the `layout` argument derived from `r CRANpkg("ggraph")`, including "nicely" (default), "circle", "dh", "drl", "fr", "graphopt", "grid","lgl", "kk", "mds", "randomly", "star" etc.
 
 > For more information about the `layout`, you could refer to: ["Introduction to ggraph: Layouts"](https://www.data-imaginist.com/2017/ggraph-introduction-layouts/)
 
@@ -374,7 +377,7 @@ p3 <- plotEnrich(ego, plot_type = "network",
 
 (ref:networkScap) Network plot of enrichment analysis.
 
-(ref:networkCap) **Network plot of enrichment analysis.** JC method and nicely layout(A, default), circle layout (B), grid layout and Want method (C).
+(ref:networkCap) **Network plot of enrichment analysis.** JC method and nicely layout (A, default), circle layout (B), grid layout and Wang method (C).
 
 ```{r network, fig.height=10, fig.width=15, fig.cap="(ref:networkCap)", fig.scap="(ref:networkScap)",echo = F, dpi=300}
 pp + plot_annotation(tag_levels = "A") &
@@ -384,7 +387,7 @@ pp + plot_annotation(tag_levels = "A") &
 
 ## GO-specific: WEGO Plot
 
-> To visulize more than one ontology of GO in one plot, user could utilize `wego plot`
+> To visualize more than one ontology of GO in one plot, users can use the `wego plot`
 
 Inspired by [WEGO](https://wego.genomics.cn/), `genekitr` utilized `r CRANpkg("ggplot2")` to reproduce this plot.
 
@@ -410,7 +413,7 @@ ego_mf <- ego_mf %>% dplyr::mutate(Ontology = "mf") %>% dplyr::rename(ID = 1)
 all_ego <- rbind(ego_cc,ego_mf)
 ```
 
-**NOTICE:** `plotEnrich` has a parameter `n_term` for WEGO plot, which specify number of terms. If you want to plot all terms, just set `n_term` higher.
+**NOTICE:** `plotEnrich` has a parameter `n_term` for the WEGO plot, which specifies the number of terms. If you want to plot all terms, just set `n_term` higher.
 
 (ref:wegoplotScap) WEGO plot of enrichment analysis.
 
@@ -423,9 +426,9 @@ plotEnrich(all_ego, plot_type = "wego", n_term = 5)
 ## GO-specific: Map Plot
 
 GO terms are built in a directed acyclic graph with a parent-child relationship.
-Here the map plot utilized `r Biocpkg("GOSemSim")` to extract parent and child terms, also utilized `r CRANpkg("ggraph")` and `r CRANpkg("igraph")` to draw with default layout "sugiyama".
+Here the map plot utilized `r Biocpkg("GOSemSim")` to extract parent and child terms, and also utilized `r CRANpkg("ggraph")` and `r CRANpkg("igraph")` to draw with the default layout "sugiyama".
 
-To avoid too much unrelated terms messed up, `genekitr` **only shows the closest parent and child with selected terms**. Besides, the top three parent term with more edges will be plotted.
+To avoid cluttering the plot with too many unrelated terms, `genekitr` **only shows the closest parent and child of the selected terms**. Besides, the top three parent terms with more edges will be plotted.
 
 ```{r include= F}
 library(igraph)
@@ -451,7 +454,7 @@ pp
 
 ## GO-specific: Terms Heatmap Plot
 
-Inspired by `r Biocpkg("rrvgo")`, `genekitr` scratches main codes to cluster GO terms. Also it could use five methods to calculate the similarity between terms.
+Inspired by `r Biocpkg("rrvgo")`, `genekitr` borrows the main code to cluster GO terms. It can also use five methods to calculate the similarity between terms.
 
 ```{r eval= F}
 plotEnrich(ego, plot_type = "goheat", sim_method = "Rel")
@@ -471,7 +474,7 @@ plotEnrich(ego,
 
 ## GO-specific: Terms Tangram Plot
 
-According to [rrvgo vignettes](http://bioconductor.org/packages/release/bioc/vignettes/rrvgo/inst/doc/rrvgo.html), tangram plot is space-filling visualization of hierarchical structures. The terms are grouped and colored based on their parent, and the space used by the term is proportional to the score.  
+According to the [rrvgo vignettes](http://bioconductor.org/packages/release/bioc/vignettes/rrvgo/inst/doc/rrvgo.html), the tangram plot is a space-filling visualization of hierarchical structures. The terms are grouped and colored based on their parent, and the space used by the term is proportional to the score.  
 
 (ref:gotangramScap) GO tangram plot of enrichment analysis.
 
@@ -485,7 +488,7 @@ plotEnrich(ego, plot_type = "gotangram", sim_method = "Rel")
 
 ## Plot Theme
 
-`Genekitr` provides a function `plot_theme()` to modify all plots theme including text size, border, legend, color, etc.
+`Genekitr` provides a function `plot_theme()` to modify all plot themes, including text size, border, legend, color, etc.
 
 ```{r include= F}
 library(patchwork)
@@ -541,9 +544,9 @@ pp + plot_annotation(tag_levels = "A") &
 
 ### Two-group barplot for up/down regulated pathways
 
-Up and down regulated genes could pass to `genORA` separately and visualize together as two-group barplot.
+Up- and down-regulated genes can be passed to `genORA` separately and visualized together as a two-group barplot.
 
-Here we take GO result as an example:
+Here we take the GO result as an example:
 
 ```{r}
 # 1st step: prepare input IDs
@@ -567,7 +570,7 @@ up_go <- head(up_go, 10)
 down_go <- head(down_go, 10)
 ```
 
-There are two visulization types: 
+There are two visualization types: 
 
 - `plot_type = "one"`: both up and down-regulated pathways are plotted together
 - `plot_type = "two"`: up and down-regulated pathways are plotted separately. **Recommended if the number of both groups is similar.**
@@ -630,24 +633,10 @@ plotEnrichAdv(up_go, down_go,
 )
 ```
 
-(ref:twogroup2Scap) Visualize two groups seperately when `plot_type = "two"`.
+(ref:twogroup2Scap) Visualize two groups separately when `plot_type = "two"`.
 
-(ref:twogroup2Cap) **Visualize two groups seperately when `plot_type = "two"`.** 
+(ref:twogroup2Cap) **Visualize two groups separately when `plot_type = "two"`.** 
 
 ```{r twogroup2, fig.width=15, fig.height=5, fig.cap="(ref:twogroup2Cap)", fig.scap="(ref:twogroup2Scap)", dpi=300, echo = F}
 pp
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
