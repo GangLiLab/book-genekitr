@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Search PubMed records | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
+<meta name="description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstracts. You need to input the term argument; if you want to add supplementary information, you can use the...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Search PubMed records | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
-<meta property="og:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
+<meta property="og:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstracts. You need to input the term argument; if you want to add supplementary information, you can use the...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Search PubMed records | Genekitr: An R Toolkit for Gene Analysis">
 <meta name="twitter:site" content="@ReedLiu1314">
-<meta name="twitter:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
+<meta name="twitter:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstracts. You need to input the term argument; if you want to add supplementary information, you can use the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -76,9 +76,9 @@
 <h1>
 <span class="header-section-number">3</span> Search PubMed records<a class="anchor" aria-label="anchor" href="#search-pubmed-1"><i class="fas fa-link"></i></a>
 </h1>
-<p><code>getPubmed</code> function utilizes <a href="https://CRAN.R-project.org/package=europepmc">europepmc</a> to easily get PubMed records by searching paper abstract.</p>
-<p>Users need to input the <code>term</code> argument; if there is any supplement information, the <code>keys</code> parameter is available.</p>
-<p>For example, if user wants to check papers for genes “Tp53”, “Brca1,” and “Tet2” research of mouse stem cells:</p>
+<p><code>getPubmed</code> function utilizes <a href="https://CRAN.R-project.org/package=europepmc">europepmc</a> to easily get PubMed records by searching paper abstracts.</p>
+<p>You need to input the <code>term</code> argument; if you want to add supplementary information, you can use the <code>keys</code> parameter.</p>
+<p>For example, if you want to find papers about genes “Tp53”, “Brca1”, and “Tet2” in the context of mouse stem cell research:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
 <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
@@ -103,8 +103,7 @@
 ## #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;,
 ## #   firstPublicationDate &lt;chr&gt;, versionNumber &lt;int&gt;</code></pre>
 <blockquote>
-<p><strong>NOTICE</strong>:
-A minor update has been made in version 0.8.6 or above. Argument <code>keys</code> is replaced with <code>add_term</code> for easy understanding, and the <code>num</code> parameter is added to specify the number of returned records.</p>
+<p><strong>NOTICE</strong>: A minor update has been made in version 0.8.6 or above. Argument <code>keys</code> is replaced with <code>add_term</code> for easier understanding, and the <code>num</code> parameter is added to specify the number of returned records.</p>
 </blockquote>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>

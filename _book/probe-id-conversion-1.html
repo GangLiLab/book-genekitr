@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Probe ID conversion | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content="Probes are used to measure the expression level of many genes. After getting micro array data, the first important thing before downstream analysis maybe probe id conversion. Ensembl database...">
+<meta name="description" content="Probes are used to measure the expression level of many genes. After getting microarray data, the first important step before downstream analysis is probably probe ID conversion. Ensembl database...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Probe ID conversion | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Probes are used to measure the expression level of many genes. After getting micro array data, the first important thing before downstream analysis maybe probe id conversion. Ensembl database...">
+<meta property="og:description" content="Probes are used to measure the expression level of many genes. After getting microarray data, the first important step before downstream analysis is probably probe ID conversion. Ensembl database...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 Probe ID conversion | Genekitr: An R Toolkit for Gene Analysis">
 <meta name="twitter:site" content="@ReedLiu1314">
-<meta name="twitter:description" content="Probes are used to measure the expression level of many genes. After getting micro array data, the first important thing before downstream analysis maybe probe id conversion. Ensembl database...">
+<meta name="twitter:description" content="Probes are used to measure the expression level of many genes. After getting microarray data, the first important step before downstream analysis is probably probe ID conversion. Ensembl database...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -76,9 +76,9 @@
 <h1>
 <span class="header-section-number">6</span> Probe ID conversion<a class="anchor" aria-label="anchor" href="#probe-id-conversion-1"><i class="fas fa-link"></i></a>
 </h1>
-<p>Probes are used to measure the expression level of many genes. After getting micro array data, the first important thing before downstream analysis maybe probe id conversion.</p>
-<p>Ensembl database regularly maps probes sets against the latest set of transcript models using their own <a href="(https://www.ensembl.org/info/genome/microarray_probe_set_mapping.html)">pipeline</a>.</p>
-<p>Here, <code>transProbe</code> utilizes Ensembl up-to-date annotation datasets and could join together with other genekitr functions fluently.</p>
+<p>Probes are used to measure the expression level of many genes. After getting microarray data, the first important step before downstream analysis is probably probe ID conversion.</p>
+<p>Ensembl database regularly maps probe sets against the latest set of transcript models using their own <a href="https://www.ensembl.org/info/genome/microarray_probe_set_mapping.html">pipeline</a>.</p>
+<p>Here, <code>transProbe</code> utilizes Ensembl’s up-to-date annotation datasets and can be seamlessly combined with other genekitr functions.</p>
 <blockquote>
 <p>Notice: now we only support human data</p>
 </blockquote>
@@ -86,7 +86,7 @@
 <h2>
 <span class="header-section-number">6.1</span> Supported platforms<a class="anchor" aria-label="anchor" href="#transProbe-supported-platforms"><i class="fas fa-link"></i></a>
 </h2>
-<p>36 probe platforms include Affymetrix, Agilent, Illumina, Codelink and Phalanx.</p>
+<p>There are 36 supported probe platforms, including Affymetrix, Agilent, Illumina, Codelink and Phalanx.</p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">hsapiens_probe_platform</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>pageLength <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="htmlwidget-b27b1b6247964e3a69ab" style="width:100%;height:auto;" class="datatables html-widget"></div>
@@ -99,13 +99,13 @@
 <p><code>transProbe</code> has four arguments:</p>
 <ul>
 <li>
-<code>id</code>: probe id</li>
+<code>id</code>: probe ID</li>
 <li>
-<code>transTo</code>: the conversion target type. User could select <strong>more than one</strong> from “symbol”, “entrez”, “ensembl” or “uniprot”.</li>
+<code>transTo</code>: the conversion target type. Users can select <strong>more than one</strong> from “symbol”, “entrez”, “ensembl” or “uniprot”.</li>
 <li>
 <code>org</code>: human (default)</li>
 <li>
-<code>platform</code>: Probe platform. If not given, program will detect automatically.</li>
+<code>platform</code>: Probe platform. If not given, the program will detect it automatically.</li>
 </ul>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
@@ -131,7 +131,7 @@
 <h2>
 <span class="header-section-number">6.3</span> Convert to more than one type<a class="anchor" aria-label="anchor" href="#convert-probe-types"><i class="fas fa-link"></i></a>
 </h2>
-<p>User could define <code>transTo</code> as many types:</p>
+<p>Users can define <code>transTo</code> with multiple types:</p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/transProbe.html">transProbe</a></span><span class="op">(</span><span class="va">probes</span>, transTo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ensembl"</span>,<span class="st">"symbol"</span><span class="op">)</span>, org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">res2</span><span class="op">)</span></code></pre></div>
@@ -142,8 +142,8 @@
 ## 17512  7925531 ENSG00000275199       AKT3
 ## 17126  8081358 ENSG00000256628 ZBTB11-AS1
 ## 6218   7979931 ENSG00000133997       MED6</code></pre>
-<p>Let’s take the first record as <a href="example:%5BENSG00000228794%5D(https://www.ensembl.org/id/ENSG00000228794" class="uri">example:[ENSG00000228794](https://www.ensembl.org/id/ENSG00000228794</a>) has 38 transcripts.</p>
-<p>When we look at its second transcript <a href="http://asia.ensembl.org/Homo_sapiens/Transcript/Oligos?db=core;g=ENSG00000228794;r=1:825138-859446;t=ENST00000445118">ENST00000445118.7</a>, probe <code>7896759</code> is listed in <code>AFFY HuGene-1_0-st-v1</code> database.</p>
+<p>Let’s take the first record as an example: <a href="https://www.ensembl.org/id/ENSG00000228794">ENSG00000228794</a> has 38 transcripts.</p>
+<p>When we look at its second transcript <a href="http://asia.ensembl.org/Homo_sapiens/Transcript/Oligos?db=core;g=ENSG00000228794;r=1:825138-859446;t=ENST00000445118">ENST00000445118.7</a>, probe <code>7896759</code> is listed in the <code>AFFY HuGene-1_0-st-v1</code> database.</p>
 
 </div>
 </div>

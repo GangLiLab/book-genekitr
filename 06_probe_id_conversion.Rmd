@@ -7,17 +7,17 @@ library(genekitr)
 library(dplyr)
 ```
 
-Probes are used to measure the expression level of many genes. After getting micro array data, the first important thing before downstream analysis maybe probe id conversion.
+Probes are used to measure the expression level of many genes. After getting microarray data, the first important step before downstream analysis is probably probe ID conversion.
 
-Ensembl database regularly maps probes sets against the latest set of transcript models using their own [pipeline]((https://www.ensembl.org/info/genome/microarray_probe_set_mapping.html)).
+Ensembl database regularly maps probe sets against the latest set of transcript models using their own [pipeline](https://www.ensembl.org/info/genome/microarray_probe_set_mapping.html).
 
-Here, `transProbe` utilizes Ensembl up-to-date annotation datasets and could join together with other genekitr functions fluently.
+Here, `transProbe` utilizes Ensembl's up-to-date annotation datasets and can be seamlessly combined with other genekitr functions.
 
 > Notice: now we only support human data
 
 ## Supported platforms {#transProbe-supported-platforms}
 
-36 probe platforms include Affymetrix, Agilent, Illumina, Codelink and Phalanx.
+There are 36 supported probe platforms, including Affymetrix, Agilent, Illumina, Codelink and Phalanx.
 
 ```{r}
 DT::datatable(hsapiens_probe_platform, options = list(pageLength = 10))
@@ -27,10 +27,10 @@ DT::datatable(hsapiens_probe_platform, options = list(pageLength = 10))
 
 `transProbe` has four arguments:
 
-- `id`: probe id
-- `transTo`: the conversion target type. User could select **more than one** from "symbol", "entrez", "ensembl" or "uniprot".
+- `id`: probe ID
+- `transTo`: the conversion target type. Users can select **more than one** from "symbol", "entrez", "ensembl" or "uniprot".
 - `org`: human (default)
-- `platform`: Probe platform. If not given, program will detect automatically.
+- `platform`: Probe platform. If not given, the program will detect it automatically.
 
 
 ```{r}
@@ -45,16 +45,13 @@ head(res)
 
 ## Convert to more than one type {#convert-probe-types}
 
-User could define `transTo` as many types:
+Users can define `transTo` with multiple types:
 
 ```{r}
 res2 <- transProbe(probes, transTo = c("ensembl","symbol"), org = "human")
 head(res2)
 ```
 
-Let's take the first record as example:`r Ensembl("ENSG00000228794")` has 38 transcripts. 
+Let's take the first record as an example: `r Ensembl("ENSG00000228794")` has 38 transcripts.
 
-When we look at its second transcript [ENST00000445118.7](http://asia.ensembl.org/Homo_sapiens/Transcript/Oligos?db=core;g=ENSG00000228794;r=1:825138-859446;t=ENST00000445118), probe `7896759` is listed in `AFFY HuGene-1_0-st-v1` database.
-
-
-
+When we look at its second transcript [ENST00000445118.7](http://asia.ensembl.org/Homo_sapiens/Transcript/Oligos?db=core;g=ENSG00000228794;r=1:825138-859446;t=ENST00000445118), probe `7896759` is listed in the `AFFY HuGene-1_0-st-v1` database.
