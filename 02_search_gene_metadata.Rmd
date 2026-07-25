@@ -11,11 +11,11 @@ library(dplyr)
 library(DT)
 ```
 
-`genInfo()` function helps the user quickly search batch of gene metadata such as names, location, GC content, etc.
+The `genInfo()` function helps users quickly search a batch of gene metadata, such as gene names, genomic location, GC content, and more.
 
 ## Supported organisms {#geninfo-supported-species}
 
-It supports 195 vertebrate species, 120 plant species, and two bacteria species. All data is up-to-date.
+It supports 195 vertebrate species, 120 plant species, and two bacterial species. All data is kept up to date.
 
 ```{r geninfo-orgname}
 # install.packages('DT')
@@ -23,19 +23,19 @@ library(genekitr)
 DT::datatable(ensOrg_name, options = list(pageLength = 10))
 ```
 
-A user could select an organism name from the `latin_short_name` column. 
+Users can select an organism name from the `latin_short_name` column.
 
-The common name is also acceptable for popular research species (e.g., human, mouse, rat, fly, zebrafish, worm, chicken). Take human as an example, the official latin short name is "hsapiens", while" hg", "hsa", "hs", or "human" are also acceptable.
+Common names are also acceptable for popular research species (e.g., human, mouse, rat, fly, zebrafish, worm, chicken). Taking human as an example, the official Latin short name is "hsapiens", while "hg", "hsa", "hs", and "human" are also acceptable.
 
 ## Basic usage {#geninfo-basic-usage}
 
 `genInfo` only has three arguments:
 
-- `id`: gene id (symbol, Entrez or Ensembl) or protein id
+- `id`: gene ID (symbol, Entrez, or Ensembl) or protein ID
 
 - `org`: organism name, default is human
 
-- `unique`: `TRUE` or `FALSE`. Commonly, one gene could have many other types of matched records. For example, the human `HBD` gene has three matched Entrez IDs: `r Entrez("3045")`, `r Entrez("85349")`, and `r Entrez("100187828")`. If `TRUE,` only return a one-to-one match result with smallest entrezid or maximal information (that is minimal NAs). See example [genekitr feature2](#geninfo-feature-2).
+- `unique`: `TRUE` or `FALSE`. Commonly, one gene may have multiple matched records of the same ID type. For example, the human `HBD` gene has three matched Entrez IDs: `r Entrez("3045")`, `r Entrez("85349")`, and `r Entrez("100187828")`. If set to `TRUE`, only a one-to-one match with the smallest Entrez ID or the most complete information (i.e., the fewest NAs) will be returned. See [genekitr feature2](#geninfo-feature-2) for an example.
 
 ```{r geneinfo-basic-usage}
 id <- c("TP53", "BRCA1", "TET2")
@@ -49,9 +49,9 @@ head(info, 3)
 
 ### f1: keep input order {#geninfo-feature-1}
 
-`genInfo` result will strictly keep up with the input order.
+The `genInfo` output will strictly follow the input order.
 
-If a gene id is unrecognized (e.g., misspelled or does not belong to the organism), the return data will be NA.
+If a gene ID is unrecognized (e.g., misspelled or not found in the specified organism), the corresponding row will be filled with NA.
 
 ```{r}
 id <- c(
@@ -66,7 +66,7 @@ head(info, 3)
 
 ### f2: keep unique or not {#geninfo-feature-2}
 
-If `unique = TRUE`, only one record with maximal information is returned.
+If `unique = TRUE`, only one record with the most complete information is returned.
 
 ```{r }
 id <- "HBD"
@@ -80,16 +80,16 @@ all_info[, 1:4]
 
 ### f3: disambiguation feature {#geninfo-feature-3}
 
-#### distinguish from gene symbol and alias
+#### Distinguishing gene symbols from aliases
 
-Many common gene names are gene alias, but many tools only accept gene symbols which cause gene information to be lost. For example, "BCC7" is the alias of "TP53" and "PD1" has three aliases: "PDCD1", "SNCA" and "SPATA2" while few enrichment analyses tools recognize "BCC7".
+Many commonly used gene names are actually gene aliases, but most tools only accept official gene symbols, which can cause important information to be lost. For example, "BCC7" is an alias of "TP53", and "PD1" has three aliases: "PDCD1", "SNCA", and "SPATA2" — yet few enrichment analysis tools are able to recognize aliases such as "BCC7".
 
 ```{r}
 id <- c("BCC7", "PD1")
 genInfo(id)[1:4]
 ```
 
-#### distinguish gene symbol with special characters
+#### Distinguishing gene symbols with special characters
 
 ```{r}
 id <- c("TNF-α", "κB-Ras2")
@@ -113,7 +113,7 @@ uniq_symbol %>%
 
 ### f5: extract all metadata {#geninfo-feature-5}
 
-If user only wants to get all information, just give `org` argument alone.
+If you only want to retrieve all available information, simply provide the `org` argument alone.
 
 ```{r}
 all_human_data <- genInfo(org = "human")
@@ -133,7 +133,7 @@ hg_pro_gene <- uniq_symbol %>%
 length(hg_pro_gene)
 ```
 
-#####  Compare with [HGNC data](http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt):
+##### Compare with [HGNC data](http://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_with_protein_product.txt):
 
 
 ```{r eval=FALSE}
@@ -155,7 +155,7 @@ plotVenn(list(
 ))
 ```
 
-Check some missing gene names in our result:
+Let's check some gene names missing from our result:
 ```{r}
 check_genes <- head(hgnc_symbol[!hgnc_symbol %in% hg_pro_gene], 3)
 hgnc_data %>%
@@ -166,27 +166,27 @@ hgnc_data %>%
   )
 ```
 
-Let's look at the first one "ABTB3":
+Let's take a look at the first one, "ABTB3":
 
-It seems that the gene "ABTB3" is recently modified, while it is also known as "BTBD11" which matched with our Ensembl data: `r Ensembl("ENSG00000151136")`
+It seems that the gene "ABTB3" was recently renamed; it is also known as "BTBD11", which matches our Ensembl data: `r Ensembl("ENSG00000151136")`
 
 ```{r}
 genInfo("121551")[1:3]
 ```
 
-So the reason for the mismatch is out-of-sync of the large database Ensembl and NCBI. However, the mismatch number is small so the effect is not serious.
+So the reason for this mismatch is that the two large databases, Ensembl and NCBI, are not perfectly synced with each other. However, since the number of such mismatches is small, the overall effect is minor.
 
-> Here is my personal view:
+> Here is my personal take on this:
 
-NCBI updates backend data everydata while Ensembl follows a quarterly update cycle.
+NCBI updates its backend data daily, while Ensembl follows a quarterly update cycle.
 
-As long as our genes are not so outdated, it can also finish gene annotation such as enrichment analysis. It is not recommended to keep gene names updated like NCBI because other large databases could not follow a very high updating frequency. 
+As long as our gene data isn't too outdated, it can still support downstream annotation tasks such as enrichment analysis. I wouldn't recommend keeping gene names as up to date as NCBI, because other large databases simply can't keep pace with such a high update frequency.
 
-For example, the gene "BTBD11" (BTB/POZ domain-containing protein 11) could be recognized in [GeneOntology](http://geneontology.org/) while the latest one "ABTB3" is not synced yet. If using NCBI name, user may not get related enrichment information about this gene.
+For example, the gene "BTBD11" (BTB/POZ domain-containing protein 11) is recognized by [GeneOntology](http://geneontology.org/), while its newer name, "ABTB3", hasn't been synced yet. If you use the NCBI name instead, you might miss out on related enrichment information for this gene.
 
 (ref:BTBD11GOScap) BTBD11 vs ABTB3 in GeneOntology
 
-(ref:BTBD11GOCap) **BTBD11 vs ABTB3 in GeneOntology** 
+(ref:BTBD11GOCap) **BTBD11 vs ABTB3 in GeneOntology**
 
 ```{r BTBD11GO, out.width="100%", echo=FALSE, fig.cap="(ref:BTBD11GOCap)", fig.scap="(ref:BTBD11GOScap)"}
 knitr::include_graphics("figures/panther-gene-btbd11.png")
@@ -194,7 +194,7 @@ knitr::include_graphics("figures/panther-gene-btbd11.png")
 
 ##### Compare with `orgDb` in Bioconductor
 
-Because `genekitr` combines both Ensembl and NCBI data, it could handle more gene ids than common organism-level (‘org’) packages in Bioconductor.
+Since `genekitr` combines both Ensembl and NCBI data, it can handle more gene IDs than the common organism-level (`org`) packages available in Bioconductor.
 
 ```{r}
 # using orgdb
@@ -223,20 +223,14 @@ genekitr_sym[!genekitr_sym%in%org_sym] %>% head()
 genInfo("SPDYE12")[1:4]
 ```
 
-For example, gene `r Entrez("100101268")` is officially named as  `SPDYE12`, while in orgdb the name is:
+For example, gene `r Entrez("100101268")` is officially named `SPDYE12`, while in `orgDb` its name is:
 
 ```{r}
 org_dat[org_dat$ENTREZID=="100101268","SYMBOL"]
 ```
 
-Do not worry, if you use `genekitr`, you can still get exact match:
+Don't worry — if you use `genekitr`, you can still get an exact match:
 
 ```{r}
 genInfo("SPDYE12P")[1:4]
 ```
-
-
-
-
-
-

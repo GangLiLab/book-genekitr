@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 1 Quick start | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content='This part helps users quickly go through function usage. Click each title to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD",...'>
+<meta name="description" content='This section helps you quickly get a sense of how each function works. Click on the titles below to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1",...'>
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Quick start | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
-<meta property="og:description" content='This part helps users quickly go through function usage. Click each title to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD",...'>
+<meta property="og:description" content='This section helps you quickly get a sense of how each function works. Click on the titles below to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1",...'>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 1 Quick start | Genekitr: An R Toolkit for Gene Analysis">
 <meta name="twitter:site" content="@ReedLiu1314">
-<meta name="twitter:description" content='This part helps users quickly go through function usage. Click each title to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD",...'>
+<meta name="twitter:description" content='This section helps you quickly get a sense of how each function works. Click on the titles below to view more details.  1.1 Search gene metadata id &lt;- c("MCM10", "CDC20", "S100A9", "MMP1",...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -77,7 +77,7 @@
 <span class="header-section-number">1</span> Quick start<a class="anchor" aria-label="anchor" href="#quick-start"><i class="fas fa-link"></i></a>
 </h1>
 <blockquote>
-<p>This part helps users quickly go through function usage. Click each title to view more details.</p>
+<p>This section helps you quickly get a sense of how each function works. Click on the titles below to view more details.</p>
 </blockquote>
 <div id="search-gene-metadata" class="section level2">
 <h2>
@@ -88,7 +88,7 @@
 <span class="va">info</span> <span class="op">&lt;-</span> <span class="fu">genInfo</span><span class="op">(</span><span class="va">id</span>, org <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span>
 <span class="co"># keep unique records</span>
 <span class="va">info2</span> <span class="op">&lt;-</span> <span class="fu">genInfo</span><span class="op">(</span><span class="va">id</span>, org <span class="op">=</span> <span class="st">"hs"</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co"># support both hg19 and hg38 genome build version</span>
+<span class="co"># supports both hg19 and hg38 genome build versions</span>
 <span class="va">v19</span> <span class="op">&lt;-</span> <span class="fu">genInfo</span><span class="op">(</span><span class="va">id</span>, org <span class="op">=</span> <span class="st">"hs"</span>,hgVersion <span class="op">=</span> <span class="st">"v19"</span><span class="op">)</span>
 <span class="va">v38</span> <span class="op">&lt;-</span> <span class="fu">genInfo</span><span class="op">(</span><span class="va">id</span>, org <span class="op">=</span> <span class="st">"hs"</span>,hgVersion <span class="op">=</span> <span class="st">"v38"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -110,7 +110,7 @@
 <span class="va">add_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu">getPubmed</span><span class="op">(</span><span class="va">term</span>, <span class="va">add_term</span>, num <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 
-<span class="co"># set "num" larger to get all records</span>
+<span class="co"># set "num" to a larger value to get all the records</span>
 <span class="va">all</span> <span class="op">&lt;-</span> <span class="fu">getPubmed</span><span class="op">(</span><span class="va">term</span>, <span class="va">add_term</span>, num <span class="op">=</span> <span class="fl">666666</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="gene-id-conversion" class="section level2">
@@ -139,7 +139,7 @@
 <code class="sourceCode R"><span class="va">id</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'205647_at'</span>,<span class="st">'204857_at'</span>,<span class="st">'201394_s_at'</span>,<span class="st">'210377_at'</span><span class="op">)</span>
 <span class="va">probe2sym</span> <span class="op">&lt;-</span> <span class="fu">transProbe</span><span class="op">(</span><span class="va">id</span>, transTo <span class="op">=</span> <span class="st">'sym'</span>,org <span class="op">=</span> <span class="st">'hs'</span><span class="op">)</span></code></pre></div>
 <blockquote>
-<p>To faciliate gene enrichment analysis, I developed <a href="https://CRAN.R-project.org/package=geneset">geneset</a></p>
+<p>To facilitate gene enrichment analysis, I developed <a href="https://CRAN.R-project.org/package=geneset">geneset</a>.</p>
 </blockquote>
 </div>
 <div id="get-gene-sets" class="section level2">
@@ -181,7 +181,7 @@
 <blockquote>
 <p>FCS stands for “functional-class-scoring”.</p>
 </blockquote>
-<p><code>geneList</code> is an order ranked gene list in decreasing order. Input IDs can be Entrez, Ensembl, symbol or UniProt IDs.</p>
+<p><code>geneList</code> is a pre-ranked gene list ordered in decreasing order. Input IDs can be Entrez, Ensembl, Symbol, or UniProt IDs.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 1st step: get pre-ranked gene list</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
@@ -197,12 +197,12 @@
 <h2>
 <span class="header-section-number">1.9</span> <a href="import-external-data-1.html#import-external-data-1">Import external data</a><a class="anchor" aria-label="anchor" href="#import-external-data"><i class="fas fa-link"></i></a>
 </h2>
-<div id="import-panther-of-geneontology-website" class="section level3">
+<div id="import-panther-results-from-the-geneontology-website" class="section level3">
 <h3>
-<span class="header-section-number">1.9.1</span> Import Panther of GeneOntology website<a class="anchor" aria-label="anchor" href="#import-panther-of-geneontology-website"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9.1</span> Import Panther results from the GeneOntology website<a class="anchor" aria-label="anchor" href="#import-panther-results-from-the-geneontology-website"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># here we save panther result as "analysis.txt"</span>
+<code class="sourceCode R"><span class="co"># Here we save the Panther result as "analysis.txt"</span>
 <span class="va">panther_res</span> <span class="op">&lt;-</span> <span class="fu">importPanther</span><span class="op">(</span><span class="st">"analysis.txt"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="import-clusterprofiler-result" class="section level3">
@@ -228,7 +228,7 @@
                minGSSize    <span class="op">=</span> <span class="fl">120</span>,
                pvalueCutoff <span class="op">=</span> <span class="fl">0.05</span>,
                verbose      <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">## Other ORA result from clusterProfiler </span>
+<span class="co">## Other ORA results from clusterProfiler </span>
 <span class="co"># (e.g. KEGG/DOSE/WikiPathways...)</span>
 <span class="va">do</span> <span class="op">&lt;-</span> <span class="fu">enrichDO</span><span class="op">(</span>gene          <span class="op">=</span> <span class="va">gene</span>,
               ont           <span class="op">=</span> <span class="st">"DO"</span>,
@@ -239,7 +239,7 @@
               maxGSSize     <span class="op">=</span> <span class="fl">500</span>,
               qvalueCutoff  <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
 
-<span class="co">## Import </span>
+<span class="co">## Convert clusterProfiler results into genekitr format</span>
 <span class="va">go_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">go</span>, type <span class="op">=</span> <span class="st">"go"</span><span class="op">)</span>
 <span class="va">kk_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">kk</span>,type <span class="op">=</span> <span class="st">'gsea'</span><span class="op">)</span>
 <span class="va">do_easy</span> <span class="op">&lt;-</span> <span class="fu">importCP</span><span class="op">(</span><span class="va">do</span>,type <span class="op">=</span> <span class="st">'other'</span><span class="op">)</span></code></pre></div>
@@ -279,7 +279,7 @@
 <span class="va">set2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 <span class="va">set3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gene"</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 
-<span class="co"># classic venn plot</span>
+<span class="co"># Classic Venn plot</span>
 <span class="fu">plotVenn</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>gset1 <span class="op">=</span> <span class="va">set1</span>, gset2 <span class="op">=</span> <span class="va">set2</span>, gset3 <span class="op">=</span> <span class="va">set3</span><span class="op">)</span>, use_venn <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># UpSet plot</span>
 <span class="fu">plotVenn</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>gset1 <span class="op">=</span> <span class="va">set1</span>, gset2 <span class="op">=</span> <span class="va">set2</span>, gset3 <span class="op">=</span> <span class="va">set3</span><span class="op">)</span>, use_venn <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
@@ -317,7 +317,7 @@
 <li><a class="nav-link" href="#fcs-gsea-analysis"><span class="header-section-number">1.8</span> FCS GSEA analysis</a></li>
 <li>
 <a class="nav-link" href="#import-external-data"><span class="header-section-number">1.9</span> Import external data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#import-panther-of-geneontology-website"><span class="header-section-number">1.9.1</span> Import Panther of GeneOntology website</a></li>
+<li><a class="nav-link" href="#import-panther-results-from-the-geneontology-website"><span class="header-section-number">1.9.1</span> Import Panther results from the GeneOntology website</a></li>
 <li><a class="nav-link" href="#import-clusterprofiler-result"><span class="header-section-number">1.9.2</span> Import clusterProfiler result</a></li>
 </ul>
 </li>

@@ -8,7 +8,7 @@ library(dplyr)
 library(DT)
 ```
 
-> This part helps users quickly go through function usage. Click each title to view more details.
+> This section helps you quickly get a sense of how each function works. Click on the titles below to view more details.
 
 ## [Search gene metadata](#search-gene-metadata-1)
 
@@ -17,7 +17,7 @@ id <- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD", "NUDT10")
 info <- genInfo(id, org = "hs")
 # keep unique records
 info2 <- genInfo(id, org = "hs", unique = TRUE)
-# support both hg19 and hg38 genome build version
+# supports both hg19 and hg38 genome build versions
 v19 <- genInfo(id, org = "hs",hgVersion = "v19")
 v38 <- genInfo(id, org = "hs",hgVersion = "v38")
 ```
@@ -39,7 +39,7 @@ term <- c("Tp53", "Brca1", "Tet2")
 add_term <- c("stem cell", "mouse")
 l <- getPubmed(term, add_term, num = 30)
 
-# set "num" larger to get all records
+# set "num" to a larger value to get all the records
 all <- getPubmed(term, add_term, num = 666666)
 ```
 
@@ -67,7 +67,7 @@ id <-  c('205647_at','204857_at','201394_s_at','210377_at')
 probe2sym <- transProbe(id, transTo = 'sym',org = 'hs')
 ```
 
-> To faciliate gene enrichment analysis, I developed `r CRANpkg("geneset")`
+> To facilitate gene enrichment analysis, I developed `r CRANpkg("geneset")`.
 
 ## [Get gene sets](#get-gene-sets-1)
 
@@ -106,7 +106,7 @@ ego <- genORA(id,
 
 > FCS stands for "functional-class-scoring".
 
-`geneList` is an order ranked gene list in decreasing order. Input IDs can be Entrez, Ensembl, symbol or UniProt IDs.
+`geneList` is a pre-ranked gene list ordered in decreasing order. Input IDs can be Entrez, Ensembl, Symbol, or UniProt IDs.
 
 ```{r eval=FALSE}
 # 1st step: get pre-ranked gene list
@@ -122,9 +122,9 @@ gse <- genGSEA(genelist = geneList,
 
 ## [Import external data](#import-external-data-1)
 
-### Import Panther of GeneOntology website
+### Import Panther results from the GeneOntology website
 ```{r eval=FALSE}
-# here we save panther result as "analysis.txt"
+# Here we save the Panther result as "analysis.txt"
 panther_res <- importPanther("analysis.txt")
 ```
 
@@ -148,7 +148,7 @@ kk <- gseKEGG(geneList     = geneList,
                minGSSize    = 120,
                pvalueCutoff = 0.05,
                verbose      = FALSE)
-## Other ORA result from clusterProfiler 
+## Other ORA results from clusterProfiler 
 # (e.g. KEGG/DOSE/WikiPathways...)
 do <- enrichDO(gene          = gene,
               ont           = "DO",
@@ -159,7 +159,7 @@ do <- enrichDO(gene          = gene,
               maxGSSize     = 500,
               qvalueCutoff  = 0.05)
 
-## Import 
+## Convert clusterProfiler results into genekitr format
 go_easy <- importCP(go, type = "go")
 kk_easy <- importCP(kk,type = 'gsea')
 do_easy <- importCP(do,type = 'other')
@@ -199,7 +199,7 @@ set1 <- paste0(rep("gene", 100), sample(1:1000, 100))
 set2 <- paste0(rep("gene", 100), sample(1:1000, 100))
 set3 <- paste0(rep("gene", 100), sample(1:1000, 100))
 
-# classic venn plot
+# Classic Venn plot
 plotVenn(list(gset1 = set1, gset2 = set2, gset3 = set3), use_venn = TRUE)
 # UpSet plot
 plotVenn(list(gset1 = set1, gset2 = set2, gset3 = set3), use_venn = FALSE)
@@ -214,6 +214,3 @@ plotVolcano(deg, "p.adjust",
   show_gene = c("CD36", "DUSP6", "IER3", "CDH7")
 )
 ```
-
-
-

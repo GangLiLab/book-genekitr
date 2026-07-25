@@ -46,7 +46,7 @@ get-gene-sets
 ora-analysis-over-representation-analysis
 fcs-gsea-analysis
 import-external-data
-import-panther-of-geneontology-website
+import-panther-results-from-the-geneontology-website
 import-clusterprofiler-result
 plot-ora
 plot-gsea
@@ -59,8 +59,8 @@ geninfo-features
 geninfo-feature-1
 geninfo-feature-2
 geninfo-feature-3
-distinguish-from-gene-symbol-and-alias
-distinguish-gene-symbol-with-special-characters
+distinguishing-gene-symbols-from-aliases
+distinguishing-gene-symbols-with-special-characters
 geninfo-feature-4
 geninfo-feature-5
 geninfo-feature-6

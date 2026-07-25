@@ -94,3 +94,9 @@ knitr::include_graphics("figures/overview.png")
 The source code for this book is available at <https://github.com/GangLiLab/book_genekitr>.
 
 If you have any ideas, suggestions, or questions, please feel free to [open an issue](https://github.com/GangLiLab/book_genekitr/issues/new).
+
+## 📖 Citation {-}
+
+If `genekitr` helps your research, please cite:
+
+Liu, Y., & Li, G. (2023). Empowering biologists to decode omics data: the Genekitr R package and web server. *BMC Bioinformatics*, 24(1), 214.
