@@ -8,32 +8,32 @@ library(genekitr)
 ```
 
 
-## Import GO panther {#import-panther}
+## Import GO PANTHER {#import-panther}
 
-`genekitr::importPanther()` support importing [panther](http://pantherdb.org/webservices/go/overrep.jsp) result from [GeneOntology](http://geneontology.org/) and formatting as `genORA` result.
+`genekitr::importPanther()` supports importing [PANTHER](http://pantherdb.org/webservices/go/overrep.jsp) results from [GeneOntology](http://geneontology.org/) and formatting them as a `genORA`-style result.
 
-(ref:goPantherscap) Import panther result.
+(ref:goPantherscap) Import PANTHER result.
 
-(ref:goPanthercap) **Import panther result.**
+(ref:goPanthercap) **Import PANTHER result.**
 
 ```{r goPanther, out.width="100%", echo=FALSE, fig.cap="(ref:goPanthercap)", fig.scap="(ref:goPantherscap)"}
 knitr::include_graphics("figures/panther_exp.png")
 ```
 
-For example, we save panther result as "analysis.txt" and pass to `importPanther`. It will tidy the data and calculate both fold enrichment and rich factor.
+For example, we save the PANTHER result as "analysis.txt" and pass it to `importPanther`. It will tidy the data and calculate both fold enrichment and rich factor.
 
 ```{r}
 panther_res <- importPanther("data/analysis.txt")
 head(panther_res, 5)
 ```
 
-Then, you could select interested terms and utilize plot functions on [Chapter 11](#plot-go-kegg-1).
+Then, you can select the terms of interest and utilize the plot functions in [Chapter 11](#plot-go-kegg-1).
 
 For example:
 
-(ref:impPantherScap) Bar plot of Panther result.
+(ref:impPantherScap) Bar plot of PANTHER result.
 
-(ref:impPantherCap) **Bar plot of Panther result.** 
+(ref:impPantherCap) **Bar plot of PANTHER result.** 
 
 ```{r impPanther, fig.width=8, fig.height=6, fig.cap="(ref:impPantherCap)", fig.scap="(ref:impPantherScap)", dpi=300}
 plotEnrich(panther_res[c(50,100,350,580,700),], 
@@ -47,9 +47,9 @@ plotEnrich(panther_res[c(50,100,350,580,700),],
 
 ## Import clusterProfiler object {#import-clusterProfiler}
 
-`r Biocpkg("clusterProfiler")` is a popular R package of enrichment analysis. However, it requires user has some programming skills to operate its S4 object, which may cause inconvenience in data cleaning and visualization.
+`r Biocpkg("clusterProfiler")` is a popular R package for enrichment analysis. However, it requires users to have some programming skills to work with its S4 object, which can be inconvenient for data cleaning and visualization.
 
-Here, `genekitr::importCP()` could easily import the S4 object with additional attributes (e.g. FoldEnrich, RichFactor) to help users communicate with data more fluently.
+Here, `genekitr::importCP()` can easily import the S4 object along with additional attributes (e.g. FoldEnrich, RichFactor) to help users interact with the data more fluently.
 
 ### clusterProfiler ORA-GO result
 
@@ -79,7 +79,7 @@ identical(as.data.frame(go)[,1], go_easy[,1])
 head(go_easy)
 ```
 
-Then you could select interested terms and utilize plot functions on [Chapter 11](#plot-go-kegg-1).
+Then you can select the terms of interest and utilize the plot functions in [Chapter 11](#plot-go-kegg-1).
 
 For example:
 
@@ -114,7 +114,7 @@ kk_easy <- importCP(kk,type = 'gsea')
 identical(kk@result[,1], kk_easy$gsea_df[,1])
 ```
 
-Then you could select interested terms and utilize plot functions on [Chapter 12](##plot-gsea-1).
+Then you can select the terms of interest and utilize the plot functions in [Chapter 12](#plot-gsea-1).
 
 For example:
 
@@ -128,7 +128,7 @@ plotGSEA(kk_easy, plot_type = "bar",
          main_text_size = 15)
 ```
 
-The IDs in the plot are actually from `ID` column in `kk_easy` result. If we want to add more content, just modify the `ID` column:
+The IDs in the plot are actually from the `ID` column in the `kk_easy` result. If you want to add more content, just modify the `ID` column:
 
 ```{r}
 kk_easy$gsea_df$ID <- paste(kk_easy$gsea_df$ID, kk_easy$gsea_df$Description,sep = ": ")
@@ -146,9 +146,9 @@ plotGSEA(kk_easy, plot_type = "bar",
 
 ### clusterProfiler KEGG/DOSE/WikiPathways... result
 
-`clusterProfiler` supports many gene sets, including [Disease Ontology (DO)](https://disease-ontology.org/), [WikiPathways](https://www.wikipathways.org/), [ReactomePA](http://bioconductor.org/packages/ReactomePA)
+`clusterProfiler` supports many gene sets, including [Disease Ontology (DO)](https://disease-ontology.org/), [WikiPathways](https://www.wikipathways.org/) and [ReactomePA](http://bioconductor.org/packages/ReactomePA).
 
-Take DO as example:
+Take DO as an example:
 
 ```{r}
 library(DOSE)
@@ -171,7 +171,7 @@ identical(as.data.frame(do)[,1], do_easy[,1])
 ```
 
 
-Then you could select interested terms and utilize plot functions on [Chapter 11](#plot-go-kegg-1).
+Then you can select the terms of interest and utilize the plot functions in [Chapter 11](#plot-go-kegg-1).
 
 For example:
 
@@ -185,10 +185,3 @@ plotEnrich(do_easy,
            fold_change = geneList,
            show_gene = c('S100A9','AGTR1','BIRC5','MMP1','CXCL10'))
 ```
-
-
-
-
-
-
-

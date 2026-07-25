@@ -97,7 +97,7 @@
   gset1 <span class="op">=</span> <span class="va">set1</span>, gset2 <span class="op">=</span> <span class="va">set2</span>, gset3 <span class="op">=</span> <span class="va">set3</span>,
   gset4 <span class="op">=</span> <span class="va">set4</span>, gset5 <span class="op">=</span> <span class="va">set5</span>
 <span class="op">)</span></code></pre></div>
-<p><code>plotVenn</code> supports two types: Venn (default) and UpSet. Besides, it also supports modification of text size, alpha degree, colors and other parameters from <code>plot_theme</code>.</p>
+<p><code>plotVenn</code> supports two types: Venn (default) and UpSet. Besides, it also supports customization of text size, alpha degree, colors, and other parameters via <code>plot_theme</code>.</p>
 
 
 <div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
@@ -114,7 +114,7 @@
 Figure 13.1: <strong>Venn plot</strong>
 </p>
 </div>
-<p>UpSet plot is better for over four groups of genes:</p>
+<p>The UpSet plot is better suited for more than four groups of genes:</p>
 
 
 <div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
@@ -135,9 +135,9 @@ Figure 13.2: <strong>UpSet plot</strong>
 <h2>
 <span class="header-section-number">13.2</span> Volcano Plot<a class="anchor" aria-label="anchor" href="#volcano-plot"><i class="fas fa-link"></i></a>
 </h2>
-<p>After finishing differential expression analysis, we could get differentially expressed genes (DEG).
-Volcano plot is widely used for these up/down regulated genes visualization.</p>
-<p>The example data is micro array differential expression analysis:</p>
+<p>After finishing differential expression analysis, we can obtain differentially expressed genes (DEGs).
+Volcano plots are widely used to visualize these up- and down-regulated genes.</p>
+<p>The example data is from a microarray differential expression analysis:</p>
 <div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">deg</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">deg</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
@@ -153,7 +153,7 @@ Volcano plot is widely used for these up/down regulated genes visualization.</p>
 ## 3 stable      1000       CDH2
 ## 4 stable     10000       AKT3
 ## 5 stable 100009676 ZBTB11-AS1</code></pre>
-<p><code>plotVolcano</code> mainly uses a DEG result which should include gene id, fold change and statistic value.</p>
+<p><code>plotVolcano</code> mainly uses a DEG result which should include gene id, fold change, and statistic value.</p>
 <p>It also has other parameters:</p>
 <ul>
 <li>
@@ -161,13 +161,13 @@ Volcano plot is widely used for these up/down regulated genes visualization.</p>
 <li>
 <code>stat_cutoff</code>: cutoff for significant statistic value, default is 0.05</li>
 <li>
-<code>logFC_cutoff</code>: cutoff for log2 (fold change), default is 1 which is actually two fold changes</li>
+<code>logFC_cutoff</code>: cutoff for log2 (fold change), default is 1, which is actually a two-fold change</li>
 <li>
 <code>up_color</code>: color for up-regulated genes</li>
 <li>
 <code>down_color</code>: color for down-regulated genes</li>
 <li>
-<code>show_gene</code>: show some gene names, default is none. Suggest renaming the column with these genes as “gene”.</li>
+<code>show_gene</code>: show some gene names, default is none. We suggest renaming the column with these genes as “gene”.</li>
 <li>
 <code>dot_size</code>: volcano dot size</li>
 </ul>
@@ -197,7 +197,7 @@ Figure 13.4: <strong>Volcano plot with genes.</strong>
 <blockquote>
 <p>Trick for increasing text size:</p>
 </blockquote>
-<p>User could hide all x/y-axis labels and raise <code>main_text_size</code> to enlarge gene text, then export the figure into PPT to add labels.</p>
+<p>You can hide all x/y-axis labels and increase <code>main_text_size</code> to enlarge the gene text, then export the figure to PowerPoint to add labels manually.</p>
 <div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotVolcano.html">plotVolcano</a></span><span class="op">(</span><span class="va">deg</span>, 
             <span class="st">"p.adjust"</span>,

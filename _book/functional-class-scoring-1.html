@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 9 FCS-GSEA analysis | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
-<meta name="description" content="9.1 FCS method introduction ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is...">
+<meta name="description" content="9.1 Introduction to FCS methods The ORA method is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 9 FCS-GSEA analysis | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
-<meta property="og:description" content="9.1 FCS method introduction ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is...">
+<meta property="og:description" content="9.1 Introduction to FCS methods The ORA method is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 9 FCS-GSEA analysis | Genekitr: An R Toolkit for Gene Analysis">
 <meta name="twitter:site" content="@ReedLiu1314">
-<meta name="twitter:description" content="9.1 FCS method introduction ORA method is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is...">
+<meta name="twitter:description" content="9.1 Introduction to FCS methods The ORA method is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -78,28 +78,28 @@
 </h1>
 <div id="fcs-introduction" class="section level2">
 <h2>
-<span class="header-section-number">9.1</span> FCS method introduction<a class="anchor" aria-label="anchor" href="#fcs-introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> Introduction to FCS methods<a class="anchor" aria-label="anchor" href="#fcs-introduction"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="ora-analysis-1.html#ora-introduction">ORA method</a> is easy to conduct, but it will lose information when genes’ differences are slight. For example, if a gene is essential in some pathway but is low-expressed, it will be filtered by fold change cutoff.</p>
-<p>Unlike ORA, FCS tools do not set a threshold for differentially expressed genes. Instead, it gives each detected gene a differential expression score and then evaluates whether the scores are more positive or negative than expected by chance for each gene set.</p>
+<p>The <a href="ora-analysis-1.html#ora-introduction">ORA method</a> is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a pathway but still be filtered out by the fold-change cutoff if its expression change is small.</p>
+<p>Unlike ORA, FCS tools do not use a fixed threshold to select differentially expressed genes. Instead, they assign a differential expression score to each detected gene and then evaluate whether the scores in each gene set are more positive or negative than expected by chance.</p>
 <blockquote>
-<p>According to article “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3285573/">Ten Years of Pathway Analysis: Current Approaches and Outstanding Challenges</a>”:</p>
+<p>According to the article “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3285573/">Ten Years of Pathway Analysis: Current Approaches and Outstanding Challenges</a>”:</p>
 </blockquote>
-<p>FCS approaches include <a href="https://www.gsea-msigdb.org/">GSEA</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2712740/">GlobalTest</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/16174746">sigPathway</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/15647293">SAFE</a>, <a href="https://scholar.google.com/scholar_lookup?journal=Ann+Appl+Stat&amp;title=On+testing+the+significance+of+sets+of+genes&amp;author=B+Efron&amp;author=R+Tibshirani&amp;volume=1&amp;publication_year=2007&amp;pages=107-129&amp;">GSA</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/22713124">PADOG</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/16877751">PCOT2</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17007070">FunCluster</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17612399">SAM-GS</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17127676">Category</a> etc.</p>
-<p>Next, we will go through the popular Gene Set Enrichment Analysis (GSEA) tool, which uses FCS permutation approaches to determine whether a gene set is significantly associated with higher or lower scores.</p>
+<p>FCS approaches include <a href="https://www.gsea-msigdb.org/">GSEA</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2712740/">GlobalTest</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/16174746">sigPathway</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/15647293">SAFE</a>, <a href="https://scholar.google.com/scholar_lookup?journal=Ann+Appl+Stat&amp;title=On+testing+the+significance+of+sets+of+genes&amp;author=B+Efron&amp;author=R+Tibshirani&amp;volume=1&amp;publication_year=2007&amp;pages=107-129&amp;">GSA</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/22713124">PADOG</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/16877751">PCOT2</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17007070">FunCluster</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17612399">SAM-GS</a>, and <a href="https://pubmed.ncbi.nlm.nih.gov/17127676">Category</a>, among others.</p>
+<p>Next, we will walk through the popular Gene Set Enrichment Analysis (GSEA) method, which uses permutation-based testing to determine whether a gene set is significantly associated with higher or lower scores.</p>
 </div>
 <div id="gsea-introduction" class="section level2">
 <h2>
-<span class="header-section-number">9.2</span> GSEA intruduction<a class="anchor" aria-label="anchor" href="#gsea-introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Introduction to GSEA<a class="anchor" aria-label="anchor" href="#gsea-introduction"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
-<p>To do GSEA, user must have an ordered gene rank list (e.g., genes with decreasing logFC order).</p>
+<p>To perform GSEA, you need an ordered, pre-ranked gene list, such as genes ranked by decreasing logFC values.</p>
 </blockquote>
-<p>Three steps in GSEA:</p>
+<p>GSEA generally includes three steps:</p>
 <ol style="list-style-type: decimal">
-<li><p>Calculate the enrichment score (ES): represents the amount to which the genes in the set are over-represented at either the top or bottom of the list. GSEA starts at the top of the ranked gene list to calculate the enrichment score. If a gene is a member of the candidate gene set, it adds to a running sum. Otherwise, it subtracts.</p></li>
-<li><p>Estimate the statistical significance of the ES: this calculation is done by a phenotypic-based permutation test in order to produce a null distribution for the ES.</p></li>
-<li><p>Adjust for multiple hypothesis testing for when a large number of gene sets are being analyzed at one time: the enrichment scores for each set are normalized, and a false discovery rate is calculated.</p></li>
+<li><p>Calculate the enrichment score (ES). The ES indicates how strongly the genes in a gene set are overrepresented at either the top or the bottom of the ranked list. GSEA starts at the top of the list and calculates a running sum. The score increases when a gene belongs to the target gene set and decreases when it does not.</p></li>
+<li><p>Estimate the statistical significance of the ES. This is done with a permutation test, which generates a null distribution for the ES.</p></li>
+<li><p>Adjust for multiple testing when many gene sets are analyzed at the same time. The enrichment score of each gene set is normalized, and a false discovery rate is calculated.</p></li>
 </ol>
 <div class="figure">
 <span style="display:block;" id="fig:gseaoverview"></span>
@@ -108,27 +108,27 @@ Figure 9.1: <strong>GSEA overview</strong>
 </p>
 </div>
 <blockquote>
-<p>If you are interested in GSEA detailed procedure, please visit: <a href="https://www.pathwaycommons.org/guide/primers/data_analysis/gsea" class="uri">https://www.pathwaycommons.org/guide/primers/data_analysis/gsea</a> OR <a href="https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md" class="uri">https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md</a></p>
+<p>For a more detailed explanation of the GSEA procedure, please visit <a href="https://www.pathwaycommons.org/guide/primers/data_analysis/gsea" class="uri">https://www.pathwaycommons.org/guide/primers/data_analysis/gsea</a> or <a href="https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md" class="uri">https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md</a>.</p>
 </blockquote>
 </div>
 <div id="gsea-basic-usage" class="section level2">
 <h2>
 <span class="header-section-number">9.3</span> Basic usage<a class="anchor" aria-label="anchor" href="#gsea-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
-<p>The simplest arguments are:</p>
+<p>The main arguments are:</p>
 <ul>
 <li>
-<code>id</code>: pre-ranked genelist with decreasing order (e.g. logFC order/correlation order). Entrez, Ensembl and Symbol are accepted</li>
+<code>id</code>: a pre-ranked gene list in decreasing order, such as a list ranked by logFC or correlation. Entrez IDs, Ensembl IDs, and gene symbols are accepted.</li>
 <li>
-<code>geneset</code>: gene set is a two-column data frame with term id and gene id. (It’s recommended to use <a href="https://CRAN.R-project.org/package=geneset">geneset</a>)</li>
+<code>geneset</code>: a two-column data frame containing term IDs and gene IDs. We recommend using <a href="https://CRAN.R-project.org/package=geneset">geneset</a> to prepare gene sets.</li>
 <li>
-<code>p_cutoff</code>: numeric of cutoff for both pvalue and adjusted pvalue, default is 0.05.</li>
+<code>p_cutoff</code>: a numeric cutoff for both the p-value and adjusted p-value. The default is 0.05.</li>
 <li>
-<code>q_cutoff</code>: numeric of cutoff for qvalue, default is 0.15.</li>
+<code>q_cutoff</code>: a numeric cutoff for the q-value. The default is 0.15.</li>
 </ul>
-<div id="st-step-prepare-pre-ranked-gene-list" class="section level3">
+<div id="step-1-prepare-a-pre-ranked-gene-list" class="section level3">
 <h3>
-<span class="header-section-number">9.3.1</span> 1st step: prepare pre-ranked gene list<a class="anchor" aria-label="anchor" href="#st-step-prepare-pre-ranked-gene-list"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.1</span> Step 1: Prepare a pre-ranked gene list<a class="anchor" aria-label="anchor" href="#step-1-prepare-a-pre-ranked-gene-list"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
@@ -136,21 +136,21 @@ Figure 9.1: <strong>GSEA overview</strong>
 <pre><code>##       948      1638    158471     10610      6947 100133941 
 ##  5.780170  5.633027  4.683610  3.875120  3.357670  3.322533</code></pre>
 </div>
-<div id="nd-step-prepare-gene-set-1" class="section level3">
+<div id="step-2-prepare-a-gene-set" class="section level3">
 <h3>
-<span class="header-section-number">9.3.2</span> 2nd step: prepare gene set<a class="anchor" aria-label="anchor" href="#nd-step-prepare-gene-set-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.2</span> Step 2: Prepare a gene set<a class="anchor" aria-label="anchor" href="#step-2-prepare-a-gene-set"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="rd-step-gsea-analysis" class="section level3">
+<div id="step-3-run-gsea" class="section level3">
 <h3>
-<span class="header-section-number">9.3.3</span> 3rd step: GSEA analysis<a class="anchor" aria-label="anchor" href="#rd-step-gsea-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.3</span> Step 3: Run GSEA<a class="anchor" aria-label="anchor" href="#step-3-run-gsea"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>genelist <span class="op">=</span> <span class="va">geneList</span>, geneset <span class="op">=</span> <span class="va">gs</span><span class="op">)</span></code></pre></div>
-<p>Now, let’s look at the result:</p>
-<p>It is a list mainly including analysis result (<code>gsea_df</code>), input genelist (<code>genelist</code>) and input geneset (<code>geneset</code>).</p>
+<p>Now, let’s take a look at the result.</p>
+<p>The returned object is a list that mainly contains the analysis results (<code>gsea_df</code>), the input gene list (<code>genelist</code>), and the input gene set (<code>geneset</code>).</p>
 <div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
@@ -217,23 +217,23 @@ Figure 9.1: <strong>GSEA overview</strong>
 <p>About the <code>gsea_df</code> result</p>
 </blockquote>
 <ul>
-<li><p><code>Description</code>: Gene set name</p></li>
-<li><p><code>setSize</code>: number of genes with gene-level statistic values. To be more specific, if we input a pathway gene set with 58 genes (e.g. HALLMARK_MYC_TARGETS_V2 ), while our gene list only have 54 of it, so the result will only show setSize = 54</p></li>
-<li><p><code>enrichmentScore</code>: also called ES, same as in Broad GSEA implementation. It reflects the degree to which a gene set is overrepresented at the top or bottom of a ranked list of genes.</p></li>
-<li><p><code>NES</code>: normalized enrichment score is the primary statistic for examining gene set enrichment results. By normalizing the enrichment score, GSEA accounts for differences in gene set size and in correlations between gene sets and the expression dataset. Therefore, NES can be used to compare analysis results across gene sets. A positive normalized enrichment scores (NES) will indicate that genes in set S will be mostly represented at the top of your list (logFC &gt; 0 or up-regulated genes).</p></li>
-<li><p><code>rank</code>: The position in the ranked list at which the maximum enrichment score occurred. If gene sets achieve the maximum enrichment score near the top or bottom of the ranked list, the rank at max is either very small or very large.</p></li>
+<li><p><code>Description</code>: the name of the gene set.</p></li>
+<li><p><code>setSize</code>: the number of genes in the gene set that have gene-level statistic values in the input list. For example, a pathway gene set may contain 58 genes, such as <code>HALLMARK_MYC_TARGETS_V2</code>, but only 54 of them may be present in the input gene list. In this case, the result will show <code>setSize = 54</code>.</p></li>
+<li><p><code>enrichmentScore</code>: also called ES, as in the Broad GSEA implementation. It reflects the degree to which a gene set is overrepresented at the top or bottom of a ranked gene list.</p></li>
+<li><p><code>NES</code>: the normalized enrichment score and the primary statistic used to examine gene set enrichment results. By normalizing the enrichment score, GSEA accounts for differences in gene set size and correlations between gene sets and the expression dataset. Therefore, NES values can be used to compare results across gene sets. A positive NES indicates that the genes in set S are mainly found near the top of the ranked list, which usually corresponds to genes with <code>logFC &gt; 0</code> or upregulated genes.</p></li>
+<li><p><code>rank</code>: the position in the ranked list where the maximum enrichment score occurs. If a gene set reaches its maximum enrichment score near the top or bottom of the ranked list, the rank at the maximum will be either very small or very large.</p></li>
 <li>
-<code>leading_edge</code>: includes three statistics
+<code>leading_edge</code>: contains three statistics:
 <ul>
 <li>
-<code>tags</code>: The percentage of gene hits before (for positive ES) or after (for negative ES) the peak in the running enrichment score, which indicates the percentage of genes contributing to the enrichment score.</li>
+<code>tags</code>: the percentage of gene hits that appear before the peak for a positive ES or after the peak for a negative ES. It indicates the proportion of genes that contribute to the enrichment score.</li>
 <li>
-<code>list</code>: The percentage of genes in the ranked gene list before (for positive ES) or after (for negative ES) the peak in the running enrichment score. This gives an indication of where in the list the enrichment score is attained.</li>
+<code>list</code>: the percentage of genes in the ranked list that appear before the peak for a positive ES or after the peak for a negative ES. It gives an idea of where the enrichment score is reached in the list.</li>
 <li>
-<code>signal</code>: If the gene set is entirely within the first N positions in the list, then the signal strength is maximal or 100%. If the gene set is spread throughout the list, then the signal strength decreases towards 0%.</li>
+<code>signal</code>: the strength of the enrichment signal. If the entire gene set appears within the first N positions of the list, the signal is strongest and may reach 100%. If the genes are spread throughout the list, the signal decreases toward 0%.</li>
 </ul>
 </li>
-<li><p><code>geneID &amp; geneID_symbol</code>: If input symbols are mixed with aliases, a new column “geneID_symbol” will be added; if all symbols are official, only “geneID” column will return</p></li>
+<li><p><code>geneID</code> and <code>geneID_symbol</code>: if the input contains a mixture of official gene symbols and aliases, a new <code>geneID_symbol</code> column will be added. If all input symbols are official gene symbols, only the <code>geneID</code> column will be returned.</p></li>
 </ul>
 </div>
 </div>
@@ -245,21 +245,21 @@ Figure 9.1: <strong>GSEA overview</strong>
 <h3>
 <span class="header-section-number">9.4.1</span> Additional arguments<a class="anchor" aria-label="anchor" href="#additional-arguments"><i class="fas fa-link"></i></a>
 </h3>
-<p>Please refer to <a href="ora-analysis-1.html#ora-additional-arguments">ORA part</a></p>
+<p>Please refer to the <a href="ora-analysis-1.html#ora-additional-arguments">ORA section</a>.</p>
 </div>
-<div id="simplify-go-gsea-result" class="section level3">
+<div id="simplify-go-gsea-results" class="section level3">
 <h3>
-<span class="header-section-number">9.4.2</span> Simplify GO GSEA result<a class="anchor" aria-label="anchor" href="#simplify-go-gsea-result"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.2</span> Simplify GO GSEA results<a class="anchor" aria-label="anchor" href="#simplify-go-gsea-results"><i class="fas fa-link"></i></a>
 </h3>
-<p>Please refer to <a href="ora-analysis-1.html#ora-go-simplify">ORA part</a></p>
+<p>Please refer to the <a href="ora-analysis-1.html#ora-go-simplify">ORA section</a>.</p>
 </div>
 </div>
-<div id="export-gsea-result" class="section level2">
+<div id="export-gsea-results" class="section level2">
 <h2>
-<span class="header-section-number">9.5</span> Export GSEA result<a class="anchor" aria-label="anchor" href="#export-gsea-result"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Export GSEA results<a class="anchor" aria-label="anchor" href="#export-gsea-results"><i class="fas fa-link"></i></a>
 </h2>
-<p><code>Genekitr</code> provides an easy way to export analysis result for editing and sharing.</p>
-<p>Multiple data are saved as different sheets in one excel file. Besides, column names are automatically formatted with bold style.</p>
+<p><code>genekitr</code> provides an easy way to export analysis results for further editing and sharing.</p>
+<p>Multiple data frames are saved as separate sheets in a single Excel file, and the column names are automatically formatted in bold.</p>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/expoSheet.html">expoSheet</a></span><span class="op">(</span>data_list <span class="op">=</span> <span class="va">gse</span>,
                     data_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>,
@@ -269,8 +269,8 @@ Figure 9.1: <strong>GSEA overview</strong>
 
 <div class="figure">
 <span style="display:block;" id="fig:exposheet"></span>
-<img src="figures/exposheet.png" alt="Export result" width="100%"><p class="caption">
-Figure 9.2: <strong>Export result</strong>
+<img src="figures/exposheet.png" alt="Export results" width="100%"><p class="caption">
+Figure 9.2: <strong>Export results</strong>
 </p>
 </div>
 
@@ -283,22 +283,22 @@ Figure 9.2: <strong>Export result</strong>
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#functional-class-scoring-1"><span class="header-section-number">9</span> FCS-GSEA analysis</a></li>
-<li><a class="nav-link" href="#fcs-introduction"><span class="header-section-number">9.1</span> FCS method introduction</a></li>
-<li><a class="nav-link" href="#gsea-introduction"><span class="header-section-number">9.2</span> GSEA intruduction</a></li>
+<li><a class="nav-link" href="#fcs-introduction"><span class="header-section-number">9.1</span> Introduction to FCS methods</a></li>
+<li><a class="nav-link" href="#gsea-introduction"><span class="header-section-number">9.2</span> Introduction to GSEA</a></li>
 <li>
 <a class="nav-link" href="#gsea-basic-usage"><span class="header-section-number">9.3</span> Basic usage</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#st-step-prepare-pre-ranked-gene-list"><span class="header-section-number">9.3.1</span> 1st step: prepare pre-ranked gene list</a></li>
-<li><a class="nav-link" href="#nd-step-prepare-gene-set-1"><span class="header-section-number">9.3.2</span> 2nd step: prepare gene set</a></li>
-<li><a class="nav-link" href="#rd-step-gsea-analysis"><span class="header-section-number">9.3.3</span> 3rd step: GSEA analysis</a></li>
+<li><a class="nav-link" href="#step-1-prepare-a-pre-ranked-gene-list"><span class="header-section-number">9.3.1</span> Step 1: Prepare a pre-ranked gene list</a></li>
+<li><a class="nav-link" href="#step-2-prepare-a-gene-set"><span class="header-section-number">9.3.2</span> Step 2: Prepare a gene set</a></li>
+<li><a class="nav-link" href="#step-3-run-gsea"><span class="header-section-number">9.3.3</span> Step 3: Run GSEA</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#advanced-usage"><span class="header-section-number">9.4</span> Advanced usage</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#additional-arguments"><span class="header-section-number">9.4.1</span> Additional arguments</a></li>
-<li><a class="nav-link" href="#simplify-go-gsea-result"><span class="header-section-number">9.4.2</span> Simplify GO GSEA result</a></li>
+<li><a class="nav-link" href="#simplify-go-gsea-results"><span class="header-section-number">9.4.2</span> Simplify GO GSEA results</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#export-gsea-result"><span class="header-section-number">9.5</span> Export GSEA result</a></li>
+<li><a class="nav-link" href="#export-gsea-results"><span class="header-section-number">9.5</span> Export GSEA results</a></li>
 </ul>
 
       <div class="book-extra">

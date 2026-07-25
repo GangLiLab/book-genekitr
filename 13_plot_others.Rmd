@@ -32,7 +32,7 @@ la_gene_list <- list(
 )
 ```
 
-`plotVenn` supports two types: Venn (default) and UpSet. Besides, it also supports modification of text size, alpha degree, colors and other parameters from `plot_theme`.
+`plotVenn` supports two types: Venn (default) and UpSet. Besides, it also supports customization of text size, alpha degree, colors, and other parameters via `plot_theme`.
 
 (ref:vennScap) Venn plot
 
@@ -48,7 +48,7 @@ plotVenn(sm_gene_list,
 )
 ```
 
-UpSet plot is better for over four groups of genes:
+The UpSet plot is better suited for more than four groups of genes:
 
 (ref:upsetVennScap) UpSet plot
 
@@ -65,10 +65,10 @@ plotVenn(la_gene_list,
 
 ## Volcano Plot
 
-After finishing differential expression analysis, we could get differentially expressed genes (DEG).
-Volcano plot is widely used for these up/down regulated genes visualization.
+After finishing differential expression analysis, we can obtain differentially expressed genes (DEGs).
+Volcano plots are widely used to visualize these up- and down-regulated genes.
 
-The example data is micro array differential expression analysis:
+The example data is from a microarray differential expression analysis:
 
 ```{r}
 data(deg, package = "genekitr")
@@ -76,16 +76,16 @@ head(deg,5)
 ```
 
 
-`plotVolcano` mainly uses a DEG result which should include gene id, fold change and statistic value. 
+`plotVolcano` mainly uses a DEG result which should include gene id, fold change, and statistic value. 
 
 It also has other parameters:
 
 - `stat_metric`: choose from "pvalue" and "p.adjust"
 - `stat_cutoff`: cutoff for significant statistic value, default is 0.05
-- `logFC_cutoff`: cutoff for log2 (fold change), default is 1 which is actually two fold changes
+- `logFC_cutoff`: cutoff for log2 (fold change), default is 1, which is actually a two-fold change
 - `up_color`: color for up-regulated genes
 - `down_color`: color for down-regulated genes
-- `show_gene`: show some gene names, default is none. Suggest renaming the column with these genes as "gene".
+- `show_gene`: show some gene names, default is none. We suggest renaming the column with these genes as "gene".
 - `dot_size`: volcano dot size
 
 (ref:degVolcanoScap) Volcano plot
@@ -112,7 +112,7 @@ plotVolcano(deg,
 
 > Trick for increasing text size:
 
-User could hide all x/y-axis labels and raise `main_text_size` to enlarge gene text, then export the figure into PPT to add labels.
+You can hide all x/y-axis labels and increase `main_text_size` to enlarge the gene text, then export the figure to PowerPoint to add labels manually.
 
 ```{r}
 plotVolcano(deg, 
@@ -124,7 +124,3 @@ plotVolcano(deg,
             dot_size = 2.5
 )
 ```
-
-
-
-

@@ -76,9 +76,9 @@
 <h1>
 <span class="header-section-number">8</span> ORA analysis<a class="anchor" aria-label="anchor" href="#ora-analysis-1"><i class="fas fa-link"></i></a>
 </h1>
-<p>As the paper <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009935">“Urgent need for consistent standards in functional enrichment analysis”</a> mentioned, popular functional enrichment tools can be classified into two main categories: (1) over-representation analysis (ORA) and (2) functional class scoring (FCS) .</p>
+<p>As the paper <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009935">“Urgent need for consistent standards in functional enrichment analysis”</a> mentioned, popular functional enrichment tools can be classified into two main categories: (1) over-representation analysis (ORA) and (2) functional class scoring (FCS).</p>
 <blockquote>
-<p><strong>Knidly Note:</strong> No matter which method you choose, the first thing is always the preparation of gene sets.</p>
+<p><strong>Kindly Note:</strong> No matter which method you choose, the first thing is always the preparation of gene sets.</p>
 </blockquote>
 <div id="ora-introduction" class="section level2">
 <h2>
@@ -92,7 +92,7 @@
 <ol style="list-style-type: decimal">
 <li>Identify features, such as mRNA, proteins or microarray probes, considered “differentially expressed” in two or more conditions</li>
 <li>Determine the number of differentially expressed features in each pathway</li>
-<li>For each pathway, using a hypergeometric distribution to calculate a probability value ( P -value) of obtaining the number of differentially expressed features against the background list of all features</li>
+<li>For each pathway, using a hypergeometric distribution to calculate a probability value (P-value) of obtaining the number of differentially expressed features against the background list of all features</li>
 </ol>
 </div>
 <div id="ora-basic-usage" class="section level2">
@@ -133,7 +133,7 @@
 <span class="header-section-number">8.2.2</span> 2nd step: prepare gene set<a class="anchor" aria-label="anchor" href="#nd-step-prepare-gene-set"><i class="fas fa-link"></i></a>
 </h3>
 <blockquote>
-<p>For more details, please refer to <a href="get-gene-sets-1.html#get-gene-sets-1">chapter7</a></p>
+<p>For more details, please refer to <a href="get-gene-sets-1.html#get-gene-sets-1">chapter 7</a></p>
 </blockquote>
 <p>Here we prepare GO MF gene set:</p>
 <div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
@@ -269,23 +269,23 @@
 <h3>
 <span class="header-section-number">8.2.4</span> Some features<a class="anchor" aria-label="anchor" href="#some-features"><i class="fas fa-link"></i></a>
 </h3>
-<p>We could get conclude some features through examples above:</p>
+<p>We can draw some conclusions about the following features based on the examples above:</p>
 <ul>
-<li>No need to sepcify input ID type and organism. The genekitr will automatically detect organism name and convert ID to suitable one.</li>
-<li>Return a data.frame object which is easy to filter or export</li>
-<li>Non-symbol IDs will be automatically converted to the latest gene symbol to easily understand</li>
-<li>If input symbols are mixed with aliases, a new column “geneID_symbol” will be added; if all symbols are official, only “geneID” column will return</li>
+<li>No need to specify input ID type and organism. genekitr will automatically detect the organism name and convert IDs to the suitable type.</li>
+<li>Returns a data.frame object which is easy to filter or export</li>
+<li>Non-symbol IDs will be automatically converted to the latest gene symbol for easier interpretation</li>
+<li>If input symbols are mixed with aliases, a new column “geneID_symbol” will be added; if all symbols are official, only the “geneID” column will be returned</li>
 <li>
-<code><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA()</a></code> includes five gene-level measurement: “Count”, “BgRatio”,“GeneRatio”, “FoldEnrichment” and “RichFactor”.
+<code><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA()</a></code> includes five gene-level measurements: “Count”, “BgRatio”, “GeneRatio”, “FoldEnrichment” and “RichFactor”.
 <ul>
 <li>
-<code>BgRatio</code>: Number of all genes in specific term / Number of universal genes (if not specified, is all genes in gene set)</li>
+<code>BgRatio</code>: Number of all genes in a specific term / Number of universal genes (if not specified, this is all genes in the gene set)</li>
 <li>
-<code>GeneRatio</code>: Number of genes enriched in specific term / Number of input genes</li>
+<code>GeneRatio</code>: Number of genes enriched in a specific term / Number of input genes</li>
 <li>
 <code>FoldEnrichment</code>: GeneRatio / BgRatio</li>
 <li>
-<code>RichFactor</code>: Number of genes enriched in specific term / Number of all genes in specific term</li>
+<code>RichFactor</code>: Number of genes enriched in a specific term / Number of all genes in that specific term</li>
 </ul>
 </li>
 </ul>
@@ -303,18 +303,18 @@
 <li>
 <code>pAdjustMethod</code>: choose from “holm”, “hochberg”, “hommel”, “bonferroni”, “BH”, “BY”, “fdr”, “none”</li>
 <li>
-<code>min_gset_size</code>: Minimal size of each gene set for analysis. Default is 10. Pathway with less than ten genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0062196">GO:0062196</a> is a child term with 8-gene in the bottom of the directed acyclic graph).</li>
+<code>min_gset_size</code>: Minimal size of each gene set for analysis. Default is 10. Pathways with fewer than ten genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0062196">GO:0062196</a> is a child term with 8 genes at the bottom of the directed acyclic graph).</li>
 <li>
-<code>max_gset_size</code>: Maximal size. Default is 500. The pathway will more than 500 genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0007049">GO:0007049</a> has 1796 genes as parent nodes at the top of the directed acyclic graph).</li>
+<code>max_gset_size</code>: Maximal size. Default is 500. Pathways with more than 500 genes will be omitted (e.g. <a href="http://www.informatics.jax.org/vocab/gene_ontology/GO:0007049">GO:0007049</a> has 1796 genes as parent nodes at the top of the directed acyclic graph).</li>
 <li>
-<code>universe</code>: If uses have their background genes, set them as <code>universe</code>. If missing, all genes in the geneset will be used as background universe.</li>
+<code>universe</code>: If users have their own background genes, set them as <code>universe</code>. If missing, all genes in the geneset will be used as the background universe.</li>
 </ul>
 </div>
 <div id="ora-group-enrichment" class="section level3">
 <h3>
 <span class="header-section-number">8.3.2</span> Group enrichment<a class="anchor" aria-label="anchor" href="#ora-group-enrichment"><i class="fas fa-link"></i></a>
 </h3>
-<p>If there is multi-group comparison (e.g. multiple experimental conditions or multiple time points), user could specify gene groups as the <code>group_list</code> argument:</p>
+<p>If there is a multi-group comparison (e.g. multiple experimental conditions or multiple time points), users can specify gene groups using the <code>group_list</code> argument:</p>
 <p>For example, we have 100 genes:</p>
 <ul>
 <li>50/100 genes are up-regulated and 50/100 are down-regulated</li>
@@ -327,47 +327,40 @@
   time_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"time1"</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"time2"</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">gora</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id_100</span>, geneset <span class="op">=</span> <span class="va">gs</span>, group_list <span class="op">=</span> <span class="va">two_groups</span><span class="op">)</span>
+<span class="va">gora</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id_100</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span>, group_list <span class="op">=</span> <span class="va">two_groups</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gora</span><span class="op">)</span></code></pre></div>
-<pre><code>##             ID    Cluster                               Description GeneRatio
-## 1 DOID:0050774 down.time2                       Rapadilino syndrome 0.1020408
-## 2 DOID:0050427 down.time2                     Xeroderma pigmentosum 0.1836735
-## 3 DOID:0060535 down.time2                  Warsaw breakage syndrome 0.1020408
-## 4    DOID:5683 down.time2 Hereditary breast ovarian cancer syndrome 0.1632653
-## 5    DOID:2717 down.time2                            Bloom syndrome 0.1224490
-## 6    DOID:7400 down.time2                Nijmegen breakage syndrome 0.1020408
-##     BgRatio       pvalue     p.adjust       qvalue
-## 1  24/19143 3.649969e-09 2.522129e-06 1.917194e-06
-## 2 281/19143 3.421889e-08 1.182263e-05 8.986961e-06
-## 3  54/19143 2.563977e-07 5.905694e-05 4.489209e-05
-## 4 274/19143 4.315571e-07 7.455149e-05 5.667026e-05
-## 5 137/19143 1.307128e-06 1.806450e-04 1.373172e-04
-## 6 107/19143 7.786564e-06 8.967526e-04 6.816659e-04
-##                                        geneID
-## 1                    641/5888/8318/9156/55388
-## 2 641/5888/595/7516/8318/993/9156/63967/51514
-## 3               113130/157570/5888/8318/63967
-## 4       29128/641/5888/595/7516/9156/374/3690
-## 5              54821/641/5888/7516/9156/63967
-## 6                   157570/641/5888/7516/9156
-##                                       geneID_symbol Count FoldEnrich RichFactor
-## 1                        BLM/RAD51/CDC45/EXO1/MCM10     5   81.39031 0.20833333
-## 2 BLM/RAD51/CCND1/XRCC2/CDC45/CDC25A/EXO1/CLSPN/DTL     9   12.51267 0.03202847
-## 3                     CDCA5/ESCO2/RAD51/CDC45/CLSPN     5   36.17347 0.09259259
-## 4       UHRF1/BLM/RAD51/CCND1/XRCC2/EXO1/AREG/ITGB3     8   11.40652 0.02919708
-## 5                 ERCC6L/BLM/RAD51/XRCC2/EXO1/CLSPN     6   17.10979 0.04379562
-## 6                        ESCO2/BLM/RAD51/XRCC2/EXO1     5   18.25577 0.04672897</code></pre>
+<pre><code>##     Hs_MF_ID    Cluster                       Description  GeneRatio   BgRatio
+## 1 GO:0140612 down.time2        DNA damage sensor activity 0.06122449  24/18850
+## 2 GO:0019887 down.time2 protein kinase regulator activity 0.12244898 247/18850
+## 3 GO:0140097 down.time2 catalytic activity, acting on DNA 0.12244898 254/18850
+## 4 GO:0019207 down.time2         kinase regulator activity 0.12244898 285/18850
+## 5 GO:0000217 down.time2   DNA secondary structure binding 0.06122449  39/18850
+## 6 GO:0003697 down.time2       single-stranded DNA binding 0.08163265 123/18850
+##         pvalue    p.adjust      qvalue                        geneID
+## 1 3.215023e-05 0.003383207 0.002232184               29128/5888/7516
+## 2 4.156248e-05 0.003383207 0.002232184 595/7039/9134/374/81848/10253
+## 3 4.856278e-05 0.003383207 0.002232184 54821/5427/641/5888/7516/9156
+## 4 9.179549e-05 0.004796314 0.003164529 595/7039/9134/374/81848/10253
+## 5 1.412419e-04 0.005903911 0.003895303                641/7516/63967
+## 6 2.914794e-04 0.008975733 0.005922040           641/5888/8318/55388
+##                       geneID_symbol Count FoldEnrich RichFactor
+## 1                 UHRF1/RAD51/XRCC2     3  48.086735 0.12500000
+## 2 CCND1/TGFA/CCNE2/AREG/SPRY4/SPRY2     6   9.344791 0.02429150
+## 3 ERCC6L/POLE2/BLM/RAD51/XRCC2/EXO1     6   9.087257 0.02362205
+## 4 CCND1/TGFA/CCNE2/AREG/SPRY4/SPRY2     6   8.098818 0.02105263
+## 5                   BLM/XRCC2/CLSPN     3  29.591837 0.07692308
+## 6             BLM/RAD51/CDC45/MCM10     4  12.510370 0.03252033</code></pre>
 <div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">gora</span><span class="op">$</span><span class="va">Cluster</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-## down.time2 
-##         60</code></pre>
+## down.time2   up.time1   up.time2 
+##         18          3         17</code></pre>
 </div>
 <div id="ora-background" class="section level3">
 <h3>
 <span class="header-section-number">8.3.3</span> Add background genes<a class="anchor" aria-label="anchor" href="#ora-background"><i class="fas fa-link"></i></a>
 </h3>
-<p>With the help of <code><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId()</a></code>, background genes could be different type from input IDs.</p>
+<p>With the help of <code><a href="https://rdrr.io/pkg/genekitr/man/transId.html">transId()</a></code>, background genes can be of a different type from the input IDs.</p>
 <p>For example, the input genes are symbols while the background genes are Entrez.</p>
 <div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -387,7 +380,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">go_sym</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sim_go</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 33 11</code></pre>
 <pre><code>## [1] 20 11</code></pre>
-<p>Let’s look which terms are considered as redundant:</p>
+<p>Let’s look at which terms are considered redundant:</p>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">go_sym</span><span class="op">$</span><span class="va">Hs_MF_ID</span><span class="op">[</span><span class="op">!</span><span class="va">go_sym</span><span class="op">$</span><span class="va">Hs_MF_ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">sim_go</span><span class="op">$</span><span class="va">Hs_MF_ID</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "GO:0031625" "GO:0140666" "GO:0001091" "GO:0140693" "GO:0140296"
@@ -400,7 +393,7 @@
 Figure 8.1: <strong>Term <a href="GO:0044389" class="uri">GO:0044389</a></strong>
 </p>
 </div>
-<p>The first record <a href="https://www.ebi.ac.uk/QuickGO/term/GO:0044389">GO:0044389</a> has the child term of <a href="https://www.ebi.ac.uk/QuickGO/term/GO:0031625">GO:0031625</a>, so we only remain the child.</p>
+<p>The first record <a href="https://www.ebi.ac.uk/QuickGO/term/GO:0044389">GO:0044389</a> has the child term <a href="https://www.ebi.ac.uk/QuickGO/term/GO:0031625">GO:0031625</a>, so we only keep the child term.</p>
 </div>
 </div>
 <div id="ora-tools-comparsion" class="section level2">
@@ -411,9 +404,9 @@ Figure 8.1: <strong>Term <a href="GO:0044389" class="uri">GO:0044389</a></strong
 <h3>
 <span class="header-section-number">8.4.1</span> <code>genekitr::genORA</code> vs <code>clusterProfiler::enrichGO/enrichKEGG/enrichDO...</code><a class="anchor" aria-label="anchor" href="#genekitrgenora-vs-clusterprofilerenrichgoenrichkeggenrichdo..."><i class="fas fa-link"></i></a>
 </h3>
-<p>The function <code>genORA</code> does not require to load the <code>orgdb</code> ahead and no need to specify input ID type.</p>
-<p>Next, take GO analysis as example:</p>
-<p>The input IDs are mixture of official symbols and aliases. Also all the five genes are very popular in biomedical research.</p>
+<p>The function <code>genORA</code> does not require you to load the <code>orgdb</code> in advance and does not require specifying the input ID type.</p>
+<p>Next, let’s take GO analysis as an example:</p>
+<p>The input IDs are a mixture of official symbols and aliases. All five genes are also very popular in biomedical research.</p>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">check_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BCC7"</span>, <span class="st">"PDL1"</span>, <span class="st">"PD1"</span>, <span class="st">"TET2"</span>, <span class="st">"BRCA1"</span><span class="op">)</span>
 
@@ -450,7 +443,7 @@ Figure 8.1: <strong>Term <a href="GO:0044389" class="uri">GO:0044389</a></strong
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/isS4.html">isS4</a></span><span class="op">(</span><span class="va">clustp_res</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># we need to convert the S4 to dataframe to view</span>
+<code class="sourceCode R"><span class="co"># we need to convert the S4 object to a data frame to view it</span>
 <span class="va">clustp_res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">clustp_res</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">genekitr_res</span><span class="op">)</span></code></pre></div>
@@ -497,18 +490,18 @@ Figure 8.1: <strong>Term <a href="GO:0044389" class="uri">GO:0044389</a></strong
 <code>clustp_res</code> only contains two genes: <code>TET2</code> and <code>BRCA1</code>
 </li>
 <li>
-<code>genekitr_res</code> includes all five genes and gives mapping for aliases</li>
+<code>genekitr_res</code> includes all five genes and provides mapping for aliases</li>
 </ul>
-<p>If you look into deeper, you may find eight terms are unique in <code>clustp_res</code>, such as <code>GO:0016571</code>:</p>
+<p>If you look closer, you may find that eight terms are unique to <code>clustp_res</code>, such as <code>GO:0016571</code>:</p>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op">[</span><span class="op">!</span><span class="va">clustp_res</span><span class="op">$</span><span class="va">ID</span><span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span><span class="va">genekitr_res</span><span class="op">$</span><span class="va">Hs_BP_ID</span> <span class="op">]</span></code></pre></div>
 <pre><code>##  [1] "GO:0051568" "GO:0044728" "GO:0034968" "GO:0006304" "GO:0018022"
 ##  [6] "GO:0016571" "GO:0006479" "GO:0008213" "GO:0043414" "GO:0032259"
 ## [11] "GO:0018205"</code></pre>
-<p><strong>Question1: Why some terms are omited in <code>genGO</code> result?</strong></p>
-<p>To get adjusted p value, the critical parameter is the number of statistical testing.</p>
-<p>For simple explanation, <code>adj.p = f * p (f&gt;1)</code> and f is related with testing methods and the number of tests. <code>genORA</code> recognizes five genes so we need to do more testings (for example, we do five testings) while <code>enrichGO</code> only includes two genes so the testing number will be less. This directly reduces the <code>adj.p</code> in <code>enrichGO</code> result and it could be remained under the threshold 0.01.</p>
-<p>So, if we set cutoff higher(e.g. 0.05), genekitr could also get those terms:</p>
+<p><strong>Question 1: Why are some terms omitted in the <code>genORA</code> result?</strong></p>
+<p>To get the adjusted p-value, the critical parameter is the number of statistical tests performed.</p>
+<p>For a simple explanation, <code>adj.p = f * p (f&gt;1)</code> and f is related to the testing method and the number of tests. <code>genORA</code> recognizes five genes, so we need to perform more tests (for example, five tests), while <code>enrichGO</code> only includes two genes, so the number of tests will be lower. This directly reduces the <code>adj.p</code> in the <code>enrichGO</code> result, allowing it to remain under the threshold of 0.01.</p>
+<p>So, if we set a higher cutoff (e.g. 0.05), genekitr can also retrieve those terms:</p>
 <div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genekitr_res2</span> <span class="op">&lt;-</span> <span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">check_gene</span>, <span class="va">gs</span>, p_cutoff <span class="op">=</span> <span class="fl">0.05</span>, q_cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
 
@@ -516,9 +509,9 @@ Figure 8.1: <strong>Term <a href="GO:0044389" class="uri">GO:0044389</a></strong
 <pre><code>## 
 ## FALSE  TRUE 
 ##    10     1</code></pre>
-<p><strong>Question2: Why <code>enrichGO</code> only recognize two genes?</strong></p>
-<p>We all know that it is not possible for such essential genes (“BCC7”, “PD1” or “PDL1”) without enriched terms.</p>
-<p>The core reason is that the three genes are actually aliases while <code>enrichGO</code> sets argument <code>keyType = "SYMBOL"</code>, which cause <code>enrichGO</code> only accepts official symbols. This function is based on organism annotation package (e.g. <code>org.Hs.eg.db</code>) and it will accept different types of data from <code>org.Hs.eg.db</code>:</p>
+<p><strong>Question 2: Why does <code>enrichGO</code> only recognize two genes?</strong></p>
+<p>It’s hard to imagine that such essential genes (“BCC7”, “PD1” or “PDL1”) would have no enriched terms at all.</p>
+<p>The core reason is that these three genes are actually aliases, while <code>enrichGO</code> sets the argument <code>keyType = "SYMBOL"</code>, which causes <code>enrichGO</code> to only accept official symbols. This function is based on an organism annotation package (e.g. <code>org.Hs.eg.db</code>) and it will accept different types of data from <code>org.Hs.eg.db</code>:</p>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span>
 <span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">columns</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></code></pre></div>
@@ -528,14 +521,14 @@ Figure 8.1: <strong>Term <a href="GO:0044389" class="uri">GO:0044389</a></strong
 ## [16] "ONTOLOGY"     "ONTOLOGYALL"  "PATH"         "PFAM"         "PMID"        
 ## [21] "PROSITE"      "REFSEQ"       "SYMBOL"       "UCSCKG"       "UNIGENE"     
 ## [26] "UNIPROT"</code></pre>
-<p>Only by specifying <code>keyType = 'ALIAS'</code>, the program could recognize gene alias, however it still could not distinguish the mixture of symbol and alias.</p>
+<p>Only by specifying <code>keyType = 'ALIAS'</code> can the program recognize gene aliases; however, it still cannot distinguish a mixture of symbols and aliases.</p>
 </div>
-<div id="gengo-vs-panther-web" class="section level3">
+<div id="genora-vs-panther-web" class="section level3">
 <h3>
-<span class="header-section-number">8.4.2</span> <code>genGO</code> vs <code>Panther web</code><a class="anchor" aria-label="anchor" href="#gengo-vs-panther-web"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4.2</span> <code>genORA</code> vs <code>Panther web</code><a class="anchor" aria-label="anchor" href="#genora-vs-panther-web"><i class="fas fa-link"></i></a>
 </h3>
 <p>Still using the above five check genes.</p>
-<p>Panther could recognize “PDL1” but not “PD1”, as well as “BCC7” is omited.</p>
+<p>Panther can recognize “PDL1” but not “PD1”, and “BCC7” is also omitted.</p>
 
 
 <div class="figure">
@@ -575,7 +568,7 @@ Figure 8.2: <strong>Panther result</strong>
 <li>
 <a class="nav-link" href="#ora-tools-comparsion"><span class="header-section-number">8.4</span> Comparison with other tools</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#genekitrgenora-vs-clusterprofilerenrichgoenrichkeggenrichdo..."><span class="header-section-number">8.4.1</span> genekitr::genORA vs clusterProfiler::enrichGO/enrichKEGG/enrichDO...</a></li>
-<li><a class="nav-link" href="#gengo-vs-panther-web"><span class="header-section-number">8.4.2</span> genGO vs Panther web</a></li>
+<li><a class="nav-link" href="#genora-vs-panther-web"><span class="header-section-number">8.4.2</span> genORA vs Panther web</a></li>
 </ul>
 </li>
 </ul>
