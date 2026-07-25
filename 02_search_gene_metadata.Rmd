@@ -237,29 +237,6 @@ genInfo("SPDYE12P")[1:4]
 
 
 
-### f7: extract human cell markers {#geneinfo-feature-7}
-
-[CellMarker database](http://xteam.xbio.top/CellMarker/index.jsp) has manually curated over 100,000 published papers, 4,124 entries including the cell marker information, tissue type, cell type, cancer information and source.
-
-Here, `geneInfo` integrated human cell markers into `cell_marker` column. 
-
-The naming rules is: `tissue_type | cancer_type: Tumor(T) or Normal(N) | cell_type`, if one gene matches many cell types, they are seperated with `; `.
-
-```{r}
-hg_marker_all <- genInfo(org = "human") %>%
-  dplyr::select(symbol, cell_marker) %>%
-  dplyr::filter(!is.na(cell_marker)) %>%
-  tidyr::separate_rows(cell_marker, sep = "; ") %>%
-  dplyr::mutate(cell_marker = gsub("^.*\\|", "", cell_marker)) %>%
-  dplyr::distinct()
-head(hg_marker_all)
-
-# select stromal cell markers
-hg_marker_all %>%
-  dplyr::filter(cell_marker == "Stromal cell") %>%
-  dplyr::pull(symbol) %>%
-  sort()
-```
 
 
 

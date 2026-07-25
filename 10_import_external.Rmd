@@ -99,12 +99,14 @@ plotEnrich(tail(go_easy,20),
 ### clusterProfiler GSEA result
 
 ```{r}
+library(org.Hs.eg.db)
 data(geneList, package="DOSE")
 ## GSEA result from clusterProfiler
-kk <- gseKEGG(geneList     = geneList,
-               organism     = 'hsa',
-               minGSSize    = 120,
-               pvalueCutoff = 0.05,
+kk <- gseGO(geneList     = geneList,
+               OrgDb         = org.Hs.eg.db,
+               minGSSize    = 400,
+               pvalueCutoff = 0.01,
+               eps = 0,
                verbose      = FALSE)
 
 ## import

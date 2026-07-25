@@ -67,7 +67,6 @@ geninfo-feature-6
 get-all-human-protein-coding-genes
 compare-with-hgnc-data
 compare-with-orgdb-in-bioconductor
-geneinfo-feature-7
 search-pubmed-1
 gene-id-conversion-1
 convertion-current-tools

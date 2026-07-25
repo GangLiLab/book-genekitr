@@ -17,6 +17,9 @@ id <- c("MCM10", "CDC20", "S100A9", "MMP1", "BCC7","FAKEID","HBD", "NUDT10")
 info <- genInfo(id, org = "hs")
 # keep unique records
 info2 <- genInfo(id, org = "hs", unique = TRUE)
+# support both hg19 and hg38 genome build version
+v19 <- genInfo(id, org = "hs",hgVersion = "v19")
+v38 <- genInfo(id, org = "hs",hgVersion = "v38")
 ```
 
 

@@ -4,21 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R</title>
+<title>Chapter 3 Search PubMed records | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
+<meta property="og:title" content="Chapter 3 Search PubMed records | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
 <meta property="og:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Search PubMed records | Genekitr: Gene Analysis Toolkit based on R">
+<meta name="twitter:title" content="Chapter 3 Search PubMed records | Genekitr: An R Toolkit for Gene Analysis">
+<meta name="twitter:site" content="@ReedLiu1314">
 <meta name="twitter:description" content="getPubmed function utilizes europepmc to easily get PubMed records by searching paper abstract. Users need to input the term argument; if there is any supplement information, the keys parameter is...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.22/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.23/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
@@ -34,7 +35,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">Genekitr: Gene Analysis Toolkit based on R</a>
+        <a href="index.html" title="">Genekitr: An R Toolkit for Gene Analysis</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -78,33 +79,34 @@
 <p><code>getPubmed</code> function utilizes <a href="https://CRAN.R-project.org/package=europepmc">europepmc</a> to easily get PubMed records by searching paper abstract.</p>
 <p>Users need to input the <code>term</code> argument; if there is any supplement information, the <code>keys</code> parameter is available.</p>
 <p>For example, if user wants to check papers for genes “Tp53”, “Brca1,” and “Tet2” research of mouse stem cells:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
 <span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">keys</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "Tp53"  "Brca1" "Tet2"</code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">l</span><span class="op">$</span><span class="va">Tp53</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 28
-##   id      source pmid  doi   title authorString journalTitle issue journalVolume
-##   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;        
-## 1 358640… MED    3586… 10.1… "Bia… Ohno T, Aka… Nat Commun   1     13           
-## 2 354091… MED    3540… 10.3… "Enh… Gringmuth M… Int J Mol S… 7     23           
-## 3 357633… MED    3576… 10.1… "Deg… Sellar RS, … J Clin Inve… &lt;NA&gt;  &lt;NA&gt;         
-## 4 PPR467… PPR    &lt;NA&gt;  10.1… "Bia… Ohno T, Aka… &lt;NA&gt;         &lt;NA&gt;  &lt;NA&gt;         
-## 5 354353… MED    3543… 10.1… "Ide… Thirouard L… Adv Sci (We… 17    9            
-## # … with 19 more variables: pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;,
-## #   pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;,
-## #   hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;, citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;,
-## #   hasTextMinedTerms &lt;chr&gt;, hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
+<pre><code>## # A tibble: 5 × 29
+##   id       source pmid     pmcid     doi   title authorString journalTitle issue
+##   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;
+## 1 42278500 MED    42278500 PMC13257… 10.3… Wild… Cart JB, Zh… Int J Mol S… 11   
+## 2 41814002 MED    41814002 PMC12987… 10.1… CDK4… Chan ICC, Z… Nat Genet    3    
+## 3 42069772 MED    42069772 &lt;NA&gt;      10.1… NELF… Su X, Yang … Nat Commun   1    
+## 4 41160778 MED    41160778 &lt;NA&gt;      10.1… The … Semba Y, Ya… Blood        6    
+## 5 41758987 MED    41758987 &lt;NA&gt;      10.1… MDM4… Sharma R, B… Blood        2    
+## # … with 20 more variables: journalVolume &lt;chr&gt;, pubYear &lt;chr&gt;,
+## #   journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;,
+## #   inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;,
+## #   citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,
+## #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
 ## #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;,
-## #   firstPublicationDate &lt;chr&gt;, pmcid &lt;chr&gt;</code></pre>
+## #   firstPublicationDate &lt;chr&gt;, versionNumber &lt;int&gt;</code></pre>
 <blockquote>
 <p><strong>NOTICE</strong>:
 A minor update has been made in version 0.8.6 or above. Argument <code>keys</code> is replaced with <code>add_term</code> for easy understanding, and the <code>num</code> parameter is added to specify the number of returned records.</p>
 </blockquote>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tp53"</span>, <span class="st">"Brca1"</span>, <span class="st">"Tet2"</span><span class="op">)</span>
 <span class="va">add_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stem cell"</span>, <span class="st">"mouse"</span><span class="op">)</span>
 <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/getPubmed.html">getPubmed</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">add_term</span>, num <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
@@ -136,7 +138,7 @@ A minor update has been made in version 0.8.6 or above. Argument <code>keys</cod
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: Gene Analysis Toolkit based on R</strong>" was written by Yunze Liu. It was last built on 2022-08-01.</p>
+    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-07-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
