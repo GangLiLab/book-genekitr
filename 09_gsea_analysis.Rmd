@@ -45,10 +45,10 @@ knitr::include_graphics("figures/gsea_overview.png")
 
 The main arguments are:
 
-- `id`: a pre-ranked gene list in decreasing order, such as a list ranked by logFC or correlation. Entrez IDs, Ensembl IDs, and gene symbols are accepted.
+- `genelist`: a pre-ranked gene list in decreasing order (a named numeric vector), such as a list ranked by logFC or correlation. Entrez IDs, Ensembl IDs, and gene symbols are accepted.
 - `geneset`: a two-column data frame containing term IDs and gene IDs. We recommend using `r CRANpkg("geneset")` to prepare gene sets.
 - `p_cutoff`: a numeric cutoff for both the p-value and adjusted p-value. The default is 0.05.
-- `q_cutoff`: a numeric cutoff for the q-value. The default is 0.15.
+- `q_cutoff`: a numeric cutoff for the q-value. The default is 0.05.
 
 
 ### Step 1: Prepare a pre-ranked gene list
@@ -100,17 +100,31 @@ head(gse$gsea_df, 5)
   - `list`: the percentage of genes in the ranked list that appear before the peak for a positive ES or after the peak for a negative ES. It gives an idea of where the enrichment score is reached in the list.
   - `signal`: the strength of the enrichment signal. If the entire gene set appears within the first N positions of the list, the signal is strongest and may reach 100%. If the genes are spread throughout the list, the signal decreases toward 0%.
 
-- `geneID` and `geneID_symbol`: if the input contains a mixture of official gene symbols and aliases, a new `geneID_symbol` column will be added. If all input symbols are official gene symbols, only the `geneID` column will be returned.
++ `core_enriched_geneID` and `core_enriched_count`: the leading-edge genes (the subset of the gene set that contributes most to the enrichment score, i.e. genes before the peak for a positive ES or after the peak for a negative ES) and their number.
+
++ `all_enriched_geneID` and `all_enriched_count`: all genes of the gene set that are present in the ranked list, and their number.
+
++ `geneID_symbol`: gene IDs are kept in the same ID type as the gene set (e.g. Entrez for KEGG and MSigDB, symbol for GO). For Entrez-based gene sets, this extra column gives the corresponding gene symbols.
+
++ `log2err`: the expected error of the log2(p-value) estimate, reported by the underlying `fgsea` algorithm.
 
 ## Advanced usage
 
 ### Additional arguments
 
-Please refer to the [ORA section](#ora-additional-arguments).
+`padj_method`, `min_gset_size` and `max_gset_size` work the same as in the [ORA section](#ora-additional-arguments). Two more things are specific to GSEA:
+
+- `set_seed`: GSEA estimates p-values by permutation, so results can differ slightly between runs. Set `set_seed = TRUE` to get the same result every time for the same input.
+- Duplicated genes: if several input IDs are mapped to the same gene after ID conversion (e.g. an alias and the official symbol of the same gene), only the first (highest ranked) one is kept, and a message tells you how many were removed.
 
 ### Simplify GO GSEA results
 
-Please refer to the [ORA section](#ora-go-simplify).
+The GO result of `genGSEA` uses the same ID column name as `genORA` (e.g. `Hs_MF_ID`), so it can be passed to `simGO()` directly (see the [ORA section](#ora-go-simplify) for details):
+
+```{r}
+sim_gse <- simGO(gse$gsea_df, sim_method = "Resnik")
+dim(gse$gsea_df); dim(sim_gse)
+```
 
 
 ## Export GSEA results

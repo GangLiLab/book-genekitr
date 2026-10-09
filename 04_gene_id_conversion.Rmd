@@ -37,7 +37,7 @@ It also supports **195 vertebrate species, 120 plant species, and two bacterial 
 
 ## Basic usage {#transid-basic-usage}
 
-`transId` provides five arguments:
+`transId` provides six arguments:
 
 - `id`: gene ID (symbol, Entrez, or Ensembl), protein ID (see also [session 4.2](##protein-id-conversion)), or microarray ID (see also [session 5.1](##probe-id-conversion))
 
@@ -48,6 +48,8 @@ It also supports **195 vertebrate species, 120 plant species, and two bacterial 
 - `unique`: `TRUE` or `FALSE` (default). If `TRUE`, only one matched ID is returned.
 
 - `keepNA`: `TRUE` or `FALSE` (default). Determines whether to keep unmatched IDs (as NA) or remove them.
+
+- `hgVersion`: human genome build, "v38" (default) or "v19".
 
 ```{r transid_basic_usage, warning=FALSE}
 # human genes
@@ -185,7 +187,7 @@ plotVenn(list(
 
 #### **`bitr` vs `transId`**
 
-There are 117 genes found only in the `bitr` result:
+There are `r sum(!bitr_sym %in% transid_sym)` genes found only in the `bitr` result:
 ```{r}
 bitr_sym[!bitr_sym %in% transid_sym] %>% head(5)
 ```
@@ -206,7 +208,7 @@ transid_res %>%
   pull(symbol)
 ```
 
-Besides, there are 118 unique symbols found only in the `transId` result:
+Besides, there are `r sum(!transid_sym %in% bitr_sym)` unique symbols found only in the `transId` result:
 ```{r}
 transid_sym[!transid_sym %in% bitr_sym] %>% head(5)
 ```
@@ -216,7 +218,7 @@ The gene `ICMT-DT` mentioned above is one of them.
 
 #### **`biomart` vs `transId`**
 
-There are 13 genes found only in the `biomart` result:
+There are `r sum(!biomart_sym %in% transid_sym)` genes found only in the `biomart` result:
 
 ```{r}
 biomart_sym[!biomart_sym %in% transid_sym] %>% head()

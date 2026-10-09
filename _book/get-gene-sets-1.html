@@ -7,7 +7,7 @@
 <title>Chapter 7 Get gene sets | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="Gene sets and statistical methods are central parts for gene enrichment analysis (GEA). To facilitate GEA, I developed the package geneset, which provides a comprehensive list of monthly updated...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Get gene sets | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Gene sets and statistical methods are central parts for gene enrichment analysis (GEA). To facilitate GEA, I developed the package geneset, which provides a comprehensive list of monthly updated...">
@@ -17,12 +17,13 @@
 <meta name="twitter:description" content="Gene sets and statistical methods are central parts for gene enrichment analysis (GEA). To facilitate GEA, I developed the package geneset, which provides a comprehensive list of monthly updated...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.23/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -72,7 +73,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="get-gene-sets-1" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="get-gene-sets-1" class="section level1" number="7">
 <h1>
 <span class="header-section-number">7</span> Get gene sets<a class="anchor" aria-label="anchor" href="#get-gene-sets-1"><i class="fas fa-link"></i></a>
 </h1>
@@ -80,7 +81,7 @@
 <p>Gene sets and statistical methods are central parts for gene enrichment analysis (GEA).</p>
 </blockquote>
 <p>To facilitate GEA, I developed the package <a href="https://CRAN.R-project.org/package=geneset">geneset</a>, which provides a comprehensive list of monthly updated gene set (GS) libraries.</p>
-<div id="geneset-package-introduction" class="section level2">
+<div id="geneset-package-introduction" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Geneset package introduction<a class="anchor" aria-label="anchor" href="#geneset-package-introduction"><i class="fas fa-link"></i></a>
 </h2>
@@ -100,11 +101,11 @@
 <li>Disease-related sets only support human (DO, NCG, DisGeNET and COVID-19)</li>
 </ul>
 </div>
-<div id="geneset-go" class="section level2">
+<div id="geneset-go" class="section level2" number="7.2">
 <h2>
 <span class="header-section-number">7.2</span> Get GO geneset<a class="anchor" aria-label="anchor" href="#geneset-go"><i class="fas fa-link"></i></a>
 </h2>
-<div id="go-introduction" class="section level3">
+<div id="go-introduction" class="section level3" number="7.2.1">
 <h3>
 <span class="header-section-number">7.2.1</span> GO introduction<a class="anchor" aria-label="anchor" href="#go-introduction"><i class="fas fa-link"></i></a>
 </h3>
@@ -134,7 +135,7 @@
 <p>For a more comprehensive introduction to GO, you may visit: <a href="https://advaitabio.com/faq-items/understanding-gene-ontology/" class="uri">https://advaitabio.com/faq-items/understanding-gene-ontology/</a> OR <a href="http://geneontology.org/docs/ontology-documentation/" class="uri">http://geneontology.org/docs/ontology-documentation/</a></p>
 </blockquote>
 </div>
-<div id="usage" class="section level3">
+<div id="usage" class="section level3" number="7.2.2">
 <h3>
 <span class="header-section-number">7.2.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage"><i class="fas fa-link"></i></a>
 </h3>
@@ -152,25 +153,25 @@
 <li>
 <code>type</code>: stores <code>ont</code> information</li>
 </ul>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
-##  $ geneset     :'data.frame':    285125 obs. of  2 variables:
-##   ..$ mf  : chr [1:285125] "GO:0000009" "GO:0000009" "GO:0000009" "GO:0000014" ...
-##   ..$ gene: chr [1:285125] "PIGV" "ALG12" "ALG2" "ENDOG" ...
-##  $ geneset_name:'data.frame':    5035 obs. of  2 variables:
-##   ..$ id  : chr [1:5035] "GO:0000009" "GO:0000014" "GO:0000016" "GO:0000026" ...
-##   ..$ name: chr [1:5035] "alpha-1,6-mannosyltransferase activity" "single-stranded DNA endodeoxyribonuclease activity" "lactase activity" "alpha-1,2-mannosyltransferase activity" ...
+##  $ geneset     :'data.frame':    279100 obs. of  2 variables:
+##   ..$ id  : chr [1:279100] "GO:0000009" "GO:0000009" "GO:0000009" "GO:0000014" ...
+##   ..$ gene: chr [1:279100] "PIGV" "ALG12" "ALG2" "ERCC1" ...
+##  $ geneset_name:'data.frame':    5134 obs. of  2 variables:
+##   ..$ id  : chr [1:5134] "GO:0000009" "GO:0000014" "GO:0000016" "GO:0000026" ...
+##   ..$ name: chr [1:5134] "alpha-1,6-mannosyltransferase activity" "single-stranded DNA endodeoxyribonuclease activity" "lactase activity" "alpha-1,2-mannosyltransferase activity" ...
 ##  $ organism    : chr "hsapiens"
 ##  $ type        : chr "mf"</code></pre>
 </div>
 </div>
-<div id="geneset-kegg" class="section level2">
+<div id="geneset-kegg" class="section level2" number="7.3">
 <h2>
 <span class="header-section-number">7.3</span> Get KEGG geneset<a class="anchor" aria-label="anchor" href="#geneset-kegg"><i class="fas fa-link"></i></a>
 </h2>
-<div id="kegg-introduction" class="section level3">
+<div id="kegg-introduction" class="section level3" number="7.3.1">
 <h3>
 <span class="header-section-number">7.3.1</span> KEGG introduction<a class="anchor" aria-label="anchor" href="#kegg-introduction"><i class="fas fa-link"></i></a>
 </h3>
@@ -192,38 +193,38 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 </p>
 </div>
 </div>
-<div id="usage-1" class="section level3">
+<div id="usage-1" class="section level3" number="7.3.2">
 <h3>
 <span class="header-section-number">7.3.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The arguments include:
 - <code>org</code>: organism name (e.g. “hsa”)
 - <code>category</code>: choose from “pathway”, “module”, “enzyme”, “disease” (human only), “drug” (human only) or “network” (human only)</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getKEGG.html">getKEGG</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"hsa"</span>, category <span class="op">=</span> <span class="st">"pathway"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getKEGG.html">getKEGG</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"hsa"</span>, category <span class="op">=</span> <span class="st">"pathway"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
-##  $ geneset     :'data.frame':    35570 obs. of  2 variables:
-##   ..$ id  : chr [1:35570] "hsa00010" "hsa00010" "hsa00010" "hsa00010" ...
-##   ..$ gene: chr [1:35570] "10327" "124" "125" "126" ...
-##  $ geneset_name:'data.frame':    563 obs. of  2 variables:
-##   ..$ id  : chr [1:563] "hsa01100" "hsa01110" "hsa01120" "hsa01200" ...
-##   ..$ name: chr [1:563] "Metabolic pathways" "Biosynthesis of secondary metabolites" "Microbial metabolism in diverse environments" "Carbon metabolism" ...
+##  $ geneset     :'data.frame':    39562 obs. of  2 variables:
+##   ..$ id  : chr [1:39562] "hsa00010" "hsa00010" "hsa00010" "hsa00010" ...
+##   ..$ gene: chr [1:39562] "10327" "124" "125" "126" ...
+##  $ geneset_name:'data.frame':    587 obs. of  2 variables:
+##   ..$ id  : chr [1:587] "hsa01100" "hsa01110" "hsa01120" "hsa01200" ...
+##   ..$ name: chr [1:587] "Metabolic pathways" "Biosynthesis of secondary metabolites" "Microbial metabolism in diverse environments" "Carbon metabolism" ...
 ##  $ organism    : chr "hsapiens"
 ##  $ type        : chr "kegg"</code></pre>
 </div>
 </div>
-<div id="geneset-mesh" class="section level2">
+<div id="geneset-mesh" class="section level2" number="7.4">
 <h2>
 <span class="header-section-number">7.4</span> Get MeSH geneset<a class="anchor" aria-label="anchor" href="#geneset-mesh"><i class="fas fa-link"></i></a>
 </h2>
-<div id="mesh-introduction" class="section level3">
+<div id="mesh-introduction" class="section level3" number="7.4.1">
 <h3>
 <span class="header-section-number">7.4.1</span> MeSH introduction<a class="anchor" aria-label="anchor" href="#mesh-introduction"><i class="fas fa-link"></i></a>
 </h3>
 <p>Medical Subject Headings is a comprehensive controlled vocabulary for the purpose of indexing journal articles and books in the life sciences. It serves as a thesaurus that facilitates searching.</p>
 </div>
-<div id="usage-2" class="section level3">
+<div id="usage-2" class="section level3" number="7.4.2">
 <h3>
 <span class="header-section-number">7.4.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage-2"><i class="fas fa-link"></i></a>
 </h3>
@@ -231,9 +232,9 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 - <code>org</code>: organism name (e.g. “human”)
 - <code>method</code>: method of mapping MeSH ID to gene ID. Choose one from “gendoo”, “gene2pubmed” or “RBBH” (mainly for some minor species).
 - <code>category</code>: MeSH descriptor categories. For more details, refer to: <a href="https://rdrr.io/bioc/meshr/f/inst/doc/MeSH.pdf">How to use MeSH-related Packages</a></p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getMesh.html">getMesh</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, method <span class="op">=</span> <span class="st">"gendoo"</span>, category <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getMesh.html">getMesh</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, method <span class="op">=</span> <span class="st">"gendoo"</span>, category <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
 ##  $ geneset     :'data.frame':    3031273 obs. of  2 variables:
 ##   ..$ id  : chr [1:3031273] "D000001" "D000001" "D000001" "D000001" ...
@@ -245,11 +246,11 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 ##  $ type        : chr "mesh"</code></pre>
 </div>
 </div>
-<div id="geneset-msigdb" class="section level2">
+<div id="geneset-msigdb" class="section level2" number="7.5">
 <h2>
 <span class="header-section-number">7.5</span> Get MsigDB geneset<a class="anchor" aria-label="anchor" href="#geneset-msigdb"><i class="fas fa-link"></i></a>
 </h2>
-<div id="msigdb-introduction" class="section level3">
+<div id="msigdb-introduction" class="section level3" number="7.5.1">
 <h3>
 <span class="header-section-number">7.5.1</span> MsigDB introduction<a class="anchor" aria-label="anchor" href="#msigdb-introduction"><i class="fas fa-link"></i></a>
 </h3>
@@ -290,7 +291,7 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <li>C8: cell type signature gene sets (700 gene sets)</li>
 </ul>
 </div>
-<div id="usage-3" class="section level3">
+<div id="usage-3" class="section level3" number="7.5.2">
 <h3>
 <span class="header-section-number">7.5.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage-3"><i class="fas fa-link"></i></a>
 </h3>
@@ -311,96 +312,96 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 <li>
 <code>type</code>: stores <code>ont</code> information</li>
 </ul>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getMsigdb.html">getMsigdb</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getMsigdb.html">getMsigdb</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
-##  $ geneset     :'data.frame':    8209 obs. of  2 variables:
-##   ..$ gs_name    : chr [1:8209] "HALLMARK_ADIPOGENESIS" "HALLMARK_ADIPOGENESIS" "HALLMARK_ADIPOGENESIS" "HALLMARK_ADIPOGENESIS" ...
-##   ..$ entrez_gene: int [1:8209] 19 11194 10449 33 34 35 47 50 51 112 ...
+##  $ geneset     :'data.frame':    7331 obs. of  2 variables:
+##   ..$ gs_name    : chr [1:7331] "HALLMARK_ADIPOGENESIS" "HALLMARK_ADIPOGENESIS" "HALLMARK_ADIPOGENESIS" "HALLMARK_ADIPOGENESIS" ...
+##   ..$ entrez_gene: chr [1:7331] "19" "11194" "10449" "33" ...
 ##  $ geneset_name: logi NA
 ##  $ organism    : chr "hsapiens"
 ##  $ type        : chr "msigdb"</code></pre>
 </div>
 </div>
-<div id="geneset-wikipath" class="section level2">
+<div id="geneset-wikipath" class="section level2" number="7.6">
 <h2>
 <span class="header-section-number">7.6</span> Get WikiPathways geneset<a class="anchor" aria-label="anchor" href="#geneset-wikipath"><i class="fas fa-link"></i></a>
 </h2>
-<div id="wikipathways-introduction" class="section level3">
+<div id="wikipathways-introduction" class="section level3" number="7.6.1">
 <h3>
 <span class="header-section-number">7.6.1</span> WikiPathways introduction<a class="anchor" aria-label="anchor" href="#wikipathways-introduction"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://www.wikipathways.org/index.php/WikiPathways">WikiPathways</a> was established to facilitate the contribution and maintenance of pathway information by the biology community. Each month, it produces a set of pathways as <code>.gmt</code> files on <a href="https://wikipathways-data.wmcloud.org/" class="uri">https://wikipathways-data.wmcloud.org/</a>.</p>
 </div>
-<div id="usage-4" class="section level3">
+<div id="usage-4" class="section level3" number="7.6.2">
 <h3>
 <span class="header-section-number">7.6.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage-4"><i class="fas fa-link"></i></a>
 </h3>
 <p>You only need to input the organism name.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getWiki.html">getWiki</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getWiki.html">getWiki</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
-##  $ geneset     :'data.frame':    30871 obs. of  2 variables:
-##   ..$ id  : chr [1:30871] "WP5187" "WP5187" "WP5187" "WP5187" ...
-##   ..$ gene: chr [1:30871] "7098" "8792" "51284" "64135" ...
-##  $ geneset_name:'data.frame':    746 obs. of  2 variables:
-##   ..$ id  : chr [1:746] "WP5187" "WP5143" "WP2916" "WP4871" ...
-##   ..$ name: chr [1:746] "mRNA vaccine activation of dendritic cell and induction of IFN-1" "GDNF signaling" "Interactome of polycomb repressive complex 2 (PRC2) " "Kisspeptin/kisspeptin receptor system in the ovary" ...
+##  $ geneset     :'data.frame':    40242 obs. of  2 variables:
+##   ..$ id  : chr [1:40242] "WP100" "WP100" "WP100" "WP100" ...
+##   ..$ gene: chr [1:40242] "2687" "2678" "2876" "2936" ...
+##  $ geneset_name:'data.frame':    987 obs. of  2 variables:
+##   ..$ id  : chr [1:987] "WP100" "WP106" "WP107" "WP111" ...
+##   ..$ name: chr [1:987] "Glutathione metabolism" "Alanine and aspartate metabolism" "Translation factors" "Electron transport chain OXPHOS system in mitochondria" ...
 ##  $ organism    : chr "hsapiens"
 ##  $ type        : chr "wikipathway"</code></pre>
 </div>
 </div>
-<div id="geneset-reactome" class="section level2">
+<div id="geneset-reactome" class="section level2" number="7.7">
 <h2>
 <span class="header-section-number">7.7</span> Get Reactome geneset<a class="anchor" aria-label="anchor" href="#geneset-reactome"><i class="fas fa-link"></i></a>
 </h2>
-<div id="reactome-introduction" class="section level3">
+<div id="reactome-introduction" class="section level3" number="7.7.1">
 <h3>
 <span class="header-section-number">7.7.1</span> Reactome introduction<a class="anchor" aria-label="anchor" href="#reactome-introduction"><i class="fas fa-link"></i></a>
 </h3>
 <p>Reactome is a free online database of biological pathways.</p>
 </div>
-<div id="usage-5" class="section level3">
+<div id="usage-5" class="section level3" number="7.7.2">
 <h3>
 <span class="header-section-number">7.7.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage-5"><i class="fas fa-link"></i></a>
 </h3>
 <p>You only need to input the organism name.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getReactome.html">getReactome</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getReactome.html">getReactome</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
-##  $ geneset     :'data.frame':    125362 obs. of  2 variables:
-##   ..$ id  : chr [1:125362] "R-HSA-1059683" "R-HSA-1059683" "R-HSA-1059683" "R-HSA-1059683" ...
-##   ..$ gene: chr [1:125362] "3569" "3570" "3572" "3716" ...
-##  $ geneset_name:'data.frame':    2566 obs. of  2 variables:
-##   ..$ id  : chr [1:2566] "R-HSA-1059683" "R-HSA-109581" "R-HSA-109582" "R-HSA-109606" ...
-##   ..$ name: chr [1:2566] "Interleukin-6 signaling" "Apoptosis" "Hemostasis" "Intrinsic Pathway for Apoptosis" ...
+##  $ geneset     :'data.frame':    142676 obs. of  2 variables:
+##   ..$ id  : chr [1:142676] "R-HSA-1059683" "R-HSA-1059683" "R-HSA-1059683" "R-HSA-1059683" ...
+##   ..$ gene: chr [1:142676] "3569" "3570" "3572" "3716" ...
+##  $ geneset_name:'data.frame':    2866 obs. of  2 variables:
+##   ..$ id  : chr [1:2866] "R-HSA-1059683" "R-HSA-109581" "R-HSA-109582" "R-HSA-109606" ...
+##   ..$ name: chr [1:2866] "Interleukin-6 signaling" "Apoptosis" "Hemostasis" "Intrinsic Pathway for Apoptosis" ...
 ##  $ organism    : chr "hsapiens"
 ##  $ type        : chr "reactome"</code></pre>
 </div>
 </div>
-<div id="geneset-enrichr" class="section level2">
+<div id="geneset-enrichr" class="section level2" number="7.8">
 <h2>
 <span class="header-section-number">7.8</span> Get Enrichr geneset<a class="anchor" aria-label="anchor" href="#geneset-enrichr"><i class="fas fa-link"></i></a>
 </h2>
-<div id="enrichr-introduction" class="section level3">
+<div id="enrichr-introduction" class="section level3" number="7.8.1">
 <h3>
 <span class="header-section-number">7.8.1</span> Enrichr introduction<a class="anchor" aria-label="anchor" href="#enrichr-introduction"><i class="fas fa-link"></i></a>
 </h3>
 <p>Enrichr is a comprehensive resource of curated gene sets and a search engine that accumulates biological knowledge for further biological discoveries.</p>
 </div>
-<div id="usage-6" class="section level3">
+<div id="usage-6" class="section level3" number="7.8.2">
 <h3>
 <span class="header-section-number">7.8.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>The arguments include:
 - <code>org</code>: organism name (e.g. “human”)
 - <code>library</code>: choose one library name from <code><a href="https://rdrr.io/pkg/geneset/man/Datasets.html">geneset::enrichr_metadata</a></code> (e.g. “COVID-19_Related_Gene_Sets”)</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getEnrichrdb.html">getEnrichrdb</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, library <span class="op">=</span> <span class="st">"COVID-19_Related_Gene_Sets"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getEnrichrdb.html">getEnrichrdb</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>, library <span class="op">=</span> <span class="st">"COVID-19_Related_Gene_Sets"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
 ##  $ geneset     :'data.frame':    60289 obs. of  2 variables:
 ##   ..$ id  : Factor w/ 205 levels "COVID19-E protein host PPI from Krogan",..: 1 1 1 1 1 1 2 2 2 2 ...
@@ -410,7 +411,7 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 ##  $ type        : chr "enrichrdb"</code></pre>
 </div>
 </div>
-<div id="geneset-hg-disease" class="section level2">
+<div id="geneset-hg-disease" class="section level2" number="7.9">
 <h2>
 <span class="header-section-number">7.9</span> Get human disease-related geneset<a class="anchor" aria-label="anchor" href="#geneset-hg-disease"><i class="fas fa-link"></i></a>
 </h2>
@@ -425,9 +426,9 @@ Figure 7.1: <strong>KEGG overview.</strong> Figure taken from <a href="https://p
 DisGeNET integrates data from expert curated repositories, GWAS catalogues, animal models and the scientific literature. DisGeNET data are homogeneously annotated with controlled vocabularies and community-driven ontologies. Additionally, several original metrics are provided to assist in the prioritization of genotype-phenotype relationships.</p></li>
 <li><p><code>covid19</code>: <a href="https://maayanlab.cloud/covid19/">The COVID-19 Drug and Gene Set Library</a>. A collection of drug and gene sets related to COVID-19 research contributed by the community.</p></li>
 </ul>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getHgDisease.html">getHgDisease</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getHgDisease.html">getHgDisease</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"do"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 4
 ##  $ geneset     :'data.frame':    387300 obs. of  2 variables:
 ##   ..$ id  : chr [1:387300] "DOID:0001816" "DOID:0001816" "DOID:0001816" "DOID:0001816" ...
@@ -507,7 +508,7 @@ DisGeNET integrates data from expert curated repositories, GWAS catalogues, anim
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-07-27.</p>
+    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

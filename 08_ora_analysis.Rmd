@@ -103,17 +103,17 @@ We can draw some conclusions about the following features based on the examples 
 + Returns a data.frame object which is easy to filter or export
 + Non-symbol IDs will be automatically converted to the latest gene symbol for easier interpretation
 + If input symbols are mixed with aliases, a new column "geneID_symbol" will be added; if all symbols are official, only the "geneID" column will be returned
-+ `genORA()` includes five gene-level measurements: "Count", "BgRatio", "GeneRatio", "FoldEnrichment" and "RichFactor".
++ `genORA()` includes five gene-level measurements: "Count", "BgRatio", "GeneRatio", "FoldEnrich" and "RichFactor" (the "oddsRatio" and "zScore" columns from clusterProfiler >= 4.14 are kept as well).
   - `BgRatio`: Number of all genes in a specific term / Number of universal genes (if not specified, this is all genes in the gene set)
   - `GeneRatio`: Number of genes enriched in a specific term / Number of input genes
-  - `FoldEnrichment`: GeneRatio / BgRatio
+  - `FoldEnrich`: GeneRatio / BgRatio
   - `RichFactor`: Number of genes enriched in a specific term / Number of all genes in that specific term
 
 ## Advanced usage {#ora-advanced-usage}
 
 ### Additional arguments {#ora-additional-arguments}
 
-+ `pAdjustMethod`: choose from "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
++ `padj_method`: choose from "holm", "hochberg", "hommel", "bonferroni", "BH" (default), "BY", "fdr", "none"
 + `min_gset_size`: Minimal size of each gene set for analysis. Default is 10. Pathways with fewer than ten genes will be omitted (e.g. [GO:0062196](http://www.informatics.jax.org/vocab/gene_ontology/GO:0062196) is a child term with 8 genes at the bottom of the directed acyclic graph).
 + `max_gset_size`: Maximal size. Default is 500. Pathways with more than 500 genes will be omitted (e.g. [GO:0007049](http://www.informatics.jax.org/vocab/gene_ontology/GO:0007049) has 1796 genes as parent nodes at the top of the directed acyclic graph). 
 + `universe`: If users have their own background genes, set them as `universe`. If missing, all genes in the geneset will be used as the background universe.
@@ -237,20 +237,20 @@ head(clustp_res,5)
 - `genekitr_res` includes all five genes and provides mapping for aliases
 
 
-If you look closer, you may find that eight terms are unique to `clustp_res`, such as `GO:0016571`:
+Let's also check whether some terms are found only in `clustp_res` (this depends on the GO data version; with older releases there were a few):
 
 ```{r}
 clustp_res$ID[!clustp_res$ID%in%genekitr_res$Hs_BP_ID ]
 ```
 
-**Question 1: Why are some terms omitted in the `genORA` result?**
+**Question 1: Why could some terms be missing from the `genORA` result?**
 
-To get the adjusted p-value, the critical parameter is the number of statistical tests performed. 
+To get the adjusted p-value, the critical parameter is the number of statistical tests performed.
 
 For a simple explanation, `adj.p = f * p (f>1)` and f is related to the testing method and the number of tests. `genORA` recognizes five genes, so we need to perform more tests (for example, five tests), while `enrichGO` only includes two genes, so the number of tests will be lower. This directly reduces the `adj.p` in the `enrichGO` result, allowing it to remain under the threshold of 0.01.
 
 
-So, if we set a higher cutoff (e.g. 0.05), genekitr can also retrieve those terms:
+So, if such terms exist, a slightly higher cutoff (e.g. 0.05) lets genekitr retrieve them as well:
 
 ```{r}
 genekitr_res2 <- genekitr::genORA(check_gene, gs, p_cutoff = 0.05, q_cutoff = 0.05)

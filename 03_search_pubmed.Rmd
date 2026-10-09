@@ -2,24 +2,30 @@
 
 `getPubmed` function utilizes `r CRANpkg("europepmc")` to easily get PubMed records by searching paper abstracts.
 
-You need to input the `term` argument; if you want to add supplementary information, you can use the `keys` parameter.
+It has three arguments:
+
+- `term`: the query terms, e.g. gene names or pathway names
+- `add_term`: supplementary terms that every record must also match (optional)
+- `num`: the maximum number of records returned for each term, default is 100
 
 For example, if you want to find papers about genes "Tp53", "Brca1", and "Tet2" in the context of mouse stem cell research:
 
 ```{r}
 term <- c("Tp53", "Brca1", "Tet2")
-keys <- c("stem cell", "mouse")
-l <- getPubmed(term, keys)
+add_term <- c("stem cell", "mouse")
+l <- getPubmed(term, add_term, num = 30)
 names(l)
 head(l$Tp53, 5)
 ```
 
-> **NOTICE**: A minor update has been made in version 0.8.6 or above. Argument `keys` is replaced with `add_term` for easier understanding, and the `num` parameter is added to specify the number of returned records.
+Set `num` to a larger value to get all records:
 
 ```{r eval=FALSE}
-term <- c("Tp53", "Brca1", "Tet2")
-add_term <- c("stem cell", "mouse")
-l <- getPubmed(term, add_term, num = 30)
-# set "num" larger to get all records
 all <- getPubmed(term, add_term, num = 666666)
+```
+
+The result is a list of data frames (one per term), which can be exported to one Excel file directly:
+
+```{r eval=FALSE}
+expoSheet(l, data_name = names(l), filename = "pubmed.xlsx", dir = "./")
 ```

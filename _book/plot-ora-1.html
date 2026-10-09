@@ -7,7 +7,7 @@
 <title>Chapter 11 Plot ORA | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="After selecting interested terms or pathways from genORA or genGSEA result, users can pass the data frame to plotEnrich, which includes many ready-made plot types, including barplot, dotplot,...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Plot ORA | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
 <meta property="og:description" content="After selecting interested terms or pathways from genORA or genGSEA result, users can pass the data frame to plotEnrich, which includes many ready-made plot types, including barplot, dotplot,...">
@@ -17,12 +17,13 @@
 <meta name="twitter:description" content="After selecting interested terms or pathways from genORA or genGSEA result, users can pass the data frame to plotEnrich, which includes many ready-made plot types, including barplot, dotplot,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.23/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -72,78 +73,78 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="plot-ora-1" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="plot-ora-1" class="section level1" number="11">
 <h1>
 <span class="header-section-number">11</span> Plot ORA<a class="anchor" aria-label="anchor" href="#plot-ora-1"><i class="fas fa-link"></i></a>
 </h1>
 <p>After selecting interested terms or pathways from <code>genORA</code> or <code>genGSEA</code> result, users can pass the data frame to <code>plotEnrich</code>, which includes many <strong>ready-made plot types</strong>, including barplot, dotplot, heatmap, wego-like plot, chord plot, network, wordcloud etc.</p>
 <p>It is worth mentioning that <strong>almost all plots are based on <a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></strong> and the <code>plot_theme</code> function can easily change their border, legend, label etc., which helps users make their own plots.</p>
-<div id="get-ora-result" class="section level2">
+<div id="get-ora-result" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> Get ORA result<a class="anchor" aria-label="anchor" href="#get-ora-result"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>For more details, please refer to <a href="ora-analysis-1.html#ora-basic-usage">chapter 8</a></p>
 </blockquote>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 1st step: prepare input IDs</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
-<span class="va">entrez_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">entrez_id</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1st step: prepare input IDs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span></span>
+<span><span class="va">entrez_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">entrez_id</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "948"    "1638"   "158471" "10610"  "6947"</code></pre>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 2nd step: prepare gene set</span>
-<span class="va">hg_gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"bp"</span><span class="op">)</span>
-
-<span class="co"># 3rd step: ORA analysis</span>
-<span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">entrez_id</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span>, p_cutoff <span class="op">=</span> <span class="fl">0.01</span>, q_cutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
-<span class="co"># next we only show ten sample terms </span>
-<span class="va">ego</span> <span class="op">&lt;-</span> <span class="va">ego</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ego</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 2nd step: prepare gene set</span></span>
+<span><span class="va">hg_gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"bp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3rd step: ORA analysis</span></span>
+<span><span class="va">ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">entrez_id</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span>, p_cutoff <span class="op">=</span> <span class="fl">0.01</span>, q_cutoff <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="co"># next we only show ten sample terms </span></span>
+<span><span class="va">ego</span> <span class="op">&lt;-</span> <span class="va">ego</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ego</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##              Hs_BP_ID
 ## GO:1901992 GO:1901992
-## GO:0050673 GO:0050673
+## GO:0071900 GO:0071900
 ## GO:1901989 GO:1901989
+## GO:0010165 GO:0010165
+## GO:0070373 GO:0070373
 ## GO:0048660 GO:0048660
-## GO:0048659 GO:0048659
-## GO:0006260 GO:0006260
 ##                                                           Description
 ## GO:1901992 positive regulation of mitotic cell cycle phase transition
-## GO:0050673                              epithelial cell proliferation
+## GO:0071900     regulation of protein serine/threonine kinase activity
 ## GO:1901989         positive regulation of cell cycle phase transition
+## GO:0010165                                          response to X-ray
+## GO:0070373               negative regulation of ERK1 and ERK2 cascade
 ## GO:0048660             regulation of smooth muscle cell proliferation
-## GO:0048659                           smooth muscle cell proliferation
-## GO:0006260                                            DNA replication
-##             GeneRatio   BgRatio       pvalue     p.adjust       qvalue
-## GO:1901992 0.06451613 105/19160 4.044808e-07 0.0007297257 0.0005741369
-## GO:0050673 0.12096774 482/19160 5.326465e-07 0.0007297257 0.0005741369
-## GO:1901989 0.06451613 125/19160 1.532079e-06 0.0009559183 0.0007521017
-## GO:0048660 0.07258065 174/19160 1.980715e-06 0.0009559183 0.0007521017
-## GO:0048659 0.07258065 178/19160 2.389740e-06 0.0009559183 0.0007521017
-## GO:0006260 0.08870968 284/19160 2.402775e-06 0.0009559183 0.0007521017
-##                                                                                   geneID
-## GO:1901992                                  407007/113130/6241/595/407006/993/9134/51514
-## GO:0050673 5176/26471/3488/6591/8549/6657/4208/407007/6422/29128/595/7039/374/3690/10468
-## GO:1901989                                  407007/113130/6241/595/407006/993/9134/51514
-## GO:0048660                             3488/3725/10891/4208/3248/407007/407006/7099/3690
-## GO:0048659                             3488/3725/10891/4208/3248/407007/407006/7099/3690
-## GO:0006260                    5427/157570/641/5888/8318/993/9156/9134/55388/51514/374393
-##                                                                                       geneID_symbol
-## GO:1901992                                          MIR222/CDCA5/RRM2/CCND1/MIR221/CDC25A/CCNE2/DTL
-## GO:0050673 SERPINF1/NUPR1/IGFBP5/SNAI2/LGR5/SOX2/MEF2C/MIR222/SFRP1/UHRF1/CCND1/TGFA/AREG/ITGB3/FST
-## GO:1901989                                          MIR222/CDCA5/RRM2/CCND1/MIR221/CDC25A/CCNE2/DTL
-## GO:0048660                                  IGFBP5/JUN/PPARGC1A/MEF2C/HPGD/MIR222/MIR221/TLR4/ITGB3
-## GO:0048659                                  IGFBP5/JUN/PPARGC1A/MEF2C/HPGD/MIR222/MIR221/TLR4/ITGB3
-## GO:0006260                          POLE2/ESCO2/BLM/RAD51/CDC45/CDC25A/EXO1/CCNE2/MCM10/DTL/FAM111B
-##            Count FoldEnrich RichFactor
-## GO:1901992     8  11.772657 0.07619048
-## GO:0050673    15   4.808593 0.03112033
-## GO:1901989     8   9.889032 0.06400000
-## GO:0048660     9   7.992214 0.05172414
-## GO:0048659     9   7.812613 0.05056180
-## GO:0006260    11   5.984780 0.03873239</code></pre>
+##             GeneRatio   BgRatio RichFactor FoldEnrich oddsRatio    zScore
+## GO:1901992 0.05645161  91/19073 0.07692308  11.831886 13.436610  8.378564
+## GO:0071900 0.06451613 149/19073 0.05369128   8.258498  9.199315  7.195305
+## GO:1901989 0.05645161 110/19073 0.06363636   9.788196 10.946975  7.477534
+## GO:0010165 0.03225806  20/19073 0.20000000  30.762903 39.443750 10.772696
+## GO:0070373 0.04838710  74/19073 0.08108108  12.471447 14.118395  7.998057
+## GO:0048660 0.06451613 160/19073 0.05000000   7.690726  8.528584  6.874939
+##                  pvalue    p.adjust       qvalue
+## GO:1901992 2.131672e-06 0.003314943 6.755552e-05
+## GO:0071900 5.888259e-06 0.003314943 6.755552e-05
+## GO:1901989 7.568977e-06 0.003314943 6.755552e-05
+## GO:0010165 7.606769e-06 0.003314943 6.755552e-05
+## GO:0070373 8.631278e-06 0.003314943 6.755552e-05
+## GO:0048660 9.941426e-06 0.003314943 6.755552e-05
+##                                                  geneID
+## GO:1901992        407007/9134/407006/595/6241/51514/993
+## GO:0071900     9134/10125/10253/57214/595/641/993/81848
+## GO:1901989        407007/9134/407006/595/6241/51514/993
+## GO:0010165                            5888/595/641/6422
+## GO:0070373           57556/10253/407006/7099/1848/81848
+## GO:0048660 407007/3248/3690/407006/3488/4208/3725/10891
+##                                                 geneID_symbol Count
+## GO:1901992          MIR222/CCNE2/MIR221/CCND1/RRM2/DTL/CDC25A     7
+## GO:0071900   CCNE2/RASGRP1/SPRY2/CEMIP/CCND1/BLM/CDC25A/SPRY4     8
+## GO:1901989          MIR222/CCNE2/MIR221/CCND1/RRM2/DTL/CDC25A     7
+## GO:0010165                              RAD51/CCND1/BLM/SFRP1     4
+## GO:0070373               SEMA6A/SPRY2/MIR221/TLR4/DUSP6/SPRY4     6
+## GO:0048660 MIR222/HPGD/ITGB3/MIR221/IGFBP5/MEF2C/JUN/PPARGC1A     8</code></pre>
 </div>
-<div id="bar-plot" class="section level2">
+<div id="bar-plot" class="section level2" number="11.2">
 <h2>
 <span class="header-section-number">11.2</span> Bar Plot<a class="anchor" aria-label="anchor" href="#bar-plot"><i class="fas fa-link"></i></a>
 </h2>
@@ -167,13 +168,13 @@ By the way, the “q-value” stands for the “false discovery rate (FDR)” me
 <li>
 <code>wrap_length</code>: Wrap term text if longer than this number</li>
 </ul>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, term_metric <span class="op">=</span> <span class="st">"GeneRatio"</span>, stats_metric <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span>
-<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, up_color <span class="op">=</span> <span class="st">"#E69056"</span>, down_color <span class="op">=</span> <span class="st">"#325CAC"</span><span class="op">)</span>
-<span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, wrap_length <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, term_metric <span class="op">=</span> <span class="st">"GeneRatio"</span>, stats_metric <span class="op">=</span> <span class="st">"pvalue"</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, up_color <span class="op">=</span> <span class="st">"#E69056"</span>, down_color <span class="op">=</span> <span class="st">"#325CAC"</span><span class="op">)</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span>, wrap_length <span class="op">=</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -183,7 +184,7 @@ Figure 11.1: <strong>Bar plot of enrichment analysis.</strong> default (A), modi
 </p>
 </div>
 </div>
-<div id="bubble-plot" class="section level2">
+<div id="bubble-plot" class="section level2" number="11.3">
 <h2>
 <span class="header-section-number">11.3</span> Bubble Plot<a class="anchor" aria-label="anchor" href="#bubble-plot"><i class="fas fa-link"></i></a>
 </h2>
@@ -194,14 +195,14 @@ Figure 11.1: <strong>Bar plot of enrichment analysis.</strong> default (A), modi
 <li>
 <code>stats_metric</code>: Statistic value of “p.adjust”, “pvalue” or “qvalue”</li>
 <li>
-<code>scale_ratio</code>: Change bubble size. Default is 1.</li>
+<code>scale_ratio</code>: Change bubble size. Default is 0.3.</li>
 </ul>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bubble"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bubble"</span>, 
-                 scale_ratio <span class="op">=</span> <span class="fl">0.5</span>, stats_metric <span class="op">=</span> <span class="st">"qvalue"</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bubble"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"bubble"</span>, </span>
+<span>                 scale_ratio <span class="op">=</span> <span class="fl">0.5</span>, stats_metric <span class="op">=</span> <span class="st">"qvalue"</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -211,21 +212,21 @@ Figure 11.2: <strong>Bubble plot of enrichment analysis.</strong> default (A), m
 </p>
 </div>
 </div>
-<div id="dot-plot" class="section level2">
+<div id="dot-plot" class="section level2" number="11.4">
 <h2>
 <span class="header-section-number">11.4</span> Dot Plot<a class="anchor" aria-label="anchor" href="#dot-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Similar to the bar plot, the dot plot is also widely used in enrichment analysis plotting. Like the bubble plot, dot size represents the gene number of an enriched term.</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,
-  plot_type <span class="op">=</span> <span class="st">"dot"</span>,
-  scale_ratio <span class="op">=</span> <span class="fl">1.5</span>,
-  stats_metric <span class="op">=</span> <span class="st">"pvalue"</span>,
-  term_metric <span class="op">=</span> <span class="st">"RichFactor"</span>
-<span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"dot"</span>,</span>
+<span>  scale_ratio <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  stats_metric <span class="op">=</span> <span class="st">"pvalue"</span>,</span>
+<span>  term_metric <span class="op">=</span> <span class="st">"RichFactor"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -237,13 +238,13 @@ Figure 11.3: <strong>Dot plot of enrichment analysis.</strong> default (A), modi
 <p>After analyzing group enrichment analysis for <a href="ora-analysis-1.html#ora-group-enrichment">ORA</a>, we can use <code>dotplot</code> to show the result:</p>
 
 
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">gego2</span>,
-           plot_type <span class="op">=</span> <span class="st">'dot'</span>,
-           scale_ratio <span class="op">=</span> <span class="fl">2</span>, <span class="co"># dot size</span>
-           main_text_size <span class="op">=</span> <span class="fl">10</span>,
-           legend_text_size <span class="op">=</span><span class="fl">8</span>,
-           n_term <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="co"># show terms</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">gego2</span>,</span>
+<span>           plot_type <span class="op">=</span> <span class="st">'dot'</span>,</span>
+<span>           scale_ratio <span class="op">=</span> <span class="fl">2</span>, <span class="co"># dot size</span></span>
+<span>           main_text_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>           legend_text_size <span class="op">=</span><span class="fl">8</span>,</span>
+<span>           n_term <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="co"># show terms</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:dotplotGroup"></span>
 <img src="genekitr_files/figure-html/dotplotGroup-1.png" alt="Dot plot of group enrichment analysis. number in round brackets shows total gene number in selected pathways" width="98%"><p class="caption">
@@ -251,23 +252,23 @@ Figure 11.4: <strong>Dot plot of group enrichment analysis.</strong> number in r
 </p>
 </div>
 </div>
-<div id="lollipop-plot" class="section level2">
+<div id="lollipop-plot" class="section level2" number="11.5">
 <h2>
 <span class="header-section-number">11.5</span> Lollipop Plot<a class="anchor" aria-label="anchor" href="#lollipop-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>The lollipop plot is like a combination of the barplot and the dotplot.</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"lollipop"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,
-  plot_type <span class="op">=</span> <span class="st">"lollipop"</span>,
-  scale_ratio <span class="op">=</span> <span class="fl">1.5</span>,
-  stats_metric <span class="op">=</span> <span class="st">"pvalue"</span>,
-  term_metric <span class="op">=</span> <span class="st">"RichFactor"</span>,
-  up_color <span class="op">=</span> <span class="st">"#a32a31"</span>,
-  down_color <span class="op">=</span> <span class="st">"#f7dcca"</span>
-<span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"lollipop"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"lollipop"</span>,</span>
+<span>  scale_ratio <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  stats_metric <span class="op">=</span> <span class="st">"pvalue"</span>,</span>
+<span>  term_metric <span class="op">=</span> <span class="st">"RichFactor"</span>,</span>
+<span>  up_color <span class="op">=</span> <span class="st">"#a32a31"</span>,</span>
+<span>  down_color <span class="op">=</span> <span class="st">"#f7dcca"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -277,20 +278,20 @@ Figure 11.5: <strong>Lollipop plot of enrichment analysis.</strong> default (A),
 </p>
 </div>
 </div>
-<div id="heatmap-plot" class="section level2">
+<div id="heatmap-plot" class="section level2" number="11.6">
 <h2>
 <span class="header-section-number">11.6</span> Heatmap Plot<a class="anchor" aria-label="anchor" href="#heatmap-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>The heatmap plot shows interactions between enriched terms and their genes.
 If fold change is given, the heatmap will add color for up- and down-regulated genes.</p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">logfc</span> <span class="op">&lt;-</span> <span class="va">geneList</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span><span class="op">)</span>
-<span class="va">show_gene</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'JUN'</span>,<span class="st">'SOX2'</span>,<span class="st">'CD24'</span>,<span class="st">'TLR4'</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span>, show_gene <span class="op">=</span> <span class="va">show_gene</span><span class="op">)</span>
-<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span>, show_gene <span class="op">=</span> <span class="va">show_gene</span>, fold_change <span class="op">=</span> <span class="va">logfc</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">/</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">logfc</span> <span class="op">&lt;-</span> <span class="va">geneList</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span><span class="op">)</span></span>
+<span><span class="va">show_gene</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'JUN'</span>,<span class="st">'SOX2'</span>,<span class="st">'CD24'</span>,<span class="st">'TLR4'</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span>, show_gene <span class="op">=</span> <span class="va">show_gene</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"geneheat"</span>, show_gene <span class="op">=</span> <span class="va">show_gene</span>, fold_change <span class="op">=</span> <span class="va">logfc</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">/</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -300,7 +301,7 @@ Figure 11.6: <strong>Heatmap plot of enrichment analysis.</strong> all genes (A,
 </p>
 </div>
 </div>
-<div id="chord-plot" class="section level2">
+<div id="chord-plot" class="section level2" number="11.7">
 <h2>
 <span class="header-section-number">11.7</span> Chord Plot<a class="anchor" aria-label="anchor" href="#chord-plot"><i class="fas fa-link"></i></a>
 </h2>
@@ -309,19 +310,19 @@ Figure 11.6: <strong>Heatmap plot of enrichment analysis.</strong> all genes (A,
 <li>
 <code>gene_space</code>: The space between the gene labels and the chord.</li>
 </ul>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">logfc</span> <span class="op">&lt;-</span> <span class="va">geneList</span>
-<span class="va">show_gene</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'JUN'</span>,<span class="st">'SOX2'</span>,<span class="st">'CD24'</span>,<span class="st">'TLR4'</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"genechord"</span>, 
-                 show_gene <span class="op">=</span> <span class="va">show_gene</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"genechord"</span>, 
-                 show_gene <span class="op">=</span> <span class="va">show_gene</span>, 
-                 fold_change <span class="op">=</span> <span class="va">logfc</span>,
-                 remove_legend_text <span class="op">=</span> <span class="cn">T</span>,
-                 gene_space <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">logfc</span> <span class="op">&lt;-</span> <span class="va">geneList</span></span>
+<span><span class="va">show_gene</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'JUN'</span>,<span class="st">'SOX2'</span>,<span class="st">'CD24'</span>,<span class="st">'TLR4'</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"genechord"</span>, </span>
+<span>                 show_gene <span class="op">=</span> <span class="va">show_gene</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"genechord"</span>, </span>
+<span>                 show_gene <span class="op">=</span> <span class="va">show_gene</span>, </span>
+<span>                 fold_change <span class="op">=</span> <span class="va">logfc</span>,</span>
+<span>                 remove_legend_text <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>                 gene_space <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -331,15 +332,15 @@ Figure 11.7: <strong>Chord plot of enrichment analysis.</strong> selected genes 
 </p>
 </div>
 </div>
-<div id="wordcloud-plot" class="section level2">
+<div id="wordcloud-plot" class="section level2" number="11.8">
 <h2>
 <span class="header-section-number">11.8</span> Wordcloud Plot<a class="anchor" aria-label="anchor" href="#wordcloud-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>The wordcloud plot shows term emphasis based on text frequency.</p>
 
 
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"wordcloud"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"wordcloud"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:wordcloud"></span>
 <img src="genekitr_files/figure-html/wordcloud-1.png" alt="Wordcloud plot of enrichment analysis." width="98%"><p class="caption">
@@ -347,15 +348,15 @@ Figure 11.8: <strong>Wordcloud plot of enrichment analysis.</strong>
 </p>
 </div>
 </div>
-<div id="upset-plot" class="section level2">
+<div id="upset-plot" class="section level2" number="11.9">
 <h2>
 <span class="header-section-number">11.9</span> Upset Plot<a class="anchor" aria-label="anchor" href="#upset-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Inspired by <a href="https://CRAN.R-project.org/package=ComplexUpset">ComplexUpset</a>, the upset plot shows the association between genes and enriched terms. Unlike a common Venn diagram, it can emphasize the complex relationships among many gene sets.</p>
 
 
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"upset"</span>,main_text_size <span class="op">=</span> <span class="fl">15</span>,legend_text_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"upset"</span>,main_text_size <span class="op">=</span> <span class="fl">15</span>,legend_text_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:upset"></span>
 <img src="genekitr_files/figure-html/upset-1.png" alt="Upset plot of enrichment analysis." width="98%"><p class="caption">
@@ -363,31 +364,31 @@ Figure 11.9: <strong>Upset plot of enrichment analysis.</strong>
 </p>
 </div>
 </div>
-<div id="network-plot" class="section level2">
+<div id="network-plot" class="section level2" number="11.10">
 <h2>
 <span class="header-section-number">11.10</span> Network Plot<a class="anchor" aria-label="anchor" href="#network-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Inspired by <code><a href="https://rdrr.io/pkg/enrichplot/man/emapplot.html">enrichplot::emapplot</a></code>, <code>genekitr</code> reproduced this plot to enhance customization.
 Enriched terms are the nodes in the network, and the overlapping gene sets are edges. Terms with more overlapping genes tend to cluster together, and the edges will be thicker.</p>
 <ul>
-<li>GO analysis results can use five semantic similarity methods to calculate the similarity between nodes: “Resnik”, “Lin”, “Rel”, “Jiang”, “Wang”, as well as the “JC” (Jaccard</li>
+<li>GO analysis results can use five semantic similarity methods to calculate the similarity between nodes: “Resnik”, “Lin”, “Rel”, “Jiang”, “Wang”, as well as the “JC” (Jaccard’s similarity index) method.</li>
 <li>KEGG only supports the “JC” method.</li>
 </ul>
 <p>Users can define the <code>layout</code> argument derived from <a href="https://CRAN.R-project.org/package=ggraph">ggraph</a>, including “nicely” (default), “circle”, “dh”, “drl”, “fr”, “graphopt”, “grid”,“lgl”, “kk”, “mds”, “randomly”, “star” etc.</p>
 <blockquote>
 <p>For more information about the <code>layout</code>, you could refer to: <a href="https://www.data-imaginist.com/2017/ggraph-introduction-layouts/">“Introduction to ggraph: Layouts”</a></p>
 </blockquote>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"network"</span>, scale_ratio <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"network"</span>, 
-                 layout <span class="op">=</span> <span class="st">"circle"</span>, scale_ratio <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
-<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"network"</span>, 
-                 layout <span class="op">=</span> <span class="st">"grid"</span>, sim_method <span class="op">=</span> <span class="st">"Wang"</span>,
-                 up_color <span class="op">=</span> <span class="st">"#a32a31"</span>, down_color <span class="op">=</span> <span class="st">"#f7dcca"</span><span class="op">)</span>
-<span class="op">(</span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span><span class="op">)</span> <span class="op">/</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"network"</span>, scale_ratio <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"network"</span>, </span>
+<span>                 layout <span class="op">=</span> <span class="st">"circle"</span>, scale_ratio <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"network"</span>, </span>
+<span>                 layout <span class="op">=</span> <span class="st">"grid"</span>, sim_method <span class="op">=</span> <span class="st">"Wang"</span>,</span>
+<span>                 up_color <span class="op">=</span> <span class="st">"#a32a31"</span>, down_color <span class="op">=</span> <span class="st">"#f7dcca"</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span><span class="op">)</span> <span class="op">/</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -397,7 +398,7 @@ Figure 11.10: <strong>Network plot of enrichment analysis.</strong> JC method an
 </p>
 </div>
 </div>
-<div id="go-specific-wego-plot" class="section level2">
+<div id="go-specific-wego-plot" class="section level2" number="11.11">
 <h2>
 <span class="header-section-number">11.11</span> GO-specific: WEGO Plot<a class="anchor" aria-label="anchor" href="#go-specific-wego-plot"><i class="fas fa-link"></i></a>
 </h2>
@@ -406,29 +407,29 @@ Figure 11.10: <strong>Network plot of enrichment analysis.</strong> JC method an
 </blockquote>
 <p>Inspired by <a href="https://wego.genomics.cn/">WEGO</a>, <code>genekitr</code> utilized <a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a> to reproduce this plot.</p>
 <p>Here we generate two ontologies (MF and CC) result.</p>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 1st step: prepare input IDs</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
-<span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span>
-
-<span class="co"># 2nd step: prepare CC and MF gene sets</span>
-<span class="va">go_cc</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"cc"</span><span class="op">)</span>
-<span class="va">go_mf</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span>
-
-<span class="co"># 3rd step: analysis</span>
-<span class="va">ego_cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, geneset <span class="op">=</span> <span class="va">go_cc</span><span class="op">)</span>
-<span class="va">ego_mf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, geneset <span class="op">=</span> <span class="va">go_mf</span><span class="op">)</span>
-
-<span class="co"># 4th step: merge two data frames</span>
-<span class="co"># Note: each data frame should add new column "Ontology"</span>
-<span class="va">ego_cc</span> <span class="op">&lt;-</span> <span class="va">ego_cc</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Ontology <span class="op">=</span> <span class="st">"cc"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">ego_mf</span> <span class="op">&lt;-</span> <span class="va">ego_mf</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Ontology <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">all_ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">ego_cc</span>,<span class="va">ego_mf</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1st step: prepare input IDs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span></span>
+<span><span class="va">id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># 2nd step: prepare CC and MF gene sets</span></span>
+<span><span class="va">go_cc</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"cc"</span><span class="op">)</span></span>
+<span><span class="va">go_mf</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3rd step: analysis</span></span>
+<span><span class="va">ego_cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, geneset <span class="op">=</span> <span class="va">go_cc</span><span class="op">)</span></span>
+<span><span class="va">ego_mf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">id</span>, geneset <span class="op">=</span> <span class="va">go_mf</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4th step: merge two data frames</span></span>
+<span><span class="co"># Note: each data frame should add new column "Ontology"</span></span>
+<span><span class="va">ego_cc</span> <span class="op">&lt;-</span> <span class="va">ego_cc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Ontology <span class="op">=</span> <span class="st">"cc"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">ego_mf</span> <span class="op">&lt;-</span> <span class="va">ego_mf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Ontology <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">all_ego</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">ego_cc</span>,<span class="va">ego_mf</span><span class="op">)</span></span></code></pre></div>
 <p><strong>NOTICE:</strong> <code>plotEnrich</code> has a parameter <code>n_term</code> for the WEGO plot, which specifies the number of terms. If you want to plot all terms, just set <code>n_term</code> higher.</p>
 
 
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">all_ego</span>, plot_type <span class="op">=</span> <span class="st">"wego"</span>, n_term <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">all_ego</span>, plot_type <span class="op">=</span> <span class="st">"wego"</span>, n_term <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:wegoplot"></span>
 <img src="genekitr_files/figure-html/wegoplot-1.png" alt="WEGO plot of enrichment analysis." width="98%"><p class="caption">
@@ -436,18 +437,18 @@ Figure 11.11: <strong>WEGO plot of enrichment analysis.</strong>
 </p>
 </div>
 </div>
-<div id="go-specific-map-plot" class="section level2">
+<div id="go-specific-map-plot" class="section level2" number="11.12">
 <h2>
 <span class="header-section-number">11.12</span> GO-specific: Map Plot<a class="anchor" aria-label="anchor" href="#go-specific-map-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>GO terms are built in a directed acyclic graph with a parent-child relationship.
 Here the map plot utilized <a href="http://bioconductor.org/packages/GOSemSim">GOSemSim</a> to extract parent and child terms, and also utilized <a href="https://CRAN.R-project.org/package=ggraph">ggraph</a> and <a href="https://CRAN.R-project.org/package=igraph">igraph</a> to draw with the default layout “sugiyama”.</p>
 <p>To avoid cluttering the plot with too many unrelated terms, <code>genekitr</code> <strong>only shows the closest parent and child of the selected terms</strong>. Besides, the top three parent terms with more edges will be plotted.</p>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"gomap"</span>, wrap_length <span class="op">=</span> <span class="fl">25</span>,
-           up_color <span class="op">=</span> <span class="st">'#a32a31'</span>,down_color <span class="op">=</span> <span class="st">'#3665a6'</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"gomap"</span>, wrap_length <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>           up_color <span class="op">=</span> <span class="st">'#a32a31'</span>,down_color <span class="op">=</span> <span class="st">'#3665a6'</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -457,13 +458,13 @@ Figure 11.12: <strong>Map plot of enrichment analysis.</strong>
 </p>
 </div>
 </div>
-<div id="go-specific-terms-heatmap-plot" class="section level2">
+<div id="go-specific-terms-heatmap-plot" class="section level2" number="11.13">
 <h2>
 <span class="header-section-number">11.13</span> GO-specific: Terms Heatmap Plot<a class="anchor" aria-label="anchor" href="#go-specific-terms-heatmap-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>Inspired by <a href="http://bioconductor.org/packages/rrvgo">rrvgo</a>, <code>genekitr</code> borrows the main code to cluster GO terms. It can also use five methods to calculate the similarity between terms.</p>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"goheat"</span>, sim_method <span class="op">=</span> <span class="st">"Rel"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"goheat"</span>, sim_method <span class="op">=</span> <span class="st">"Rel"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -473,15 +474,15 @@ Figure 11.13: <strong>GO heatmap plot of enrichment analysis.</strong>
 </p>
 </div>
 </div>
-<div id="go-specific-terms-tangram-plot" class="section level2">
+<div id="go-specific-terms-tangram-plot" class="section level2" number="11.14">
 <h2>
 <span class="header-section-number">11.14</span> GO-specific: Terms Tangram Plot<a class="anchor" aria-label="anchor" href="#go-specific-terms-tangram-plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>According to the <a href="http://bioconductor.org/packages/release/bioc/vignettes/rrvgo/inst/doc/rrvgo.html">rrvgo vignettes</a>, the tangram plot is a space-filling visualization of hierarchical structures. The terms are grouped and colored based on their parent, and the space used by the term is proportional to the score.</p>
 
 
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"gotangram"</span>, sim_method <span class="op">=</span> <span class="st">"Rel"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"gotangram"</span>, sim_method <span class="op">=</span> <span class="st">"Rel"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:gotangram"></span>
 <img src="genekitr_files/figure-html/gotangram-1.png" alt="GO tangram plot of enrichment analysis." width="98%"><p class="caption">
@@ -489,33 +490,33 @@ Figure 11.14: <strong>GO tangram plot of enrichment analysis.</strong>
 </p>
 </div>
 </div>
-<div id="plot-theme" class="section level2">
+<div id="plot-theme" class="section level2" number="11.15">
 <h2>
 <span class="header-section-number">11.15</span> Plot Theme<a class="anchor" aria-label="anchor" href="#plot-theme"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>Genekitr</code> provides a function <code><a href="https://rdrr.io/pkg/genekitr/man/plot_theme.html">plot_theme()</a></code> to modify all plot themes, including text size, border, legend, color, etc.</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,
-  plot_type <span class="op">=</span> <span class="st">"dot"</span>,
-  main_text_size <span class="op">=</span> <span class="fl">10</span>,
-  legend_text_size <span class="op">=</span> <span class="fl">10</span>
-<span class="op">)</span>
-
-<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,
-  plot_type <span class="op">=</span> <span class="st">"dot"</span>,
-  border_thick <span class="op">=</span> <span class="fl">3</span>,
-  remove_grid <span class="op">=</span> <span class="cn">F</span>
-<span class="op">)</span>
-
-<span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,
-  plot_type <span class="op">=</span> <span class="st">"dot"</span>,
-  remove_main_text <span class="op">=</span> <span class="cn">T</span>,
-  remove_legend_text <span class="op">=</span> <span class="cn">T</span>,
-  remove_legend <span class="op">=</span> <span class="cn">T</span>
-<span class="op">)</span>
-<span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>, plot_type <span class="op">=</span> <span class="st">"dot"</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"dot"</span>,</span>
+<span>  main_text_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  legend_text_size <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"dot"</span>,</span>
+<span>  border_thick <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  remove_grid <span class="op">=</span> <span class="cn">F</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrich.html">plotEnrich</a></span><span class="op">(</span><span class="va">ego</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"dot"</span>,</span>
+<span>  remove_main_text <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  remove_legend_text <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  remove_legend <span class="op">=</span> <span class="cn">T</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span> <span class="op">+</span> <span class="va">p3</span> <span class="op">+</span> <span class="va">p4</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>tag_levels <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -525,39 +526,39 @@ Figure 11.15: <strong>Plot theme.</strong> default theme (A), modify text size (
 </p>
 </div>
 </div>
-<div id="advanced-plot" class="section level2">
+<div id="advanced-plot" class="section level2" number="11.16">
 <h2>
 <span class="header-section-number">11.16</span> Advanced Plot<a class="anchor" aria-label="anchor" href="#advanced-plot"><i class="fas fa-link"></i></a>
 </h2>
-<div id="two-group-barplot-for-updown-regulated-pathways" class="section level3">
+<div id="two-group-barplot-for-updown-regulated-pathways" class="section level3" number="11.16.1">
 <h3>
 <span class="header-section-number">11.16.1</span> Two-group barplot for up/down regulated pathways<a class="anchor" aria-label="anchor" href="#two-group-barplot-for-updown-regulated-pathways"><i class="fas fa-link"></i></a>
 </h3>
 <p>Up- and down-regulated genes can be passed to <code>genORA</code> separately and visualized together as a two-group barplot.</p>
 <p>Here we take the GO result as an example:</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 1st step: prepare input IDs</span>
-<span class="co"># Since the geneList is logFC decreasing ordered, we could take first 100 as up-regulated genes and vice versa.</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
-<span class="va">up_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span>
-<span class="va">down_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span>
-
-<span class="co"># 2nd step: prepare gene set</span>
-<span class="va">hg_gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"bp"</span><span class="op">)</span>
-
-<span class="co"># 3rd step: ORA analysis separately</span>
-<span class="va">up_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">up_genes</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span><span class="op">)</span>
-<span class="va">down_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">down_genes</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">up_go</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 29 12</code></pre>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">down_go</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 272  12</code></pre>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># here we only take 10 terms of each</span>
-<span class="va">up_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">up_go</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="va">down_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">down_go</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1st step: prepare input IDs</span></span>
+<span><span class="co"># Since the geneList is logFC decreasing ordered, we could take first 100 as up-regulated genes and vice versa.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span></span>
+<span><span class="va">up_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">down_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2nd step: prepare gene set</span></span>
+<span><span class="va">hg_gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"bp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3rd step: ORA analysis separately</span></span>
+<span><span class="va">up_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">up_genes</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span><span class="op">)</span></span>
+<span><span class="va">down_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genORA.html">genORA</a></span><span class="op">(</span><span class="va">down_genes</span>, geneset <span class="op">=</span> <span class="va">hg_gs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">up_go</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 12 14</code></pre>
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">down_go</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 219  14</code></pre>
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># here we only take 10 terms of each</span></span>
+<span><span class="va">up_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">up_go</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">down_go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">down_go</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>There are two visualization types:</p>
 <ul>
 <li>
@@ -566,30 +567,30 @@ Figure 11.15: <strong>Plot theme.</strong> default theme (A), modify text size (
 <code>plot_type = "two"</code>: up and down-regulated pathways are plotted separately. <strong>Recommended if the number of both groups is similar.</strong>
 </li>
 </ul>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrichAdv.html">plotEnrichAdv</a></span><span class="op">(</span><span class="va">up_go</span>, <span class="va">down_go</span>,
-              plot_type <span class="op">=</span> <span class="st">"one"</span>,
-              term_metric <span class="op">=</span> <span class="st">"FoldEnrich"</span>,
-              stats_metric <span class="op">=</span> <span class="st">"p.adjust"</span>,
-              xlim_left <span class="op">=</span> <span class="fl">25</span>, xlim_right <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrichAdv.html">plotEnrichAdv</a></span><span class="op">(</span><span class="va">up_go</span>, <span class="va">down_go</span>,</span>
+<span>              plot_type <span class="op">=</span> <span class="st">"one"</span>,</span>
+<span>              term_metric <span class="op">=</span> <span class="st">"FoldEnrich"</span>,</span>
+<span>              stats_metric <span class="op">=</span> <span class="st">"p.adjust"</span>,</span>
+<span>              xlim_left <span class="op">=</span> <span class="fl">25</span>, xlim_right <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"inside"</span>, legend.position.inside <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:twogroup1"></span>
-<img src="genekitr_files/figure-html/twogroup1-1.png" alt="Visualize two groups together when plot_type = " one width="98%"><p class="caption">
+<img src="genekitr_files/figure-html/twogroup1-1.png" alt="Visualize two groups together when plot_type = " one"." width="98%"><p class="caption">
 Figure 11.16: <strong>Visualize two groups together when <code>plot_type = "one"</code>.</strong>
 </p>
 </div>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrichAdv.html">plotEnrichAdv</a></span><span class="op">(</span><span class="va">up_go</span>, <span class="va">down_go</span>,
-              plot_type <span class="op">=</span> <span class="st">"two"</span>,
-              term_metric <span class="op">=</span> <span class="st">"FoldEnrich"</span>,
-              stats_metric <span class="op">=</span> <span class="st">"qvalue"</span>
-<span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/plotEnrichAdv.html">plotEnrichAdv</a></span><span class="op">(</span><span class="va">up_go</span>, <span class="va">down_go</span>,</span>
+<span>              plot_type <span class="op">=</span> <span class="st">"two"</span>,</span>
+<span>              term_metric <span class="op">=</span> <span class="st">"FoldEnrich"</span>,</span>
+<span>              stats_metric <span class="op">=</span> <span class="st">"qvalue"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
 <span style="display:block;" id="fig:twogroup2"></span>
-<img src="genekitr_files/figure-html/twogroup2-1.png" alt="Visualize two groups separately when plot_type = " two width="98%"><p class="caption">
+<img src="genekitr_files/figure-html/twogroup2-1.png" alt="Visualize two groups separately when plot_type = " two"." width="98%"><p class="caption">
 Figure 11.17: <strong>Visualize two groups separately when <code>plot_type = "two"</code>.</strong>
 </p>
 </div>
@@ -638,7 +639,7 @@ Figure 11.17: <strong>Visualize two groups separately when <code>plot_type = "tw
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-07-27.</p>
+    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

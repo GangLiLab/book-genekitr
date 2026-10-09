@@ -13,7 +13,7 @@ library(genekitr)
 
 - Directly pass the list to `plotGSEA`, which enables 5 types (classic pathway plot, volcano plot, multi-pathway plot, ridge plot and two-side bar plot).
 
-- Extract the analysis result (e.g. `gse_list$gsea_df`) then pass it to `plotEnrich`, which enables 8 types (geneheat, genechord, wordcloud, upset, network, gomap, goheat, gotangram).
+- Extract the analysis result (e.g. `gse_list$gsea_df`) then pass it to `plotEnrich`, which enables 8 more types: geneheat, genechord, wordcloud, upset and network for any gene set, plus gomap, goheat and gotangram for GO gene sets.
 
 ## Get GSEA result
 
@@ -130,7 +130,7 @@ plotGSEA(gse,
 
 ## Two-side Barplot
 
-The barplot separates positive and negative NES into two sides. Users can specify the `color` for the two sides. Meanwhile, non-significant pathways (e.g. P-value > 0.05) will be colored "grey".
+The barplot separates positive and negative NES into two sides, with zero in the centre and labels on the opposite side of the bars. Users can specify the `colour` for negative NES, positive NES and non-significant pathways (adjusted P-value > 0.05, grey by default).
 
 (ref:twosideBarScap) Two-side bar plot of GSEA.
 
@@ -144,12 +144,13 @@ plotGSEA(gse, plot_type = "bar", colour = c("navyblue", "orange"))
 
 > More plotting details are available at [chapter 11](#plot-ora-1)
 
-Take the `geneheat` plot as an example:
+Take the `geneheat` plot as an example. The MSigDB gene set uses Entrez IDs, so `genGSEA` adds a `geneID_symbol` column and the plot shows gene symbols:
 
 ```{r}
-plotEnrich(gse$gsea_df, 
-           plot_type = "geneheat", 
-           show_gene = c("BRCA2", "CDK1", "MCM8", "TIPIN","FBL","ABCC2"), 
+head(gse$gsea_df$geneID_symbol, 2)
+plotEnrich(gse$gsea_df,
+           plot_type = "geneheat",
+           show_gene = c("BRCA2", "CDK1", "MCM8", "TIPIN","FBL","ABCC2"),
            fold_change = geneList)
 ```
 
@@ -166,8 +167,17 @@ In the above `geneheat` plot, the labels come from the `Description` column, so 
 gse2 <- gse
 gse2$gsea_df$Description <- tolower(gse2$gsea_df$Description)
 # plotEnrich will automatically uppercase the first letter.
-plotEnrich(gse2$gsea_df, 
-           plot_type = "geneheat", 
-           show_gene = c("BRCA2", "CDK1", "MCM8", "TIPIN","FBL","ABCC2"), 
+plotEnrich(gse2$gsea_df,
+           plot_type = "geneheat",
+           show_gene = c("BRCA2", "CDK1", "MCM8", "TIPIN","FBL","ABCC2"),
            fold_change = geneList)
+```
+
+### Label pathways by description
+
+`plotGSEA` labels pathways with the `ID` column by default. For the volcano, ridge and bar plots, set `label_by = "description"` to use the `Description` column instead (edit that column first if you want custom labels):
+
+```{r}
+gse2$gsea_df$Description <- gsub("hallmark_", "", gse2$gsea_df$Description, ignore.case = TRUE)
+plotGSEA(gse2, plot_type = "bar", label_by = "description")
 ```

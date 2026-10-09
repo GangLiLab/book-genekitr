@@ -143,6 +143,12 @@ plotGSEA(kk_easy, plot_type = "bar",
          main_text_size = 15)
 ```
 
+Alternatively, set `label_by = "description"` to label the bars with the `Description` column directly:
+
+```{r eval=FALSE}
+plotGSEA(kk_easy, plot_type = "bar", label_by = "description")
+```
+
 
 ### clusterProfiler KEGG/DOSE/WikiPathways... result
 
@@ -157,7 +163,7 @@ gene <- names(geneList)[abs(geneList) > 1.5]
 
 ## ORA-DO result from clusterProfiler
 do <- enrichDO(gene          = gene,
-              ont           = "DO",
+              ont           = "HDO",
               pvalueCutoff  = 0.05,
               pAdjustMethod = "BH",
               universe      = names(geneList),

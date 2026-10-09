@@ -37,6 +37,7 @@ fig:upsetVenn
 fig:degVolcano
 fig:degVolcano2
 quick-start
+installation
 search-gene-metadata
 search-pubmed-records
 gene-id-conversion
@@ -177,6 +178,7 @@ two-side-barplot
 borrow-from-plotenrich
 tricks
 change-figure-labels
+label-pathways-by-description
 plot-others-1
 venn-plot
 volcano-plot

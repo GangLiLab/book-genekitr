@@ -101,7 +101,7 @@ The x-axis is the statistic value and the y-axis is "Fold Enrichment".
 The basic arguments are: 
 
 - `stats_metric`: Statistic value of "p.adjust", "pvalue" or "qvalue"
-- `scale_ratio`: Change bubble size. Default is 1.
+- `scale_ratio`: Change bubble size. Default is 0.3.
 
 
 ```{r include= F}
@@ -343,7 +343,7 @@ plotEnrich(ego, plot_type = "upset",main_text_size = 15,legend_text_size = 8)
 Inspired by `enrichplot::emapplot`, `genekitr` reproduced this plot to enhance customization.
 Enriched terms are the nodes in the network, and the overlapping gene sets are edges. Terms with more overlapping genes tend to cluster together, and the edges will be thicker.
 
-- GO analysis results can use five semantic similarity methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang", "Wang", as well as the "JC" (Jaccard\u2019s similarity index) method.
+- GO analysis results can use five semantic similarity methods to calculate the similarity between nodes: "Resnik", "Lin", "Rel", "Jiang", "Wang", as well as the "JC" (Jaccard's similarity index) method.
 - KEGG only supports the "JC" method.
 
 Users can define the `layout` argument derived from `r CRANpkg("ggraph")`, including "nicely" (default), "circle", "dh", "drl", "fr", "graphopt", "grid","lgl", "kk", "mds", "randomly", "star" etc.
@@ -585,43 +585,18 @@ plotEnrichAdv(up_go, down_go,
               term_metric = "FoldEnrich",
               stats_metric = "p.adjust",
               xlim_left = 25, xlim_right = 15) +
-  theme(legend.position = c(0.15, 0.9))
+  theme(legend.position = "inside", legend.position.inside = c(0.15, 0.9))
 ```
 
 
 ```{r include= F}
-library(patchwork)
-color <- c("#a32a31", "#f7dcca", "#3665a6", "#d5e4ef")
-left <- suppressMessages(plotEnrich(up_go,
-  plot_type = "bar",
-  term_metric = "FoldEnrich",
-  stats_metric = "qvalue",
-  up_color = color[1], down_color = color[2],
-  main_text_size = 15,
-  legend_text_size = 10
-) +
-  scale_y_discrete(limits = rev) +
-  scale_x_reverse() +
-  theme(
-    axis.title.y = element_blank(),
-    legend.position = c(0.2, 0.8)
-  ))
-
-right <- suppressMessages(plotEnrich(down_go,
-  plot_type = "bar",
-  term_metric = "FoldEnrich",
-  stats_metric = "qvalue",
-  up_color = color[3], down_color = color[4],
-  main_text_size = 15,
-  legend_text_size = 10
-) +
-  scale_y_discrete(position = "right") +
-  theme(
-    axis.title.y = element_blank(),
-    legend.position = c(0.8, 0.2)
-  ))
-
-pp <- left + right
+pp <- plotEnrichAdv(up_go, down_go,
+              plot_type = "two",
+              term_metric = "FoldEnrich",
+              stats_metric = "qvalue",
+              main_text_size = 15,
+              legend_text_size = 10
+)
 ```
 
 

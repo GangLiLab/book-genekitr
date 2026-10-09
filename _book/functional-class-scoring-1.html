@@ -7,7 +7,7 @@
 <title>Chapter 9 FCS-GSEA analysis | Genekitr: An R Toolkit for Gene Analysis</title>
 <meta name="author" content="Yunze Liu">
 <meta name="description" content="9.1 Introduction to FCS methods The ORA method is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 9 FCS-GSEA analysis | Genekitr: An R Toolkit for Gene Analysis">
 <meta property="og:type" content="book">
 <meta property="og:description" content="9.1 Introduction to FCS methods The ORA method is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a...">
@@ -17,12 +17,13 @@
 <meta name="twitter:description" content="9.1 Introduction to FCS methods The ORA method is easy to use, but it may lose useful information when the differences between genes are small. For example, a gene may play an essential role in a...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.23/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -72,11 +73,11 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-class-scoring-1" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functional-class-scoring-1" class="section level1" number="9">
 <h1>
 <span class="header-section-number">9</span> FCS-GSEA analysis<a class="anchor" aria-label="anchor" href="#functional-class-scoring-1"><i class="fas fa-link"></i></a>
 </h1>
-<div id="fcs-introduction" class="section level2">
+<div id="fcs-introduction" class="section level2" number="9.1">
 <h2>
 <span class="header-section-number">9.1</span> Introduction to FCS methods<a class="anchor" aria-label="anchor" href="#fcs-introduction"><i class="fas fa-link"></i></a>
 </h2>
@@ -88,7 +89,7 @@
 <p>FCS approaches include <a href="https://www.gsea-msigdb.org/">GSEA</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2712740/">GlobalTest</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/16174746">sigPathway</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/15647293">SAFE</a>, <a href="https://scholar.google.com/scholar_lookup?journal=Ann+Appl+Stat&amp;title=On+testing+the+significance+of+sets+of+genes&amp;author=B+Efron&amp;author=R+Tibshirani&amp;volume=1&amp;publication_year=2007&amp;pages=107-129&amp;">GSA</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/22713124">PADOG</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/16877751">PCOT2</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17007070">FunCluster</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/17612399">SAM-GS</a>, and <a href="https://pubmed.ncbi.nlm.nih.gov/17127676">Category</a>, among others.</p>
 <p>Next, we will walk through the popular Gene Set Enrichment Analysis (GSEA) method, which uses permutation-based testing to determine whether a gene set is significantly associated with higher or lower scores.</p>
 </div>
-<div id="gsea-introduction" class="section level2">
+<div id="gsea-introduction" class="section level2" number="9.2">
 <h2>
 <span class="header-section-number">9.2</span> Introduction to GSEA<a class="anchor" aria-label="anchor" href="#gsea-introduction"><i class="fas fa-link"></i></a>
 </h2>
@@ -111,54 +112,54 @@ Figure 9.1: <strong>GSEA overview</strong>
 <p>For a more detailed explanation of the GSEA procedure, please visit <a href="https://www.pathwaycommons.org/guide/primers/data_analysis/gsea" class="uri">https://www.pathwaycommons.org/guide/primers/data_analysis/gsea</a> or <a href="https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md" class="uri">https://github.com/crazyhottommy/RNA-seq-analysis/blob/master/GSEA_explained.md</a>.</p>
 </blockquote>
 </div>
-<div id="gsea-basic-usage" class="section level2">
+<div id="gsea-basic-usage" class="section level2" number="9.3">
 <h2>
 <span class="header-section-number">9.3</span> Basic usage<a class="anchor" aria-label="anchor" href="#gsea-basic-usage"><i class="fas fa-link"></i></a>
 </h2>
 <p>The main arguments are:</p>
 <ul>
 <li>
-<code>id</code>: a pre-ranked gene list in decreasing order, such as a list ranked by logFC or correlation. Entrez IDs, Ensembl IDs, and gene symbols are accepted.</li>
+<code>genelist</code>: a pre-ranked gene list in decreasing order (a named numeric vector), such as a list ranked by logFC or correlation. Entrez IDs, Ensembl IDs, and gene symbols are accepted.</li>
 <li>
 <code>geneset</code>: a two-column data frame containing term IDs and gene IDs. We recommend using <a href="https://CRAN.R-project.org/package=geneset">geneset</a> to prepare gene sets.</li>
 <li>
 <code>p_cutoff</code>: a numeric cutoff for both the p-value and adjusted p-value. The default is 0.05.</li>
 <li>
-<code>q_cutoff</code>: a numeric cutoff for the q-value. The default is 0.15.</li>
+<code>q_cutoff</code>: a numeric cutoff for the q-value. The default is 0.05.</li>
 </ul>
-<div id="step-1-prepare-a-pre-ranked-gene-list" class="section level3">
+<div id="step-1-prepare-a-pre-ranked-gene-list" class="section level3" number="9.3.1">
 <h3>
 <span class="header-section-number">9.3.1</span> Step 1: Prepare a pre-ranked gene list<a class="anchor" aria-label="anchor" href="#step-1-prepare-a-pre-ranked-gene-list"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package <span class="op">=</span> <span class="st">"genekitr"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       948      1638    158471     10610      6947 100133941 
 ##  5.780170  5.633027  4.683610  3.875120  3.357670  3.322533</code></pre>
 </div>
-<div id="step-2-prepare-a-gene-set" class="section level3">
+<div id="step-2-prepare-a-gene-set" class="section level3" number="9.3.2">
 <h3>
 <span class="header-section-number">9.3.2</span> Step 2: Prepare a gene set<a class="anchor" aria-label="anchor" href="#step-2-prepare-a-gene-set"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu">geneset</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geneset/man/getGO.html">getGO</a></span><span class="op">(</span>org <span class="op">=</span> <span class="st">"human"</span>,ont <span class="op">=</span> <span class="st">"mf"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="step-3-run-gsea" class="section level3">
+<div id="step-3-run-gsea" class="section level3" number="9.3.3">
 <h3>
 <span class="header-section-number">9.3.3</span> Step 3: Run GSEA<a class="anchor" aria-label="anchor" href="#step-3-run-gsea"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>genelist <span class="op">=</span> <span class="va">geneList</span>, geneset <span class="op">=</span> <span class="va">gs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/genGSEA.html">genGSEA</a></span><span class="op">(</span>genelist <span class="op">=</span> <span class="va">geneList</span>, geneset <span class="op">=</span> <span class="va">gs</span><span class="op">)</span></span></code></pre></div>
 <p>Now, let’s take a look at the result.</p>
 <p>The returned object is a list that mainly contains the analysis results (<code>gsea_df</code>), the input gene list (<code>genelist</code>), and the input gene set (<code>geneset</code>).</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "gsea_df"  "genelist" "geneset"  "exponent" "org"</code></pre>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">genelist</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">genelist</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                    ID    logfc
 ## CD36             CD36 5.780170
 ## DCT               DCT 5.633027
@@ -166,53 +167,59 @@ Figure 9.1: <strong>GSEA overview</strong>
 ## ST6GALNAC2 ST6GALNAC2 3.875120
 ## TCN1             TCN1 3.357670
 ## CD24             CD24 3.322533</code></pre>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">geneset</span><span class="op">)</span></code></pre></div>
-<pre><code>##           mf  gene
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">geneset</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           id  gene
 ## 1 GO:0000009  PIGV
 ## 2 GO:0000009 ALG12
 ## 3 GO:0000009  ALG2
-## 4 GO:0000014 ENDOG
-## 5 GO:0000014 ERCC1
-## 6 GO:0000014 ERCC4</code></pre>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
-<pre><code>##              Hs_MF_ID                           Description setSize
-## GO:0140097 GO:0140097     catalytic activity, acting on DNA     226
-## GO:0008094 GO:0008094 ATP-dependent activity, acting on DNA     111
-## GO:0016887 GO:0016887               ATP hydrolysis activity     392
-## GO:0140098 GO:0140098     catalytic activity, acting on RNA     361
-## GO:0004386 GO:0004386                     helicase activity     146
+## 4 GO:0000014 ERCC1
+## 5 GO:0000014 ERCC4
+## 6 GO:0000014 MRE11</code></pre>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##              Hs_MF_ID                            Description setSize
+## GO:0003678 GO:0003678                  DNA helicase activity      57
+## GO:0017116 GO:0017116  single-stranded DNA helicase activity      24
+## GO:0008094 GO:0008094  ATP-dependent activity, acting on DNA     118
+## GO:0017056 GO:0017056 structural constituent of nuclear pore      21
+## GO:0003697 GO:0003697            single-stranded DNA binding     111
 ##            enrichmentScore       NES       pvalue     p.adjust       qvalue
-## GO:0140097      -0.5827930 -2.454673 9.523154e-17 1.164682e-13 9.693569e-14
-## GO:0008094      -0.6686545 -2.586379 2.834758e-14 1.733455e-11 1.442743e-11
-## GO:0016887      -0.4652918 -2.054363 4.900594e-14 1.997809e-11 1.662763e-11
-## GO:0140098      -0.4483973 -1.971987 1.166004e-11 3.565056e-09 2.967173e-09
-## GO:0004386      -0.5827909 -2.327719 1.775608e-11 4.343138e-09 3.614764e-09
+## GO:0003678      -0.7407188 -2.517871 1.938079e-11 3.422094e-09 2.141764e-09
+## GO:0017116      -0.8723960 -2.505996 3.696204e-10 4.153189e-08 2.599329e-08
+## GO:0008094      -0.6440061 -2.481783 7.319114e-14 2.261606e-11 1.415457e-11
+## GO:0017056      -0.8612352 -2.417513 1.422998e-08 1.465688e-06 9.173208e-07
+## GO:0003697      -0.6286387 -2.370217 6.659685e-12 1.371895e-09 8.586191e-10
 ##            rank                   leading_edge
-## GO:0140097 1723  tags=31%, list=9%, signal=28%
-## GO:0008094 1172  tags=34%, list=6%, signal=32%
-## GO:0016887 2528 tags=31%, list=14%, signal=28%
-## GO:0140098 2872 tags=36%, list=15%, signal=31%
-## GO:0004386 1295  tags=31%, list=7%, signal=29%
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       geneID
-## GO:0140097                                                                                                                                                                                                                                                                                                                                                                                                           4292/5981/6996/126549/92667/3159/3980/348654/1786/1105/10856/1660/7150/63922/5889/10728/57697/7156/27301/7517/10146/5932/56652/3978/5810/5424/54107/8607/5422/2956/7374/11144/7153/5985/4436/8458/2237/64782/5426/64858/5982/1763/146956/5984/10714/1736/5111/55345/4172/84515/8091/83990/4171/4176/5983/10721/79075/55247/4174/4173/79915/4175/3070/8438/54821/5427/641/5888/7516/9156
-## GO:0008094                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         1105/10856/1660/63922/5889/57697/7517/10146/56652/8607/2956/11144/7153/5985/4436/8458/5982/1763/5984/55345/4172/84515/83990/4171/4176/5983/10721/79075/4174/4173/79915/4175/3070/8438/54821/641/5888/7516
-## GO:0016887                                                                                                  22880/3327/80119/10131/730211/23347/55661/23517/3313/22907/55636/3799/64222/1653/6832/5704/9126/79572/55308/55794/391634/23400/154664/3312/81570/5700/338322/5706/4643/57062/4292/5981/23/6782/3320/10694/23195/79039/547/8243/3329/5702/9429/3324/55210/9879/6891/6950/10061/57696/10575/1105/10856/3309/7203/64794/57647/1660/908/9775/63922/54606/57697/9704/56919/1662/3800/23046/10146/10576/10212/10051/56652/10112/10592/3323/51182/490/8607/8886/1665/11218/22948/11144/5985/81930/3835/4436/80179/6059/9188/166378/11004/9928/5982/1763/9585/5984/3833/63979/146909/990/4172/9493/84515/83990/56992/4171/4176/5983/10721/4174/4173/79915/4175/9319/91607/8438/29028/4998/54821/641/5888
-## GO:0140098 138428/122665/5435/60625/5976/57472/55278/10623/3396/167227/7015/91801/8731/8846/80745/80119/10557/55695/10556/79828/60528/91893/29883/55661/339175/23517/22907/80746/22894/171568/51163/11128/1653/6832/57505/55308/55794/5437/5511/79066/221078/11102/115708/85463/8732/51010/114049/112479/5438/54512/201626/9836/25885/23016/124454/57062/55798/96764/91298/9533/117246/10799/29063/2107/10940/79039/79731/27292/54913/51651/9879/55687/55621/57696/56339/29960/55157/56931/246243/54931/64794/57647/1660/9775/23210/54606/2193/54148/57697/81875/9704/27161/56919/1662/24140/79691/10146/54888/10621/10212/114034/28960/92935/64216/10171/4839/4234/56915/10436/90459/25819/80324/10622/8886/1665/51728/10535/11218/10056/84172/87178/10248/54517/23404/2237/5393/9188/51106/5557/83990/9156
-## GO:0004386                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                9879/57696/1105/10856/64794/57647/1660/9775/63922/54606/57697/9704/56919/1662/10146/10212/56652/8607/8886/1665/11218/5985/8458/9188/5982/1763/5984/55345/4172/84515/83990/4171/4176/5983/10721/79075/4174/4173/4175/3070/91607/8438/54821/641/5888
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            geneID_symbol
-## GO:0140097                                                                                                                                                                                                                                                                                                                                                                                                                                          MLH1/RFC1/TDG/ANKLE1/MGME1/HMGA1/LIG3/GEN1/DNMT1/CHD1/RUVBL2/DHX9/TOP1/CHTF18/RAD51C/PTGES3/FANCM/TOP3A/APEX2/XRCC3/G3BP1/RBBP8/TWNK/LIG1/RAD1/POLD1/POLE3/RUVBL1/POLA1/MSH6/UNG/DMC1/TOP2A/RFC5/MSH2/TTF2/FEN1/AEN/POLE/DCLRE1B/RFC2/DNA2/EME1/RFC4/POLD3/DKC1/PCNA/ZGRF1/MCM3/MCM8/HMGA2/BRIP1/MCM2/MCM7/RFC3/POLQ/DSCC1/NEIL3/MCM5/MCM4/ATAD5/MCM6/HELLS/RAD54L/ERCC6L/POLE2/BLM/RAD51/XRCC2/EXO1
-## GO:0008094                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           CHD1/RUVBL2/DHX9/CHTF18/RAD51C/FANCM/XRCC3/G3BP1/TWNK/RUVBL1/MSH6/DMC1/TOP2A/RFC5/MSH2/TTF2/RFC2/DNA2/RFC4/ZGRF1/MCM3/MCM8/BRIP1/MCM2/MCM7/RFC3/POLQ/DSCC1/MCM5/MCM4/ATAD5/MCM6/HELLS/RAD54L/ERCC6L/BLM/RAD51/XRCC2
-## GO:0016887                                                                MORC2/HSP90AB3P/PIF1/TRAP1/HSP90AA5P/SMCHD1/DDX27/MTREX/HSPA9/DHX30/CHD7/KIF5B/TOR3A/DDX1/SUPV3L1/PSMC4/SMC3/ATP13A3/DDX19A/DDX28/HSP90AB2P/ATP13A2/ABCA13/HSPA8/CLPB/PSMC1/NLRP10/PSMC6/MYO1E/DDX24/MLH1/RFC1/ABCF1/HSPA13/HSP90AA1/CCT8/MDN1/DDX54/KIF1A/SMC1A/HSPD1/PSMC3/ABCG2/HSP90AA2P/ATAD3A/DDX46/TAP2/TCP1/ABCF2/DDX55/CCT4/CHD1/RUVBL2/HSPA5/CCT3/DDX31/DHX37/DHX9/CCT6A/EIF4A3/CHTF18/DDX56/FANCM/DHX34/DHX33/DDX10/KIF5C/KIF21B/G3BP1/CCT2/DDX39A/SMC4/TWNK/KIF20A/SMC2/HSP90AA4P/HSPA14/ATP2B1/RUVBL1/DDX18/DHX15/DDX20/CCT5/DMC1/RFC5/KIF18A/KIF22/MSH2/MYO19/ABCE1/DDX21/AFG2A/KIF2C/KIF14/RFC2/DNA2/KIF20B/RFC4/KIFC1/FIGNL1/KIF18B/CDC6/MCM3/KIF23/MCM8/BRIP1/KIF15/MCM2/MCM7/RFC3/POLQ/MCM5/MCM4/ATAD5/MCM6/TRIP13/SLFN11/RAD54L/ATAD2/ORC1/ERCC6L/BLM/RAD51
-## GO:0140098 PTRH1/RNASE8/POLR2F/DHX35/UPF1/CNOT6/QRSL1/POLR3C/MRPL58/DCP2/TERT/ALKBH8/RNMT/ALKBH1/THUMPD2/PIF1/RPP38/NSUN5/RPP30/METTL8/ELAC2/FDXACB1/CNOT7/DDX27/METTL2A/MTREX/DHX30/TSEN2/DIS3/POLR3H/DBR1/POLR3A/DDX1/SUPV3L1/AARS2/DDX19A/DDX28/POLR2H/PPP1R8/METTL16/NSUN6/RPP14/TRMT61A/ZC3H12C/RNGTT/EXOSC3/BUD23/ERI2/POLR2I/EXOSC4/PDE12/LCMT2/POLR1A/EXOSC7/EARS2/DDX24/METTL2B/TGS1/RLIG1/POLR1C/FTSJ3/RPP40/ZCCHC4/ETF1/POP1/DDX54/NARS2/DIMT1/RPP25/PTRH2/DDX46/TRMU/TRMT1/DDX55/METTL3/MRM2/DARS2/DUS3L/RNASEH1/TRMT10C/DDX31/DHX37/DHX9/EIF4A3/JMJD6/DDX56/FARSA/MRPL39/FANCM/ISG20L2/DHX34/AGO2/DHX33/DDX10/FTSJ1/QTRT2/G3BP1/NSUN2/POLR3F/DDX39A/TOE1/DCPS/MARS2/TFB2M/RCL1/NOP2/METTL1/EXOSC5/EMG1/ERI1/NOCT/PUS1/POLR3G/DDX18/DHX15/POLR3K/RNASEH2A/DDX20/FARSB/POLR1B/PNPT1/POP7/PUS7/EXOSC2/FEN1/EXOSC9/DDX21/TFB1M/PRIM1/BRIP1/EXO1
-## GO:0004386                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            DDX46/DDX55/CHD1/RUVBL2/DDX31/DHX37/DHX9/EIF4A3/CHTF18/DDX56/FANCM/DHX34/DHX33/DDX10/G3BP1/DDX39A/TWNK/RUVBL1/DDX18/DHX15/DDX20/RFC5/TTF2/DDX21/RFC2/DNA2/RFC4/ZGRF1/MCM3/MCM8/BRIP1/MCM2/MCM7/RFC3/POLQ/DSCC1/MCM5/MCM4/MCM6/HELLS/SLFN11/RAD54L/ERCC6L/BLM/RAD51
-##            Count
-## GO:0140097    70
-## GO:0008094    38
-## GO:0016887   123
-## GO:0140098   131
-## GO:0004386    45</code></pre>
+## GO:0003678 1163  tags=46%, list=6%, signal=43%
+## GO:0017116 1123  tags=71%, list=6%, signal=67%
+## GO:0008094 1172  tags=32%, list=6%, signal=30%
+## GO:0017056 1567  tags=67%, list=8%, signal=61%
+## GO:0003697 2061 tags=35%, list=11%, signal=31%
+##                                                                                                                                                                                                                        core_enriched_geneID
+## GO:0003678                                                                                   RUVBL2/DHX9/CHTF18/FANCM/G3BP1/TWNK/RUVBL1/RFC5/RFC2/DNA2/RFC4/ZGRF1/MCM3/MCM8/BRIP1/MCM2/MCM7/RFC3/POLQ/DSCC1/MCM5/MCM4/MCM6/ERCC6L/BLM/RAD51
+## GO:0017116                                                                                                                                         DHX9/CHTF18/RFC5/RFC2/DNA2/RFC4/MCM3/MCM8/MCM2/MCM7/RFC3/POLQ/DSCC1/MCM5/MCM4/MCM6/RAD51
+## GO:0008094              CHD1/RUVBL2/DHX9/CHTF18/RAD51C/FANCM/XRCC3/G3BP1/TWNK/RUVBL1/MSH6/DMC1/TOP2A/RFC5/MSH2/TTF2/RFC2/DNA2/RFC4/ZGRF1/MCM3/MCM8/BRIP1/MCM2/MCM7/RFC3/POLQ/DSCC1/MCM5/MCM4/ATAD5/MCM6/HELLS/RAD54L/ERCC6L/BLM/RAD51/XRCC2
+## GO:0017056                                                                                                                                         NUP98/NUP54/NUP93/NUP153/NUP88/NUP160/NUP188/NUP155/NUP85/NDC1/NUP58/NUP35/NUP107/NUP205
+## GO:0003697 HNRNPU/RPA1/POLR2H/TDP1/NOL12/MLH1/HMGB1/RAD23A/FAM111A/HSPD1/DHX9/TOP1/TOP3A/SMC4/TWNK/SMC2/HMGB2/RNF138/POLA1/DMC1/MSH2/RPA2/RAD18/MCM3/MCM8/MCM2/MCM7/NEIL3/MCM5/MCM4/MCM6/MMS22L/RAD54L/BRCA2/RAD51AP1/BLM/RAD51/CDC45/MCM10
+##              log2err core_enriched_count
+## GO:0003678 0.8634154                  26
+## GO:0017116 0.8140358                  17
+## GO:0008094 0.9545416                  38
+## GO:0017056 0.7477397                  14
+## GO:0003697 0.8870750                  39
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     all_enriched_geneID
+## GO:0003678                                                                                                                                                                                                                                                                                                                                                                                          MCM3/RECQL5/DHX30/ERCC2/MCM5/TWNK/WRNIP1/RUVBL1/BLM/MCM7/HFM1/MCM9/RECQL4/MCM2/ASCC3/RECQL/CHTF18/FBH1/BRIP1/WRN/MCMDC2/MCM6/MCM8/IGHMBP2/RUVBL2/ATRX/DDX3X/DHX9/DNA2/ERCC3/XRCC6/MCM4/MRE11/RAD51/UPF1/RFC2/RFC3/RFC4/RFC5/SUPV3L1/XRCC5/CHD1L/RAD50/G3BP1/POLQ/SETX/ERCC6L/CHTF8/ZGRF1/CHD8/FANCM/DSCC1/PIF1/NAV2/HELB/HELQ/DHX36
+## GO:0017116                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             MCM3/MCM5/WRNIP1/MCM7/MCM9/MCM2/CHTF18/MCMDC2/MCM6/MCM8/DHX9/DNA2/MCM4/RAD51/RFC2/RFC3/RFC4/RFC5/POLQ/CHTF8/DSCC1/PIF1/HELB/HELQ
+## GO:0008094 MCM3/RECQL5/DHX30/ERCC2/RAD51B/MCM5/CHD2/SMARCA4/TWNK/CHD4/WRNIP1/RUVBL1/BLM/MCM7/CHD3/HFM1/MCM9/RECQL4/MCM2/ASCC3/RECQL/CHTF18/FBH1/TTF2/BRIP1/CHD7/HLTF/SMARCA2/CHD6/RFC3/WRN/CHD8/MCMDC2/RFC5/SMARCA5/RFC2/CHD5/CHD1/RAD51/RFC4/SMARCA1/MCM6/MCM8/IGHMBP2/SMARCAD1/RAD17/RUVBL2/ATRX/CDK7/CHRNA4/DAXX/DDX1/DDX3X/DHX9/DNA2/ERCC3/BPTF/XRCC6/MSH6/HELLS/MCM4/MLH1/MRE11/MSH2/MSH3/MYD88/PMS1/PMS2P1/PMS2P3/PMS2/RAD51C/RBBP4/UPF1/RFC1/SMARCB1/SMARCC1/SMARCC2/SMARCD1/SMARCD3/SMARCE1/SUPV3L1/TOP2A/TOP2B/TP53/XRCC2/XRCC3/XRCC5/ARID1A/RAD54L/BTAF1/CHD1L/RAD50/G3BP1/POLQ/DMC1/MORC2/WAPL/SETX/RAD54L2/SPO11/MLH3/CECR2/SMARCAL1/RSF1/INO80/ERCC6L/CHTF8/ZGRF1/FANCM/DSCC1/ATAD5/PIF1/ZRANB3/NAV2/HELB/HELQ/DHX36/ARID2
+## GO:0017056                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      NUP58/NUP155/NUP107/POM121L2/NUP160/NUP85/NPAP1/TPR/NUP188/NUP214/NUP133/NUP153/NUP54/NUP35/NUP93/NUP88/NUP98/NUTF2/NUP205/NUP62CL/NDC1
+## GO:0003697                                          APTX/ERCC1/MCM3/BIVM/SSBP1/MEIOB/RAD51B/SETMAR/MCM5/ERCC4/RAD51AP1/TDP1/TWNK/SMC6/CDC45/MCM7/POLA1/MCM9/MCM2/TERF1/RPA2/SMC5/RNF138/RPA1/RPA3/MCMDC2/RAD50/MCM10/XPC/NUCKS1/PCBP1/POT1/RAD51/RPA4/MCM6/MCM8/CTC1/BLM/BRCA2/CRY2/DHX9/HMGB1/HMGB2/HNRNPA1/HNRNPA2B1/HNRNPU/HSPD1/IGHMBP2/JCHAIN/MAPT/MCM4/MLH1/MSH2/MSH3/YBX1/PMS2/POLR2G/POLR2H/POU4F1/PURA/PURB/RAD23A/RAD23B/RBMS1/RECQL/SMARCA1/HLTF/TERF2/TOP1/TOP3A/TP53/TSN/RAD54L/FUBP1/FUBP3/LONP1/RECQL4/HNRNPDL/SMC4/LRPPRC/SMC2/POLR3C/SUB1/DMC1/RTF1/SSBP2/SSBP3/SAMHD1/SMARCAL1/TDP2/WBP11/PCBP3/TERF2IP/RADX/NEIL3/RAD18/HMCES/REXO4/WDR48/FAM111A/NABP1/NABP2/NOL12/STN1/SPRTN/ZRANB3/FBH1/SWSAP1/SSBP4/DHX36/MMS22L
+##            all_enriched_count
+## GO:0003678                 57
+## GO:0017116                 24
+## GO:0008094                118
+## GO:0017056                 21
+## GO:0003697                111</code></pre>
 <blockquote>
 <p>About the <code>gsea_df</code> result</p>
 </blockquote>
@@ -223,7 +230,7 @@ Figure 9.1: <strong>GSEA overview</strong>
 <li><p><code>NES</code>: the normalized enrichment score and the primary statistic used to examine gene set enrichment results. By normalizing the enrichment score, GSEA accounts for differences in gene set size and correlations between gene sets and the expression dataset. Therefore, NES values can be used to compare results across gene sets. A positive NES indicates that the genes in set S are mainly found near the top of the ranked list, which usually corresponds to genes with <code>logFC &gt; 0</code> or upregulated genes.</p></li>
 <li><p><code>rank</code>: the position in the ranked list where the maximum enrichment score occurs. If a gene set reaches its maximum enrichment score near the top or bottom of the ranked list, the rank at the maximum will be either very small or very large.</p></li>
 <li>
-<code>leading_edge</code>: contains three statistics:
+<p><code>leading_edge</code>: contains three statistics:</p>
 <ul>
 <li>
 <code>tags</code>: the percentage of gene hits that appear before the peak for a positive ES or after the peak for a negative ES. It indicates the proportion of genes that contribute to the enrichment score.</li>
@@ -233,38 +240,51 @@ Figure 9.1: <strong>GSEA overview</strong>
 <code>signal</code>: the strength of the enrichment signal. If the entire gene set appears within the first N positions of the list, the signal is strongest and may reach 100%. If the genes are spread throughout the list, the signal decreases toward 0%.</li>
 </ul>
 </li>
-<li><p><code>geneID</code> and <code>geneID_symbol</code>: if the input contains a mixture of official gene symbols and aliases, a new <code>geneID_symbol</code> column will be added. If all input symbols are official gene symbols, only the <code>geneID</code> column will be returned.</p></li>
+<li><p><code>core_enriched_geneID</code> and <code>core_enriched_count</code>: the leading-edge genes (the subset of the gene set that contributes most to the enrichment score, i.e. genes before the peak for a positive ES or after the peak for a negative ES) and their number.</p></li>
+<li><p><code>all_enriched_geneID</code> and <code>all_enriched_count</code>: all genes of the gene set that are present in the ranked list, and their number.</p></li>
+<li><p><code>geneID_symbol</code>: gene IDs are kept in the same ID type as the gene set (e.g. Entrez for KEGG and MSigDB, symbol for GO). For Entrez-based gene sets, this extra column gives the corresponding gene symbols.</p></li>
+<li><p><code>log2err</code>: the expected error of the log2(p-value) estimate, reported by the underlying <code>fgsea</code> algorithm.</p></li>
 </ul>
 </div>
 </div>
-<div id="advanced-usage" class="section level2">
+<div id="advanced-usage" class="section level2" number="9.4">
 <h2>
 <span class="header-section-number">9.4</span> Advanced usage<a class="anchor" aria-label="anchor" href="#advanced-usage"><i class="fas fa-link"></i></a>
 </h2>
-<div id="additional-arguments" class="section level3">
+<div id="additional-arguments" class="section level3" number="9.4.1">
 <h3>
 <span class="header-section-number">9.4.1</span> Additional arguments<a class="anchor" aria-label="anchor" href="#additional-arguments"><i class="fas fa-link"></i></a>
 </h3>
-<p>Please refer to the <a href="ora-analysis-1.html#ora-additional-arguments">ORA section</a>.</p>
+<p><code>padj_method</code>, <code>min_gset_size</code> and <code>max_gset_size</code> work the same as in the <a href="ora-analysis-1.html#ora-additional-arguments">ORA section</a>. Two more things are specific to GSEA:</p>
+<ul>
+<li>
+<code>set_seed</code>: GSEA estimates p-values by permutation, so results can differ slightly between runs. Set <code>set_seed = TRUE</code> to get the same result every time for the same input.</li>
+<li>Duplicated genes: if several input IDs are mapped to the same gene after ID conversion (e.g. an alias and the official symbol of the same gene), only the first (highest ranked) one is kept, and a message tells you how many were removed.</li>
+</ul>
 </div>
-<div id="simplify-go-gsea-results" class="section level3">
+<div id="simplify-go-gsea-results" class="section level3" number="9.4.2">
 <h3>
 <span class="header-section-number">9.4.2</span> Simplify GO GSEA results<a class="anchor" aria-label="anchor" href="#simplify-go-gsea-results"><i class="fas fa-link"></i></a>
 </h3>
-<p>Please refer to the <a href="ora-analysis-1.html#ora-go-simplify">ORA section</a>.</p>
+<p>The GO result of <code>genGSEA</code> uses the same ID column name as <code>genORA</code> (e.g. <code>Hs_MF_ID</code>), so it can be passed to <code><a href="https://rdrr.io/pkg/genekitr/man/simGO.html">simGO()</a></code> directly (see the <a href="ora-analysis-1.html#ora-go-simplify">ORA section</a> for details):</p>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sim_gse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/simGO.html">simGO</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span>, sim_method <span class="op">=</span> <span class="st">"Resnik"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">gse</span><span class="op">$</span><span class="va">gsea_df</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sim_gse</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 88 15</code></pre>
+<pre><code>## [1] 34 15</code></pre>
 </div>
 </div>
-<div id="export-gsea-results" class="section level2">
+<div id="export-gsea-results" class="section level2" number="9.5">
 <h2>
 <span class="header-section-number">9.5</span> Export GSEA results<a class="anchor" aria-label="anchor" href="#export-gsea-results"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>genekitr</code> provides an easy way to export analysis results for further editing and sharing.</p>
 <p>Multiple data frames are saved as separate sheets in a single Excel file, and the column names are automatically formatted in bold.</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/expoSheet.html">expoSheet</a></span><span class="op">(</span>data_list <span class="op">=</span> <span class="va">gse</span>,
-                    data_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>,
-                    filename <span class="op">=</span> <span class="st">"gsea_result.xlsx"</span>,
-                    dir <span class="op">=</span> <span class="st">"./"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">genekitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genekitr/man/expoSheet.html">expoSheet</a></span><span class="op">(</span>data_list <span class="op">=</span> <span class="va">gse</span>,</span>
+<span>                    data_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gse</span><span class="op">)</span>,</span>
+<span>                    filename <span class="op">=</span> <span class="st">"gsea_result.xlsx"</span>,</span>
+<span>                    dir <span class="op">=</span> <span class="st">"./"</span><span class="op">)</span></span></code></pre></div>
 
 
 <div class="figure">
@@ -315,7 +335,7 @@ Figure 9.2: <strong>Export results</strong>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-07-27.</p>
+    <p>"<strong>Genekitr: An R Toolkit for Gene Analysis</strong>" was written by Yunze Liu. It was last built on 2026-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

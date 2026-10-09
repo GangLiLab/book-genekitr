@@ -29,13 +29,17 @@ Common names are also acceptable for popular research species (e.g., human, mous
 
 ## Basic usage {#geninfo-basic-usage}
 
-`genInfo` only has three arguments:
+`genInfo` has five arguments:
 
 - `id`: gene ID (symbol, Entrez, or Ensembl) or protein ID
 
 - `org`: organism name, default is human
 
 - `unique`: `TRUE` or `FALSE`. Commonly, one gene may have multiple matched records of the same ID type. For example, the human `HBD` gene has three matched Entrez IDs: `r Entrez("3045")`, `r Entrez("85349")`, and `r Entrez("100187828")`. If set to `TRUE`, only a one-to-one match with the smallest Entrez ID or the most complete information (i.e., the fewest NAs) will be returned. See [genekitr feature2](#geninfo-feature-2) for an example.
+
+- `keepNA`: `TRUE` (default) or `FALSE`. Whether to keep unmatched IDs as NA rows or remove them.
+
+- `hgVersion`: human genome build, "v38" (default) or "v19".
 
 ```{r geneinfo-basic-usage}
 id <- c("TP53", "BRCA1", "TET2")

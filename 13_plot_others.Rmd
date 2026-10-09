@@ -85,8 +85,10 @@ It also has other parameters:
 - `logFC_cutoff`: cutoff for log2 (fold change), default is 1, which is actually a two-fold change
 - `up_color`: color for up-regulated genes
 - `down_color`: color for down-regulated genes
+- `other_color`: color for the other genes, default is "black"
 - `show_gene`: show some gene names, default is none. We suggest renaming the column with these genes as "gene".
 - `dot_size`: volcano dot size
+- `alpha`: dot transparency, default is 0.4
 
 (ref:degVolcanoScap) Volcano plot
 

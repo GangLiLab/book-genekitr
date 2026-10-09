@@ -42,6 +42,8 @@ head(probes)
 head(res)
 ```
 
+> Probes that are not found in the Ensembl mapping are additionally looked up in the Bioconductor annotation package of the detected platform (column `Bioc_anno` of `hsapiens_probe_platform`, e.g. `hugene10sttranscriptcluster.db`) if it is installed. Otherwise a message tells you which package to install.
+
 
 ## Convert to more than one type {#convert-probe-types}
 
